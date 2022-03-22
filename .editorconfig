@@ -504,4 +504,7 @@ dotnet_diagnostic.S1135.severity = suggestion       # https://github.com/atc-net
 ##########################################
 [*.{cs,csx,cake}]
 
+dotnet_diagnostic.CA1056.severity = none            # URI properties should not be strings
+dotnet_diagnostic.CA5400.severity = none            # Ensure HttpClient certificate revocation list check is not disabled
+
 dotnet_diagnostic.S1172.severity = suggestion       # Temporary, due to false positive in latest version of the analyzer package
