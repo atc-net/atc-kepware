@@ -1,7 +1,12 @@
+using Atc.Kepware.Configuration.Contracts.Drivers;
+
 namespace Atc.Kepware.Configuration.Services;
 
 public interface IKepwareConfigurationClient
 {
+    Task<(bool Succeeded, IList<ChannelBase>? Result, string? ErrorMessage)> GetChannels(
+        CancellationToken cancellationToken = default);
+
     Task<(bool Succeeded, string? ErrorMessage)> CreateEuroMap63Channel(
         EuroMap63ChannelRequest request,
         CancellationToken cancellationToken = default);

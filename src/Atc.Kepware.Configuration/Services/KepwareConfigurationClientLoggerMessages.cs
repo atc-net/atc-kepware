@@ -10,6 +10,18 @@ public partial class KepwareConfigurationClient
     private readonly ILogger<KepwareConfigurationClient> logger;
 
     [LoggerMessage(
+        EventId = LoggingEventIdConstants.GetSucceeded,
+        Level = LogLevel.Trace,
+        Message = "Successfully retrieved data from pathTemplate '{pathTemplate}'.")]
+    private partial void LogGetSucceeded(string pathTemplate);
+
+    [LoggerMessage(
+        EventId = LoggingEventIdConstants.GetFailure,
+        Level = LogLevel.Error,
+        Message = "Failed to retrieve data from pathTemplate '{pathTemplate}': '{errorMessage}'.")]
+    private partial void LogGetFailure(string pathTemplate, string errorMessage);
+
+    [LoggerMessage(
         EventId = LoggingEventIdConstants.PostSucceeded,
         Level = LogLevel.Trace,
         Message = "Successfully posted to pathTemplate '{pathTemplate}'.")]

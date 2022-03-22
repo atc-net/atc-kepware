@@ -1,10 +1,13 @@
 using Atc.Kepware.Configuration.Contracts;
+using Atc.Kepware.Configuration.Contracts.Drivers;
 
 namespace Atc.Kepware.Configuration.Services;
 
 /// <summary>
 /// The main KepwareConfigurationClient - Handles call execution.
 /// </summary>
+[SuppressMessage("Usage", "CA2234:Pass system uri objects instead of strings", Justification = "OK")]
+[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "OK")]
 public sealed partial class KepwareConfigurationClient : IKepwareConfigurationClient, IDisposable
 {
     private readonly JsonSerializerOptions jsonSerializerOptions;
@@ -46,8 +49,47 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         }
     }
 
-    [SuppressMessage("Usage", "CA2234:Pass system uri objects instead of strings", Justification = "OK")]
-    [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "OK")]
+    public Task<(bool Succeeded, IList<ChannelBase>? Result, string? ErrorMessage)> GetChannels(
+        CancellationToken cancellationToken = default)
+        => Get<IList<ChannelBase>>(
+            EndpointPathTemplateConstants.ProjectChannels,
+            cancellationToken);
+
+    private async Task<(bool Succeeded, TResponse? Result, string? ErrorMessage)> Get<TResponse>(
+        string pathTemplate,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var response = await httpClient.GetAsync(pathTemplate, cancellationToken);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseJson = await response.Content.ReadAsStringAsync(cancellationToken);
+                LogGetSucceeded(pathTemplate);
+                var result = JsonSerializer.Deserialize<TResponse>(responseJson, jsonSerializerOptions);
+                return (true, result, string.Empty);
+            }
+
+            var errorResponseJson = await response.Content.ReadAsStringAsync(cancellationToken);
+            var errorResponse = JsonSerializer.Deserialize<KepwareErrorResponse>(errorResponseJson, jsonSerializerOptions);
+            if (errorResponse is not null)
+            {
+                var codeMessage = errorResponse.GetCodeAndMessage();
+                LogGetFailure(pathTemplate, codeMessage);
+                return (false, default, codeMessage);
+            }
+
+            LogGetFailure(pathTemplate, errorResponseJson);
+            return (false, default, errorResponseJson);
+        }
+        catch (Exception ex)
+        {
+            LogGetFailure(pathTemplate, ex.Message);
+            return (false, default, ex.Message);
+        }
+    }
+
     private async Task<(bool Succeeded, string? ErrorMessage)> Post<TRequest>(
         TRequest request,
         string pathTemplate,
