@@ -35,7 +35,7 @@ public abstract class ChannelRequestBase
     /// Choose how write data is passed to the underlying communications driver when more than one write exists in the write queue.
     /// </summary>
     [JsonPropertyName("servermain.CHANNEL_WRITE_OPTIMIZATIONS_METHOD")]
-    public ChannelOptimizationMethodType ChannelOptimizationMethod { get; set; } = ChannelOptimizationMethodType.WriteOnlyLatestValueForAllTags;
+    public ChannelOptimizationMethodType OptimizationMethod { get; set; } = ChannelOptimizationMethodType.WriteOnlyLatestValueForAllTags;
 
     /// <summary>
     /// Specify the ratio of write operations to read operations, based on one read per configurable number of writes.
@@ -52,5 +52,5 @@ public abstract class ChannelRequestBase
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{nameof(Name)}: {Name}, {nameof(Description)}: {Description}, {nameof(DeviceDriver)}: {DeviceDriver}, {nameof(CaptureDiagnostics)}: {CaptureDiagnostics}, {nameof(ChannelOptimizationMethod)}: {ChannelOptimizationMethod}, {nameof(WriteOptimizationDutyCycle)}: {WriteOptimizationDutyCycle}, {nameof(NonNormalizedFloatingPointHandling)}: {NonNormalizedFloatingPointHandling}";
+        => $"{nameof(Name)}: {Name}, {nameof(Description)}: {Description}, {nameof(DeviceDriver)}: {DeviceDriver}, {nameof(CaptureDiagnostics)}: {CaptureDiagnostics}, {nameof(OptimizationMethod)}: {OptimizationMethod}, {nameof(WriteOptimizationDutyCycle)}: {WriteOptimizationDutyCycle}, {nameof(NonNormalizedFloatingPointHandling)}: {NonNormalizedFloatingPointHandling}";
 }
