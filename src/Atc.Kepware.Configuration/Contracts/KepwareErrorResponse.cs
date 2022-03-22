@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.Contracts;
 
-public class KepwareErrorResponse
+public sealed class KepwareErrorResponse
 {
     public HttpStatusCode Code { get; set; }
 
