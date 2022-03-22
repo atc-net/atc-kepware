@@ -7,6 +7,10 @@ public interface IKepwareConfigurationClient
     Task<(bool Succeeded, IList<ChannelBase>? Result, string? ErrorMessage)> GetChannels(
         CancellationToken cancellationToken = default);
 
+    Task<(bool Succeeded, IList<DeviceBase>? Result, string? ErrorMessage)> GetDevices(
+        string channelName,
+        CancellationToken cancellationToken = default);
+
     Task<(bool Succeeded, string? ErrorMessage)> CreateEuroMap63Channel(
         EuroMap63ChannelRequest request,
         CancellationToken cancellationToken = default);

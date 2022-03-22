@@ -55,6 +55,13 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             EndpointPathTemplateConstants.ProjectChannels,
             cancellationToken);
 
+    public Task<(bool Succeeded, IList<DeviceBase>? Result, string? ErrorMessage)> GetDevices(
+        string channelName,
+        CancellationToken cancellationToken = default)
+        => Get<IList<DeviceBase>>(
+            $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}/{EndpointPathTemplateConstants.Devices}",
+            cancellationToken);
+
     private async Task<(bool Succeeded, TResponse? Result, string? ErrorMessage)> Get<TResponse>(
         string pathTemplate,
         CancellationToken cancellationToken)
