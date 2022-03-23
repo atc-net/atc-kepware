@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.Services;
 
 /// <summary>
-/// KepwareConfigurationClient - Handles OPC UA calls.
+/// KepwareConfigurationClient - Handles OPC UA Client calls.
 /// </summary>
 [SuppressMessage("Design", "MA0048:File name must match type name", Justification = "OK - By Design.")]
 public sealed partial class KepwareConfigurationClient
