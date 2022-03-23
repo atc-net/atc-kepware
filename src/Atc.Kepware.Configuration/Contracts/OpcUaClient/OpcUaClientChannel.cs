@@ -1,5 +1,5 @@
 namespace Atc.Kepware.Configuration.Contracts.OpcUaClient;
 
-public class OpcUaClientChannel : ChannelBase
+public class OpcUaClientChannel : ChannelBase, IOpcUaClientChannel
 {
 }
