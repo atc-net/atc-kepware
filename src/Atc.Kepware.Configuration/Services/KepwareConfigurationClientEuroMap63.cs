@@ -8,7 +8,7 @@ public sealed partial class KepwareConfigurationClient
 {
     public Task<KepwareResultResponse<bool>> CreateEuroMap63Channel(
         EuroMap63ChannelRequest request,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
         return InvokeCreateEuroMap63Channel(
@@ -19,7 +19,7 @@ public sealed partial class KepwareConfigurationClient
     public Task<KepwareResultResponse<bool>> CreateEuroMap63Device(
         EuroMap63DeviceRequest request,
         string channelName,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
         return InvokeCreateEuroMap63Device(

@@ -8,7 +8,7 @@ public sealed partial class KepwareConfigurationClient
 {
     public Task<KepwareResultResponse<bool>> CreateOpcUaChannel(
         OpcUaChannelRequest request,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
         return InvokeCreateOpcUaChannel(
@@ -19,7 +19,7 @@ public sealed partial class KepwareConfigurationClient
     public Task<KepwareResultResponse<bool>> CreateOpcUaDevice(
         OpcUaDeviceRequest request,
         string channelName,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
         return InvokeCreateOpcUaDevice(
