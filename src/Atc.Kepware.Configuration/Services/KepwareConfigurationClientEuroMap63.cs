@@ -6,8 +6,8 @@ namespace Atc.Kepware.Configuration.Services;
 [SuppressMessage("Design", "MA0048:File name must match type name", Justification = "OK - By Design.")]
 public sealed partial class KepwareConfigurationClient
 {
-    public Task<KepwareResultResponse<bool>> CreateEuroMap63Channel(
-        EuroMap63ChannelRequest request,
+    public Task<ResultResponse<bool>> CreateEuroMap63Channel(
+        Contracts.EuroMap63.EuroMap63ChannelRequest request,
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
@@ -16,8 +16,8 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    public Task<KepwareResultResponse<bool>> CreateEuroMap63Device(
-        EuroMap63DeviceRequest request,
+    public Task<ResultResponse<bool>> CreateEuroMap63Device(
+        Contracts.EuroMap63.EuroMap63DeviceRequest request,
         string channelName,
         CancellationToken cancellationToken)
     {
@@ -28,20 +28,20 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    private Task<KepwareResultResponse<bool>> InvokeCreateEuroMap63Channel(
-            EuroMap63ChannelRequest request,
-            CancellationToken cancellationToken)
-            => Post(
-                request,
-                EndpointPathTemplateConstants.ProjectChannels,
-                cancellationToken);
+    private Task<ResultResponse<bool>> InvokeCreateEuroMap63Channel(
+        Contracts.EuroMap63.EuroMap63ChannelRequest request,
+        CancellationToken cancellationToken)
+        => Post(
+            request.Adapt<KepwareContracts.EuroMap63.EuroMap63ChannelRequest>(),
+            EndpointPathTemplateConstants.ProjectChannels,
+            cancellationToken);
 
-    private Task<KepwareResultResponse<bool>> InvokeCreateEuroMap63Device(
-        EuroMap63DeviceRequest request,
+    private Task<ResultResponse<bool>> InvokeCreateEuroMap63Device(
+        Contracts.EuroMap63.EuroMap63DeviceRequest request,
         string channelName,
         CancellationToken cancellationToken)
         => Post(
-            request,
+            request.Adapt<KepwareContracts.EuroMap63.EuroMap63DeviceRequest>(),
             $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}/{EndpointPathTemplateConstants.Devices}",
             cancellationToken);
 }

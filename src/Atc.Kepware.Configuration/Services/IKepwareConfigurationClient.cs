@@ -11,36 +11,36 @@ public interface IKepwareConfigurationClient
         string deviceName,
         CancellationToken cancellationToken);
 
-    Task<KepwareResultResponse<IList<ChannelBase>?>> GetChannels(
+    Task<ResultResponse<IList<ChannelBase>?>> GetChannels(
         CancellationToken cancellationToken);
 
-    Task<KepwareResultResponse<IList<DeviceBase>?>> GetDevices(
+    Task<ResultResponse<IList<DeviceBase>?>> GetDevices(
         string channelName,
         CancellationToken cancellationToken);
 
-    Task<KepwareResultResponse<bool>> CreateEuroMap63Channel(
-        EuroMap63ChannelRequest request,
+    Task<ResultResponse<bool>> CreateEuroMap63Channel(
+        Contracts.EuroMap63.EuroMap63ChannelRequest request,
         CancellationToken cancellationToken);
 
-    Task<KepwareResultResponse<bool>> CreateEuroMap63Device(
-        EuroMap63DeviceRequest request,
+    Task<ResultResponse<bool>> CreateEuroMap63Device(
+        Contracts.EuroMap63.EuroMap63DeviceRequest request,
         string channelName,
         CancellationToken cancellationToken);
 
-    Task<KepwareResultResponse<bool>> CreateOpcUaChannel(
-        OpcUaChannelRequest request,
+    Task<ResultResponse<bool>> CreateOpcUaClientChannel(
+        Contracts.OpcUaClient.OpcUaClientChannelRequest request,
         CancellationToken cancellationToken);
 
-    Task<KepwareResultResponse<bool>> CreateOpcUaDevice(
-        OpcUaDeviceRequest request,
+    Task<ResultResponse<bool>> CreateOpcUaClientDevice(
+        Contracts.OpcUaClient.OpcUaClientDeviceRequest request,
         string channelName,
         CancellationToken cancellationToken);
 
-    Task<KepwareResultResponse<bool>> DeleteChannel(
+    Task<ResultResponse<bool>> DeleteChannel(
         string channelName,
         CancellationToken cancellationToken);
 
-    Task<KepwareResultResponse<bool>> DeleteDevice(
+    Task<ResultResponse<bool>> DeleteDevice(
         string channelName,
         string deviceName,
         CancellationToken cancellationToken);

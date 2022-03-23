@@ -6,8 +6,8 @@ namespace Atc.Kepware.Configuration.Services;
 [SuppressMessage("Design", "MA0048:File name must match type name", Justification = "OK - By Design.")]
 public sealed partial class KepwareConfigurationClient
 {
-    public Task<KepwareResultResponse<bool>> CreateOpcUaChannel(
-        OpcUaChannelRequest request,
+    public Task<ResultResponse<bool>> CreateOpcUaClientChannel(
+        Contracts.OpcUaClient.OpcUaClientChannelRequest request,
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
@@ -16,8 +16,8 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    public Task<KepwareResultResponse<bool>> CreateOpcUaDevice(
-        OpcUaDeviceRequest request,
+    public Task<ResultResponse<bool>> CreateOpcUaClientDevice(
+        Contracts.OpcUaClient.OpcUaClientDeviceRequest request,
         string channelName,
         CancellationToken cancellationToken)
     {
@@ -28,20 +28,20 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    private Task<KepwareResultResponse<bool>> InvokeCreateOpcUaChannel(
-        OpcUaChannelRequest request,
+    private Task<ResultResponse<bool>> InvokeCreateOpcUaChannel(
+        Contracts.OpcUaClient.OpcUaClientChannelRequest request,
         CancellationToken cancellationToken)
         => Post(
-            request,
+            request.Adapt<KepwareContracts.OpcUaClient.OpcUaClientChannelRequest>(),
             EndpointPathTemplateConstants.ProjectChannels,
             cancellationToken);
 
-    private Task<KepwareResultResponse<bool>> InvokeCreateOpcUaDevice(
-        OpcUaDeviceRequest request,
+    private Task<ResultResponse<bool>> InvokeCreateOpcUaDevice(
+        Contracts.OpcUaClient.OpcUaClientDeviceRequest request,
         string channelName,
         CancellationToken cancellationToken)
         => Post(
-            request,
+            request.Adapt<KepwareContracts.OpcUaClient.OpcUaClientDeviceRequest>(),
             $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}/{EndpointPathTemplateConstants.Devices}",
             cancellationToken);
 }
