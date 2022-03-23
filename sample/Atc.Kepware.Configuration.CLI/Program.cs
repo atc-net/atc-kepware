@@ -19,7 +19,9 @@ public static class Program
 
         var serviceCollection = ServiceCollectionFactory.Create(consoleLoggerConfiguration);
 
-        var app = CommandAppFactory.Create(serviceCollection);
+        var app = CommandAppFactory.CreateWithRootCommand<RootCommand>(serviceCollection);
+        app.ConfigureCommands();
+
         return app.RunAsync(args);
     }
 
