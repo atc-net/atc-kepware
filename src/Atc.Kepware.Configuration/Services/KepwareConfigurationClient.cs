@@ -121,25 +121,34 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
                 return new HttpClientRequestResult<TResponse?>(response.StatusCode, result);
             }
 
-            var errorResponseJson = await response.Content.ReadAsStringAsync(cancellationToken);
-            var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(errorResponseJson, jsonSerializerOptions);
-            if (errorResponse is not null)
+            var errorResponseString = await response.Content.ReadAsStringAsync(cancellationToken);
+            if (response.Content.Headers.ContentType?.MediaType == MediaTypeNames.Application.Json)
             {
-                var codeMessage = errorResponse.GetCodeAndMessage();
-                if (response.StatusCode == HttpStatusCode.NotFound)
+                var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(errorResponseString, jsonSerializerOptions);
+                if (errorResponse is not null)
                 {
-                    LogGetNotFound(pathTemplate);
-                }
-                else
-                {
-                    LogGetFailure(pathTemplate, codeMessage);
-                }
+                    var codeMessage = errorResponse.GetCodeAndMessage();
+                    if (response.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        LogGetNotFound(pathTemplate);
+                    }
+                    else
+                    {
+                        LogGetFailure(pathTemplate, codeMessage);
+                    }
 
-                return new HttpClientRequestResult<TResponse?>(response.StatusCode, default, codeMessage);
+                    return new HttpClientRequestResult<TResponse?>(response.StatusCode, default, codeMessage);
+                }
             }
 
-            LogGetFailure(pathTemplate, errorResponseJson);
-            return new HttpClientRequestResult<TResponse?>(response.StatusCode, default, errorResponseJson);
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                LogGetNotFound(pathTemplate);
+                return new HttpClientRequestResult<TResponse?>(response.StatusCode, default);
+            }
+
+            LogGetFailure(pathTemplate, errorResponseString);
+            return new HttpClientRequestResult<TResponse?>(response.StatusCode, default, errorResponseString);
         }
         catch (Exception ex)
         {
@@ -169,17 +178,20 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
                 return new HttpClientRequestResult<bool>(response.StatusCode, data: true);
             }
 
-            var responseJson = await response.Content.ReadAsStringAsync(cancellationToken);
-            var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(responseJson, jsonSerializerOptions);
-            if (errorResponse is not null)
+            var errorResponseString = await response.Content.ReadAsStringAsync(cancellationToken);
+            if (response.Content.Headers.ContentType?.MediaType == MediaTypeNames.Application.Json)
             {
-                var codeMessage = errorResponse.GetCodeAndMessage();
-                LogPostFailure(pathTemplate, codeMessage);
-                return new HttpClientRequestResult<bool>(response.StatusCode, data: false, codeMessage);
+                var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(errorResponseString, jsonSerializerOptions);
+                if (errorResponse is not null)
+                {
+                    var codeMessage = errorResponse.GetCodeAndMessage();
+                    LogPostFailure(pathTemplate, codeMessage);
+                    return new HttpClientRequestResult<bool>(response.StatusCode, data: false, codeMessage);
+                }
             }
 
-            LogPostFailure(pathTemplate, responseJson);
-            return new HttpClientRequestResult<bool>(response.StatusCode, data: false, responseJson);
+            LogPostFailure(pathTemplate, errorResponseString);
+            return new HttpClientRequestResult<bool>(response.StatusCode, data: false, errorResponseString);
         }
         catch (Exception ex)
         {
@@ -201,9 +213,20 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
                 return new HttpClientRequestResult<bool>(response.StatusCode, data: true);
             }
 
-            var responseJson = await response.Content.ReadAsStringAsync(cancellationToken);
-            LogDeleteFailure(pathTemplate, responseJson);
-            return new HttpClientRequestResult<bool>(response.StatusCode, data: false, responseJson);
+            var errorResponseString = await response.Content.ReadAsStringAsync(cancellationToken);
+            if (response.Content.Headers.ContentType?.MediaType == MediaTypeNames.Application.Json)
+            {
+                var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(errorResponseString, jsonSerializerOptions);
+                if (errorResponse is not null)
+                {
+                    var codeMessage = errorResponse.GetCodeAndMessage();
+                    LogDeleteFailure(pathTemplate, codeMessage);
+                    return new HttpClientRequestResult<bool>(response.StatusCode, data: false, codeMessage);
+                }
+            }
+
+            LogPostFailure(pathTemplate, errorResponseString);
+            return new HttpClientRequestResult<bool>(response.StatusCode, data: false, errorResponseString);
         }
         catch (Exception ex)
         {
