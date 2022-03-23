@@ -6,7 +6,11 @@ global using System.Net.Http.Headers;
 global using System.Text;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
+
+global using Atc.Data.Models;
 global using Atc.Kepware.Configuration.Contracts;
 global using Atc.Serialization;
+
 global using Mapster;
+
 global using Microsoft.Extensions.Logging;

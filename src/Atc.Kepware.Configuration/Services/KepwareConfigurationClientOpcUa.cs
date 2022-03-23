@@ -6,7 +6,7 @@ namespace Atc.Kepware.Configuration.Services;
 [SuppressMessage("Design", "MA0048:File name must match type name", Justification = "OK - By Design.")]
 public sealed partial class KepwareConfigurationClient
 {
-    public Task<ResultResponse<bool>> CreateOpcUaClientChannel(
+    public Task<HttpClientRequestResult<bool>> CreateOpcUaClientChannel(
         Contracts.OpcUaClient.OpcUaClientChannelRequest request,
         CancellationToken cancellationToken)
     {
@@ -16,7 +16,7 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    public Task<ResultResponse<bool>> CreateOpcUaClientDevice(
+    public Task<HttpClientRequestResult<bool>> CreateOpcUaClientDevice(
         Contracts.OpcUaClient.OpcUaClientDeviceRequest request,
         string channelName,
         CancellationToken cancellationToken)
@@ -28,7 +28,7 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    private Task<ResultResponse<bool>> InvokeCreateOpcUaChannel(
+    private Task<HttpClientRequestResult<bool>> InvokeCreateOpcUaChannel(
         Contracts.OpcUaClient.OpcUaClientChannelRequest request,
         CancellationToken cancellationToken)
         => Post(
@@ -36,7 +36,7 @@ public sealed partial class KepwareConfigurationClient
             EndpointPathTemplateConstants.ProjectChannels,
             cancellationToken);
 
-    private Task<ResultResponse<bool>> InvokeCreateOpcUaDevice(
+    private Task<HttpClientRequestResult<bool>> InvokeCreateOpcUaDevice(
         Contracts.OpcUaClient.OpcUaClientDeviceRequest request,
         string channelName,
         CancellationToken cancellationToken)

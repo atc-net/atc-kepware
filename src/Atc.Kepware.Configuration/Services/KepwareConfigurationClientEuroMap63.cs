@@ -6,7 +6,7 @@ namespace Atc.Kepware.Configuration.Services;
 [SuppressMessage("Design", "MA0048:File name must match type name", Justification = "OK - By Design.")]
 public sealed partial class KepwareConfigurationClient
 {
-    public Task<ResultResponse<bool>> CreateEuroMap63Channel(
+    public Task<HttpClientRequestResult<bool>> CreateEuroMap63Channel(
         Contracts.EuroMap63.EuroMap63ChannelRequest request,
         CancellationToken cancellationToken)
     {
@@ -16,7 +16,7 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    public Task<ResultResponse<bool>> CreateEuroMap63Device(
+    public Task<HttpClientRequestResult<bool>> CreateEuroMap63Device(
         Contracts.EuroMap63.EuroMap63DeviceRequest request,
         string channelName,
         CancellationToken cancellationToken)
@@ -28,7 +28,7 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    private Task<ResultResponse<bool>> InvokeCreateEuroMap63Channel(
+    private Task<HttpClientRequestResult<bool>> InvokeCreateEuroMap63Channel(
         Contracts.EuroMap63.EuroMap63ChannelRequest request,
         CancellationToken cancellationToken)
         => Post(
@@ -36,7 +36,7 @@ public sealed partial class KepwareConfigurationClient
             EndpointPathTemplateConstants.ProjectChannels,
             cancellationToken);
 
-    private Task<ResultResponse<bool>> InvokeCreateEuroMap63Device(
+    private Task<HttpClientRequestResult<bool>> InvokeCreateEuroMap63Device(
         Contracts.EuroMap63.EuroMap63DeviceRequest request,
         string channelName,
         CancellationToken cancellationToken)

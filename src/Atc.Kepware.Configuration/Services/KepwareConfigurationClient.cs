@@ -69,17 +69,17 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         return response.Data is not null;
     }
 
-    public async Task<ResultResponse<IList<ChannelBase>?>> GetChannels(
+    public async Task<HttpClientRequestResult<IList<ChannelBase>?>> GetChannels(
         CancellationToken cancellationToken)
     {
         var response = await Get<IList<KepwareContracts.ChannelBase>>(
             EndpointPathTemplateConstants.ProjectChannels,
             cancellationToken);
 
-        return response.Adapt<ResultResponse<IList<ChannelBase>?>>();
+        return response.Adapt<HttpClientRequestResult<IList<ChannelBase>?>>();
     }
 
-    public async Task<ResultResponse<IList<DeviceBase>?>> GetDevices(
+    public async Task<HttpClientRequestResult<IList<DeviceBase>?>> GetDevices(
         string channelName,
         CancellationToken cancellationToken)
     {
@@ -87,17 +87,17 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}/{EndpointPathTemplateConstants.Devices}",
             cancellationToken);
 
-        return response.Adapt<ResultResponse<IList<DeviceBase>?>>();
+        return response.Adapt<HttpClientRequestResult<IList<DeviceBase>?>>();
     }
 
-    public Task<ResultResponse<bool>> DeleteChannel(
+    public Task<HttpClientRequestResult<bool>> DeleteChannel(
         string channelName,
         CancellationToken cancellationToken)
         => Delete(
             $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}",
             cancellationToken);
 
-    public Task<ResultResponse<bool>> DeleteDevice(
+    public Task<HttpClientRequestResult<bool>> DeleteDevice(
         string channelName,
         string deviceName,
         CancellationToken cancellationToken)
@@ -105,7 +105,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}/{EndpointPathTemplateConstants.Devices}/{deviceName}",
             cancellationToken);
 
-    private async Task<ResultResponse<TResponse?>> Get<TResponse>(
+    private async Task<HttpClientRequestResult<TResponse?>> Get<TResponse>(
         string pathTemplate,
         CancellationToken cancellationToken)
     {
@@ -118,7 +118,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
                 var responseJson = await response.Content.ReadAsStringAsync(cancellationToken);
                 LogGetSucceeded(pathTemplate);
                 var result = JsonSerializer.Deserialize<TResponse>(responseJson, jsonSerializerOptions);
-                return new ResultResponse<TResponse?>(response.StatusCode, result);
+                return new HttpClientRequestResult<TResponse?>(response.StatusCode, result);
             }
 
             var errorResponseJson = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -135,20 +135,20 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
                     LogGetFailure(pathTemplate, codeMessage);
                 }
 
-                return new ResultResponse<TResponse?>(response.StatusCode, default, codeMessage);
+                return new HttpClientRequestResult<TResponse?>(response.StatusCode, default, codeMessage);
             }
 
             LogGetFailure(pathTemplate, errorResponseJson);
-            return new ResultResponse<TResponse?>(response.StatusCode, default, errorResponseJson);
+            return new HttpClientRequestResult<TResponse?>(response.StatusCode, default, errorResponseJson);
         }
         catch (Exception ex)
         {
             LogGetFailure(pathTemplate, ex.Message);
-            return new ResultResponse<TResponse?>(ex);
+            return new HttpClientRequestResult<TResponse?>(ex);
         }
     }
 
-    private async Task<ResultResponse<bool>> Post<TRequest>(
+    private async Task<HttpClientRequestResult<bool>> Post<TRequest>(
         TRequest request,
         string pathTemplate,
         CancellationToken cancellationToken)
@@ -166,7 +166,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             if (response.IsSuccessStatusCode)
             {
                 LogPostSucceeded(pathTemplate);
-                return new ResultResponse<bool>(response.StatusCode, data: true);
+                return new HttpClientRequestResult<bool>(response.StatusCode, data: true);
             }
 
             var responseJson = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -175,20 +175,20 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             {
                 var codeMessage = errorResponse.GetCodeAndMessage();
                 LogPostFailure(pathTemplate, codeMessage);
-                return new ResultResponse<bool>(response.StatusCode, data: false, codeMessage);
+                return new HttpClientRequestResult<bool>(response.StatusCode, data: false, codeMessage);
             }
 
             LogPostFailure(pathTemplate, responseJson);
-            return new ResultResponse<bool>(response.StatusCode, data: false, responseJson);
+            return new HttpClientRequestResult<bool>(response.StatusCode, data: false, responseJson);
         }
         catch (Exception ex)
         {
             LogPostFailure(pathTemplate, ex.Message);
-            return new ResultResponse<bool>(ex);
+            return new HttpClientRequestResult<bool>(ex);
         }
     }
 
-    private async Task<ResultResponse<bool>> Delete(
+    private async Task<HttpClientRequestResult<bool>> Delete(
         string pathTemplate,
         CancellationToken cancellationToken)
     {
@@ -198,17 +198,17 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             if (response.IsSuccessStatusCode)
             {
                 LogDeleteSucceeded(pathTemplate);
-                return new ResultResponse<bool>(response.StatusCode, data: true);
+                return new HttpClientRequestResult<bool>(response.StatusCode, data: true);
             }
 
             var responseJson = await response.Content.ReadAsStringAsync(cancellationToken);
             LogDeleteFailure(pathTemplate, responseJson);
-            return new ResultResponse<bool>(response.StatusCode, data: false, responseJson);
+            return new HttpClientRequestResult<bool>(response.StatusCode, data: false, responseJson);
         }
         catch (Exception ex)
         {
             LogDeleteFailure(pathTemplate, ex.Message);
-            return new ResultResponse<bool>(ex);
+            return new HttpClientRequestResult<bool>(ex);
         }
     }
 
