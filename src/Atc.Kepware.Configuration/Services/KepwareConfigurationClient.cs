@@ -165,6 +165,30 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         }
     }
 
+    private async Task<KepwareResultResponse<bool>> Delete(
+        string pathTemplate,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var response = await httpClient.DeleteAsync(pathTemplate, cancellationToken);
+            if (response.IsSuccessStatusCode)
+            {
+                LogDeleteSucceeded(pathTemplate);
+                return new KepwareResultResponse<bool>(true, response.StatusCode, true, string.Empty);
+            }
+
+            var responseJson = await response.Content.ReadAsStringAsync(cancellationToken);
+            LogDeleteFailure(pathTemplate, responseJson);
+            return new KepwareResultResponse<bool>(false, response.StatusCode, false, responseJson);
+        }
+        catch (Exception ex)
+        {
+            LogDeleteFailure(pathTemplate, ex.Message);
+            return new KepwareResultResponse<bool>(false, null, false, ex.Message);
+        }
+    }
+
     public void Dispose()
     {
         httpClientHandler.Dispose();

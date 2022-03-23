@@ -38,4 +38,16 @@ public partial class KepwareConfigurationClient
         Level = LogLevel.Error,
         Message = "Failed to post to pathTemplate '{pathTemplate}': '{errorMessage}'.")]
     private partial void LogPostFailure(string pathTemplate, string errorMessage);
+
+    [LoggerMessage(
+        EventId = LoggingEventIdConstants.DeleteSucceeded,
+        Level = LogLevel.Trace,
+        Message = "Successfully deleted for pathTemplate '{pathTemplate}'.")]
+    private partial void LogDeleteSucceeded(string pathTemplate);
+
+    [LoggerMessage(
+        EventId = LoggingEventIdConstants.DeleteFailure,
+        Level = LogLevel.Error,
+        Message = "Failed to delete for pathTemplate '{pathTemplate}': '{errorMessage}'.")]
+    private partial void LogDeleteFailure(string pathTemplate, string errorMessage);
 }
