@@ -9,6 +9,9 @@ global using System.Text.Json.Serialization;
 
 global using Atc.Data.Models;
 global using Atc.Kepware.Configuration.Contracts;
+global using Atc.Kepware.Configuration.Interfaces;
+global using Atc.Kepware.Configuration.Interfaces.EuroMap63;
+global using Atc.Kepware.Configuration.Interfaces.OpcUaClient;
 global using Atc.Serialization;
 
 global using Mapster;
