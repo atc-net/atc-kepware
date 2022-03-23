@@ -16,6 +16,12 @@ public partial class KepwareConfigurationClient
     private partial void LogGetSucceeded(string pathTemplate);
 
     [LoggerMessage(
+        EventId = LoggingEventIdConstants.GetNotFound,
+        Level = LogLevel.Warning,
+        Message = "No content found when retrieving data from pathTemplate '{pathTemplate}'.")]
+    private partial void LogGetNotFound(string pathTemplate);
+
+    [LoggerMessage(
         EventId = LoggingEventIdConstants.GetFailure,
         Level = LogLevel.Error,
         Message = "Failed to retrieve data from pathTemplate '{pathTemplate}': '{errorMessage}'.")]

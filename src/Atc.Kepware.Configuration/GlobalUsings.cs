@@ -6,6 +6,8 @@ global using System.Net.Http.Headers;
 global using System.Text;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
+global using Atc.Kepware.Configuration.Contracts;
+global using Atc.Kepware.Configuration.Contracts.Drivers;
 global using Atc.Kepware.Configuration.Contracts.Drivers.EuroMap63.Channel;
 global using Atc.Kepware.Configuration.Contracts.Drivers.EuroMap63.Device;
 global using Atc.Kepware.Configuration.Contracts.Drivers.OpcUaClient.Channel;
