@@ -9,7 +9,7 @@ public abstract class DeviceRequestBase
     }
 
     /// <summary>
-    /// Specify the identity of this object.
+    /// Specifies the identity of this object.
     /// </summary>
     [MinLength(1)]
     [MaxLength(256)]
@@ -17,7 +17,7 @@ public abstract class DeviceRequestBase
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// Provide a brief summary of this object or its use.
+    /// Summary of this object or its use.
     /// </summary>
     [MaxLength(255)]
     [JsonPropertyName("common.ALLTYPES_DESCRIPTION")]
@@ -27,7 +27,7 @@ public abstract class DeviceRequestBase
     public string Driver { get; private init; }
 
     /// <summary>
-    /// Select whether or not communication with the physical device is active (enabled) or turned off (disabled).
+    /// Indicates whether or not communication with the physical device is active (enabled) or turned off (disabled).
     /// When disabled, data is marked invalid and write operations are not accepted.
     /// </summary>
     [JsonPropertyName("servermain.DEVICE_DATA_COLLECTION")]
@@ -40,13 +40,13 @@ public abstract class DeviceRequestBase
     public bool Simulated { get; set; }
 
     /// <summary>
-    /// Specify the method for determining how often tags in the device are scanned.
+    /// Specifies the method for determining how often tags in the device are scanned.
     /// </summary>
     [JsonPropertyName("servermain.DEVICE_SCAN_MODE")]
     public DeviceScanModeType ScanMode { get; set; } = DeviceScanModeType.RespectClientSpecifiedScanRate;
 
     /// <summary>
-    /// Indicate the frequency of scanning in milliseconds.
+    /// Indicates the frequency of scanning in milliseconds.
     /// When the Scan Mode is Request data no faster than Scan Rate, this is the maximum rate.
     /// When the Scan Mode is Request all data at Scan Rate, all tags are scanned at this rate.
     /// </summary>
@@ -58,7 +58,7 @@ public abstract class DeviceRequestBase
     public int ScanRate { get; set; } = 1000;
 
     /// <summary>
-    /// Provide the first updates for new tag references from stored (cached) data
+    /// Determines if the first updates for new tag references should be returned from stored (cached) data
     /// rather than polling devices immediately.
     /// </summary>
     [JsonPropertyName("servermain.DEVICE_SCAN_MODE_PROVIDE_INITIAL_UPDATES_FROM_CACHE")]
