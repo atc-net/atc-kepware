@@ -7,7 +7,7 @@ namespace Atc.Kepware.Configuration.Services;
 [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "OK")]
 public partial class KepwareConfigurationClient
 {
-    private readonly ILogger<KepwareConfigurationClient> logger;
+    private readonly ILogger logger;
 
     [LoggerMessage(
         EventId = LoggingEventIdConstants.GetSucceeded,

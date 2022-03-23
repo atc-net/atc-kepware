@@ -14,7 +14,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     [SuppressMessage("Security", "MA0039:Do not write your own certificate validation method", Justification = "OK")]
     [SuppressMessage("Critical Vulnerability", "S4830:Server certificates should be verified during SSL/TLS connections", Justification = "OK")]
     public KepwareConfigurationClient(
-        ILogger<KepwareConfigurationClient> logger,
+        ILogger logger,
         Uri baseUri,
         string? userName,
         string? password,
