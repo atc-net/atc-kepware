@@ -1,14 +1,14 @@
 namespace Atc.Kepware.Configuration.CLI.Commands;
 
-public class ChannelsGetCommand : AsyncCommand<ChannelsGetCommandSettings>
+public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
 {
-    private readonly ILogger<ChannelsGetCommand> logger;
+    private readonly ILogger<DevicesGetCommand> logger;
 
-    public ChannelsGetCommand(ILogger<ChannelsGetCommand> logger) => this.logger = logger;
+    public DevicesGetCommand(ILogger<DevicesGetCommand> logger) => this.logger = logger;
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelsGetCommandSettings settings)
+        DevicesGetCommandSettings settings)
     {
         ArgumentNullException.ThrowIfNull(settings);
         return ExecuteInternalAsync(settings);
@@ -16,7 +16,7 @@ public class ChannelsGetCommand : AsyncCommand<ChannelsGetCommandSettings>
 
     [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "OK.")]
     private async Task<int> ExecuteInternalAsync(
-        ChannelsGetCommandSettings settings)
+        DevicesGetCommandSettings settings)
     {
         ConsoleHelper.WriteHeader();
 
@@ -28,13 +28,13 @@ public class ChannelsGetCommand : AsyncCommand<ChannelsGetCommandSettings>
                 settings.UserName,
                 settings.Password);
 
-            var result = await kepwareConfigurationClient.GetChannels(CancellationToken.None);
+            var result = await kepwareConfigurationClient.GetDevices(settings.ChannelName, CancellationToken.None);
 
             if (result.HasCommunicationSucceeded && result.Data is not null)
             {
-                foreach (var channelBase in result.Data)
+                foreach (var deviceBase in result.Data)
                 {
-                    logger.LogInformation($"{channelBase.Name} - {channelBase.DeviceDriver}");
+                    logger.LogInformation($"{deviceBase.Name} - {deviceBase.Driver}");
                 }
             }
             else

@@ -1,4 +1,4 @@
-﻿namespace Atc.Kepware.Configuration.CLI.Commands.Settings;
+namespace Atc.Kepware.Configuration.CLI.Commands.Settings;
 
 public class KepwareBaseCommandSettings : BaseCommandSettings
 {
@@ -7,8 +7,8 @@ public class KepwareBaseCommandSettings : BaseCommandSettings
     public string Url { get; init; } = string.Empty;
 
     [CommandOption("--username <USERNAME>")]
-    [Description("Username for Kepware server configuration endpoint")]
-    public string Username { get; init; } = string.Empty;
+    [Description("UserName for Kepware server configuration endpoint")]
+    public string UserName { get; init; } = string.Empty;
 
     [CommandOption("--password <PASSWORD>")]
     [Description("Password for Kepware server configuration endpoint")]
@@ -32,7 +32,7 @@ public class KepwareBaseCommandSettings : BaseCommandSettings
             return ValidationResult.Error("url is invalid.");
         }
 
-        if (string.IsNullOrEmpty(Username))
+        if (string.IsNullOrEmpty(UserName))
         {
             return ValidationResult.Error("username is not set.");
         }
