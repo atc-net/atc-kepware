@@ -1,16 +1,16 @@
 namespace Atc.Kepware.Configuration.CLI.Commands;
 
-public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
+public class TagsGetCommand : AsyncCommand<TagsGetCommandSettings>
 {
-    private readonly ILogger<DevicesGetCommand> logger;
+    private readonly ILogger<TagsGetCommand> logger;
 
-    public DevicesGetCommand(
-        ILogger<DevicesGetCommand> logger)
+    public TagsGetCommand(
+        ILogger<TagsGetCommand> logger)
         => this.logger = logger;
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        DevicesGetCommandSettings settings)
+        TagsGetCommandSettings settings)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
@@ -19,7 +19,7 @@ public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
     }
 
     private async Task<int> ExecuteInternalAsync(
-        DevicesGetCommandSettings settings)
+        TagsGetCommandSettings settings)
     {
         ConsoleHelper.WriteHeader();
 
@@ -40,12 +40,22 @@ public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
                     userName: null,
                     password: null);
 
-            var result = await kepwareConfigurationClient.GetDevices(settings.ChannelName, CancellationToken.None);
+            var result = await kepwareConfigurationClient.GetTags(
+                settings.ChannelName,
+                settings.DeviceName,
+                settings.MaxDepth < 1 ? 1 : settings.MaxDepth,
+                CancellationToken.None);
+
             if (result.HasCommunicationSucceeded && result.Data is not null)
             {
-                foreach (var deviceBase in result.Data)
+                foreach (var tag in result.Data.Tags)
                 {
-                    logger.LogInformation($"{deviceBase.Name} - {deviceBase.Driver}");
+                    logger.LogInformation($"Tag: {tag.Name}");
+                }
+
+                foreach (var tagGroup in result.Data.TagGroups)
+                {
+                    logger.LogInformation($"TagGroup: {tagGroup.Name}");
                 }
             }
             else

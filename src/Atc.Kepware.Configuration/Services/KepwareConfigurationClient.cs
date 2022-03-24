@@ -69,6 +69,41 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         return response.Data is not null;
     }
 
+    public async Task<bool> IsTagDefined(
+        string channelName,
+        string deviceName,
+        string[] tagGroupStructure,
+        string tagName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(tagGroupStructure);
+
+        var baseRequestPathTemplate = $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}/{EndpointPathTemplateConstants.Devices}/{deviceName}";
+
+        string tagPath;
+        switch (tagGroupStructure.Length)
+        {
+            case 0:
+                tagPath = $"{baseRequestPathTemplate}/{EndpointPathTemplateConstants.Tags}/{tagName}";
+                break;
+            case 1:
+                tagPath = $"{baseRequestPathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{tagGroupStructure[0]}/{EndpointPathTemplateConstants.Tags}/{tagName}";
+                break;
+            default:
+            {
+                var intermediateGroupPath = string.Join($"/{EndpointPathTemplateConstants.TagGroups}/", tagGroupStructure);
+                tagPath = $"{baseRequestPathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{intermediateGroupPath}/{EndpointPathTemplateConstants.Tags}/{tagName}";
+                break;
+            }
+        }
+
+        var response = await Get<KepwareContracts.Tag>(
+            tagPath,
+            cancellationToken);
+
+        return response.Data is not null;
+    }
+
     public async Task<HttpClientRequestResult<IList<ChannelBase>?>> GetChannels(
         CancellationToken cancellationToken)
     {
@@ -90,6 +125,60 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         return response.Adapt<HttpClientRequestResult<IList<DeviceBase>?>>();
     }
 
+    public async Task<HttpClientRequestResult<TagRoot>> GetTags(
+        string channelName,
+        string deviceName,
+        int maxDepth,
+        CancellationToken cancellationToken)
+    {
+        var result = new TagRoot(deviceName);
+        var baseRequestPathTemplate = $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}/{EndpointPathTemplateConstants.Devices}/{deviceName}";
+        const int currentDepth = 1;
+
+        var tagResult = await GetTagsResultForPathTemplate(baseRequestPathTemplate, cancellationToken);
+        if (tagResult.HasCommunicationSucceeded)
+        {
+            if (tagResult.Data is not null &&
+                tagResult.Data.Any())
+            {
+                foreach (var tag in tagResult.Data.Adapt<List<Tag>>())
+                {
+                    result.Tags.Add(tag);
+                }
+            }
+
+            var tagGroupResult = await GetTagGroupResultForPathTemplate(baseRequestPathTemplate, cancellationToken);
+
+            if (tagGroupResult.HasCommunicationSucceeded &&
+                tagGroupResult.Data is not null &&
+                tagGroupResult.Data.Any())
+            {
+                foreach (var kepwareTagGroup in tagGroupResult.Data)
+                {
+                    var tagGroup = kepwareTagGroup.Adapt<TagGroup>();
+
+                    if (maxDepth >= currentDepth && kepwareTagGroup.TagCountInTree > 0)
+                    {
+                        await IterateTagGroup(
+                            tagGroup,
+                            $"{baseRequestPathTemplate}/{EndpointPathTemplateConstants.TagGroups}",
+                            currentDepth + 1,
+                            maxDepth,
+                            cancellationToken);
+                    }
+
+                    result.TagGroups.Add(tagGroup);
+                }
+            }
+        }
+        else if (tagResult.StatusCode != HttpStatusCode.OK)
+        {
+            return new HttpClientRequestResult<TagRoot>(tagResult.StatusCode);
+        }
+
+        return new HttpClientRequestResult<TagRoot>(result);
+    }
+
     public Task<HttpClientRequestResult<bool>> DeleteChannel(
         string channelName,
         CancellationToken cancellationToken)
@@ -103,6 +192,76 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         CancellationToken cancellationToken)
         => Delete(
             $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}/{EndpointPathTemplateConstants.Devices}/{deviceName}",
+            cancellationToken);
+
+    private async Task IterateTagGroup(
+        TagGroup tagGroup,
+        string tagGroupPathTemplate,
+        int currentDepth,
+        int maxDepth,
+        CancellationToken cancellationToken)
+    {
+        if (maxDepth < currentDepth)
+        {
+            return;
+        }
+
+        tagGroupPathTemplate = $"{tagGroupPathTemplate}/{tagGroup.Name}";
+
+        // TODO: Optimize if tagGroup.TagCountInGroup > 0
+        var tagResult = await GetTagsResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
+        if (!tagResult.HasCommunicationSucceeded)
+        {
+            return;
+        }
+
+        if (tagResult.Data is not null &&
+            tagResult.Data.Any())
+        {
+            foreach (var tag in tagResult.Data.Adapt<List<Tag>>())
+            {
+                tagGroup.Tags.Add(tag);
+            }
+        }
+
+        // TODO: Optimize if tagGroup.TagCountInTree > 0
+        var tagGroupResult = await GetTagGroupResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
+
+        if (tagGroupResult.HasCommunicationSucceeded &&
+            tagGroupResult.Data is not null &&
+            tagGroupResult.Data.Any())
+        {
+            foreach (var kepwareTagGroup in tagGroupResult.Data)
+            {
+                var subTagGroup = kepwareTagGroup.Adapt<TagGroup>();
+
+                if (kepwareTagGroup.TagCountInTree > 0)
+                {
+                    await IterateTagGroup(
+                        subTagGroup,
+                        $"{tagGroupPathTemplate}/{EndpointPathTemplateConstants.TagGroups}",
+                        currentDepth + 1,
+                        maxDepth,
+                        cancellationToken);
+                }
+
+                tagGroup.TagGroups.Add(subTagGroup);
+            }
+        }
+    }
+
+    private Task<HttpClientRequestResult<IList<KepwareContracts.Tag>?>> GetTagsResultForPathTemplate(
+        string pathTemplate,
+        CancellationToken cancellationToken)
+        => Get<IList<KepwareContracts.Tag>>(
+            $"{pathTemplate}/{EndpointPathTemplateConstants.Tags}",
+            cancellationToken);
+
+    private Task<HttpClientRequestResult<IList<KepwareContracts.TagGroup>?>> GetTagGroupResultForPathTemplate(
+        string pathTemplate,
+        CancellationToken cancellationToken)
+        => Get<IList<KepwareContracts.TagGroup>>(
+            $"{pathTemplate}/{EndpointPathTemplateConstants.TagGroups}",
             cancellationToken);
 
     private async Task<HttpClientRequestResult<TResponse?>> Get<TResponse>(

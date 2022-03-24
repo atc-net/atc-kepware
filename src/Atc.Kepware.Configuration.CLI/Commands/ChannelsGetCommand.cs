@@ -4,7 +4,8 @@ public class ChannelsGetCommand : AsyncCommand<ChannelsGetCommandSettings>
 {
     private readonly ILogger<ChannelsGetCommand> logger;
 
-    public ChannelsGetCommand(ILogger<ChannelsGetCommand> logger)
+    public ChannelsGetCommand(
+        ILogger<ChannelsGetCommand> logger)
         => this.logger = logger;
 
     public override Task<int> ExecuteAsync(
@@ -17,7 +18,6 @@ public class ChannelsGetCommand : AsyncCommand<ChannelsGetCommandSettings>
         return ExecuteInternalAsync(settings);
     }
 
-    [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "OK.")]
     private async Task<int> ExecuteInternalAsync(
         ChannelsGetCommandSettings settings)
     {
@@ -31,12 +31,12 @@ public class ChannelsGetCommand : AsyncCommand<ChannelsGetCommandSettings>
             using var kepwareConfigurationClient = userName is not null && userName.IsSet
                 ? new KepwareConfigurationClient(
                     logger,
-                    new Uri(settings.Url),
+                    new Uri(settings.ServerUrl),
                     userName.Value,
                     password!.Value)
                 : new KepwareConfigurationClient(
                     logger,
-                    new Uri(settings.Url),
+                    new Uri(settings.ServerUrl),
                     userName: null,
                     password: null);
 

@@ -11,11 +11,24 @@ public interface IKepwareConfigurationClient
         string deviceName,
         CancellationToken cancellationToken);
 
+    Task<bool> IsTagDefined(
+        string channelName,
+        string deviceName,
+        string[] tagGroupStructure,
+        string tagName,
+        CancellationToken cancellationToken);
+
     Task<HttpClientRequestResult<IList<ChannelBase>?>> GetChannels(
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<IList<DeviceBase>?>> GetDevices(
         string channelName,
+        CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<TagRoot>> GetTags(
+        string channelName,
+        string deviceName,
+        int maxDepth,
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<bool>> CreateEuroMap63Channel(

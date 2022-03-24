@@ -2,15 +2,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Settings;
 
 public class KepwareBaseCommandSettings : BaseCommandSettings
 {
-    [CommandOption("--url <URL>")]
-    [Description("Url for Kepserver configuration endpoint")]
-    public string Url { get; init; } = string.Empty;
+    [CommandOption("-s|--serverUrl <SERVERURL>")]
+    [Description("Server Url for Kepserver configuration endpoint")]
+    public string ServerUrl { get; init; } = string.Empty;
 
-    [CommandOption("--username [USERNAME]")]
+    [CommandOption("-u|--username [USERNAME]")]
     [Description("UserName for Kepware server configuration endpoint")]
     public FlagValue<string>? UserName { get; init; }
 
-    [CommandOption("--password [PASSWORD]")]
+    [CommandOption("-p|--password [PASSWORD]")]
     [Description("Password for Kepware server configuration endpoint")]
     public FlagValue<string>? Password { get; init; }
 
@@ -22,14 +22,14 @@ public class KepwareBaseCommandSettings : BaseCommandSettings
             return validationResult;
         }
 
-        if (string.IsNullOrEmpty(Url))
+        if (string.IsNullOrEmpty(ServerUrl))
         {
-            return ValidationResult.Error("url is not set.");
+            return ValidationResult.Error("serverUrl is not set.");
         }
 
-        if (Uri.TryCreate(Url, UriKind.Relative, out _))
+        if (Uri.TryCreate(ServerUrl, UriKind.Relative, out _))
         {
-            return ValidationResult.Error("url is invalid.");
+            return ValidationResult.Error("serverUrl is invalid.");
         }
 
         if ((UserName is not null && UserName.IsSet && Password is not null && !Password.IsSet) ||
