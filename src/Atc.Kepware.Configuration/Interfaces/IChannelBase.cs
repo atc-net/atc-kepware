@@ -3,12 +3,12 @@ namespace Atc.Kepware.Configuration.Interfaces;
 public interface IChannelBase
 {
     /// <summary>
-    /// Specify the identity of this object.
+    /// Name of the channel.
     /// </summary>
     string Name { get; set; }
 
     /// <summary>
-    /// Provide a brief summary of this object or its use.
+    /// Description of the channel.
     /// </summary>
     string Description { get; set; }
 

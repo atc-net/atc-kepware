@@ -3,12 +3,12 @@ namespace Atc.Kepware.Configuration.Interfaces;
 public interface IDeviceBase
 {
     /// <summary>
-    /// Specify the identity of this object.
+    /// Name of the device.
     /// </summary>
     string Name { get; set; }
 
     /// <summary>
-    /// Provide a brief summary of this object or its use.
+    /// Description of the device.
     /// </summary>
     string Description { get; set; }
 

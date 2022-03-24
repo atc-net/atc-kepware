@@ -21,7 +21,7 @@ public interface IOpcUaClientChannelRequest : IChannelRequestBase
     OpcUaServerMessageModeType ServerMessageMode { get; set; }
 
     /// <summary>
-    /// Specify the maximum amount of time, in seconds,
+    /// Specifies the maximum amount of time, in seconds,
     /// the channel should wait to successfully connect after making a connect call.
     /// A shorter timeout makes the application more responsive;
     /// a longer timeout gives the channel a better chance of connecting.
@@ -29,25 +29,25 @@ public interface IOpcUaClientChannelRequest : IChannelRequestBase
     int ConnectTimeoutSeconds { get; set; }
 
     /// <summary>
-    /// Specify the maximum amount of time, in minutes, a session remains open without activity.
+    /// Specifies the maximum amount of time, in minutes, a session remains open without activity.
     /// If the client fails to issue a request within this period, the server terminates the connection.
     /// </summary>
     int SessionTimeoutInactiveMinutes { get; set; }
 
     /// <summary>
-    /// Specify the time, in minutes, between channel renewals.
+    /// Specifies the time, in minutes, between channel renewals.
     /// The driver refreshes the security of the channel after 75% of this time expires.
     /// Decreasing this time makes the connection more secure, but may slow data transfer.
     /// </summary>
     int SessionRenewalIntervalMinutes { get; set; }
 
     /// <summary>
-    /// Specify the rate, in seconds, at which the channel attempts to reconnect if it fails to connect or becomes disconnected.
+    /// Specifies the rate, in seconds, at which the channel attempts to reconnect if it fails to connect or becomes disconnected.
     /// </summary>
     int SessionFailedConnectionRetryIntervalSeconds { get; set; }
 
     /// <summary>
-    /// Specify the rate the client reads the server status state node.
+    /// Specifies the rate the client reads the server status state node.
     /// </summary>
     int SessionWatchdogTimeout { get; set; }
 
