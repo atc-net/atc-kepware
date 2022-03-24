@@ -35,7 +35,7 @@ public class KepwareBaseCommandSettings : BaseCommandSettings
         if ((UserName is not null && UserName.IsSet && Password is not null && !Password.IsSet) ||
             (UserName is not null && !UserName.IsSet && Password is not null && Password.IsSet))
         {
-            return ValidationResult.Error("Both UserName and Password must be set.");
+            return ValidationResult.Error("Both username and password must be set.");
         }
 
         return ValidationResult.Success();

@@ -4,7 +4,8 @@ public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
 {
     private readonly ILogger<DevicesGetCommand> logger;
 
-    public DevicesGetCommand(ILogger<DevicesGetCommand> logger) => this.logger = logger;
+    public DevicesGetCommand(ILogger<DevicesGetCommand> logger)
+        => this.logger = logger;
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,27 +26,19 @@ public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
             var userName = settings.UserName;
             var password = settings.Password;
 
-            KepwareConfigurationClient kepwareConfigurationClient;
-            if (userName is not null && userName.IsSet)
-            {
-                kepwareConfigurationClient = new KepwareConfigurationClient(
+            using var kepwareConfigurationClient = userName is not null && userName.IsSet
+                ? new KepwareConfigurationClient(
                     logger,
                     new Uri(settings.Url),
                     userName.Value,
-                    password!.Value);
-            }
-            else
-            {
-                kepwareConfigurationClient = new KepwareConfigurationClient(
+                    password!.Value)
+                : new KepwareConfigurationClient(
                     logger,
                     new Uri(settings.Url),
-                    null,
-                    null);
-            }
+                    userName: null,
+                    password: null);
 
             var result = await kepwareConfigurationClient.GetDevices(settings.ChannelName, CancellationToken.None);
-            kepwareConfigurationClient.Dispose();
-
             if (result.HasCommunicationSucceeded && result.Data is not null)
             {
                 foreach (var deviceBase in result.Data)
