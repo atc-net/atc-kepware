@@ -10,6 +10,7 @@ public class RootCommand : AsyncCommand<RootCommandSettings>
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
+
         return ExecuteInternalAsync(settings);
     }
 
@@ -39,7 +40,5 @@ public class RootCommand : AsyncCommand<RootCommandSettings>
     }
 
     private static void HandleVersionOption()
-    {
-        System.Console.WriteLine(CliHelper.GetCurrentVersion().ToString());
-    }
+        => System.Console.WriteLine(CliHelper.GetCurrentVersion().ToString());
 }

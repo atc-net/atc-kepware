@@ -11,7 +11,9 @@ public class ChannelsGetCommand : AsyncCommand<ChannelsGetCommandSettings>
         CommandContext context,
         ChannelsGetCommandSettings settings)
     {
+        ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
+
         return ExecuteInternalAsync(settings);
     }
 

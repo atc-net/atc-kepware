@@ -11,7 +11,9 @@ public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
         CommandContext context,
         DevicesGetCommandSettings settings)
     {
+        ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
+
         return ExecuteInternalAsync(settings);
     }
 
