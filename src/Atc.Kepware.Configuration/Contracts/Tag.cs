@@ -1,5 +1,3 @@
-using Atc.Kepware.Configuration.KepwareContracts;
-
 namespace Atc.Kepware.Configuration.Contracts;
 
 public class Tag

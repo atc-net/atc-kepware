@@ -22,13 +22,29 @@ public class ChannelsGetCommand : AsyncCommand<ChannelsGetCommandSettings>
 
         try
         {
-            using var kepwareConfigurationClient = new KepwareConfigurationClient(
-                logger,
-                new Uri(settings.Url),
-                settings.UserName,
-                settings.Password);
+            var userName = settings.UserName;
+            var password = settings.Password;
+
+            KepwareConfigurationClient kepwareConfigurationClient;
+            if (userName is not null && userName.IsSet)
+            {
+                kepwareConfigurationClient = new KepwareConfigurationClient(
+                    logger,
+                    new Uri(settings.Url),
+                    userName.Value,
+                    password!.Value);
+            }
+            else
+            {
+                kepwareConfigurationClient = new KepwareConfigurationClient(
+                    logger,
+                    new Uri(settings.Url),
+                    null,
+                    null);
+            }
 
             var result = await kepwareConfigurationClient.GetChannels(CancellationToken.None);
+            kepwareConfigurationClient.Dispose();
 
             if (result.HasCommunicationSucceeded && result.Data is not null)
             {

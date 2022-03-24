@@ -6,13 +6,13 @@ public class KepwareBaseCommandSettings : BaseCommandSettings
     [Description("Url for Kepserver configuration endpoint")]
     public string Url { get; init; } = string.Empty;
 
-    [CommandOption("--username <USERNAME>")]
+    [CommandOption("--username [USERNAME]")]
     [Description("UserName for Kepware server configuration endpoint")]
-    public string UserName { get; init; } = string.Empty;
+    public FlagValue<string>? UserName { get; init; }
 
-    [CommandOption("--password <PASSWORD>")]
+    [CommandOption("--password [PASSWORD]")]
     [Description("Password for Kepware server configuration endpoint")]
-    public string Password { get; init; } = string.Empty;
+    public FlagValue<string>? Password { get; init; }
 
     public override ValidationResult Validate()
     {
@@ -32,14 +32,10 @@ public class KepwareBaseCommandSettings : BaseCommandSettings
             return ValidationResult.Error("url is invalid.");
         }
 
-        if (string.IsNullOrEmpty(UserName))
+        if ((UserName is not null && UserName.IsSet && Password is not null && !Password.IsSet) ||
+            (UserName is not null && !UserName.IsSet && Password is not null && Password.IsSet))
         {
-            return ValidationResult.Error("username is not set.");
-        }
-
-        if (string.IsNullOrEmpty(Password))
-        {
-            return ValidationResult.Error("password is not set.");
+            return ValidationResult.Error("Both UserName and Password must be set.");
         }
 
         return ValidationResult.Success();
