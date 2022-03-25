@@ -25,20 +25,7 @@ public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
 
         try
         {
-            var userName = settings.UserName;
-            var password = settings.Password;
-
-            using var kepwareConfigurationClient = userName is not null && userName.IsSet
-                ? new KepwareConfigurationClient(
-                    logger,
-                    new Uri(settings.ServerUrl),
-                    userName.Value,
-                    password!.Value)
-                : new KepwareConfigurationClient(
-                    logger,
-                    new Uri(settings.ServerUrl),
-                    userName: null,
-                    password: null);
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
 
             var result = await kepwareConfigurationClient.GetDevices(settings.ChannelName, CancellationToken.None);
             if (result.CommunicationSucceeded && result.HasData)

@@ -23,43 +23,41 @@ public class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateCommandSetti
     {
         ConsoleHelper.WriteHeader();
 
-        ////try
-        ////{
-        ////    var userName = settings.UserName;
-        ////    var password = settings.Password;
+        try
+        {
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
 
-        ////    using var kepwareConfigurationClient = userName is not null && userName.IsSet
-        ////        ? new KepwareConfigurationClient(
-        ////            logger,
-        ////            new Uri(settings.Url),
-        ////            userName.Value,
-        ////            password!.Value)
-        ////        : new KepwareConfigurationClient(
-        ////            logger,
-        ////            new Uri(settings.Url),
-        ////            userName: null,
-        ////            password: null);
+            //// TODO: Check if exists..
 
-        ////    var result = await kepwareConfigurationClient.GetChannels(CancellationToken.None);
-        ////    if (result.HasCommunicationSucceeded && result.Data is not null)
-        ////    {
-        ////        foreach (var channelBase in result.Data)
-        ////        {
-        ////            logger.LogInformation($"{channelBase.Name} - {channelBase.DeviceDriver}");
-        ////        }
-        ////    }
-        ////    else
-        ////    {
-        ////        return ConsoleExitStatusCodes.Failure;
-        ////    }
-        ////}
-        ////catch (Exception ex)
-        ////{
-        ////    logger.LogError($"{EmojisConstants.Error} {ex.GetMessage()}");
-        ////    return ConsoleExitStatusCodes.Failure;
-        ////}
+            var request = BuildTagGroupRequest(settings);
+            var result = await kepwareConfigurationClient.CreateTagGroup(
+                request,
+                settings.ChannelName,
+                settings.DeviceName,
+                settings.TagGroups,
+                CancellationToken.None);
+
+            if (!result.CommunicationSucceeded ||
+                result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError($"{EmojisConstants.Error} {ex.GetMessage()}");
+            return ConsoleExitStatusCodes.Failure;
+        }
 
         logger.LogInformation($"{EmojisConstants.Success} Done");
         return ConsoleExitStatusCodes.Success;
     }
+
+    private static TagGroupRequest BuildTagGroupRequest(
+        TagGroupCreateCommandSettings settings)
+        => new TagGroupRequest
+        {
+            Name = settings.Name,
+            Description = settings.Description,
+        };
 }

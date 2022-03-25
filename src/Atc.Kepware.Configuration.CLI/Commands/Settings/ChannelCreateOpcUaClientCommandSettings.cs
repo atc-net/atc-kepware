@@ -65,9 +65,14 @@ public class ChannelCreateOpcUaClientCommandSettings : ChannelCreateCommandBaseS
             return ValidationResult.Error("--endpoint-url is invalid.");
         }
 
-        // TODO: Validate if ServerSecurityPolicy != None -> Så er username//Password required
-
-        // TODO: Expand
+        if (ServerSecurityPolicy is not null &&
+            ServerSecurityPolicy.IsSet &&
+            ServerSecurityPolicy.Value != OpcUaServerSecurityPolicyType.None &&
+            ((UserName is not null && UserName.IsSet && Password is not null && !Password.IsSet) ||
+             (UserName is not null && !UserName.IsSet && Password is not null && Password.IsSet)))
+        {
+            return ValidationResult.Error("Both username and password must be set when ServerSecurityPolicy is in effect.");
+        }
 
         return ValidationResult.Success();
     }

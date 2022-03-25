@@ -14,8 +14,15 @@ public interface IKepwareConfigurationClient
     Task<bool> IsTagDefined(
         string channelName,
         string deviceName,
-        string[] tagGroupStructure,
         string tagName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken);
+
+    Task<bool> IsTagGroupDefined(
+        string channelName,
+        string deviceName,
+        string tagGroupName,
+        string[] tagGroupStructure,
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<IList<ChannelBase>?>> GetChannels(
@@ -33,6 +40,13 @@ public interface IKepwareConfigurationClient
 
     Task<HttpClientRequestResult<bool>> CreateTag(
         TagRequest request,
+        string channelName,
+        string deviceName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<bool>> CreateTagGroup(
+        TagGroupRequest request,
         string channelName,
         string deviceName,
         string[] tagGroupStructure,

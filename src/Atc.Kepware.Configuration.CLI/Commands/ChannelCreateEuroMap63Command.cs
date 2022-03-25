@@ -25,22 +25,17 @@ public class ChannelCreateEuroMap63Command : AsyncCommand<ChannelCreateCommandBa
 
         try
         {
-            var userName = settings.UserName;
-            var password = settings.Password;
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
 
-            using var kepwareConfigurationClient = userName is not null && userName.IsSet
-                ? new KepwareConfigurationClient(
-                    logger,
-                    new Uri(settings.ServerUrl),
-                    userName.Value,
-                    password!.Value)
-                : new KepwareConfigurationClient(
-                    logger,
-                    new Uri(settings.ServerUrl),
-                    userName: null,
-                    password: null);
+            var isChannelDefined = await kepwareConfigurationClient.IsChannelDefined(
+                settings.Name,
+                CancellationToken.None);
 
-            // TODO: Check if exists...
+            if (isChannelDefined)
+            {
+                logger.LogWarning("Channel already exists!");
+                return ConsoleExitStatusCodes.Success;
+            }
 
             var request = BuildEuroMap63ChannelRequest(settings);
             var result = await kepwareConfigurationClient.CreateEuroMap63Channel(request, CancellationToken.None);

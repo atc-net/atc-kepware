@@ -1,16 +1,14 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Settings;
 
-public class DeviceCreateCommandBaseSettings : KepwareBaseCommandSettings
+public class DeviceCreateCommandBaseSettings : ChannelAndDeviceCommandBaseSettings
 {
-    [CommandOption("-n|--name <NAME>")]
-    [Description("Requested Name")]
-    public string Name { get; init; } = string.Empty;
+    [CommandOption("--session-file-path <SESSION-FILE-PATH>")]
+    [Description("The path to the session file directory")]
+    public string SessionFilePath { get; set; } = string.Empty;
 
     [CommandOption("--description [DESCRIPTION]")]
     [Description("Requested Description")]
     public FlagValue<string>? Description { get; init; }
-
-    // TODO: Expand
 
     public override ValidationResult Validate()
     {
@@ -20,12 +18,10 @@ public class DeviceCreateCommandBaseSettings : KepwareBaseCommandSettings
             return validationResult;
         }
 
-        if (string.IsNullOrEmpty(Name))
+        if (string.IsNullOrEmpty(SessionFilePath))
         {
-            return ValidationResult.Error("--name is not set.");
+            return ValidationResult.Error("--session-file-path is not set.");
         }
-
-        // TODO: Expand
 
         return ValidationResult.Success();
     }

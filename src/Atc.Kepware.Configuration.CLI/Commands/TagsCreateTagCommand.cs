@@ -25,26 +25,13 @@ public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
 
         try
         {
-            var userName = settings.UserName;
-            var password = settings.Password;
-
-            using var kepwareConfigurationClient = userName is not null && userName.IsSet
-                ? new KepwareConfigurationClient(
-                    logger,
-                    new Uri(settings.ServerUrl),
-                    userName.Value,
-                    password!.Value)
-                : new KepwareConfigurationClient(
-                    logger,
-                    new Uri(settings.ServerUrl),
-                    userName: null,
-                    password: null);
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
 
             var isTagDefined = await kepwareConfigurationClient.IsTagDefined(
                 settings.ChannelName,
                 settings.DeviceName,
+                settings.Name,
                 settings.TagGroups,
-                settings.TagName,
                 CancellationToken.None);
 
             if (isTagDefined)
@@ -53,15 +40,7 @@ public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
                 return ConsoleExitStatusCodes.Success;
             }
 
-            var request = new TagRequest
-            {
-                Name = settings.TagName,
-                Description = "MyTag2 Description",
-                Address = "R5",
-                DataType = TagDataType.Word,
-                ClientAccess = TagClientAccessType.ReadOnly,
-                ScanRate = 100,
-            };
+            var request = BuildTagRequest(settings);
 
             var result = await kepwareConfigurationClient.CreateTag(
                 request,
@@ -85,4 +64,20 @@ public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
         logger.LogInformation($"{EmojisConstants.Success} Done");
         return ConsoleExitStatusCodes.Success;
     }
+
+    private static TagRequest BuildTagRequest(
+        TagCreateCommandSettings settings)
+        => new()
+        {
+            Name = settings.Name,
+            Description = settings.Description,
+            Address = settings.Address,
+            DataType = settings.DataType is not null && settings.DataType.IsSet
+                ? settings.DataType.Value
+                : TagDataType.Word,
+            ClientAccess = settings.ClientAccess is not null && settings.ClientAccess.IsSet
+                ? settings.ClientAccess.Value
+                : TagClientAccessType.ReadOnly,
+            ScanRate = settings.ScanRate,
+        };
 }

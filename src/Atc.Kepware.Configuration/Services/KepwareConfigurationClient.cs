@@ -74,8 +74,8 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     public async Task<bool> IsTagDefined(
         string channelName,
         string deviceName,
-        string[] tagGroupStructure,
         string tagName,
+        string[] tagGroupStructure,
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
@@ -89,6 +89,18 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             shouldLogNotFound: false);
 
         return response.Data is not null;
+    }
+
+    public Task<bool> IsTagGroupDefined(
+        string channelName,
+        string deviceName,
+        string tagGroupName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(tagGroupStructure);
+
+        throw new NotImplementedException();
     }
 
     public async Task<HttpClientRequestResult<IList<ChannelBase>?>> GetChannels(
@@ -123,12 +135,12 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         const int currentDepth = 1;
 
         var tagResult = await GetTagsResultForPathTemplate(basePathTemplate, cancellationToken);
-        if (tagResult.HasCommunicationSucceeded)
+        if (tagResult.CommunicationSucceeded)
         {
-            if (tagResult.Data is not null &&
-                tagResult.Data.Any())
+            if (tagResult.HasData &&
+                tagResult.Data!.Any())
             {
-                foreach (var tag in tagResult.Data.Adapt<List<Tag>>())
+                foreach (var tag in tagResult.Data!.Adapt<List<Tag>>())
                 {
                     result.Tags.Add(tag);
                 }
@@ -136,11 +148,11 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
 
             var tagGroupResult = await GetTagGroupResultForPathTemplate(basePathTemplate, cancellationToken);
 
-            if (tagGroupResult.HasCommunicationSucceeded &&
-                tagGroupResult.Data is not null &&
-                tagGroupResult.Data.Any())
+            if (tagGroupResult.CommunicationSucceeded &&
+                tagGroupResult.HasData &&
+                tagGroupResult.Data!.Any())
             {
-                foreach (var kepwareTagGroup in tagGroupResult.Data)
+                foreach (var kepwareTagGroup in tagGroupResult.Data!)
                 {
                     var tagGroup = kepwareTagGroup.Adapt<TagGroup>();
 
@@ -182,6 +194,16 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             cancellationToken);
     }
 
+    public Task<HttpClientRequestResult<bool>> CreateTagGroup(
+        TagGroupRequest request,
+        string channelName,
+        string deviceName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<HttpClientRequestResult<bool>> DeleteChannel(
         string channelName,
         CancellationToken cancellationToken)
@@ -213,7 +235,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
 
         // TODO: Optimize if tagGroup.TagCountInGroup > 0
         var tagResult = await GetTagsResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
-        if (!tagResult.HasCommunicationSucceeded)
+        if (!tagResult.CommunicationSucceeded)
         {
             return;
         }
@@ -230,11 +252,11 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         // TODO: Optimize if tagGroup.TagCountInTree > 0
         var tagGroupResult = await GetTagGroupResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
 
-        if (tagGroupResult.HasCommunicationSucceeded &&
-            tagGroupResult.Data is not null &&
-            tagGroupResult.Data.Any())
+        if (tagGroupResult.CommunicationSucceeded &&
+            tagGroupResult.HasData &&
+            tagGroupResult.Data!.Any())
         {
-            foreach (var kepwareTagGroup in tagGroupResult.Data)
+            foreach (var kepwareTagGroup in tagGroupResult.Data!)
             {
                 var subTagGroup = kepwareTagGroup.Adapt<TagGroup>();
 

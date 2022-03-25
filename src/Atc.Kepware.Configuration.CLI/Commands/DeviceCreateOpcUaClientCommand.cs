@@ -23,41 +23,45 @@ public class DeviceCreateOpcUaClientCommand : AsyncCommand<DeviceCreateCommandBa
     {
         ConsoleHelper.WriteHeader();
 
-        ////try
-        ////{
-        ////    var userName = settings.UserName;
-        ////    var password = settings.Password;
+        try
+        {
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
 
-        ////    using var kepwareConfigurationClient = userName is not null && userName.IsSet
-        ////        ? new KepwareConfigurationClient(
-        ////            logger,
-        ////            new Uri(settings.Url),
-        ////            userName.Value,
-        ////            password!.Value)
-        ////        : new KepwareConfigurationClient(
-        ////            logger,
-        ////            new Uri(settings.Url),
-        ////            userName: null,
-        ////            password: null);
+            var isDeviceDefined = await kepwareConfigurationClient.IsDeviceDefined(
+                settings.ChannelName,
+                settings.DeviceName,
+                CancellationToken.None);
 
-        ////    var result = await kepwareConfigurationClient.GetChannels(CancellationToken.None);
-        ////    if (result.HasCommunicationSucceeded && result.Data is not null)
-        ////    {
-        ////        foreach (var channelBase in result.Data)
-        ////        {
-        ////            logger.LogInformation($"{channelBase.Name} - {channelBase.DeviceDriver}");
-        ////        }
-        ////    }
-        ////    else
-        ////    {
-        ////        return ConsoleExitStatusCodes.Failure;
-        ////    }
-        ////}
-        ////catch (Exception ex)
-        ////{
-        ////    logger.LogError($"{EmojisConstants.Error} {ex.GetMessage()}");
-        ////    return ConsoleExitStatusCodes.Failure;
-        ////}
+            if (isDeviceDefined)
+            {
+                logger.LogWarning("Device already exists!");
+                return ConsoleExitStatusCodes.Success;
+            }
+
+            var request = new OpcUaClientDeviceRequest
+            {
+                Name = settings.DeviceName,
+                Description = settings.Description is not null && settings.Description.IsSet
+                    ? settings.Description.Value
+                    : string.Empty,
+            };
+
+            var result = await kepwareConfigurationClient.CreateOpcUaClientDevice(
+                request,
+                settings.ChannelName,
+                CancellationToken.None);
+
+            if (!result.CommunicationSucceeded ||
+                result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError($"{EmojisConstants.Error} {ex.GetMessage()}");
+            return ConsoleExitStatusCodes.Failure;
+        }
 
         logger.LogInformation($"{EmojisConstants.Success} Done");
         return ConsoleExitStatusCodes.Success;
