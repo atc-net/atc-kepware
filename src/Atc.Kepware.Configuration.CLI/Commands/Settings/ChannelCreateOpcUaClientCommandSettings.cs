@@ -22,27 +22,27 @@ public class ChannelCreateOpcUaClientCommandSettings : ChannelCreateCommandBaseS
     [OpcUaServerMessageModeTypeDescription]
     public FlagValue<OpcUaServerMessageModeType>? ServerMessageMode { get; init; } = new();
 
-    [CommandOption("--connecttimeoutseconds [CONNECTTIMEOUTSECONDS]")]
+    [CommandOption("--connecttimeoutseconds")]
     [Description("Specify the maximum amount of time, in seconds the channel should wait to successfully connect after making a connect call")]
     [DefaultValue(30)]
     public int ConnectTimeoutSeconds { get; init; }
 
-    [CommandOption("--sessiontimeoutinactiveminutes [SESSIONTIMEOUTINACTIVEMINUTES]")]
+    [CommandOption("--sessiontimeoutinactiveminutes")]
     [Description("Specifies the maximum amount of time, in minutes, a session remains open without activity")]
     [DefaultValue(20)]
     public int SessionTimeoutInactiveMinutes { get; init; }
 
-    [CommandOption("--sessionrenewalintervalminutes [SESSIONRENEWALINTERVALMINUTES]")]
+    [CommandOption("--sessionrenewalintervalminutes")]
     [Description("Specifies the time, in minutes, between channel renewals")]
     [DefaultValue(60)]
     public int SessionRenewalIntervalMinutes { get; init; }
 
-    [CommandOption("--sessionfailedconnectionretryintervalseconds [SESSIONFAILEDCONNECTIONRETRYINTERVALSECONDS]")]
+    [CommandOption("--sessionfailedconnectionretryintervalseconds")]
     [Description("Specifies the rate, in seconds, at which the channel attempts to reconnect if it fails to connect or becomes disconnected")]
     [DefaultValue(5)]
     public int SessionFailedConnectionRetryIntervalSeconds { get; init; }
 
-    [CommandOption("--sessionwatchdogtimeout [SESSIONWATCHDOGTIMEOUT]")]
+    [CommandOption("--sessionwatchdogtimeout")]
     [Description("Specifies the rate the client reads the server status state node")]
     [DefaultValue(5)]
     public int SessionWatchdogTimeout { get; init; }
