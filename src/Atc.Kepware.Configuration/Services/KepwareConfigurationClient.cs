@@ -91,7 +91,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         return response.Data is not null;
     }
 
-    public Task<bool> IsTagGroupDefined(
+    public async Task<bool> IsTagGroupDefined(
         string channelName,
         string deviceName,
         string tagGroupName,
@@ -100,7 +100,15 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     {
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        throw new NotImplementedException();
+        var basePathTemplate = GetBasePathTemplate(channelName, deviceName);
+        var tagGroupPathTemplate = $"{GetTagGroupPathFromTagGroupStructure(basePathTemplate, tagGroupStructure)}/{EndpointPathTemplateConstants.TagGroups}/{tagGroupName}";
+
+        var response = await Get<KepwareContracts.TagGroup>(
+            tagGroupPathTemplate,
+            cancellationToken,
+            shouldLogNotFound: false);
+
+        return response.Data is not null;
     }
 
     public async Task<HttpClientRequestResult<IList<ChannelBase>?>> GetChannels(
@@ -201,7 +209,13 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         string[] tagGroupStructure,
         CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(request);
+        return InvokeCreateTagGroup(
+            request,
+            channelName,
+            deviceName,
+            tagGroupStructure,
+            cancellationToken);
     }
 
     public Task<HttpClientRequestResult<bool>> DeleteChannel(
@@ -297,8 +311,32 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             default:
             {
                 var intermediateGroupPath = string.Join($"/{EndpointPathTemplateConstants.TagGroups}/", tagGroupStructure);
+                tagPath = $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{intermediateGroupPath}/{EndpointPathTemplateConstants.Tags}";
+                break;
+            }
+        }
+
+        return tagPath;
+    }
+
+    private static string GetTagGroupPathFromTagGroupStructure(
+        string basePathTemplate,
+        string[] tagGroupStructure)
+    {
+        string tagPath;
+        switch (tagGroupStructure.Length)
+        {
+            case 0:
+                tagPath = basePathTemplate;
+                break;
+            case 1:
                 tagPath =
-                    $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{intermediateGroupPath}/{EndpointPathTemplateConstants.Tags}";
+                    $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{tagGroupStructure[0]}";
+                break;
+            default:
+            {
+                var intermediateGroupPath = string.Join($"/{EndpointPathTemplateConstants.TagGroups}/", tagGroupStructure);
+                tagPath = $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{intermediateGroupPath}";
                 break;
             }
         }
@@ -333,6 +371,22 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         return Post(
             request.Adapt<KepwareContracts.TagRequest>(),
             tagsPathTemplate,
+            cancellationToken);
+    }
+
+    private Task<HttpClientRequestResult<bool>> InvokeCreateTagGroup(
+        TagGroupRequest request,
+        string channelName,
+        string deviceName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken)
+    {
+        var basePathTemplate = GetBasePathTemplate(channelName, deviceName);
+        var tagGroupPathTemplate = $"{GetTagGroupPathFromTagGroupStructure(basePathTemplate, tagGroupStructure)}/{EndpointPathTemplateConstants.TagGroups}";
+
+        return Post(
+            request.Adapt<KepwareContracts.TagGroupRequest>(),
+            tagGroupPathTemplate,
             cancellationToken);
     }
 

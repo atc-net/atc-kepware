@@ -27,7 +27,18 @@ public class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateCommandSetti
         {
             var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
 
-            //// TODO: Check if exists..
+            var isTagGroupDefined = await kepwareConfigurationClient.IsTagGroupDefined(
+                settings.ChannelName,
+                settings.DeviceName,
+                settings.Name,
+                settings.TagGroups,
+                CancellationToken.None);
+
+            if (isTagGroupDefined)
+            {
+                logger.LogWarning("Tag Group already exists!");
+                return ConsoleExitStatusCodes.Success;
+            }
 
             var request = BuildTagGroupRequest(settings);
             var result = await kepwareConfigurationClient.CreateTagGroup(
