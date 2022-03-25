@@ -326,7 +326,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             var requestContent = new StringContent(
                 JsonSerializer.Serialize(request, jsonSerializerOptions),
                 Encoding.UTF8,
-                System.Net.Mime.MediaTypeNames.Application.Json);
+                MediaTypeNames.Application.Json);
 
             var response = await httpClient.PostAsync(pathTemplate, requestContent, cancellationToken);
             requestContent.Dispose();
