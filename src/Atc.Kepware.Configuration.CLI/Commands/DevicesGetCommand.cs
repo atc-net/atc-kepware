@@ -41,9 +41,9 @@ public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
                     password: null);
 
             var result = await kepwareConfigurationClient.GetDevices(settings.ChannelName, CancellationToken.None);
-            if (result.HasCommunicationSucceeded && result.Data is not null)
+            if (result.CommunicationSucceeded && result.HasData)
             {
-                foreach (var deviceBase in result.Data)
+                foreach (var deviceBase in result.Data!)
                 {
                     logger.LogInformation($"{deviceBase.Name} - {deviceBase.Driver}");
                 }

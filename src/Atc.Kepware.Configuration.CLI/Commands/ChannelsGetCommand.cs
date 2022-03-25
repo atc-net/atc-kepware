@@ -41,9 +41,9 @@ public class ChannelsGetCommand : AsyncCommand<ChannelsGetCommandSettings>
                     password: null);
 
             var result = await kepwareConfigurationClient.GetChannels(CancellationToken.None);
-            if (result.HasCommunicationSucceeded && result.Data is not null)
+            if (result.CommunicationSucceeded && result.HasData)
             {
-                foreach (var channelBase in result.Data)
+                foreach (var channelBase in result.Data!)
                 {
                     logger.LogInformation($"{channelBase.Name} - {channelBase.DeviceDriver}");
                 }

@@ -70,7 +70,7 @@ public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
                 settings.TagGroups,
                 CancellationToken.None);
 
-            if (!result.HasCommunicationSucceeded ||
+            if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {
                 return ConsoleExitStatusCodes.Failure;
