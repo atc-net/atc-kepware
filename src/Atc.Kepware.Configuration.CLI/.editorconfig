@@ -14,4 +14,5 @@ dotnet_diagnostic.CA1031.severity = none            # Not needed in CLI projects
 dotnet_diagnostic.CA1303.severity = none            # Not needed in CLI projects
 dotnet_diagnostic.CA1819.severity = none            # Not needed in CLI projects
 dotnet_diagnostic.CA1848.severity = none            # Not needed in CLI projects
+dotnet_diagnostic.CA2000.severity = none            # Not needed in CLI projects
 dotnet_diagnostic.CA2254.severity = none            # Not needed in CLI projects
