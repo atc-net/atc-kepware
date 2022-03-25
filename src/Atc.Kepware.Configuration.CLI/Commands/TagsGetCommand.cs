@@ -48,15 +48,7 @@ public class TagsGetCommand : AsyncCommand<TagsGetCommandSettings>
 
             if (result.HasCommunicationSucceeded && result.Data is not null)
             {
-                foreach (var tag in result.Data.Tags)
-                {
-                    logger.LogInformation($"Tag: {tag.Name}");
-                }
-
-                foreach (var tagGroup in result.Data.TagGroups)
-                {
-                    logger.LogInformation($"TagGroup: {tagGroup.Name}");
-                }
+                OutputTagRoot(result.Data);
             }
             else
             {
@@ -71,5 +63,46 @@ public class TagsGetCommand : AsyncCommand<TagsGetCommandSettings>
 
         logger.LogInformation($"{EmojisConstants.Success} Done");
         return ConsoleExitStatusCodes.Success;
+    }
+
+    private void OutputTagRoot(
+        TagRoot tagRoot)
+    {
+        logger.LogInformation($"Device:   {tagRoot.DeviceName}");
+
+        foreach (var tag in tagRoot.Tags)
+        {
+            logger.LogInformation($"Tag:        {tag.Name}");
+        }
+
+        foreach (var tagGroup in tagRoot.TagGroups)
+        {
+            logger.LogInformation($"TagGroup:   {tagGroup.Name}");
+
+            foreach (var tag in tagGroup.Tags)
+            {
+                logger.LogInformation($"Tag:          {tag.Name}");
+            }
+
+            OutputTagGroup(tagGroup, 1);
+        }
+    }
+
+    private void OutputTagGroup(
+        TagGroup tagGroup,
+        int level)
+    {
+        foreach (var group in tagGroup.TagGroups)
+        {
+            var spaces = string.Empty.PadRight(level * 2);
+            logger.LogInformation($"TagGroup:{spaces}   {group.Name}");
+
+            foreach (var tag in group.Tags)
+            {
+                logger.LogInformation($"Tag:{spaces}          {tag.Name}");
+            }
+
+            OutputTagGroup(group, level + 1);
+        }
     }
 }
