@@ -2,47 +2,47 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Settings;
 
 public class ChannelCreateOpcUaClientCommandSettings : ChannelCreateCommandBaseSettings
 {
-    [CommandOption("--endpointUrl <ENDPOINTURL>")]
+    [CommandOption("--endpoint-url <ENDPOINT-URL>")]
     [Description("Endpoint Url for OPC UA Client Channel")]
     public string EndpointUrl { get; init; } = string.Empty;
 
-    [CommandOption("--serversecuritypolicy [SERVERSECURITYPOLICY]")]
+    [CommandOption("--server-security-policy [SERVER-SECURITY-POLICY]")]
     [OpcUaServerSecurityPolicyTypeDescription]
     public FlagValue<OpcUaServerSecurityPolicyType>? ServerSecurityPolicy { get; init; } = new();
 
-    [CommandOption("--opcuausername [OPCUAUSERNAME]")]
+    [CommandOption("--opc-ua-username [OPC-UA-USERNAME]")]
     [Description("UserName for OPC UA Client Channel")]
     public FlagValue<string>? OpcUaUserName { get; init; }
 
-    [CommandOption("--opcuapassword [OPCUAPASSWORD]")]
+    [CommandOption("--opc-ua-password [OPC-UA-PASSWORD]")]
     [Description("Password for OPC UA Client Channel")]
     public FlagValue<string>? OpcUaPassword { get; init; }
 
-    [CommandOption("--servermessagemode [SERVERMESSAGEMODE]")]
+    [CommandOption("--server-message-mode [SERVER-MESSAGE-MODE]")]
     [OpcUaServerMessageModeTypeDescription]
     public FlagValue<OpcUaServerMessageModeType>? ServerMessageMode { get; init; } = new();
 
-    [CommandOption("--connecttimeoutseconds")]
+    [CommandOption("--connect-timeout-seconds")]
     [Description("Specify the maximum amount of time, in seconds the channel should wait to successfully connect after making a connect call")]
     [DefaultValue(30)]
     public int ConnectTimeoutSeconds { get; init; }
 
-    [CommandOption("--sessiontimeoutinactiveminutes")]
+    [CommandOption("--session-timeout-inactive-minutes")]
     [Description("Specifies the maximum amount of time, in minutes, a session remains open without activity")]
     [DefaultValue(20)]
     public int SessionTimeoutInactiveMinutes { get; init; }
 
-    [CommandOption("--sessionrenewalintervalminutes")]
+    [CommandOption("--session-renewal-interval-minutes")]
     [Description("Specifies the time, in minutes, between channel renewals")]
     [DefaultValue(60)]
     public int SessionRenewalIntervalMinutes { get; init; }
 
-    [CommandOption("--sessionfailedconnectionretryintervalseconds")]
+    [CommandOption("--session-failed-connection-retry-interval-seconds")]
     [Description("Specifies the rate, in seconds, at which the channel attempts to reconnect if it fails to connect or becomes disconnected")]
     [DefaultValue(5)]
     public int SessionFailedConnectionRetryIntervalSeconds { get; init; }
 
-    [CommandOption("--sessionwatchdogtimeout")]
+    [CommandOption("--session-watchdog-timeout")]
     [Description("Specifies the rate the client reads the server status state node")]
     [DefaultValue(5)]
     public int SessionWatchdogTimeout { get; init; }
@@ -57,12 +57,12 @@ public class ChannelCreateOpcUaClientCommandSettings : ChannelCreateCommandBaseS
 
         if (string.IsNullOrEmpty(EndpointUrl))
         {
-            return ValidationResult.Error("endpointUrl is not set.");
+            return ValidationResult.Error("--endpoint-url is not set.");
         }
 
         if (Uri.TryCreate(EndpointUrl, UriKind.Relative, out _))
         {
-            return ValidationResult.Error("endpointUrl is invalid.");
+            return ValidationResult.Error("--endpoint-url is invalid.");
         }
 
         // TODO: Validate if ServerSecurityPolicy != None -> Så er username//Password required

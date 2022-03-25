@@ -2,7 +2,7 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Settings;
 
 public class KepwareBaseCommandSettings : BaseCommandSettings
 {
-    [CommandOption("-s|--serverurl <SERVERURL>")]
+    [CommandOption("-s|--server-url <SERVER-URL>")]
     [Description("Server Url for Kepserver configuration endpoint")]
     public string ServerUrl { get; init; } = string.Empty;
 
@@ -24,12 +24,12 @@ public class KepwareBaseCommandSettings : BaseCommandSettings
 
         if (string.IsNullOrEmpty(ServerUrl))
         {
-            return ValidationResult.Error("serverurl is not set.");
+            return ValidationResult.Error("--server-url is not set.");
         }
 
         if (Uri.TryCreate(ServerUrl, UriKind.Relative, out _))
         {
-            return ValidationResult.Error("serverurl is invalid.");
+            return ValidationResult.Error("--server-url is invalid.");
         }
 
         if ((UserName is not null && UserName.IsSet && Password is not null && !Password.IsSet) ||

@@ -2,11 +2,11 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Settings;
 
 public class ChannelAndDeviceCommandBaseSettings : KepwareBaseCommandSettings
 {
-    [CommandOption("-c|--channelname <CHANNELNAME>")]
+    [CommandOption("-c|--channel-name <CHANNEL-NAME>")]
     [Description("Requested ChannelName")]
     public string ChannelName { get; init; } = string.Empty;
 
-    [CommandOption("-d|--devicename <DEVICENAME>")]
+    [CommandOption("-d|--device-name <DEVICE-NAME>")]
     [Description("Requested DeviceName")]
     public string DeviceName { get; init; } = string.Empty;
 
@@ -20,12 +20,12 @@ public class ChannelAndDeviceCommandBaseSettings : KepwareBaseCommandSettings
 
         if (string.IsNullOrEmpty(ChannelName))
         {
-            return ValidationResult.Error("channelname is not set.");
+            return ValidationResult.Error("--channel-name is not set.");
         }
 
         if (string.IsNullOrEmpty(DeviceName))
         {
-            return ValidationResult.Error("devicename is not set.");
+            return ValidationResult.Error("--device-name is not set.");
         }
 
         return ValidationResult.Success();

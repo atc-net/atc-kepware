@@ -2,13 +2,13 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Settings;
 
 public class TagCreateCommandSettings : ChannelAndDeviceCommandBaseSettings
 {
-    [CommandOption("--tagname <TAGNAME>")]
+    [CommandOption("--tag-name <TAG-NAME>")]
     [Description("Requested TagName")]
     public string TagName { get; init; } = string.Empty;
 
     // TODO: Expand with request properties...
 
-    [CommandOption("--taggroup <TAGGROUP>")]
+    [CommandOption("--tag-group <TAG-GROUP>")]
     [Description("Tag Groups indicating tree structure.")]
     public string[] TagGroups { get; init; } = Array.Empty<string>();
 
@@ -22,7 +22,7 @@ public class TagCreateCommandSettings : ChannelAndDeviceCommandBaseSettings
 
         if (string.IsNullOrEmpty(TagName))
         {
-            return ValidationResult.Error("tagname is missing.");
+            return ValidationResult.Error("--tag-name is not set.");
         }
 
         return ValidationResult.Success();

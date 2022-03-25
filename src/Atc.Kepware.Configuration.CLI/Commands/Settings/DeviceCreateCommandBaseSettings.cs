@@ -22,7 +22,7 @@ public class DeviceCreateCommandBaseSettings : KepwareBaseCommandSettings
 
         if (string.IsNullOrEmpty(Name))
         {
-            return ValidationResult.Error("name is not set.");
+            return ValidationResult.Error("--name is not set.");
         }
 
         // TODO: Expand
