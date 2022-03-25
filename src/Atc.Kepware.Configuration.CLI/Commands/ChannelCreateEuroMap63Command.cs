@@ -40,9 +40,13 @@ public class ChannelCreateEuroMap63Command : AsyncCommand<ChannelCreateCommandBa
                     userName: null,
                     password: null);
 
+            // TODO: Check if exists...
+
             var request = BuildEuroMap63ChannelRequest(settings);
             var result = await kepwareConfigurationClient.CreateEuroMap63Channel(request, CancellationToken.None);
-            if (!result.HasCommunicationSucceeded)
+
+            if (!result.HasCommunicationSucceeded ||
+                result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {
                 return ConsoleExitStatusCodes.Failure;
             }

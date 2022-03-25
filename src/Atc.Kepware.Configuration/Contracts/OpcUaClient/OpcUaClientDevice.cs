@@ -1,5 +1,5 @@
 namespace Atc.Kepware.Configuration.Contracts.OpcUaClient;
 
-public class OpcUaClientDevice : DeviceBase, IOpcUaClientDevice
+public sealed class OpcUaClientDevice : DeviceBase, IOpcUaClientDevice
 {
 }

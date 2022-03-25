@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.Contracts;
 
-public class TagGroup
+public sealed class TagGroup
 {
     /// <summary>
     /// Specify the identity of this object.

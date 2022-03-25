@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.Contracts.OpcUaClient;
 
-public class OpcUaClientDeviceRequest : DeviceRequestBase, IOpcUaClientDeviceRequest
+public sealed class OpcUaClientDeviceRequest : DeviceRequestBase, IOpcUaClientDeviceRequest
 {
     public OpcUaClientDeviceRequest()
         : base(DriverType.OpcUaClient)

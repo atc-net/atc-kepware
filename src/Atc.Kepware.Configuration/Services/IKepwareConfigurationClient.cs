@@ -31,6 +31,13 @@ public interface IKepwareConfigurationClient
         int maxDepth,
         CancellationToken cancellationToken);
 
+    Task<HttpClientRequestResult<bool>> CreateTag(
+        TagRequest request,
+        string channelName,
+        string deviceName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken);
+
     Task<HttpClientRequestResult<bool>> CreateEuroMap63Channel(
         Contracts.EuroMap63.EuroMap63ChannelRequest request,
         CancellationToken cancellationToken);

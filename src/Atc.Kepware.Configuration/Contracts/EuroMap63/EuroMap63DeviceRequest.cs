@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.Contracts.EuroMap63;
 
-public class EuroMap63DeviceRequest : DeviceRequestBase, IEuroMap63DeviceRequest
+public sealed class EuroMap63DeviceRequest : DeviceRequestBase, IEuroMap63DeviceRequest
 {
     public EuroMap63DeviceRequest()
         : base(DriverType.EuroMap63)

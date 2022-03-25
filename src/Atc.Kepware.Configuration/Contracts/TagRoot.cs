@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.Contracts;
 
-public class TagRoot
+public sealed class TagRoot
 {
     public TagRoot(
         string deviceName)

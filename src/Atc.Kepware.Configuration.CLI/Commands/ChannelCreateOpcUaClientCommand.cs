@@ -40,9 +40,12 @@ public class ChannelCreateOpcUaClientCommand : AsyncCommand<ChannelCreateOpcUaCl
                     userName: null,
                     password: null);
 
+            // TODO: Check if exists...
+
             var request = BuildOpcUaClientChannelRequest(settings);
             var result = await kepwareConfigurationClient.CreateOpcUaClientChannel(request, CancellationToken.None);
-            if (!result.HasCommunicationSucceeded)
+            if (!result.HasCommunicationSucceeded ||
+                result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {
                 return ConsoleExitStatusCodes.Failure;
             }

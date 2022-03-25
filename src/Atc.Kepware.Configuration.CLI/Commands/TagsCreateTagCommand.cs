@@ -23,41 +23,64 @@ public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
     {
         ConsoleHelper.WriteHeader();
 
-        ////try
-        ////{
-        ////    var userName = settings.UserName;
-        ////    var password = settings.Password;
+        try
+        {
+            var userName = settings.UserName;
+            var password = settings.Password;
 
-        ////    using var kepwareConfigurationClient = userName is not null && userName.IsSet
-        ////        ? new KepwareConfigurationClient(
-        ////            logger,
-        ////            new Uri(settings.Url),
-        ////            userName.Value,
-        ////            password!.Value)
-        ////        : new KepwareConfigurationClient(
-        ////            logger,
-        ////            new Uri(settings.Url),
-        ////            userName: null,
-        ////            password: null);
+            using var kepwareConfigurationClient = userName is not null && userName.IsSet
+                ? new KepwareConfigurationClient(
+                    logger,
+                    new Uri(settings.ServerUrl),
+                    userName.Value,
+                    password!.Value)
+                : new KepwareConfigurationClient(
+                    logger,
+                    new Uri(settings.ServerUrl),
+                    userName: null,
+                    password: null);
 
-        ////    var result = await kepwareConfigurationClient.GetChannels(CancellationToken.None);
-        ////    if (result.HasCommunicationSucceeded && result.Data is not null)
-        ////    {
-        ////        foreach (var channelBase in result.Data)
-        ////        {
-        ////            logger.LogInformation($"{channelBase.Name} - {channelBase.DeviceDriver}");
-        ////        }
-        ////    }
-        ////    else
-        ////    {
-        ////        return ConsoleExitStatusCodes.Failure;
-        ////    }
-        ////}
-        ////catch (Exception ex)
-        ////{
-        ////    logger.LogError($"{EmojisConstants.Error} {ex.GetMessage()}");
-        ////    return ConsoleExitStatusCodes.Failure;
-        ////}
+            var isTagDefined = await kepwareConfigurationClient.IsTagDefined(
+                settings.ChannelName,
+                settings.DeviceName,
+                settings.TagGroups,
+                settings.TagName,
+                CancellationToken.None);
+
+            if (isTagDefined)
+            {
+                logger.LogWarning("Tag already exists!");
+                return ConsoleExitStatusCodes.Success;
+            }
+
+            var request = new TagRequest
+            {
+                Name = settings.TagName,
+                Description = "MyTag2 Description",
+                Address = "R5",
+                DataType = TagDataType.Word,
+                ClientAccess = TagClientAccessType.ReadOnly,
+                ScanRate = 100,
+            };
+
+            var result = await kepwareConfigurationClient.CreateTag(
+                request,
+                settings.ChannelName,
+                settings.DeviceName,
+                settings.TagGroups,
+                CancellationToken.None);
+
+            if (!result.HasCommunicationSucceeded ||
+                result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError($"{EmojisConstants.Error} {ex.GetMessage()}");
+            return ConsoleExitStatusCodes.Failure;
+        }
 
         logger.LogInformation($"{EmojisConstants.Success} Done");
         return ConsoleExitStatusCodes.Success;

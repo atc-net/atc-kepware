@@ -3,7 +3,7 @@ namespace Atc.Kepware.Configuration.Contracts.OpcUaClient;
 /// <summary>
 /// Channel properties for the OPC UA Client driver.
 /// </summary>
-public class OpcUaClientChannelRequest : ChannelRequestBase, IOpcUaClientChannelRequest
+public sealed class OpcUaClientChannelRequest : ChannelRequestBase, IOpcUaClientChannelRequest
 {
     public OpcUaClientChannelRequest()
         : base(DriverType.OpcUaClient)

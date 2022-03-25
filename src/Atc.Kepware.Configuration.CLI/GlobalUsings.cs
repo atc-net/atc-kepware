@@ -1,4 +1,5 @@
 global using System.ComponentModel;
+global using System.Net;
 global using Atc.Console.Spectre;
 global using Atc.Console.Spectre.CommandSettings;
 global using Atc.Console.Spectre.Factories;
