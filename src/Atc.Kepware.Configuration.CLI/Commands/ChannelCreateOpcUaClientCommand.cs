@@ -74,13 +74,17 @@ public class ChannelCreateOpcUaClientCommand : AsyncCommand<ChannelCreateOpcUaCl
                 ? settings.NonNormalizedFloatingPointHandling.Value
                 : ChannelNonNormalizedFloatingPointHandlingType.ReplaceWithZero,
 
-            // TODO: OPC UA Specific stuff
+            // OPC UA Specific Settings
             EndpointUrl = settings.EndpointUrl,
             ServerSecurityPolicy = settings.ServerSecurityPolicy is not null && settings.ServerSecurityPolicy.IsSet
                 ? settings.ServerSecurityPolicy.Value
                 : OpcUaServerSecurityPolicyType.None,
-            ////UserName = ,
-            ////Password = ,
+            UserName = settings.OpcUaUserName is not null && settings.OpcUaUserName.IsSet
+                ? settings.OpcUaUserName.Value
+                : string.Empty,
+            Password = settings.OpcUaPassword is not null && settings.OpcUaPassword.IsSet
+                ? settings.OpcUaPassword.Value
+                : string.Empty,
             ServerMessageMode = settings.ServerMessageMode is not null && settings.ServerMessageMode.IsSet
                 ? settings.ServerMessageMode.Value
                 : OpcUaServerMessageModeType.None,
