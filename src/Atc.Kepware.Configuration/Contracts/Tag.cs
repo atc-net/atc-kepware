@@ -3,12 +3,12 @@ namespace Atc.Kepware.Configuration.Contracts;
 public sealed class Tag
 {
     /// <summary>
-    /// Specifies the identity of this object.
+    /// The tag name.
     /// </summary>
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// Summary of this object or its use.
+    /// The tag description
     /// </summary>
     public string Description { get; set; } = string.Empty;
 

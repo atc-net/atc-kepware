@@ -3,13 +3,13 @@ namespace Atc.Kepware.Configuration.KepwareContracts;
 internal class TagGroup
 {
     /// <summary>
-    /// Specify the identity of this object.
+    /// The tag group name.
     /// </summary>
     [JsonPropertyName("common.ALLTYPES_NAME")]
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// Summary of this object or its use.
+    /// The tag group description.
     /// </summary>
     [MaxLength(255)]
     [JsonPropertyName("common.ALLTYPES_DESCRIPTION")]
