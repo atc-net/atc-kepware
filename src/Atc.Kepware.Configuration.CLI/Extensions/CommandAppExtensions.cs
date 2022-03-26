@@ -81,6 +81,14 @@ public static class CommandAppExtensions
                 .AddCommand<TagsGetCommand>("get")
                 .WithDescription("Get tags for channel and device");
 
+            node
+                .AddCommand<TagsSearchCommand>("search")
+                .WithDescription("Search tags")
+                .WithExample(new[] { "tags search -s [server] --search MyTag" })
+                .WithExample(new[] { "tags search -s [server] --search *Tag" })
+                .WithExample(new[] { "tags search -s [server] --search My*" })
+                .WithExample(new[] { "tags search -s [server] --search *yt*" });
+
             ConfigureTagCreateCommands(node);
             ConfigureTagDeleteCommands(node);
         };
