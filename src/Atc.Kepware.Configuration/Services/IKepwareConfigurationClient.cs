@@ -78,4 +78,18 @@ public interface IKepwareConfigurationClient
         string channelName,
         string deviceName,
         CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<bool>> DeleteTag(
+        string channelName,
+        string deviceName,
+        string tagName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<bool>> DeleteTagGroup(
+        string channelName,
+        string deviceName,
+        string tagGroupName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken);
 }

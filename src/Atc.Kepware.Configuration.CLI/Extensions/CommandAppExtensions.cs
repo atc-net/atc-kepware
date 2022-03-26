@@ -74,6 +74,7 @@ public static class CommandAppExtensions
                 .WithDescription("Get tags for channel and device");
 
             ConfigureTagCreateCommands(node);
+            ConfigureTagDeleteCommands(node);
         };
 
     private static void ConfigureTagCreateCommands(IConfigurator<CommandSettings> node)
@@ -87,5 +88,18 @@ public static class CommandAppExtensions
             create.AddCommand<TagsCreateTagGroupCommand>("taggroup")
                 .WithDescription("Creates a tag group (if not exists).")
                 .WithExample(new[] { "tags create taggroup" }); // TODO: Fix
+        });
+
+    private static void ConfigureTagDeleteCommands(IConfigurator<CommandSettings> node)
+        => node.AddBranch("delete", create =>
+        {
+            create.SetDescription("Operations related to deleting tags and tag groups.");
+            create.AddCommand<TagsDeleteTagCommand>("tag")
+                .WithDescription("Delete a tag (if exists).")
+                .WithExample(new[] { "tags delete tag" }); // TODO: Fix
+
+            create.AddCommand<TagsDeleteTagGroupCommand>("taggroup")
+                .WithDescription("Deletes a tag group (if exists).")
+                .WithExample(new[] { "tags delete taggroup" }); // TODO: Fix
         });
 }

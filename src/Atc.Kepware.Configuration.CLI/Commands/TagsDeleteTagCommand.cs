@@ -1,16 +1,16 @@
 namespace Atc.Kepware.Configuration.CLI.Commands;
 
-public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
+public class TagsDeleteTagCommand : AsyncCommand<TagDeleteCommandSettings>
 {
-    private readonly ILogger<TagsCreateTagCommand> logger;
+    private readonly ILogger<TagsDeleteTagCommand> logger;
 
-    public TagsCreateTagCommand(
-        ILogger<TagsCreateTagCommand> logger)
+    public TagsDeleteTagCommand(
+        ILogger<TagsDeleteTagCommand> logger)
         => this.logger = logger;
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        TagCreateCommandSettings settings)
+        TagDeleteCommandSettings settings)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
@@ -19,7 +19,7 @@ public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
     }
 
     private async Task<int> ExecuteInternalAsync(
-        TagCreateCommandSettings settings)
+        TagDeleteCommandSettings settings)
     {
         ConsoleHelper.WriteHeader();
 
@@ -34,22 +34,20 @@ public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
                 settings.TagGroups,
                 CancellationToken.None);
 
-            if (isTagDefined)
+            if (!isTagDefined)
             {
-                logger.LogWarning("Tag already exists!");
+                logger.LogWarning("Tag does not exist!");
                 return ConsoleExitStatusCodes.Success;
             }
 
-            var request = BuildTagRequest(settings);
-            var result = await kepwareConfigurationClient.CreateTag(
-                request,
+            var result = await kepwareConfigurationClient.DeleteTag(
                 settings.ChannelName,
                 settings.DeviceName,
+                settings.Name,
                 settings.TagGroups,
                 CancellationToken.None);
 
-            if (!result.CommunicationSucceeded ||
-                result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
+            if (!result.CommunicationSucceeded && !result.Data)
             {
                 return ConsoleExitStatusCodes.Failure;
             }
@@ -63,20 +61,4 @@ public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
         logger.LogInformation($"{EmojisConstants.Success} Done");
         return ConsoleExitStatusCodes.Success;
     }
-
-    private static TagRequest BuildTagRequest(
-        TagCreateCommandSettings settings)
-        => new()
-        {
-            Name = settings.Name,
-            Description = settings.Description,
-            Address = settings.Address,
-            DataType = settings.DataType is not null && settings.DataType.IsSet
-                ? settings.DataType.Value
-                : TagDataType.Word,
-            ClientAccess = settings.ClientAccess is not null && settings.ClientAccess.IsSet
-                ? settings.ClientAccess.Value
-                : TagClientAccessType.ReadOnly,
-            ScanRate = settings.ScanRate,
-        };
 }

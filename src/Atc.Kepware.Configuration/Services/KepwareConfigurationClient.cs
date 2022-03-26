@@ -233,6 +233,38 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             GetBasePathTemplate(channelName, deviceName),
             cancellationToken);
 
+    public Task<HttpClientRequestResult<bool>> DeleteTag(
+        string channelName,
+        string deviceName,
+        string tagName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(tagGroupStructure);
+        return InvokeDeleteTag(
+            channelName,
+            deviceName,
+            tagName,
+            tagGroupStructure,
+            cancellationToken);
+    }
+
+    public Task<HttpClientRequestResult<bool>> DeleteTagGroup(
+        string channelName,
+        string deviceName,
+        string tagGroupName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(tagGroupStructure);
+        return InvokeDeleteTagGroup(
+            channelName,
+            deviceName,
+            tagGroupName,
+            tagGroupStructure,
+            cancellationToken);
+    }
+
     private async Task IterateTagGroup(
         TagGroup tagGroup,
         string tagGroupPathTemplate,
@@ -386,6 +418,36 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
 
         return Post(
             request.Adapt<KepwareContracts.TagGroupRequest>(),
+            tagGroupPathTemplate,
+            cancellationToken);
+    }
+
+    private Task<HttpClientRequestResult<bool>> InvokeDeleteTag(
+        string channelName,
+        string deviceName,
+        string tagName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken)
+    {
+        var basePathTemplate = GetBasePathTemplate(channelName, deviceName);
+        var tagPathTemplate = $"{GetTagsPathFromTagGroupStructure(basePathTemplate, tagGroupStructure)}/{tagName}";
+
+        return Delete(
+            tagPathTemplate,
+            cancellationToken);
+    }
+
+    private Task<HttpClientRequestResult<bool>> InvokeDeleteTagGroup(
+        string channelName,
+        string deviceName,
+        string tagGroupName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken)
+    {
+        var basePathTemplate = GetBasePathTemplate(channelName, deviceName);
+        var tagGroupPathTemplate = $"{GetTagGroupPathFromTagGroupStructure(basePathTemplate, tagGroupStructure)}/{EndpointPathTemplateConstants.TagGroups}/{tagGroupName}";
+
+        return Delete(
             tagGroupPathTemplate,
             cancellationToken);
     }
