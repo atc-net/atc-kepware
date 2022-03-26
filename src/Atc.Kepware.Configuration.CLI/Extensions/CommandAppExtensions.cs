@@ -24,6 +24,10 @@ public static class CommandAppExtensions
                 .WithDescription("Get channels");
 
             ConfigureChannelCreateCommands(node);
+
+            node
+                .AddCommand<ChannelDeleteCommand>("delete")
+                .WithDescription("Delete channel");
         };
 
     private static void ConfigureChannelCreateCommands(IConfigurator<CommandSettings> node)
@@ -49,6 +53,10 @@ public static class CommandAppExtensions
                 .WithDescription("Get devices for channel");
 
             ConfigureDeviceCreateCommands(node);
+
+            node
+                .AddCommand<DeviceDeleteCommand>("delete")
+                .WithDescription("Delete device from channel");
         };
 
     private static void ConfigureDeviceCreateCommands(IConfigurator<CommandSettings> node)
