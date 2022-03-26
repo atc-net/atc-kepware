@@ -38,6 +38,12 @@ public interface IKepwareConfigurationClient
         int maxDepth,
         CancellationToken cancellationToken);
 
+    Task<HttpClientRequestResult<IList<string>>> SearchTags(
+        string? channelName,
+        string? deviceName,
+        string query,
+        CancellationToken cancellationToken);
+
     Task<HttpClientRequestResult<bool>> CreateTag(
         TagRequest request,
         string channelName,

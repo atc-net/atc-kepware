@@ -186,6 +186,31 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         return new HttpClientRequestResult<TagRoot>(result);
     }
 
+    public async Task<HttpClientRequestResult<IList<string>>> SearchTags(
+        string? channelName,
+        string? deviceName,
+        string query,
+        CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrEmpty(query))
+        {
+            return new HttpClientRequestResult<IList<string>>(HttpStatusCode.BadRequest);
+        }
+
+        const int maxDepth = 1000;
+        if (string.IsNullOrEmpty(channelName))
+        {
+            return await SearchTags(query, maxDepth, cancellationToken);
+        }
+
+        if (string.IsNullOrEmpty(deviceName))
+        {
+            return await SearchTagsByChannelName(channelName, query, maxDepth, cancellationToken);
+        }
+
+        return await SearchTagsByChannelNameAndDeviceName(channelName, deviceName, query, maxDepth, cancellationToken);
+    }
+
     public Task<HttpClientRequestResult<bool>> CreateTag(
         TagRequest request,
         string channelName,
@@ -232,6 +257,176 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         => Delete(
             GetBasePathTemplate(channelName, deviceName),
             cancellationToken);
+
+    private async Task<HttpClientRequestResult<IList<string>>> SearchTags(
+        string query,
+        int maxDepth,
+        CancellationToken cancellationToken)
+    {
+        var channelResult = await GetChannels(cancellationToken);
+        if (!channelResult.CommunicationSucceeded || !channelResult.HasData)
+        {
+            return channelResult.HasException
+                ? new HttpClientRequestResult<IList<string>>(channelResult.Exception!)
+                : new HttpClientRequestResult<IList<string>>(channelResult.StatusCode, new List<string>());
+        }
+
+        var searchResults = new List<string>();
+        foreach (var channelName in channelResult.Data!
+                     .Select(x => x.Name)
+                     .OrderBy(x => x))
+        {
+            var devicesResult = await GetDevices(channelName, cancellationToken);
+            foreach (var deviceName in devicesResult.Data!
+                         .Select(x => x.Name)
+                         .OrderBy(x => x))
+            {
+                var tagsResultForDevice = await GetTags(channelName, deviceName, maxDepth, cancellationToken);
+                if (tagsResultForDevice.CommunicationSucceeded &&
+                    tagsResultForDevice.HasData)
+                {
+                    SearchInTagRoot(searchResults, channelName, deviceName, query, tagsResultForDevice.Data!);
+                }
+            }
+        }
+
+        return new HttpClientRequestResult<IList<string>>(searchResults);
+    }
+
+    private async Task<HttpClientRequestResult<IList<string>>> SearchTagsByChannelName(
+        string channelName,
+        string query,
+        int maxDepth,
+        CancellationToken cancellationToken)
+    {
+        var devicesResult = await GetDevices(channelName, cancellationToken);
+        if (!devicesResult.CommunicationSucceeded || !devicesResult.HasData)
+        {
+            return devicesResult.HasException
+                ? new HttpClientRequestResult<IList<string>>(devicesResult.Exception!)
+                : new HttpClientRequestResult<IList<string>>(devicesResult.StatusCode, new List<string>());
+        }
+
+        var searchResults = new List<string>();
+        foreach (var deviceName in devicesResult.Data!
+                     .Select(x => x.Name)
+                     .OrderBy(x => x))
+        {
+            var tagsResultForDevice = await GetTags(channelName, deviceName, maxDepth, cancellationToken);
+            if (tagsResultForDevice.CommunicationSucceeded &&
+                tagsResultForDevice.HasData)
+            {
+                SearchInTagRoot(searchResults, channelName, deviceName, query, tagsResultForDevice.Data!);
+            }
+        }
+
+        return new HttpClientRequestResult<IList<string>>(searchResults);
+    }
+
+    private async Task<HttpClientRequestResult<IList<string>>> SearchTagsByChannelNameAndDeviceName(
+        string channelName,
+        string deviceName,
+        string query,
+        int maxDepth,
+        CancellationToken cancellationToken)
+    {
+        var tagsResult = await GetTags(channelName, deviceName, maxDepth, cancellationToken);
+        if (!tagsResult.CommunicationSucceeded || !tagsResult.HasData)
+        {
+            return tagsResult.HasException
+                ? new HttpClientRequestResult<IList<string>>(tagsResult.Exception!)
+                : new HttpClientRequestResult<IList<string>>(tagsResult.StatusCode, new List<string>());
+        }
+
+        var searchResults = new List<string>();
+        SearchInTagRoot(searchResults, channelName, deviceName, query, tagsResult.Data!);
+        return new HttpClientRequestResult<IList<string>>(searchResults);
+    }
+
+    private static void SearchInTagRoot(
+        ICollection<string> searchResults,
+        string channelName,
+        string deviceName,
+        string query,
+        TagRoot tagsResult)
+    {
+        foreach (var tag in tagsResult.Tags)
+        {
+            if (query.Contains('*', StringComparison.Ordinal))
+            {
+                SearchInTag(searchResults, channelName, deviceName, query, tag);
+            }
+            else if (tag.Name.Contains(query, StringComparison.OrdinalIgnoreCase))
+            {
+                searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
+            }
+        }
+
+        foreach (var tagGroup in tagsResult.TagGroups)
+        {
+            SearchInTagGroup(searchResults, channelName, deviceName, query, tagGroup.Name, tagGroup);
+        }
+    }
+
+    private static void SearchInTagGroup(
+        ICollection<string> searchResults,
+        string channelName,
+        string deviceName,
+        string query,
+        string tagGroupPath,
+        TagGroup tagsResult)
+    {
+        foreach (var tag in tagsResult.Tags)
+        {
+            if (query.Contains('*', StringComparison.Ordinal))
+            {
+                SearchInTag(searchResults, channelName, deviceName, query, tag);
+            }
+            else if (tag.Name.Contains(query, StringComparison.OrdinalIgnoreCase))
+            {
+                searchResults.Add($"{channelName}/{deviceName}/{tagGroupPath}/{tag.Name}");
+            }
+        }
+
+        foreach (var tagGroup in tagsResult.TagGroups)
+        {
+            SearchInTagGroup(searchResults, channelName, deviceName, query, $"{tagGroupPath}/{tagGroup.Name}", tagGroup);
+        }
+    }
+
+    private static void SearchInTag(
+        ICollection<string> searchResults,
+        string channelName,
+        string deviceName,
+        string query,
+        Tag tag)
+    {
+        if (query.StartsWith('*') &&
+            query.EndsWith('*'))
+        {
+            var searchNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
+            if (tag.Name.Contains(searchNoWildcard, StringComparison.OrdinalIgnoreCase))
+            {
+                searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
+            }
+        }
+        else if (query.StartsWith('*'))
+        {
+            var searchNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
+            if (tag.Name.StartsWith(searchNoWildcard, StringComparison.OrdinalIgnoreCase))
+            {
+                searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
+            }
+        }
+        else
+        {
+            var searchNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
+            if (tag.Name.EndsWith(searchNoWildcard, StringComparison.OrdinalIgnoreCase))
+            {
+                searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
+            }
+        }
+    }
 
     public Task<HttpClientRequestResult<bool>> DeleteTag(
         string channelName,
