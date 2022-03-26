@@ -25,7 +25,7 @@ public class DeviceCreateOpcUaClientCommand : AsyncCommand<DeviceCreateCommandBa
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
             var isDeviceDefined = await kepwareConfigurationClient.IsDeviceDefined(
                 settings.ChannelName,
@@ -38,14 +38,7 @@ public class DeviceCreateOpcUaClientCommand : AsyncCommand<DeviceCreateCommandBa
                 return ConsoleExitStatusCodes.Success;
             }
 
-            var request = new OpcUaClientDeviceRequest
-            {
-                Name = settings.DeviceName,
-                Description = settings.Description is not null && settings.Description.IsSet
-                    ? settings.Description.Value
-                    : string.Empty,
-            };
-
+            var request = BuildOpcUaClientDeviceRequest(settings);
             var result = await kepwareConfigurationClient.CreateOpcUaClientDevice(
                 request,
                 settings.ChannelName,
@@ -66,4 +59,14 @@ public class DeviceCreateOpcUaClientCommand : AsyncCommand<DeviceCreateCommandBa
         logger.LogInformation($"{EmojisConstants.Success} Done");
         return ConsoleExitStatusCodes.Success;
     }
+
+    private static OpcUaClientDeviceRequest BuildOpcUaClientDeviceRequest(
+        DeviceCreateCommandBaseSettings settings)
+        => new()
+        {
+            Name = settings.DeviceName,
+            Description = settings.Description is not null && settings.Description.IsSet
+                ? settings.Description.Value
+                : string.Empty,
+        };
 }

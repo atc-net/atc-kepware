@@ -25,7 +25,7 @@ public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
             var result = await kepwareConfigurationClient.GetDevices(settings.ChannelName, CancellationToken.None);
             if (result.CommunicationSucceeded && result.HasData)

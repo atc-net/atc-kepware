@@ -1,8 +1,8 @@
-﻿namespace Atc.Kepware.Configuration.CLI.Commands;
+namespace Atc.Kepware.Configuration.CLI.Commands;
 
 public static class KepwareConfigurationClientBuilder
 {
-    public static KepwareConfigurationClient BuildKepwareConfigurationClient(
+    public static KepwareConfigurationClient Build(
         KepwareBaseCommandSettings settings,
         ILogger logger)
     {

@@ -25,7 +25,7 @@ public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
             var isTagDefined = await kepwareConfigurationClient.IsTagDefined(
                 settings.ChannelName,

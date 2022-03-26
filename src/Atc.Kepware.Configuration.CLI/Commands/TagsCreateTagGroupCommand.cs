@@ -25,7 +25,7 @@ public class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateCommandSetti
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
             var isTagGroupDefined = await kepwareConfigurationClient.IsTagGroupDefined(
                 settings.ChannelName,
@@ -66,7 +66,7 @@ public class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateCommandSetti
 
     private static TagGroupRequest BuildTagGroupRequest(
         TagGroupCreateCommandSettings settings)
-        => new TagGroupRequest
+        => new()
         {
             Name = settings.Name,
             Description = settings.Description,

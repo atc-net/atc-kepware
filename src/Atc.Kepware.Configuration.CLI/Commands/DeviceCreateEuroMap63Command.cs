@@ -25,7 +25,7 @@ public class DeviceCreateEuroMap63Command : AsyncCommand<DeviceCreateCommandBase
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
             var isDeviceDefined = await kepwareConfigurationClient.IsDeviceDefined(
                 settings.ChannelName,
@@ -38,15 +38,7 @@ public class DeviceCreateEuroMap63Command : AsyncCommand<DeviceCreateCommandBase
                 return ConsoleExitStatusCodes.Success;
             }
 
-            var request = new EuroMap63DeviceRequest
-            {
-                Name = settings.DeviceName,
-                Description = settings.Description is not null && settings.Description.IsSet
-                ? settings.Description.Value
-                : string.Empty,
-                SessionFilePath = settings.SessionFilePath,
-            };
-
+            var request = BuildEuroMap63DeviceRequest(settings);
             var result = await kepwareConfigurationClient.CreateEuroMap63Device(
                 request,
                 settings.ChannelName,
@@ -67,4 +59,15 @@ public class DeviceCreateEuroMap63Command : AsyncCommand<DeviceCreateCommandBase
         logger.LogInformation($"{EmojisConstants.Success} Done");
         return ConsoleExitStatusCodes.Success;
     }
+
+    private static EuroMap63DeviceRequest BuildEuroMap63DeviceRequest(
+        DeviceCreateCommandBaseSettings settings)
+        => new()
+        {
+            Name = settings.DeviceName,
+            Description = settings.Description is not null && settings.Description.IsSet
+                ? settings.Description.Value
+                : string.Empty,
+            SessionFilePath = settings.SessionFilePath,
+        };
 }

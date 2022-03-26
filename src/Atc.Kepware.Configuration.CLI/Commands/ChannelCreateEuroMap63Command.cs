@@ -25,7 +25,7 @@ public class ChannelCreateEuroMap63Command : AsyncCommand<ChannelCreateCommandBa
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
             var isChannelDefined = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,

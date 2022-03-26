@@ -55,7 +55,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             cancellationToken,
             shouldLogNotFound: false);
 
-        return response.Data is not null;
+        return response.HasData;
     }
 
     public async Task<bool> IsDeviceDefined(
@@ -68,7 +68,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             cancellationToken,
             shouldLogNotFound: false);
 
-        return response.Data is not null;
+        return response.HasData;
     }
 
     public async Task<bool> IsTagDefined(
@@ -88,7 +88,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             cancellationToken,
             shouldLogNotFound: false);
 
-        return response.Data is not null;
+        return response.HasData;
     }
 
     public async Task<bool> IsTagGroupDefined(
@@ -108,7 +108,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             cancellationToken,
             shouldLogNotFound: false);
 
-        return response.Data is not null;
+        return response.HasData;
     }
 
     public async Task<HttpClientRequestResult<IList<ChannelBase>?>> GetChannels(
@@ -254,10 +254,10 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             return;
         }
 
-        if (tagResult.Data is not null &&
-            tagResult.Data.Any())
+        if (tagResult.HasData &&
+            tagResult.Data!.Any())
         {
-            foreach (var tag in tagResult.Data.Adapt<List<Tag>>())
+            foreach (var tag in tagResult.Data!.Adapt<List<Tag>>())
             {
                 tagGroup.Tags.Add(tag);
             }

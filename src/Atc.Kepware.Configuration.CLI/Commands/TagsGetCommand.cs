@@ -25,7 +25,7 @@ public class TagsGetCommand : AsyncCommand<TagsGetCommandSettings>
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.BuildKepwareConfigurationClient(settings, logger);
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
             var result = await kepwareConfigurationClient.GetTags(
                 settings.ChannelName,
