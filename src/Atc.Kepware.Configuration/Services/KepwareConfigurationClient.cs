@@ -404,24 +404,24 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         if (query.StartsWith('*') &&
             query.EndsWith('*'))
         {
-            var searchNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
-            if (tag.Name.Contains(searchNoWildcard, StringComparison.OrdinalIgnoreCase))
+            var queryNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
+            if (tag.Name.Contains(queryNoWildcard, StringComparison.OrdinalIgnoreCase))
             {
                 searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
             }
         }
         else if (query.StartsWith('*'))
         {
-            var searchNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
-            if (tag.Name.StartsWith(searchNoWildcard, StringComparison.OrdinalIgnoreCase))
+            var queryNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
+            if (tag.Name.StartsWith(queryNoWildcard, StringComparison.OrdinalIgnoreCase))
             {
                 searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
             }
         }
         else
         {
-            var searchNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
-            if (tag.Name.EndsWith(searchNoWildcard, StringComparison.OrdinalIgnoreCase))
+            var queryNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
+            if (tag.Name.EndsWith(queryNoWildcard, StringComparison.OrdinalIgnoreCase))
             {
                 searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
             }
