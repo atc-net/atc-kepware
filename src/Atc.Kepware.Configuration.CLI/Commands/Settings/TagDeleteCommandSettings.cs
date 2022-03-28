@@ -18,9 +18,10 @@ public class TagDeleteCommandSettings : ChannelAndDeviceCommandBaseSettings
             return validationResult;
         }
 
-        if (string.IsNullOrEmpty(Name))
+        var isValidName = IsValidName(Name);
+        if (!isValidName.Successful)
         {
-            return ValidationResult.Error("--name is not set.");
+            return isValidName;
         }
 
         return ValidationResult.Success();

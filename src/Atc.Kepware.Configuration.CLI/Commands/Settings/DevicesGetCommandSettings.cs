@@ -14,8 +14,9 @@ public class DevicesGetCommandSettings : KepwareBaseCommandSettings
             return validationResult;
         }
 
-        return string.IsNullOrEmpty(ChannelName)
-            ? ValidationResult.Error("--channel-name is not set.")
+        var validationError = KepwareConfigurationValidationHelper.GetErrorForName("channel-name", ChannelName);
+        return validationError is not null
+            ? ValidationResult.Error(validationError)
             : ValidationResult.Success();
     }
 }

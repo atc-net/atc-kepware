@@ -18,14 +18,16 @@ public class DeviceDeleteCommandSettings : KepwareBaseCommandSettings
             return validationResult;
         }
 
-        if (string.IsNullOrEmpty(ChannelName))
+        var isValidChannelName = IsValidName("channel-name", ChannelName);
+        if (!isValidChannelName.Successful)
         {
-            return ValidationResult.Error("--channel-name is not set.");
+            return isValidChannelName;
         }
 
-        if (string.IsNullOrEmpty(DeviceName))
+        var isValidDeviceName = IsValidName("device-name", DeviceName);
+        if (!isValidDeviceName.Successful)
         {
-            return ValidationResult.Error("--device-name is not set.");
+            return isValidDeviceName;
         }
 
         return ValidationResult.Success();

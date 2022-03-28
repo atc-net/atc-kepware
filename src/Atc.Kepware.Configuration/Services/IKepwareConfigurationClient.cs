@@ -36,7 +36,7 @@ public interface IKepwareConfigurationClient
         string channelName,
         CancellationToken cancellationToken);
 
-    Task<HttpClientRequestResult<IList<DeviceBase>?>> GetDevices(
+    Task<HttpClientRequestResult<IList<DeviceBase>?>> GetDevicesByChannelName(
         string channelName,
         CancellationToken cancellationToken);
 
@@ -67,6 +67,7 @@ public interface IKepwareConfigurationClient
         string channelName,
         string deviceName,
         string[] tagGroupStructure,
+        bool ensureTagGroupStructure,
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<bool>> CreateTagGroup(
@@ -74,6 +75,7 @@ public interface IKepwareConfigurationClient
         string channelName,
         string deviceName,
         string[] tagGroupStructure,
+        bool ensureTagGroupStructure,
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<bool>> CreateEuroMap63Channel(

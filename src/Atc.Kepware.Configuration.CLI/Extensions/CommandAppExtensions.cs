@@ -79,9 +79,9 @@ public static class CommandAppExtensions
             get.SetDescription("Operations related to retrieving devices.");
 
             get
-                .AddCommand<DevicesGetCommand>("all")
-                .WithDescription("Retrieve all devices")
-                .WithExample(new[] { "devices get all" });
+                .AddCommand<DevicesGetByChannelCommand>("all")
+                .WithDescription("Retrieve all devices by channel-name")
+                .WithExample(new[] { "devices get all --channel-name [channelName]" });
 
             get.AddCommand<DeviceGetEuroMap63Command>("euromap63")
                 .WithDescription("Creates a EuroMap63 device (if not exists).")

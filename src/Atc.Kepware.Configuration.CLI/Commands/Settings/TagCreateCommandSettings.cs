@@ -38,9 +38,10 @@ public class TagCreateCommandSettings : ChannelAndDeviceCommandBaseSettings
             return validationResult;
         }
 
-        if (string.IsNullOrEmpty(Name))
+        var isValidName = IsValidName(Name);
+        if (!isValidName.Successful)
         {
-            return ValidationResult.Error("--name is not set.");
+            return isValidName;
         }
 
         if (string.IsNullOrEmpty(Address))

@@ -40,4 +40,18 @@ public class KepwareBaseCommandSettings : BaseCommandSettings
 
         return ValidationResult.Success();
     }
+
+    public static ValidationResult IsValidName(
+        string parameterValue)
+        => IsValidName("name", parameterValue);
+
+    public static ValidationResult IsValidName(
+        string parameterName,
+        string parameterValue)
+    {
+        var validationError = KepwareConfigurationValidationHelper.GetErrorForName(parameterName, parameterValue);
+        return validationError is not null
+            ? ValidationResult.Error(validationError)
+            : ValidationResult.Success();
+    }
 }

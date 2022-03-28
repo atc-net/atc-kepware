@@ -48,6 +48,13 @@ public sealed partial class KepwareConfigurationClient
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
+
+        var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(request.Name);
+        if (validationErrorForName is not null)
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrorForName));
+        }
+
         return InvokeCreateOpcUaChannel(
             request,
             cancellationToken);
@@ -59,6 +66,13 @@ public sealed partial class KepwareConfigurationClient
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
+
+        var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(request.Name);
+        if (validationErrorForName is not null)
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrorForName));
+        }
+
         return InvokeCreateOpcUaDevice(
             request,
             channelName,

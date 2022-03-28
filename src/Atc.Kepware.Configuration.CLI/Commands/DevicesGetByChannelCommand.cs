@@ -1,11 +1,11 @@
 namespace Atc.Kepware.Configuration.CLI.Commands;
 
-public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
+public class DevicesGetByChannelCommand : AsyncCommand<DevicesGetCommandSettings>
 {
-    private readonly ILogger<DevicesGetCommand> logger;
+    private readonly ILogger<DevicesGetByChannelCommand> logger;
 
-    public DevicesGetCommand(
-        ILogger<DevicesGetCommand> logger)
+    public DevicesGetByChannelCommand(
+        ILogger<DevicesGetByChannelCommand> logger)
         => this.logger = logger;
 
     public override Task<int> ExecuteAsync(
@@ -27,7 +27,7 @@ public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
         {
             var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
-            var result = await kepwareConfigurationClient.GetDevices(settings.ChannelName, CancellationToken.None);
+            var result = await kepwareConfigurationClient.GetDevicesByChannelName(settings.ChannelName, CancellationToken.None);
             if (result.CommunicationSucceeded &&
                 result.HasData)
             {

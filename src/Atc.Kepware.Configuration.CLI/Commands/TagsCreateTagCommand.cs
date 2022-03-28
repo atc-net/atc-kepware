@@ -46,6 +46,7 @@ public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
                 settings.ChannelName,
                 settings.DeviceName,
                 settings.TagGroups,
+                ensureTagGroupStructure: true,
                 CancellationToken.None);
 
             if (!result.CommunicationSucceeded ||
