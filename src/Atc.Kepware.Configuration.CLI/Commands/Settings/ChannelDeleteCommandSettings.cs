@@ -3,7 +3,7 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Settings;
 public class ChannelDeleteCommandSettings : KepwareBaseCommandSettings
 {
     [CommandOption("-n|--name <NAME>")]
-    [Description("Requested Name")]
+    [Description("Channel Name")]
     public string Name { get; init; } = string.Empty;
 
     public override ValidationResult Validate()

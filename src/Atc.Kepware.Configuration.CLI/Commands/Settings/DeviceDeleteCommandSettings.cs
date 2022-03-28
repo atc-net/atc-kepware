@@ -3,11 +3,11 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Settings;
 public class DeviceDeleteCommandSettings : KepwareBaseCommandSettings
 {
     [CommandOption("-c|--channel-name <CHANNEL-NAME>")]
-    [Description("Requested ChannelName")]
+    [Description("Channel Name")]
     public string ChannelName { get; init; } = string.Empty;
 
     [CommandOption("-d|--device-name <DEVICE-NAME>")]
-    [Description("Requested DeviceName")]
+    [Description("Device Name")]
     public string DeviceName { get; init; } = string.Empty;
 
     public override ValidationResult Validate()
