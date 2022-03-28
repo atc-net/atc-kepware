@@ -1,15 +1,7 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Settings;
 
-public class TagsSearchCommandSettings : KepwareBaseCommandSettings
+public class TagsSearchCommandSettings : ChannelAndDeviceCommandBaseSettings
 {
-    [CommandOption("-c|--channel-name")]
-    [Description("Requested ChannelName")]
-    public string? ChannelName { get; init; } = string.Empty;
-
-    [CommandOption("-d|--device-name")]
-    [Description("Requested DeviceName")]
-    public string? DeviceName { get; init; } = string.Empty;
-
     [CommandOption("-q|--query <QUERY>")]
     [Description("Query")]
     public string Query { get; init; } = string.Empty;
