@@ -2,10 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <PackageId>Atc.Kepware.Configuration</PackageId>
+    <PackageTags>kepware;kepware-configuration</PackageTags>
+    <Description>Atc.Kepware.Configuration is a collection of classes and clients for interacting with Kepware through REST API calls.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Atc" Version="2.0.91" />
+    <None Include="..\..\README.md" Link="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Atc" Version="2.0.108" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
   </ItemGroup>
 
 </Project>
