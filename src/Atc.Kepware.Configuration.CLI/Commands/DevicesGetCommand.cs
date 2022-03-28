@@ -28,7 +28,8 @@ public class DevicesGetCommand : AsyncCommand<DevicesGetCommandSettings>
             var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
             var result = await kepwareConfigurationClient.GetDevices(settings.ChannelName, CancellationToken.None);
-            if (result.CommunicationSucceeded && result.HasData)
+            if (result.CommunicationSucceeded &&
+                result.HasData)
             {
                 foreach (var deviceBase in result.Data!)
                 {
