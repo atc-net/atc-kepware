@@ -223,6 +223,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         string channelName,
         string deviceName,
         string[] tagGroupStructure,
+        bool ensureTagGroupStructure,
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
@@ -238,6 +239,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             channelName,
             deviceName,
             tagGroupStructure,
+            ensureTagGroupStructure,
             cancellationToken);
     }
 
@@ -246,6 +248,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         string channelName,
         string deviceName,
         string[] tagGroupStructure,
+        bool ensureTagGroupStructure,
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
@@ -261,6 +264,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             channelName,
             deviceName,
             tagGroupStructure,
+            ensureTagGroupStructure,
             cancellationToken);
     }
 
@@ -620,36 +624,79 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             $"{pathTemplate}/{EndpointPathTemplateConstants.TagGroups}",
             cancellationToken);
 
-    private Task<HttpClientRequestResult<bool>> InvokeCreateTag(
+    private async Task<HttpClientRequestResult<bool>> InvokeCreateTag(
         TagRequest request,
         string channelName,
         string deviceName,
         string[] tagGroupStructure,
+        bool ensureTagGroupStructure,
         CancellationToken cancellationToken)
     {
+        if (ensureTagGroupStructure)
+        {
+            await EnsureTagGroupStructure(channelName, deviceName, tagGroupStructure, cancellationToken);
+        }
+
         var basePathTemplate = GetBasePathTemplate(channelName, deviceName);
         var tagsPathTemplate = GetTagsPathFromTagGroupStructure(basePathTemplate, tagGroupStructure);
 
-        return Post(
+        return await Post(
             request.Adapt<KepwareContracts.TagRequest>(),
             tagsPathTemplate,
             cancellationToken);
     }
 
-    private Task<HttpClientRequestResult<bool>> InvokeCreateTagGroup(
+    private async Task<HttpClientRequestResult<bool>> InvokeCreateTagGroup(
         TagGroupRequest request,
+        string channelName,
+        string deviceName,
+        string[] tagGroupStructure,
+        bool ensureTagGroupStructure,
+        CancellationToken cancellationToken)
+    {
+        if (ensureTagGroupStructure)
+        {
+            await EnsureTagGroupStructure(channelName, deviceName, tagGroupStructure, cancellationToken);
+        }
+
+        var basePathTemplate = GetBasePathTemplate(channelName, deviceName);
+        var tagGroupPathTemplate = $"{GetTagGroupPathFromTagGroupStructure(basePathTemplate, tagGroupStructure)}/{EndpointPathTemplateConstants.TagGroups}";
+
+        return await Post(
+            request.Adapt<KepwareContracts.TagGroupRequest>(),
+            tagGroupPathTemplate,
+            cancellationToken);
+    }
+
+    private async Task EnsureTagGroupStructure(
         string channelName,
         string deviceName,
         string[] tagGroupStructure,
         CancellationToken cancellationToken)
     {
-        var basePathTemplate = GetBasePathTemplate(channelName, deviceName);
-        var tagGroupPathTemplate = $"{GetTagGroupPathFromTagGroupStructure(basePathTemplate, tagGroupStructure)}/{EndpointPathTemplateConstants.TagGroups}";
+        if (!tagGroupStructure.Any())
+        {
+            return;
+        }
 
-        return Post(
-            request.Adapt<KepwareContracts.TagGroupRequest>(),
-            tagGroupPathTemplate,
-            cancellationToken);
+        var testTagGroupStructure = new List<string>();
+        foreach (var tagGroup in tagGroupStructure)
+        {
+            if (await IsTagGroupDefined(channelName, deviceName, tagGroup, testTagGroupStructure.ToArray(), cancellationToken))
+            {
+                testTagGroupStructure.Add(tagGroup);
+                continue;
+            }
+
+            var request = new TagGroupRequest { Name = tagGroup };
+            var requestResult = await CreateTagGroup(request, channelName, deviceName, testTagGroupStructure.ToArray(), ensureTagGroupStructure: false, cancellationToken);
+            if (!requestResult.CommunicationSucceeded || requestResult.HasException)
+            {
+                break;
+            }
+
+            testTagGroupStructure.Add(tagGroup);
+        }
     }
 
     private Task<HttpClientRequestResult<bool>> InvokeDeleteTag(
