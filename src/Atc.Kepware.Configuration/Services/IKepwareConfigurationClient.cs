@@ -36,7 +36,7 @@ public interface IKepwareConfigurationClient
         string channelName,
         CancellationToken cancellationToken);
 
-    Task<HttpClientRequestResult<IList<DeviceBase>?>> GetDevices(
+    Task<HttpClientRequestResult<IList<DeviceBase>?>> GetDevicesByChannelName(
         string channelName,
         CancellationToken cancellationToken);
 

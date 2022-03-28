@@ -121,7 +121,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         return response.Adapt<HttpClientRequestResult<IList<ChannelBase>?>>();
     }
 
-    public async Task<HttpClientRequestResult<IList<DeviceBase>?>> GetDevices(
+    public async Task<HttpClientRequestResult<IList<DeviceBase>?>> GetDevicesByChannelName(
         string channelName,
         CancellationToken cancellationToken)
     {
@@ -297,7 +297,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
                      .Select(x => x.Name)
                      .OrderBy(x => x))
         {
-            var devicesResult = await GetDevices(channelName, cancellationToken);
+            var devicesResult = await GetDevicesByChannelName(channelName, cancellationToken);
             foreach (var deviceName in devicesResult.Data!
                          .Select(x => x.Name)
                          .OrderBy(x => x))
@@ -320,7 +320,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         int maxDepth,
         CancellationToken cancellationToken)
     {
-        var devicesResult = await GetDevices(channelName, cancellationToken);
+        var devicesResult = await GetDevicesByChannelName(channelName, cancellationToken);
         if (!devicesResult.CommunicationSucceeded || !devicesResult.HasData)
         {
             return devicesResult.HasException
