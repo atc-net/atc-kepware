@@ -53,4 +53,4 @@ jobs:
         run: dotnet pack -c Release --no-restore -o ${GITHUB_WORKSPACE}/packages -p:RepositoryBranch=$BRANCH_NAME /p:PublicRelease=true
 
       - name: 📦 Push packages to NuGet
-        run: dotnet nuget push ${GITHUB_WORKSPACE}/packages/'Atc.Opc.Ua.'${NBGV_NuGetPackageVersion}'.nupkg' -k ${{ secrets.NUGET_KEY }} -s ${{ env.NUGET_REPO_URL }} --skip-duplicate --no-symbols
+        run: dotnet nuget push ${GITHUB_WORKSPACE}/packages/'Atc.Kepware.Configuration.'${NBGV_NuGetPackageVersion}'.nupkg' -k ${{ secrets.NUGET_KEY }} -s ${{ env.NUGET_REPO_URL }} --skip-duplicate --no-symbols
