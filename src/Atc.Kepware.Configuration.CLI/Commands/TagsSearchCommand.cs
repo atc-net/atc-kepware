@@ -2,10 +2,10 @@ namespace Atc.Kepware.Configuration.CLI.Commands;
 
 public class TagsSearchCommand : AsyncCommand<TagsSearchCommandSettings>
 {
-    private readonly ILogger<TagsGetCommand> logger;
+    private readonly ILogger<TagsSearchCommand> logger;
 
     public TagsSearchCommand(
-        ILogger<TagsGetCommand> logger)
+        ILogger<TagsSearchCommand> logger)
         => this.logger = logger;
 
     public override Task<int> ExecuteAsync(
