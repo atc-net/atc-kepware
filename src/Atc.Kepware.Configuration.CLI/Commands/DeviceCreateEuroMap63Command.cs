@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands;
 
-public class DeviceCreateEuroMap63Command : AsyncCommand<DeviceCreateCommandBaseSettings>
+public class DeviceCreateEuroMap63Command : AsyncCommand<DeviceCreateEuroMap63CommandBaseSettings>
 {
     private readonly ILogger<DeviceCreateEuroMap63Command> logger;
 
@@ -10,7 +10,7 @@ public class DeviceCreateEuroMap63Command : AsyncCommand<DeviceCreateCommandBase
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        DeviceCreateCommandBaseSettings settings)
+        DeviceCreateEuroMap63CommandBaseSettings settings)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
@@ -19,7 +19,7 @@ public class DeviceCreateEuroMap63Command : AsyncCommand<DeviceCreateCommandBase
     }
 
     private async Task<int> ExecuteInternalAsync(
-        DeviceCreateCommandBaseSettings settings)
+        DeviceCreateEuroMap63CommandBaseSettings settings)
     {
         ConsoleHelper.WriteHeader();
 
@@ -61,7 +61,7 @@ public class DeviceCreateEuroMap63Command : AsyncCommand<DeviceCreateCommandBase
     }
 
     private static EuroMap63DeviceRequest BuildEuroMap63DeviceRequest(
-        DeviceCreateCommandBaseSettings settings)
+        DeviceCreateEuroMap63CommandBaseSettings settings)
         => new()
         {
             Name = settings.DeviceName,
