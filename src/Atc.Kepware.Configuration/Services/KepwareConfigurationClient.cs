@@ -198,13 +198,20 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         }
 
         const int maxDepth = 1000;
-        if (string.IsNullOrEmpty(channelName))
+        if (string.IsNullOrEmpty(channelName) ||
+            "*".Equals(channelName, StringComparison.Ordinal))
         {
             return await SearchTags(query, maxDepth, cancellationToken);
         }
 
-        if (string.IsNullOrEmpty(deviceName))
+        if (string.IsNullOrEmpty(deviceName) ||
+            "*".Equals(deviceName, StringComparison.Ordinal))
         {
+            if ("*".Equals(channelName, StringComparison.Ordinal))
+            {
+                channelName = string.Empty;
+            }
+
             return await SearchTagsByChannelName(channelName, query, maxDepth, cancellationToken);
         }
 
@@ -219,6 +226,13 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
+
+        var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(request.Name);
+        if (validationErrorForName is not null)
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrorForName));
+        }
+
         return InvokeCreateTag(
             request,
             channelName,
@@ -235,6 +249,13 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
+
+        var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(request.Name);
+        if (validationErrorForName is not null)
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrorForName));
+        }
+
         return InvokeCreateTagGroup(
             request,
             channelName,
@@ -436,6 +457,13 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
+
+        var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(tagName);
+        if (validationErrorForName is not null)
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrorForName));
+        }
+
         return InvokeDeleteTag(
             channelName,
             deviceName,
@@ -452,6 +480,13 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
+
+        var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(tagGroupName);
+        if (validationErrorForName is not null)
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrorForName));
+        }
+
         return InvokeDeleteTagGroup(
             channelName,
             deviceName,
