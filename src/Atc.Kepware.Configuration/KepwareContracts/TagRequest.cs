@@ -43,14 +43,3 @@ internal sealed class TagRequest
     public override string ToString()
         => $"{nameof(Name)}: {Name}, {nameof(Description)}: {Description}, {nameof(Address)}: {Address}, {nameof(DataType)}: {DataType}, {nameof(ClientAccess)}: {ClientAccess}, {nameof(ScanRate)}: {ScanRate}";
 }
-
-////    ScalingType* ScalingType    `json:"servermain.TAG_SCALING_TYPE,omitempty"`                0
-////    RawLow* int            `json:"servermain.TAG_SCALING_RAW_LOW,omitempty"`                  0
-////    RawHigh* int            `json:"servermain.TAG_SCALING_RAW_HIGH,omitempty"`                1000
-////    ScaledDataType* ScaledDataType `json:"servermain.TAG_SCALING_SCALED_DATA_TYPE,omitempty"` 9
-////    ScaledLow* int            `json:"servermain.TAG_SCALING_SCALED_LOW,omitempty"`            0
-////    ScaledHigh* int            `json:"servermain.TAG_SCALING_SCALED_HIGH,omitempty"`          1000
-////    ClampLow* bool           `json:"servermain.TAG_SCALING_CLAMP_LOW,omitempty"`              false
-////    ClampHigh* bool           `json:"servermain.TAG_SCALING_CLAMP_HIGH,omitempty"`            false
-////    NegateValue* bool           `json:"servermain.TAG_SCALING_NEGATE_VALUE,omitempty"`        false
-////    Units* string         `json:"servermain.TAG_SCALING_UNITS,omitempty"`                     ""
