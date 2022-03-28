@@ -28,8 +28,26 @@ public interface IKepwareConfigurationClient
     Task<HttpClientRequestResult<IList<ChannelBase>?>> GetChannels(
         CancellationToken cancellationToken);
 
+    Task<HttpClientRequestResult<EuroMap63Channel?>> GetEuroMap63Channel(
+        string channelName,
+        CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<OpcUaClientChannel?>> GetOpcUaClientChannel(
+        string channelName,
+        CancellationToken cancellationToken);
+
     Task<HttpClientRequestResult<IList<DeviceBase>?>> GetDevices(
         string channelName,
+        CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<EuroMap63Device?>> GetEuroMap63Device(
+        string channelName,
+        string deviceName,
+        CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<OpcUaClientDevice?>> GetOpcUaClientDevice(
+        string channelName,
+        string deviceName,
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<TagRoot>> GetTags(

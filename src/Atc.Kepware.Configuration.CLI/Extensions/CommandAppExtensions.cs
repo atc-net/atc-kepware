@@ -19,9 +19,7 @@ public static class CommandAppExtensions
         {
             node.SetDescription("Commands for channels");
 
-            node
-                .AddCommand<ChannelsGetCommand>("get")
-                .WithDescription("Get channels");
+            ConfigureChannelGetCommands(node);
 
             ConfigureChannelCreateCommands(node);
 
@@ -30,17 +28,35 @@ public static class CommandAppExtensions
                 .WithDescription("Delete channel");
         };
 
+    private static void ConfigureChannelGetCommands(IConfigurator<CommandSettings> node)
+        => node.AddBranch("get", get =>
+        {
+            get.SetDescription("Operations related to retrieving channels.");
+
+            get.AddCommand<ChannelsGetCommand>("all")
+                .WithDescription("Retrieve all channels")
+                .WithExample(new[] { "channels get all" });
+
+            get.AddCommand<ChannelGetEuroMap63Command>("euromap63")
+                .WithDescription("Creates a EuroMap63 channel (if not exists).")
+                .WithExample(new[] { "channels get euromap63 --name [channelName]" });
+
+            get.AddCommand<ChannelGetOpcUaClientCommand>("opcuaclient")
+                .WithDescription("Creates a OPC UA Client channel (if not exists).")
+                .WithExample(new[] { "channels get opcuaclient --name [channelName]" });
+        });
+
     private static void ConfigureChannelCreateCommands(IConfigurator<CommandSettings> node)
         => node.AddBranch("create", create =>
         {
             create.SetDescription("Operations related to creating channels.");
             create.AddCommand<ChannelCreateEuroMap63Command>("euromap63")
                 .WithDescription("Creates a EuroMap63 channel (if not exists).")
-                .WithExample(new[] { "channels create euromap63" }); // TODO: Fix
+                .WithExample(new[] { "channels create euromap63 --name [channelName] --description [description]" });
 
             create.AddCommand<ChannelCreateOpcUaClientCommand>("opcuaclient")
                 .WithDescription("Creates a OPC UA Client channel (if not exists).")
-                .WithExample(new[] { "channels create opcuaclient" }); // TODO: Fix
+                .WithExample(new[] { "channels create opcuaclient --name [channelName] --description [description]" });
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -48,9 +64,7 @@ public static class CommandAppExtensions
         {
             node.SetDescription("Commands for devices");
 
-            node
-                .AddCommand<DevicesGetCommand>("get")
-                .WithDescription("Get devices for channel");
+            ConfigureDeviceGetCommands(node);
 
             ConfigureDeviceCreateCommands(node);
 
@@ -59,17 +73,37 @@ public static class CommandAppExtensions
                 .WithDescription("Delete device from channel");
         };
 
+    private static void ConfigureDeviceGetCommands(IConfigurator<CommandSettings> node)
+        => node.AddBranch("get", get =>
+        {
+            get.SetDescription("Operations related to retrieving devices.");
+
+            get
+                .AddCommand<DevicesGetCommand>("all")
+                .WithDescription("Retrieve all devices")
+                .WithExample(new[] { "devices get all" });
+
+            get.AddCommand<DeviceGetEuroMap63Command>("euromap63")
+                .WithDescription("Creates a EuroMap63 device (if not exists).")
+                .WithExample(new[] { "devices get euromap63 --channel-name [channelName] --device-name [deviceName]" });
+
+            get.AddCommand<DeviceGetOpcUaClientCommand>("opcuaclient")
+                .WithDescription("Creates a OPC UA Client device (if not exists).")
+                .WithExample(new[] { "devices get opcuaclient --channel-name [channelName] --device-name [deviceName]" });
+        });
+
     private static void ConfigureDeviceCreateCommands(IConfigurator<CommandSettings> node)
         => node.AddBranch("create", create =>
         {
             create.SetDescription("Operations related to creating devices.");
+
             create.AddCommand<DeviceCreateEuroMap63Command>("euromap63")
                 .WithDescription("Creates a EuroMap63 device (if not exists).")
-                .WithExample(new[] { "devices create euromap63" }); // TODO: Fix
+                .WithExample(new[] { "devices create euromap63 --channel-name [channelName] --device-name [deviceName] --description [description] --session-file-path [filePath]" });
 
             create.AddCommand<DeviceCreateOpcUaClientCommand>("opcuaclient")
                 .WithDescription("Creates a OPC UA Client device (if not exists).")
-                .WithExample(new[] { "devices create opcuaclient" }); // TODO: Fix
+                .WithExample(new[] { "devices create opcuaclient --channel-name [channelName] --device-name [deviceName] --description [description] " });
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
@@ -81,6 +115,9 @@ public static class CommandAppExtensions
                 .AddCommand<TagsGetCommand>("get")
                 .WithDescription("Get tags for channel and device");
 
+            ConfigureTagCreateCommands(node);
+            ConfigureTagDeleteCommands(node);
+
             node
                 .AddCommand<TagsSearchCommand>("search")
                 .WithDescription("Search tags")
@@ -88,34 +125,33 @@ public static class CommandAppExtensions
                 .WithExample(new[] { "tags search -s [server] --search *Tag" })
                 .WithExample(new[] { "tags search -s [server] --search My*" })
                 .WithExample(new[] { "tags search -s [server] --search *yt*" });
-
-            ConfigureTagCreateCommands(node);
-            ConfigureTagDeleteCommands(node);
         };
 
     private static void ConfigureTagCreateCommands(IConfigurator<CommandSettings> node)
         => node.AddBranch("create", create =>
         {
             create.SetDescription("Operations related to creating tags and tag groups.");
+
             create.AddCommand<TagsCreateTagCommand>("tag")
                 .WithDescription("Creates a tag (if not exists).")
-                .WithExample(new[] { "tags create tag" }); // TODO: Fix
+                .WithExample(new[] { "tags create tag --channel-name [channelName] --device-name [deviceName] --name [tagName] --address [tagAddress] --scan-rate [scanRate] --data-type [dataType] --client-access [clientAccess] --description [description]" });
 
             create.AddCommand<TagsCreateTagGroupCommand>("taggroup")
                 .WithDescription("Creates a tag group (if not exists).")
-                .WithExample(new[] { "tags create taggroup" }); // TODO: Fix
+                .WithExample(new[] { "tags create taggroup --channel-name [channelName] --device-name [deviceName] --name [tagGroupName] --description [description]" });
         });
 
     private static void ConfigureTagDeleteCommands(IConfigurator<CommandSettings> node)
         => node.AddBranch("delete", create =>
         {
             create.SetDescription("Operations related to deleting tags and tag groups.");
+
             create.AddCommand<TagsDeleteTagCommand>("tag")
                 .WithDescription("Delete a tag (if exists).")
-                .WithExample(new[] { "tags delete tag" }); // TODO: Fix
+                .WithExample(new[] { "tags delete tag --name [tagName]" });
 
             create.AddCommand<TagsDeleteTagGroupCommand>("taggroup")
                 .WithDescription("Deletes a tag group (if exists).")
-                .WithExample(new[] { "tags delete taggroup" }); // TODO: Fix
+                .WithExample(new[] { "tags delete taggroup --name [tagGroupName]" });
         });
 }
