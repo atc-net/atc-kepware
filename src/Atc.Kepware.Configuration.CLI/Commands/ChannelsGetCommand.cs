@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands;
 
-public class ChannelsGetCommand : AsyncCommand<ChannelsGetCommandSettings>
+public class ChannelsGetCommand : AsyncCommand<KepwareBaseCommandSettings>
 {
     private readonly ILogger<ChannelsGetCommand> logger;
 
@@ -10,7 +10,7 @@ public class ChannelsGetCommand : AsyncCommand<ChannelsGetCommandSettings>
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelsGetCommandSettings settings)
+        KepwareBaseCommandSettings settings)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
@@ -19,29 +19,17 @@ public class ChannelsGetCommand : AsyncCommand<ChannelsGetCommandSettings>
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelsGetCommandSettings settings)
+        KepwareBaseCommandSettings settings)
     {
         ConsoleHelper.WriteHeader();
 
         try
         {
-            var userName = settings.UserName;
-            var password = settings.Password;
-
-            using var kepwareConfigurationClient = userName is not null && userName.IsSet
-                ? new KepwareConfigurationClient(
-                    logger,
-                    new Uri(settings.ServerUrl),
-                    userName.Value,
-                    password!.Value)
-                : new KepwareConfigurationClient(
-                    logger,
-                    new Uri(settings.ServerUrl),
-                    userName: null,
-                    password: null);
+            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
             var result = await kepwareConfigurationClient.GetChannels(CancellationToken.None);
-            if (result.CommunicationSucceeded && result.HasData)
+            if (result.CommunicationSucceeded &&
+                result.HasData)
             {
                 foreach (var channelBase in result.Data!)
                 {
