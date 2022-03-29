@@ -14,7 +14,7 @@ The `Atc.Kepware.Configuration.CLI` tool is available through a cross platform c
 
 ### Installation
 
-The tool can be installed as a .NET Core global tool by the following command
+The tool can be installed as a .NET global tool by the following command
 
 ```powershell
 dotnet tool install --global atc-kepware-configuration
@@ -31,7 +31,7 @@ Tool 'atc-kepware-configuration' (version '1.0.xxx') was successfully installed.
 
 ### Update
 
-The tool can be updated by following command
+The tool can be updated by the following command
 
 ```powershell
 dotnet tool update --global atc-kepware-configuration
