@@ -13,7 +13,7 @@ internal class OpcUaClientDeviceRequest : DeviceRequestBase, IOpcUaClientDeviceR
     public int PublishingInterval { get; set; } = 1000;
 
     /// <inheritdoc />
-    [Range(0, 4294967295)]
+    [Range(0, 2147483647)]
     [JsonPropertyName("opcuaclient.DEVICE_SUBSCRIPTION_MAX_NOTIFICATIONS_PER_PUBLISH")]
     public int MaxNotificationsPerPublish { get; set; }
 
