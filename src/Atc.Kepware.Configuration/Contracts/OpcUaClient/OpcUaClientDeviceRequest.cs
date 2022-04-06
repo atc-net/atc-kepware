@@ -12,7 +12,7 @@ public sealed class OpcUaClientDeviceRequest : DeviceRequestBase, IOpcUaClientDe
     public int PublishingInterval { get; set; } = 1000;
 
     /// <inheritdoc />
-    [Range(0, 4294967295)]
+    [Range(0, 2147483647)]
     public int MaxNotificationsPerPublish { get; set; }
 
     /// <inheritdoc />
