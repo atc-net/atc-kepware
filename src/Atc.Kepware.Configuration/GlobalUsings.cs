@@ -12,9 +12,8 @@ global using Atc.Kepware.Configuration.Contracts;
 global using Atc.Kepware.Configuration.Contracts.Drivers.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Drivers.OpcUaClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces;
-global using Atc.Kepware.Configuration.Interfaces;
-global using Atc.Kepware.Configuration.Interfaces.EuroMap63;
-global using Atc.Kepware.Configuration.Interfaces.OpcUaClient;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.EuroMap63;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.OpcUaClient;
 global using Atc.Serialization;
 
 global using Mapster;

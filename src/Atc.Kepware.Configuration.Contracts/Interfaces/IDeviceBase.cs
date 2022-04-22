@@ -1,4 +1,4 @@
-namespace Atc.Kepware.Configuration.Interfaces;
+namespace Atc.Kepware.Configuration.Contracts.Interfaces;
 
 public interface IDeviceBase
 {
