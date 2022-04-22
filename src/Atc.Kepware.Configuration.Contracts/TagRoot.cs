@@ -10,7 +10,7 @@ public sealed class TagRoot
 
     public string DeviceName { get; }
 
-    public IList<Tag> Tags { get; init; } = new List<Tag>();
+    public IList<Tag> Tags { get; set; } = new List<Tag>();
 
-    public IList<TagGroup> TagGroups { get; init; } = new List<TagGroup>();
+    public IList<TagGroup> TagGroups { get; set; } = new List<TagGroup>();
 }

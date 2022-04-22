@@ -18,7 +18,7 @@ public abstract class DeviceRequestBase : IDeviceRequestBase
     public string Description { get; set; } = string.Empty;
 
     /// <inheritdoc />
-    public string Driver { get; private init; }
+    public string Driver { get; set; }
 
     /// <inheritdoc />
     public bool DataCollection { get; set; } = true;

@@ -507,7 +507,9 @@ dotnet_diagnostic.S1135.severity = suggestion       # https://github.com/atc-net
 dotnet_diagnostic.CA1056.severity = none            # URI properties should not be strings
 dotnet_diagnostic.CA1812.severity = none            # Internal class that is apparently never instantiated.
 dotnet_diagnostic.CA2007.severity = none            # Consider calling ConfigureAwait on the awaited task
+dotnet_diagnostic.CA2227.severity = none            # Collection properties should be read only
 dotnet_diagnostic.CA5400.severity = none            # Ensure HttpClient certificate revocation list check is not disabled
+
 
 dotnet_diagnostic.MA0004.severity = none            # Use Task.ConfigureAwait(false) as the current SynchronizationContext is not needed
 

@@ -1,4 +1,4 @@
-namespace Atc.Kepware.Configuration.Contracts.EuroMap63;
+namespace Atc.Kepware.Configuration.Contracts.Drivers.EuroMap63;
 
 /// <summary>
 /// Channel properties for the EUROMAP 63 driver.

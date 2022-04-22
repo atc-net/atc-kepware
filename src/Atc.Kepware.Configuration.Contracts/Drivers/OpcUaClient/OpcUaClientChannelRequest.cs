@@ -1,4 +1,4 @@
-namespace Atc.Kepware.Configuration.Contracts.OpcUaClient;
+namespace Atc.Kepware.Configuration.Contracts.Drivers.OpcUaClient;
 
 /// <summary>
 /// Channel properties for the OPC UA Client driver.

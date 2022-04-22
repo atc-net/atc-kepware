@@ -17,4 +17,8 @@
     <PackageReference Include="Mapster" Version="7.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Atc.Kepware.Configuration.Contracts\Atc.Kepware.Configuration.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

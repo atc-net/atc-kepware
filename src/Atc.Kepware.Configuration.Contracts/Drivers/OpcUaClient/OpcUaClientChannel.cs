@@ -1,4 +1,4 @@
-namespace Atc.Kepware.Configuration.Contracts.OpcUaClient;
+namespace Atc.Kepware.Configuration.Contracts.Drivers.OpcUaClient;
 
 public sealed class OpcUaClientChannel : ChannelBase, IOpcUaClientChannel
 {

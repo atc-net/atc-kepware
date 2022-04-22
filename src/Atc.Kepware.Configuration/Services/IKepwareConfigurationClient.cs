@@ -79,20 +79,20 @@ public interface IKepwareConfigurationClient
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<bool>> CreateEuroMap63Channel(
-        Contracts.EuroMap63.EuroMap63ChannelRequest request,
+        EuroMap63ChannelRequest request,
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<bool>> CreateEuroMap63Device(
-        Contracts.EuroMap63.EuroMap63DeviceRequest request,
+        EuroMap63DeviceRequest request,
         string channelName,
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<bool>> CreateOpcUaClientChannel(
-        Contracts.OpcUaClient.OpcUaClientChannelRequest request,
+        OpcUaClientChannelRequest request,
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<bool>> CreateOpcUaClientDevice(
-        Contracts.OpcUaClient.OpcUaClientDeviceRequest request,
+        OpcUaClientDeviceRequest request,
         string channelName,
         CancellationToken cancellationToken);
 

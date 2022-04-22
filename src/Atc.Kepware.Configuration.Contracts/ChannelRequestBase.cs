@@ -17,7 +17,7 @@ public abstract class ChannelRequestBase : IChannelRequestBase
     public string Description { get; set; } = string.Empty;
 
     /// <inheritdoc />
-    public string DeviceDriver { get; private init; }
+    public string DeviceDriver { get; private set; }
 
     /// <inheritdoc />
     public bool? CaptureDiagnostics { get; set; }
