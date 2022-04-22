@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageId>Atc.Kepware.Configuration.Contracts</PackageId>
+    <PackageTags>kepware;kepware-configuration</PackageTags>
+    <Description>Atc.Kepware.Configuration.Contracts is a collection of contracts classes for interacting with Kepware through REST API calls.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Atc" Version="2.0.108" />
+  </ItemGroup>
+
+</Project>

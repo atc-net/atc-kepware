@@ -12,9 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{DAC1423F-D
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{1CB34588-A7CA-42EB-88AC-A778697946DD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atc.Kepware.Configuration.CLI", "src\Atc.Kepware.Configuration.CLI\Atc.Kepware.Configuration.CLI.csproj", "{268932F7-56E9-4B76-B488-1F398C71F7DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atc.Kepware.Configuration.Contracts", "src\Atc.Kepware.Configuration.Contracts\Atc.Kepware.Configuration.Contracts.csproj", "{E4E1D746-AFEF-47B6-9CBA-F08E8E1BF8AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +30,10 @@ Global
 		{268932F7-56E9-4B76-B488-1F398C71F7DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{268932F7-56E9-4B76-B488-1F398C71F7DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{268932F7-56E9-4B76-B488-1F398C71F7DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4E1D746-AFEF-47B6-9CBA-F08E8E1BF8AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4E1D746-AFEF-47B6-9CBA-F08E8E1BF8AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4E1D746-AFEF-47B6-9CBA-F08E8E1BF8AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4E1D746-AFEF-47B6-9CBA-F08E8E1BF8AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +41,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4856D04B-2DA5-4398-90C2-CF13B8FA6191} = {69C84246-AA75-43E8-94B2-66FD555B18B0}
 		{268932F7-56E9-4B76-B488-1F398C71F7DE} = {69C84246-AA75-43E8-94B2-66FD555B18B0}
+		{E4E1D746-AFEF-47B6-9CBA-F08E8E1BF8AF} = {69C84246-AA75-43E8-94B2-66FD555B18B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {04120463-05C5-417B-8D7A-2D7D35B71A07}
