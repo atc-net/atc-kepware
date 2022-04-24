@@ -36,8 +36,9 @@ internal sealed class TagRequest
     /// <summary>
     /// Specifies the poll interval, in milliseconds, for this tag.
     /// </summary>
+    [Range(10, 99999990)]
     [JsonPropertyName("servermain.TAG_SCAN_RATE_MILLISECONDS")]
-    public int ScanRate { get; set; }
+    public int ScanRate { get; set; } = 1000;
 
     /// <inheritdoc />
     public override string ToString()
