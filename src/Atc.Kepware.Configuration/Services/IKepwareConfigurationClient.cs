@@ -2,23 +2,23 @@ namespace Atc.Kepware.Configuration.Services;
 
 public interface IKepwareConfigurationClient
 {
-    Task<bool> IsChannelDefined(
+    Task<HttpClientRequestResult<bool>> IsChannelDefined(
         string channelName,
         CancellationToken cancellationToken);
 
-    Task<bool> IsDeviceDefined(
+    Task<HttpClientRequestResult<bool>> IsDeviceDefined(
         string channelName,
         string deviceName,
         CancellationToken cancellationToken);
 
-    Task<bool> IsTagDefined(
+    Task<HttpClientRequestResult<bool>> IsTagDefined(
         string channelName,
         string deviceName,
         string tagName,
         string[] tagGroupStructure,
         CancellationToken cancellationToken);
 
-    Task<bool> IsTagGroupDefined(
+    Task<HttpClientRequestResult<bool>> IsTagGroupDefined(
         string channelName,
         string deviceName,
         string tagGroupName,

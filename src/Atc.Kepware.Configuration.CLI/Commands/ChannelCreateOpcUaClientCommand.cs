@@ -27,11 +27,12 @@ public class ChannelCreateOpcUaClientCommand : AsyncCommand<ChannelCreateOpcUaCl
         {
             var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
-            var isChannelDefined = await kepwareConfigurationClient.IsChannelDefined(
+            var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
                 CancellationToken.None);
 
-            if (isChannelDefined)
+            if (isChannelDefinedResult.CommunicationSucceeded &&
+                isChannelDefinedResult.Data)
             {
                 logger.LogWarning("Channel already exists!");
                 return ConsoleExitStatusCodes.Success;
