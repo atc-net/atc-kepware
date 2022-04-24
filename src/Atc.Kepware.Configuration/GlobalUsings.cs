@@ -8,6 +8,7 @@ global using System.Text.Json;
 global using System.Text.Json.Serialization;
 
 global using Atc.Data.Models;
+global using Atc.Helpers;
 global using Atc.Kepware.Configuration.Contracts;
 global using Atc.Kepware.Configuration.Contracts.Drivers.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Drivers.OpcUaClient;
