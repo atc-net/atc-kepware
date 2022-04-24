@@ -27,14 +27,15 @@ public class TagsDeleteTagCommand : AsyncCommand<TagDeleteCommandSettings>
         {
             var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
-            var isTagDefined = await kepwareConfigurationClient.IsTagDefined(
+            var isTagDefinedResult = await kepwareConfigurationClient.IsTagDefined(
                 settings.ChannelName,
                 settings.DeviceName,
                 settings.Name,
                 settings.TagGroups,
                 CancellationToken.None);
 
-            if (!isTagDefined)
+            if (isTagDefinedResult.CommunicationSucceeded &&
+                !isTagDefinedResult.Data)
             {
                 logger.LogWarning("Tag does not exist!");
                 return ConsoleExitStatusCodes.Success;

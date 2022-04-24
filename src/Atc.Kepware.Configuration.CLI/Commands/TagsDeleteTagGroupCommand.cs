@@ -27,14 +27,15 @@ public class TagsDeleteTagGroupCommand : AsyncCommand<TagGroupDeleteCommandSetti
         {
             var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
-            var isTagGroupDefined = await kepwareConfigurationClient.IsTagGroupDefined(
+            var isTagGroupDefinedResult = await kepwareConfigurationClient.IsTagGroupDefined(
                 settings.ChannelName,
                 settings.DeviceName,
                 settings.Name,
                 settings.TagGroups,
                 CancellationToken.None);
 
-            if (!isTagGroupDefined)
+            if (isTagGroupDefinedResult.CommunicationSucceeded &&
+                !isTagGroupDefinedResult.Data)
             {
                 logger.LogWarning("Tag Group does not exist!");
                 return ConsoleExitStatusCodes.Success;

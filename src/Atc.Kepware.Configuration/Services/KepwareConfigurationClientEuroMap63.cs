@@ -49,6 +49,11 @@ public sealed partial class KepwareConfigurationClient
     {
         ArgumentNullException.ThrowIfNull(request);
 
+        if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
+        }
+
         var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(request.Name);
         if (validationErrorForName is not null)
         {
@@ -66,6 +71,11 @@ public sealed partial class KepwareConfigurationClient
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
+
+        if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
+        }
 
         var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(request.Name);
         if (validationErrorForName is not null)

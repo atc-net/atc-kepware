@@ -46,7 +46,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         }
     }
 
-    public async Task<bool> IsChannelDefined(
+    public async Task<HttpClientRequestResult<bool>> IsChannelDefined(
         string channelName,
         CancellationToken cancellationToken)
     {
@@ -55,10 +55,22 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             cancellationToken,
             shouldLogNotFound: false);
 
-        return response.HasData;
+        if (!response.CommunicationSucceeded)
+        {
+            return new HttpClientRequestResult<bool>(new HttpRequestException("Communication error!"));
+        }
+
+        if (response.StatusCode is HttpStatusCode.OK or HttpStatusCode.NotFound)
+        {
+            return new HttpClientRequestResult<bool>(response.HasData);
+        }
+
+        return response.HasMessage
+            ? new HttpClientRequestResult<bool>(response.StatusCode, response.HasData, response.Message!)
+            : new HttpClientRequestResult<bool>(response.StatusCode, response.HasData);
     }
 
-    public async Task<bool> IsDeviceDefined(
+    public async Task<HttpClientRequestResult<bool>> IsDeviceDefined(
         string channelName,
         string deviceName,
         CancellationToken cancellationToken)
@@ -68,10 +80,22 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             cancellationToken,
             shouldLogNotFound: false);
 
-        return response.HasData;
+        if (!response.CommunicationSucceeded)
+        {
+            return new HttpClientRequestResult<bool>(new HttpRequestException("Communication error!"));
+        }
+
+        if (response.StatusCode is HttpStatusCode.OK or HttpStatusCode.NotFound)
+        {
+            return new HttpClientRequestResult<bool>(response.HasData);
+        }
+
+        return response.HasMessage
+            ? new HttpClientRequestResult<bool>(response.StatusCode, response.HasData, response.Message!)
+            : new HttpClientRequestResult<bool>(response.StatusCode, response.HasData);
     }
 
-    public async Task<bool> IsTagDefined(
+    public async Task<HttpClientRequestResult<bool>> IsTagDefined(
         string channelName,
         string deviceName,
         string tagName,
@@ -88,10 +112,22 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             cancellationToken,
             shouldLogNotFound: false);
 
-        return response.HasData;
+        if (!response.CommunicationSucceeded)
+        {
+            return new HttpClientRequestResult<bool>(new HttpRequestException("Communication error!"));
+        }
+
+        if (response.StatusCode is HttpStatusCode.OK or HttpStatusCode.NotFound)
+        {
+            return new HttpClientRequestResult<bool>(new HttpRequestException("Communication error!"));
+        }
+
+        return response.HasMessage
+            ? new HttpClientRequestResult<bool>(response.StatusCode, response.HasData, response.Message!)
+            : new HttpClientRequestResult<bool>(response.StatusCode, response.HasData);
     }
 
-    public async Task<bool> IsTagGroupDefined(
+    public async Task<HttpClientRequestResult<bool>> IsTagGroupDefined(
         string channelName,
         string deviceName,
         string tagGroupName,
@@ -108,7 +144,19 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             cancellationToken,
             shouldLogNotFound: false);
 
-        return response.HasData;
+        if (!response.CommunicationSucceeded)
+        {
+            return new HttpClientRequestResult<bool>(new HttpRequestException("Communication error!"));
+        }
+
+        if (response.StatusCode is HttpStatusCode.OK or HttpStatusCode.NotFound)
+        {
+            return new HttpClientRequestResult<bool>(response.HasData);
+        }
+
+        return response.HasMessage
+            ? new HttpClientRequestResult<bool>(response.StatusCode, response.HasData, response.Message!)
+            : new HttpClientRequestResult<bool>(response.StatusCode, response.HasData);
     }
 
     public async Task<HttpClientRequestResult<IList<ChannelBase>?>> GetChannels(
@@ -228,6 +276,11 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     {
         ArgumentNullException.ThrowIfNull(request);
 
+        if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
+        }
+
         var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(request.Name);
         if (validationErrorForName is not null)
         {
@@ -252,6 +305,11 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
+
+        if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
+        }
 
         var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(request.Name);
         if (validationErrorForName is not null)
@@ -682,7 +740,9 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         var testTagGroupStructure = new List<string>();
         foreach (var tagGroup in tagGroupStructure)
         {
-            if (await IsTagGroupDefined(channelName, deviceName, tagGroup, testTagGroupStructure.ToArray(), cancellationToken))
+            var isTagGroupDefinedResult = await IsTagGroupDefined(channelName, deviceName, tagGroup, testTagGroupStructure.ToArray(), cancellationToken);
+            if (isTagGroupDefinedResult.CommunicationSucceeded &&
+                isTagGroupDefinedResult.Data)
             {
                 testTagGroupStructure.Add(tagGroup);
                 continue;

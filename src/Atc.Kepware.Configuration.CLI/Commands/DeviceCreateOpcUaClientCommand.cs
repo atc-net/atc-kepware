@@ -27,12 +27,13 @@ public class DeviceCreateOpcUaClientCommand : AsyncCommand<DeviceCreateCommandBa
         {
             var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
-            var isDeviceDefined = await kepwareConfigurationClient.IsDeviceDefined(
+            var isDeviceDefinedResult = await kepwareConfigurationClient.IsDeviceDefined(
                 settings.ChannelName,
                 settings.DeviceName,
                 CancellationToken.None);
 
-            if (isDeviceDefined)
+            if (isDeviceDefinedResult.CommunicationSucceeded &&
+                isDeviceDefinedResult.Data)
             {
                 logger.LogWarning("Device already exists!");
                 return ConsoleExitStatusCodes.Success;

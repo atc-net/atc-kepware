@@ -31,7 +31,8 @@ public sealed class TagRequest
     /// <summary>
     /// Specifies the poll interval, in milliseconds, for this tag.
     /// </summary>
-    public int ScanRate { get; set; }
+    [Range(10, 99999990)]
+    public int ScanRate { get; set; } = 1000;
 
     /// <inheritdoc />
     public override string ToString()

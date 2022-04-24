@@ -27,11 +27,12 @@ public class ChannelDeleteCommand : AsyncCommand<ChannelDeleteCommandSettings>
         {
             var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
-            var isChannelDefined = await kepwareConfigurationClient.IsChannelDefined(
+            var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
                 CancellationToken.None);
 
-            if (!isChannelDefined)
+            if (isChannelDefinedResult.CommunicationSucceeded &&
+                !isChannelDefinedResult.Data)
             {
                 logger.LogWarning("Channel does not exist!");
                 return ConsoleExitStatusCodes.Success;
