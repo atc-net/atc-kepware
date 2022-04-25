@@ -62,7 +62,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
 
         if (response.StatusCode is HttpStatusCode.OK or HttpStatusCode.NotFound)
         {
-            return new HttpClientRequestResult<bool>(response.HasData);
+            return new HttpClientRequestResult<bool>(response.StatusCode, response.HasData);
         }
 
         return response.HasMessage
@@ -87,7 +87,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
 
         if (response.StatusCode is HttpStatusCode.OK or HttpStatusCode.NotFound)
         {
-            return new HttpClientRequestResult<bool>(response.HasData);
+            return new HttpClientRequestResult<bool>(response.StatusCode, response.HasData);
         }
 
         return response.HasMessage
@@ -119,7 +119,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
 
         if (response.StatusCode is HttpStatusCode.OK or HttpStatusCode.NotFound)
         {
-            return new HttpClientRequestResult<bool>(new HttpRequestException("Communication error!"));
+            return new HttpClientRequestResult<bool>(response.StatusCode, response.HasData);
         }
 
         return response.HasMessage
@@ -151,7 +151,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
 
         if (response.StatusCode is HttpStatusCode.OK or HttpStatusCode.NotFound)
         {
-            return new HttpClientRequestResult<bool>(response.HasData);
+            return new HttpClientRequestResult<bool>(response.StatusCode, response.HasData);
         }
 
         return response.HasMessage
