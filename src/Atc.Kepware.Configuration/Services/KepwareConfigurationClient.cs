@@ -281,12 +281,6 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
         }
 
-        var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(request.Name);
-        if (validationErrorForName is not null)
-        {
-            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrorForName));
-        }
-
         return InvokeCreateTag(
             request,
             channelName,
@@ -309,12 +303,6 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
         {
             return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
-        }
-
-        var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(request.Name);
-        if (validationErrorForName is not null)
-        {
-            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrorForName));
         }
 
         return InvokeCreateTagGroup(
@@ -520,10 +508,9 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     {
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(tagName);
-        if (validationErrorForName is not null)
+        if (!KeyStringAttribute.TryIsValid(tagName, out var errorMessage))
         {
-            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrorForName));
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage));
         }
 
         return InvokeDeleteTag(
@@ -543,10 +530,9 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     {
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(tagGroupName);
-        if (validationErrorForName is not null)
+        if (!KeyStringAttribute.TryIsValid(tagGroupName, out var errorMessage))
         {
-            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrorForName));
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage));
         }
 
         return InvokeDeleteTagGroup(
@@ -629,8 +615,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
                 tagPath = $"{basePathTemplate}/{EndpointPathTemplateConstants.Tags}";
                 break;
             case 1:
-                tagPath =
-                    $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{tagGroupStructure[0]}/{EndpointPathTemplateConstants.Tags}";
+                tagPath = $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{tagGroupStructure[0]}/{EndpointPathTemplateConstants.Tags}";
                 break;
             default:
             {

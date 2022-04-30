@@ -54,12 +54,6 @@ public sealed partial class KepwareConfigurationClient
             return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
         }
 
-        var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(request.Name);
-        if (validationErrorForName is not null)
-        {
-            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrorForName));
-        }
-
         return InvokeCreateOpcUaChannel(
             request,
             cancellationToken);
@@ -75,12 +69,6 @@ public sealed partial class KepwareConfigurationClient
         if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
         {
             return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
-        }
-
-        var validationErrorForName = KepwareConfigurationValidationHelper.GetErrorForName(request.Name);
-        if (validationErrorForName is not null)
-        {
-            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrorForName));
         }
 
         return InvokeCreateOpcUaDevice(
