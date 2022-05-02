@@ -9,8 +9,7 @@ public abstract class DeviceRequestBase : IDeviceRequestBase
     }
 
     /// <inheritdoc />
-    [MinLength(1)]
-    [MaxLength(256)]
+    [KeyString]
     public string Name { get; set; } = string.Empty;
 
     /// <inheritdoc />

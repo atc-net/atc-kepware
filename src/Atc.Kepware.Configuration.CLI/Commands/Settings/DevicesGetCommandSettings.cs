@@ -14,9 +14,10 @@ public class DevicesGetCommandSettings : KepwareBaseCommandSettings
             return validationResult;
         }
 
-        var validationError = KepwareConfigurationValidationHelper.GetErrorForName("channel-name", ChannelName);
-        return validationError is not null
-            ? ValidationResult.Error(validationError)
-            : ValidationResult.Success();
+        return System.ComponentModel.DataAnnotations.KeyStringAttribute.TryIsValid(
+            ChannelName,
+            out var errorMessage)
+            ? ValidationResult.Success()
+            : ValidationResult.Error($"--{ChannelName}: {errorMessage}");
     }
 }

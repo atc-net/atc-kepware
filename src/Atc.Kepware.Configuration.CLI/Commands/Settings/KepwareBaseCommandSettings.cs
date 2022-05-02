@@ -48,10 +48,9 @@ public class KepwareBaseCommandSettings : BaseCommandSettings
     public static ValidationResult IsValidName(
         string parameterName,
         string parameterValue)
-    {
-        var validationError = KepwareConfigurationValidationHelper.GetErrorForName(parameterName, parameterValue);
-        return validationError is not null
-            ? ValidationResult.Error(validationError)
-            : ValidationResult.Success();
-    }
+        => System.ComponentModel.DataAnnotations.KeyStringAttribute.TryIsValid(
+            parameterValue,
+            out var errorMessage)
+            ? ValidationResult.Success()
+            : ValidationResult.Error($"--{parameterName}: {errorMessage}");
 }

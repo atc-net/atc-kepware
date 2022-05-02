@@ -5,6 +5,7 @@ public sealed class TagRequest
     /// <summary>
     /// The name of the tag.
     /// </summary>
+    [KeyString]
     public string Name { get; set; } = string.Empty;
 
     /// <summary>

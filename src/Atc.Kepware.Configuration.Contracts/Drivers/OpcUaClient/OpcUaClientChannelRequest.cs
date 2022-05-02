@@ -11,6 +11,7 @@ public sealed class OpcUaClientChannelRequest : ChannelRequestBase, IOpcUaClient
     }
 
     /// <inheritdoc />
+    [Uri(AllowHttp = false, AllowHttps = false, AllowFtp = false, AllowFile = false, AllowOpcTcp = true)]
     public string EndpointUrl { get; set; } = string.Empty;
 
     /// <inheritdoc />

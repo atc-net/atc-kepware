@@ -8,8 +8,7 @@ public abstract class ChannelRequestBase : IChannelRequestBase
     }
 
     /// <inheritdoc />
-    [MinLength(1)]
-    [MaxLength(256)]
+    [KeyString]
     public string Name { get; set; } = string.Empty;
 
     /// <inheritdoc />
