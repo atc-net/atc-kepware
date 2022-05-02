@@ -5,6 +5,7 @@ internal sealed class TagGroupRequest
     /// <summary>
     /// Specify the identity of this object.
     /// </summary>
+    [KeyString]
     [JsonPropertyName("common.ALLTYPES_NAME")]
     public string Name { get; set; } = string.Empty;
 

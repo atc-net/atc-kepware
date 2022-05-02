@@ -11,6 +11,7 @@ internal class OpcUaClientChannelRequest : ChannelRequestBase, IOpcUaClientChann
     }
 
     /// <inheritdoc />
+    [Uri(AllowHttp = false, AllowHttps = false, AllowFtp = false, AllowFile = false, AllowOpcTcp = true)]
     [JsonPropertyName("opcuaclient.CHANNEL_UA_SERVER_ENDPOINT_URL")]
     public string EndpointUrl { get; set; } = string.Empty;
 
