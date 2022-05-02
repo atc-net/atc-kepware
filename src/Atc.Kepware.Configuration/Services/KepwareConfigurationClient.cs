@@ -1,3 +1,4 @@
+// ReSharper disable ParameterTypeCanBeEnumerable.Local
 namespace Atc.Kepware.Configuration.Services;
 
 /// <summary>
@@ -52,9 +53,11 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     {
         ArgumentNullException.ThrowIfNull(channelName);
 
-        if (!TryIsValid(
+        if (!TryIsValidNames(
                 channelName,
-                Array.Empty<string>(),
+                deviceName: null,
+                tagGroupNameOrTagName: null,
+                tagGroupStructure: null,
                 out var errorMessage))
         {
             return await Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!));
@@ -88,10 +91,11 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         ArgumentNullException.ThrowIfNull(channelName);
         ArgumentNullException.ThrowIfNull(deviceName);
 
-        if (!TryIsValid(
+        if (!TryIsValidNames(
                 channelName,
                 deviceName,
-                Array.Empty<string>(),
+                tagGroupNameOrTagName: null,
+                tagGroupStructure: null,
                 out var errorMessage))
         {
             return await Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!));
@@ -129,7 +133,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         ArgumentNullException.ThrowIfNull(tagName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        if (!TryIsValid(
+        if (!TryIsValidNames(
                 channelName,
                 deviceName,
                 tagName,
@@ -174,7 +178,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         ArgumentNullException.ThrowIfNull(tagGroupName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        if (!TryIsValid(
+        if (!TryIsValidNames(
                 channelName,
                 deviceName,
                 tagGroupName,
@@ -223,9 +227,11 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     {
         ArgumentNullException.ThrowIfNull(channelName);
 
-        if (!TryIsValid(
+        if (!TryIsValidNames(
                 channelName,
-                Array.Empty<string>(),
+                deviceName: null,
+                tagGroupNameOrTagName: null,
+                tagGroupStructure: null,
                 out var errorMessage))
         {
             return await Task.FromResult(HttpClientRequestResultFactory<IList<DeviceBase>?>.CreateBadRequest(errorMessage!));
@@ -247,10 +253,11 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         ArgumentNullException.ThrowIfNull(channelName);
         ArgumentNullException.ThrowIfNull(deviceName);
 
-        if (!TryIsValid(
+        if (!TryIsValidNames(
                 channelName,
                 deviceName,
-                Array.Empty<string>(),
+                tagGroupNameOrTagName: null,
+                tagGroupStructure: null,
                 out var errorMessage))
         {
             return (await Task.FromResult(HttpClientRequestResultFactory<TagRoot>.CreateBadRequest(errorMessage!)))!;
@@ -349,9 +356,10 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         ArgumentNullException.ThrowIfNull(deviceName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        if (!TryIsValid(
+        if (!TryIsValidNames(
                 channelName,
                 deviceName,
+                tagGroupNameOrTagName: null,
                 tagGroupStructure,
                 out var errorMessage))
         {
@@ -385,9 +393,10 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         ArgumentNullException.ThrowIfNull(deviceName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        if (!TryIsValid(
+        if (!TryIsValidNames(
                 channelName,
                 deviceName,
+                tagGroupNameOrTagName: null,
                 tagGroupStructure,
                 out var errorMessage))
         {
@@ -414,9 +423,11 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     {
         ArgumentNullException.ThrowIfNull(channelName);
 
-        return !TryIsValid(
+        return !TryIsValidNames(
             channelName,
-            Array.Empty<string>(),
+            deviceName: null,
+            tagGroupNameOrTagName: null,
+            tagGroupStructure: null,
             out var errorMessage)
             ? Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!))
             : Delete($"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}", cancellationToken);
@@ -430,10 +441,11 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         ArgumentNullException.ThrowIfNull(channelName);
         ArgumentNullException.ThrowIfNull(deviceName);
 
-        return !TryIsValid(
+        return !TryIsValidNames(
             channelName,
             deviceName,
-            Array.Empty<string>(),
+            tagGroupNameOrTagName: null,
+            tagGroupStructure: null,
             out var errorMessage)
             ? Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!))
             : Delete(GetBasePathTemplate(channelName, deviceName), cancellationToken);
@@ -451,7 +463,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         ArgumentNullException.ThrowIfNull(tagName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        if (!TryIsValid(
+        if (!TryIsValidNames(
                 channelName,
                 deviceName,
                 tagName,
@@ -481,7 +493,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         ArgumentNullException.ThrowIfNull(tagGroupName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        if (!TryIsValid(
+        if (!TryIsValidNames(
                 channelName,
                 deviceName,
                 tagGroupName,
@@ -928,9 +940,11 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         }
     }
 
-    private bool TryIsValid(
+    private static bool TryIsValidNames(
         string channelName,
-        string[] tagGroupStructure,
+        string? deviceName,
+        string? tagGroupNameOrTagName,
+        string[]? tagGroupStructure,
         out string? errorMessage)
     {
         if (!KeyStringAttribute.TryIsValid(channelName, out var errorMessageChannel))
@@ -939,67 +953,32 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             return false;
         }
 
-        foreach (var tagGroupItem in tagGroupStructure)
-        {
-            if (KeyStringAttribute.TryIsValid(tagGroupItem, out var errorMessageTagGroupItem))
-            {
-                continue;
-            }
-
-            errorMessage = errorMessageTagGroupItem;
-            return false;
-        }
-
-        errorMessage = null;
-        return true;
-    }
-
-    private bool TryIsValid(
-        string channelName,
-        string deviceName,
-        string[] tagGroupStructure,
-        out string? errorMessage)
-    {
-        if (!TryIsValid(
-                channelName,
-                tagGroupStructure,
-                out string? errorMessageBase))
-        {
-            errorMessage = errorMessageBase;
-            return false;
-        }
-
-        if (!KeyStringAttribute.TryIsValid(deviceName, out var errorMessageDevice))
+        if (deviceName is not null &&
+            !KeyStringAttribute.TryIsValid(deviceName, out var errorMessageDevice))
         {
             errorMessage = errorMessageDevice;
             return false;
         }
 
-        errorMessage = null;
-        return true;
-    }
-
-    private bool TryIsValid(
-        string channelName,
-        string deviceName,
-        string tagGroupName,
-        string[] tagGroupStructure,
-        out string? errorMessage)
-    {
-        if (!TryIsValid(
-                channelName,
-                deviceName,
-                tagGroupStructure,
-                out string? errorMessageBase))
+        if (tagGroupNameOrTagName is not null &&
+            !KeyStringAttribute.TryIsValid(tagGroupNameOrTagName, out var errorMessageTag))
         {
-            errorMessage = errorMessageBase;
+            errorMessage = errorMessageTag;
             return false;
         }
 
-        if (!KeyStringAttribute.TryIsValid(tagGroupName, out var errorMessageTagGroup))
+        if (tagGroupStructure is not null)
         {
-            errorMessage = errorMessageTagGroup;
-            return false;
+            foreach (var tagGroupItem in tagGroupStructure)
+            {
+                if (KeyStringAttribute.TryIsValid(tagGroupItem, out var errorMessageTagGroupItem))
+                {
+                    continue;
+                }
+
+                errorMessage = errorMessageTagGroupItem;
+                return false;
+            }
         }
 
         errorMessage = null;
