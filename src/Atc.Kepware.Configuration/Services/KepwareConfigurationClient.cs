@@ -50,6 +50,16 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         string channelName,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(channelName);
+
+        if (!TryIsValid(
+                channelName,
+                Array.Empty<string>(),
+                out var errorMessage))
+        {
+            return await Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!));
+        }
+
         var response = await Get<KepwareContracts.ChannelBase>(
             $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}",
             cancellationToken,
@@ -75,6 +85,18 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         string deviceName,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(channelName);
+        ArgumentNullException.ThrowIfNull(deviceName);
+
+        if (!TryIsValid(
+                channelName,
+                deviceName,
+                Array.Empty<string>(),
+                out var errorMessage))
+        {
+            return await Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!));
+        }
+
         var response = await Get<KepwareContracts.DeviceBase>(
             GetBasePathTemplate(channelName, deviceName),
             cancellationToken,
@@ -102,7 +124,20 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         string[] tagGroupStructure,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(channelName);
+        ArgumentNullException.ThrowIfNull(deviceName);
+        ArgumentNullException.ThrowIfNull(tagName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
+
+        if (!TryIsValid(
+                channelName,
+                deviceName,
+                tagName,
+                tagGroupStructure,
+                out var errorMessage))
+        {
+            return await Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!));
+        }
 
         var basePathTemplate = GetBasePathTemplate(channelName, deviceName);
         var tagPathTemplate = $"{GetTagsPathFromTagGroupStructure(basePathTemplate, tagGroupStructure)}/{tagName}";
@@ -134,7 +169,20 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         string[] tagGroupStructure,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(channelName);
+        ArgumentNullException.ThrowIfNull(deviceName);
+        ArgumentNullException.ThrowIfNull(tagGroupName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
+
+        if (!TryIsValid(
+                channelName,
+                deviceName,
+                tagGroupName,
+                tagGroupStructure,
+                out var errorMessage))
+        {
+            return await Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!));
+        }
 
         var basePathTemplate = GetBasePathTemplate(channelName, deviceName);
         var tagGroupPathTemplate = $"{GetTagGroupPathFromTagGroupStructure(basePathTemplate, tagGroupStructure)}/{EndpointPathTemplateConstants.TagGroups}/{tagGroupName}";
@@ -173,6 +221,16 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         string channelName,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(channelName);
+
+        if (!TryIsValid(
+                channelName,
+                Array.Empty<string>(),
+                out var errorMessage))
+        {
+            return await Task.FromResult(HttpClientRequestResultFactory<IList<DeviceBase>?>.CreateBadRequest(errorMessage!));
+        }
+
         var response = await Get<IList<KepwareContracts.DeviceBase>>(
             $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}/{EndpointPathTemplateConstants.Devices}",
             cancellationToken);
@@ -186,6 +244,18 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         int maxDepth,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(channelName);
+        ArgumentNullException.ThrowIfNull(deviceName);
+
+        if (!TryIsValid(
+                channelName,
+                deviceName,
+                Array.Empty<string>(),
+                out var errorMessage))
+        {
+            return (await Task.FromResult(HttpClientRequestResultFactory<TagRoot>.CreateBadRequest(errorMessage!)))!;
+        }
+
         var result = new TagRoot(deviceName);
         var basePathTemplate = GetBasePathTemplate(channelName, deviceName);
         const int currentDepth = 1;
@@ -275,6 +345,18 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(channelName);
+        ArgumentNullException.ThrowIfNull(deviceName);
+        ArgumentNullException.ThrowIfNull(tagGroupStructure);
+
+        if (!TryIsValid(
+                channelName,
+                deviceName,
+                tagGroupStructure,
+                out var errorMessage))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!));
+        }
 
         if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
         {
@@ -299,6 +381,18 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(channelName);
+        ArgumentNullException.ThrowIfNull(deviceName);
+        ArgumentNullException.ThrowIfNull(tagGroupStructure);
+
+        if (!TryIsValid(
+                channelName,
+                deviceName,
+                tagGroupStructure,
+                out var errorMessage))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!));
+        }
 
         if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
         {
@@ -317,16 +411,106 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     public Task<HttpClientRequestResult<bool>> DeleteChannel(
         string channelName,
         CancellationToken cancellationToken)
-        => Delete(
-            $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}",
-            cancellationToken);
+    {
+        ArgumentNullException.ThrowIfNull(channelName);
+
+        return !TryIsValid(
+            channelName,
+            Array.Empty<string>(),
+            out var errorMessage)
+            ? Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!))
+            : Delete($"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}", cancellationToken);
+    }
 
     public Task<HttpClientRequestResult<bool>> DeleteDevice(
         string channelName,
         string deviceName,
         CancellationToken cancellationToken)
-        => Delete(
-            GetBasePathTemplate(channelName, deviceName),
+    {
+        ArgumentNullException.ThrowIfNull(channelName);
+        ArgumentNullException.ThrowIfNull(deviceName);
+
+        return !TryIsValid(
+            channelName,
+            deviceName,
+            Array.Empty<string>(),
+            out var errorMessage)
+            ? Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!))
+            : Delete(GetBasePathTemplate(channelName, deviceName), cancellationToken);
+    }
+
+    public Task<HttpClientRequestResult<bool>> DeleteTag(
+        string channelName,
+        string deviceName,
+        string tagName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(channelName);
+        ArgumentNullException.ThrowIfNull(deviceName);
+        ArgumentNullException.ThrowIfNull(tagName);
+        ArgumentNullException.ThrowIfNull(tagGroupStructure);
+
+        if (!TryIsValid(
+                channelName,
+                deviceName,
+                tagName,
+                tagGroupStructure,
+                out var errorMessage))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!));
+        }
+
+        return InvokeDeleteTag(
+            channelName,
+            deviceName,
+            tagName,
+            tagGroupStructure,
+            cancellationToken);
+    }
+
+    public Task<HttpClientRequestResult<bool>> DeleteTagGroup(
+        string channelName,
+        string deviceName,
+        string tagGroupName,
+        string[] tagGroupStructure,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(channelName);
+        ArgumentNullException.ThrowIfNull(deviceName);
+        ArgumentNullException.ThrowIfNull(tagGroupName);
+        ArgumentNullException.ThrowIfNull(tagGroupStructure);
+
+        if (!TryIsValid(
+                channelName,
+                deviceName,
+                tagGroupName,
+                tagGroupStructure,
+                out var errorMessage))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage!));
+        }
+
+        return InvokeDeleteTagGroup(
+            channelName,
+            deviceName,
+            tagGroupName,
+            tagGroupStructure,
+            cancellationToken);
+    }
+
+    private Task<HttpClientRequestResult<IList<KepwareContracts.Tag>?>> GetTagsResultForPathTemplate(
+        string pathTemplate,
+        CancellationToken cancellationToken)
+        => Get<IList<KepwareContracts.Tag>>(
+            $"{pathTemplate}/{EndpointPathTemplateConstants.Tags}",
+            cancellationToken);
+
+    private Task<HttpClientRequestResult<IList<KepwareContracts.TagGroup>?>> GetTagGroupResultForPathTemplate(
+        string pathTemplate,
+        CancellationToken cancellationToken)
+        => Get<IList<KepwareContracts.TagGroup>>(
+            $"{pathTemplate}/{EndpointPathTemplateConstants.TagGroups}",
             cancellationToken);
 
     private async Task<HttpClientRequestResult<IList<string>>> SearchTags(
@@ -413,259 +597,6 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         SearchInTagRoot(searchResults, channelName, deviceName, query, tagsResult.Data!);
         return new HttpClientRequestResult<IList<string>>(searchResults);
     }
-
-    private static void SearchInTagRoot(
-        ICollection<string> searchResults,
-        string channelName,
-        string deviceName,
-        string query,
-        TagRoot tagsResult)
-    {
-        foreach (var tag in tagsResult.Tags)
-        {
-            if (query.Contains('*', StringComparison.Ordinal))
-            {
-                SearchInTag(searchResults, channelName, deviceName, query, tag);
-            }
-            else if (tag.Name.Contains(query, StringComparison.OrdinalIgnoreCase))
-            {
-                searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
-            }
-        }
-
-        foreach (var tagGroup in tagsResult.TagGroups)
-        {
-            SearchInTagGroup(searchResults, channelName, deviceName, query, tagGroup.Name, tagGroup);
-        }
-    }
-
-    private static void SearchInTagGroup(
-        ICollection<string> searchResults,
-        string channelName,
-        string deviceName,
-        string query,
-        string tagGroupPath,
-        TagGroup tagsResult)
-    {
-        foreach (var tag in tagsResult.Tags)
-        {
-            if (query.Contains('*', StringComparison.Ordinal))
-            {
-                SearchInTag(searchResults, channelName, deviceName, query, tag);
-            }
-            else if (tag.Name.Contains(query, StringComparison.OrdinalIgnoreCase))
-            {
-                searchResults.Add($"{channelName}/{deviceName}/{tagGroupPath}/{tag.Name}");
-            }
-        }
-
-        foreach (var tagGroup in tagsResult.TagGroups)
-        {
-            SearchInTagGroup(searchResults, channelName, deviceName, query, $"{tagGroupPath}/{tagGroup.Name}", tagGroup);
-        }
-    }
-
-    private static void SearchInTag(
-        ICollection<string> searchResults,
-        string channelName,
-        string deviceName,
-        string query,
-        Tag tag)
-    {
-        if (query.StartsWith('*') &&
-            query.EndsWith('*'))
-        {
-            var queryNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
-            if (tag.Name.Contains(queryNoWildcard, StringComparison.OrdinalIgnoreCase))
-            {
-                searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
-            }
-        }
-        else if (query.StartsWith('*'))
-        {
-            var queryNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
-            if (tag.Name.StartsWith(queryNoWildcard, StringComparison.OrdinalIgnoreCase))
-            {
-                searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
-            }
-        }
-        else
-        {
-            var queryNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
-            if (tag.Name.EndsWith(queryNoWildcard, StringComparison.OrdinalIgnoreCase))
-            {
-                searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
-            }
-        }
-    }
-
-    public Task<HttpClientRequestResult<bool>> DeleteTag(
-        string channelName,
-        string deviceName,
-        string tagName,
-        string[] tagGroupStructure,
-        CancellationToken cancellationToken)
-    {
-        ArgumentNullException.ThrowIfNull(tagGroupStructure);
-
-        if (!KeyStringAttribute.TryIsValid(tagName, out var errorMessage))
-        {
-            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage));
-        }
-
-        return InvokeDeleteTag(
-            channelName,
-            deviceName,
-            tagName,
-            tagGroupStructure,
-            cancellationToken);
-    }
-
-    public Task<HttpClientRequestResult<bool>> DeleteTagGroup(
-        string channelName,
-        string deviceName,
-        string tagGroupName,
-        string[] tagGroupStructure,
-        CancellationToken cancellationToken)
-    {
-        ArgumentNullException.ThrowIfNull(tagGroupStructure);
-
-        if (!KeyStringAttribute.TryIsValid(tagGroupName, out var errorMessage))
-        {
-            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(errorMessage));
-        }
-
-        return InvokeDeleteTagGroup(
-            channelName,
-            deviceName,
-            tagGroupName,
-            tagGroupStructure,
-            cancellationToken);
-    }
-
-    private async Task IterateTagGroup(
-        TagGroup tagGroup,
-        string tagGroupPathTemplate,
-        int currentDepth,
-        int maxDepth,
-        CancellationToken cancellationToken)
-    {
-        if (maxDepth < currentDepth)
-        {
-            return;
-        }
-
-        tagGroupPathTemplate = $"{tagGroupPathTemplate}/{tagGroup.Name}";
-
-        // TODO: Optimize if tagGroup.TagCountInGroup > 0
-        var tagResult = await GetTagsResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
-        if (!tagResult.CommunicationSucceeded)
-        {
-            return;
-        }
-
-        if (tagResult.HasData &&
-            tagResult.Data!.Any())
-        {
-            foreach (var tag in tagResult.Data!.Adapt<List<Tag>>())
-            {
-                tagGroup.Tags.Add(tag);
-            }
-        }
-
-        // TODO: Optimize if tagGroup.TagCountInTree > 0
-        var tagGroupResult = await GetTagGroupResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
-
-        if (tagGroupResult.CommunicationSucceeded &&
-            tagGroupResult.HasData &&
-            tagGroupResult.Data!.Any())
-        {
-            foreach (var kepwareTagGroup in tagGroupResult.Data!)
-            {
-                var subTagGroup = kepwareTagGroup.Adapt<TagGroup>();
-
-                if (kepwareTagGroup.TagCountInTree > 0)
-                {
-                    await IterateTagGroup(
-                        subTagGroup,
-                        $"{tagGroupPathTemplate}/{EndpointPathTemplateConstants.TagGroups}",
-                        currentDepth + 1,
-                        maxDepth,
-                        cancellationToken);
-                }
-
-                tagGroup.TagGroups.Add(subTagGroup);
-            }
-        }
-    }
-
-    private static string GetBasePathTemplate(
-        string channelName,
-        string deviceName)
-        => $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}/{EndpointPathTemplateConstants.Devices}/{deviceName}";
-
-    private static string GetTagsPathFromTagGroupStructure(
-        string basePathTemplate,
-        string[] tagGroupStructure)
-    {
-        string tagPath;
-        switch (tagGroupStructure.Length)
-        {
-            case 0:
-                tagPath = $"{basePathTemplate}/{EndpointPathTemplateConstants.Tags}";
-                break;
-            case 1:
-                tagPath = $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{tagGroupStructure[0]}/{EndpointPathTemplateConstants.Tags}";
-                break;
-            default:
-            {
-                var intermediateGroupPath = string.Join($"/{EndpointPathTemplateConstants.TagGroups}/", tagGroupStructure);
-                tagPath = $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{intermediateGroupPath}/{EndpointPathTemplateConstants.Tags}";
-                break;
-            }
-        }
-
-        return tagPath;
-    }
-
-    private static string GetTagGroupPathFromTagGroupStructure(
-        string basePathTemplate,
-        string[] tagGroupStructure)
-    {
-        string tagPath;
-        switch (tagGroupStructure.Length)
-        {
-            case 0:
-                tagPath = basePathTemplate;
-                break;
-            case 1:
-                tagPath =
-                    $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{tagGroupStructure[0]}";
-                break;
-            default:
-            {
-                var intermediateGroupPath = string.Join($"/{EndpointPathTemplateConstants.TagGroups}/", tagGroupStructure);
-                tagPath = $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{intermediateGroupPath}";
-                break;
-            }
-        }
-
-        return tagPath;
-    }
-
-    private Task<HttpClientRequestResult<IList<KepwareContracts.Tag>?>> GetTagsResultForPathTemplate(
-        string pathTemplate,
-        CancellationToken cancellationToken)
-        => Get<IList<KepwareContracts.Tag>>(
-            $"{pathTemplate}/{EndpointPathTemplateConstants.Tags}",
-            cancellationToken);
-
-    private Task<HttpClientRequestResult<IList<KepwareContracts.TagGroup>?>> GetTagGroupResultForPathTemplate(
-        string pathTemplate,
-        CancellationToken cancellationToken)
-        => Get<IList<KepwareContracts.TagGroup>>(
-            $"{pathTemplate}/{EndpointPathTemplateConstants.TagGroups}",
-            cancellationToken);
 
     private async Task<HttpClientRequestResult<bool>> InvokeCreateTag(
         TagRequest request,
@@ -910,6 +841,280 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             LogDeleteFailure(pathTemplate, ex.Message);
             return new HttpClientRequestResult<bool>(ex);
         }
+    }
+
+    private static void SearchInTagRoot(
+        ICollection<string> searchResults,
+        string channelName,
+        string deviceName,
+        string query,
+        TagRoot tagsResult)
+    {
+        foreach (var tag in tagsResult.Tags)
+        {
+            if (query.Contains('*', StringComparison.Ordinal))
+            {
+                SearchInTag(searchResults, channelName, deviceName, query, tag);
+            }
+            else if (tag.Name.Contains(query, StringComparison.OrdinalIgnoreCase))
+            {
+                searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
+            }
+        }
+
+        foreach (var tagGroup in tagsResult.TagGroups)
+        {
+            SearchInTagGroup(searchResults, channelName, deviceName, query, tagGroup.Name, tagGroup);
+        }
+    }
+
+    private static void SearchInTagGroup(
+        ICollection<string> searchResults,
+        string channelName,
+        string deviceName,
+        string query,
+        string tagGroupPath,
+        TagGroup tagsResult)
+    {
+        foreach (var tag in tagsResult.Tags)
+        {
+            if (query.Contains('*', StringComparison.Ordinal))
+            {
+                SearchInTag(searchResults, channelName, deviceName, query, tag);
+            }
+            else if (tag.Name.Contains(query, StringComparison.OrdinalIgnoreCase))
+            {
+                searchResults.Add($"{channelName}/{deviceName}/{tagGroupPath}/{tag.Name}");
+            }
+        }
+
+        foreach (var tagGroup in tagsResult.TagGroups)
+        {
+            SearchInTagGroup(searchResults, channelName, deviceName, query, $"{tagGroupPath}/{tagGroup.Name}", tagGroup);
+        }
+    }
+
+    private static void SearchInTag(
+        ICollection<string> searchResults,
+        string channelName,
+        string deviceName,
+        string query,
+        Tag tag)
+    {
+        if (query.StartsWith('*') &&
+            query.EndsWith('*'))
+        {
+            var queryNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
+            if (tag.Name.Contains(queryNoWildcard, StringComparison.OrdinalIgnoreCase))
+            {
+                searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
+            }
+        }
+        else if (query.StartsWith('*'))
+        {
+            var queryNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
+            if (tag.Name.StartsWith(queryNoWildcard, StringComparison.OrdinalIgnoreCase))
+            {
+                searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
+            }
+        }
+        else
+        {
+            var queryNoWildcard = query.Replace("*", string.Empty, StringComparison.Ordinal);
+            if (tag.Name.EndsWith(queryNoWildcard, StringComparison.OrdinalIgnoreCase))
+            {
+                searchResults.Add($"{channelName}/{deviceName}/{tag.Name}");
+            }
+        }
+    }
+
+    private bool TryIsValid(
+        string channelName,
+        string[] tagGroupStructure,
+        out string? errorMessage)
+    {
+        if (!KeyStringAttribute.TryIsValid(channelName, out var errorMessageChannel))
+        {
+            errorMessage = errorMessageChannel;
+            return false;
+        }
+
+        foreach (var tagGroupItem in tagGroupStructure)
+        {
+            if (KeyStringAttribute.TryIsValid(tagGroupItem, out var errorMessageTagGroupItem))
+            {
+                continue;
+            }
+
+            errorMessage = errorMessageTagGroupItem;
+            return false;
+        }
+
+        errorMessage = null;
+        return true;
+    }
+
+    private bool TryIsValid(
+        string channelName,
+        string deviceName,
+        string[] tagGroupStructure,
+        out string? errorMessage)
+    {
+        if (!TryIsValid(
+                channelName,
+                tagGroupStructure,
+                out string? errorMessageBase))
+        {
+            errorMessage = errorMessageBase;
+            return false;
+        }
+
+        if (!KeyStringAttribute.TryIsValid(deviceName, out var errorMessageDevice))
+        {
+            errorMessage = errorMessageDevice;
+            return false;
+        }
+
+        errorMessage = null;
+        return true;
+    }
+
+    private bool TryIsValid(
+        string channelName,
+        string deviceName,
+        string tagGroupName,
+        string[] tagGroupStructure,
+        out string? errorMessage)
+    {
+        if (!TryIsValid(
+                channelName,
+                deviceName,
+                tagGroupStructure,
+                out string? errorMessageBase))
+        {
+            errorMessage = errorMessageBase;
+            return false;
+        }
+
+        if (!KeyStringAttribute.TryIsValid(tagGroupName, out var errorMessageTagGroup))
+        {
+            errorMessage = errorMessageTagGroup;
+            return false;
+        }
+
+        errorMessage = null;
+        return true;
+    }
+
+    private async Task IterateTagGroup(
+        TagGroup tagGroup,
+        string tagGroupPathTemplate,
+        int currentDepth,
+        int maxDepth,
+        CancellationToken cancellationToken)
+    {
+        if (maxDepth < currentDepth)
+        {
+            return;
+        }
+
+        tagGroupPathTemplate = $"{tagGroupPathTemplate}/{tagGroup.Name}";
+
+        // TODO: Optimize if tagGroup.TagCountInGroup > 0
+        var tagResult = await GetTagsResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
+        if (!tagResult.CommunicationSucceeded)
+        {
+            return;
+        }
+
+        if (tagResult.HasData &&
+            tagResult.Data!.Any())
+        {
+            foreach (var tag in tagResult.Data!.Adapt<List<Tag>>())
+            {
+                tagGroup.Tags.Add(tag);
+            }
+        }
+
+        // TODO: Optimize if tagGroup.TagCountInTree > 0
+        var tagGroupResult = await GetTagGroupResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
+
+        if (tagGroupResult.CommunicationSucceeded &&
+            tagGroupResult.HasData &&
+            tagGroupResult.Data!.Any())
+        {
+            foreach (var kepwareTagGroup in tagGroupResult.Data!)
+            {
+                var subTagGroup = kepwareTagGroup.Adapt<TagGroup>();
+
+                if (kepwareTagGroup.TagCountInTree > 0)
+                {
+                    await IterateTagGroup(
+                        subTagGroup,
+                        $"{tagGroupPathTemplate}/{EndpointPathTemplateConstants.TagGroups}",
+                        currentDepth + 1,
+                        maxDepth,
+                        cancellationToken);
+                }
+
+                tagGroup.TagGroups.Add(subTagGroup);
+            }
+        }
+    }
+
+    private static string GetBasePathTemplate(
+        string channelName,
+        string deviceName)
+        => $"{EndpointPathTemplateConstants.ProjectChannels}/{channelName}/{EndpointPathTemplateConstants.Devices}/{deviceName}";
+
+    private static string GetTagsPathFromTagGroupStructure(
+        string basePathTemplate,
+        string[] tagGroupStructure)
+    {
+        string tagPath;
+        switch (tagGroupStructure.Length)
+        {
+            case 0:
+                tagPath = $"{basePathTemplate}/{EndpointPathTemplateConstants.Tags}";
+                break;
+            case 1:
+                tagPath =
+                    $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{tagGroupStructure[0]}/{EndpointPathTemplateConstants.Tags}";
+                break;
+            default:
+            {
+                var intermediateGroupPath = string.Join($"/{EndpointPathTemplateConstants.TagGroups}/", tagGroupStructure);
+                tagPath = $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{intermediateGroupPath}/{EndpointPathTemplateConstants.Tags}";
+                break;
+            }
+        }
+
+        return tagPath;
+    }
+
+    private static string GetTagGroupPathFromTagGroupStructure(
+        string basePathTemplate,
+        string[] tagGroupStructure)
+    {
+        string tagPath;
+        switch (tagGroupStructure.Length)
+        {
+            case 0:
+                tagPath = basePathTemplate;
+                break;
+            case 1:
+                tagPath =
+                    $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{tagGroupStructure[0]}";
+                break;
+            default:
+            {
+                var intermediateGroupPath = string.Join($"/{EndpointPathTemplateConstants.TagGroups}/", tagGroupStructure);
+                tagPath = $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}/{intermediateGroupPath}";
+                break;
+            }
+        }
+
+        return tagPath;
     }
 
     public void Dispose()
