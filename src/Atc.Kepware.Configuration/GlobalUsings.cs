@@ -10,11 +10,12 @@ global using System.Text.Json.Serialization;
 global using Atc.Data.Models;
 global using Atc.Helpers;
 global using Atc.Kepware.Configuration.Contracts;
-global using Atc.Kepware.Configuration.Contracts.Drivers.EuroMap63;
-global using Atc.Kepware.Configuration.Contracts.Drivers.OpcUaClient;
-global using Atc.Kepware.Configuration.Contracts.Interfaces;
-global using Atc.Kepware.Configuration.Contracts.Interfaces.EuroMap63;
-global using Atc.Kepware.Configuration.Contracts.Interfaces.OpcUaClient;
+global using Atc.Kepware.Configuration.Contracts.Connectivity;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcUaClient;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcUaClient;
 global using Atc.Serialization;
 
 global using Mapster;

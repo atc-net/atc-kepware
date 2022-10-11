@@ -56,26 +56,50 @@ OPTIONS:
         --version    Display version
 
 COMMANDS:
+    connectivity
+    iot-gateway
+```
+
+#### Command <span style="color:yellow">connectivity</span>
+
+```powershell
+atc-kepware-configuration connectivity --help
+
+
+USAGE:
+    atc-kepware-configuration.exe connectivity [OPTIONS] <COMMAND>
+
+EXAMPLES:
+    atc-kepware-configuration.exe connectivity channels get all -s [server-url]
+    atc-kepware-configuration.exe connectivity channels get euromap63 -s [server-url] --name [channelName]
+    atc-kepware-configuration.exe connectivity channels get opcuaclient -s [server-url] --name [channelName]
+    atc-kepware-configuration.exe connectivity channels create euromap63 -s [server-url] --name [channelName] --description [description]
+    atc-kepware-configuration.exe connectivity channels create opcuaclient -s [server-url] --name [channelName] --description [description]
+
+OPTIONS:
+    -h, --help    Prints help information
+
+COMMANDS:
     channels    Commands for channels
     devices     Commands for devices
     tags        Commands for tags
 ```
 
-#### Command <span style="color:yellow">channels</span>
+#### Command <span style="color:yellow">connectivity channels</span>
 
 ```powershell
-atc-kepware-configuration channels --help
+atc-kepware-configuration connectivity channels --help
 
 
 USAGE:
-    atc-kepware-configuration.exe channels [OPTIONS] <COMMAND>
+    atc-kepware-configuration.exe connectivity channels [OPTIONS] <COMMAND>
 
 EXAMPLES:
-    atc-kepware-configuration.exe channels get all -s [server-url] 
-    atc-kepware-configuration.exe channels get euromap63 -s [server-url] --name [channelName]
-    atc-kepware-configuration.exe channels get opcuaclient -s [server-url] --name [channelName]
-    atc-kepware-configuration.exe channels create euromap63 -s [server-url] --name [channelName] --description [description]
-    atc-kepware-configuration.exe channels create opcuaclient -s [server-url] --name [channelName] --description [description]
+    atc-kepware-configuration.exe connectivity channels get all -s [server-url]
+    atc-kepware-configuration.exe connectivity channels get euromap63 -s [server-url] --name [channelName]
+    atc-kepware-configuration.exe connectivity channels get opcuaclient -s [server-url] --name [channelName]
+    atc-kepware-configuration.exe connectivity channels create euromap63 -s [server-url] --name [channelName] --description [description]
+    atc-kepware-configuration.exe connectivity channels create opcuaclient -s [server-url] --name [channelName] --description [description]
 
 OPTIONS:
     -h, --help    Prints help information
@@ -86,22 +110,22 @@ COMMANDS:
     delete    Delete channel
 ```
 
-#### Command <span style="color:yellow">devices</span>
+#### Command <span style="color:yellow">connectivity devices</span>
 
 ```powershell
-atc-kepware-configuration devices --help
+atc-kepware-configuration connectivity devices --help
 
 
 USAGE:
-    atc-kepware-configuration.exe devices [OPTIONS] <COMMAND>
+    atc-kepware-configuration.exe connectivity devices [OPTIONS] <COMMAND>
 
 EXAMPLES:
-    atc-kepware-configuration.exe devices get all -s [server-url] --channel-name [channelName]
-    atc-kepware-configuration.exe devices get euromap63 -s [server-url] --channel-name [channelName] --device-name [deviceName]
-    atc-kepware-configuration.exe devices get opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]
-    atc-kepware-configuration.exe devices create euromap63 -s [server-url] --channel-name [channelName] --device-name [deviceName]
+    atc-kepware-configuration.exe connectivity devices get all -s [server-url] --channel-name [channelName]
+    atc-kepware-configuration.exe connectivity devices get euromap63 -s [server-url] --channel-name [channelName] --device-name [deviceName]
+    atc-kepware-configuration.exe connectivity devices get opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]
+    atc-kepware-configuration.exe connectivity devices create euromap63 -s [server-url] --channel-name [channelName] --device-name [deviceName]
 --description [description] --session-file-path [filePath]
-    atc-kepware-configuration.exe devices create opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]
+    atc-kepware-configuration.exe connectivity devices create opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]
 --description [description]
 
 OPTIONS:
@@ -113,21 +137,21 @@ COMMANDS:
     delete    Delete device from channel
 ```
 
-#### Command <span style="color:yellow">tags</span>
+#### Command <span style="color:yellow">connectivity tags</span>
 
 ```powershell
-atc-kepware-configuration tags --help
+atc-kepware-configuration connectivity tags --help
 
 
 USAGE:
-    atc-kepware-configuration.exe tags [OPTIONS] <COMMAND>
+    atc-kepware-configuration.exe connectivity tags [OPTIONS] <COMMAND>
 
 EXAMPLES:
-    atc-kepware-configuration.exe tags search -s [server-url] --search MyTag
-    atc-kepware-configuration.exe tags search -s [server-url] --search *Tag
-    atc-kepware-configuration.exe tags search -s [server-url] --search My*
-    atc-kepware-configuration.exe tags search -s [server-url] --search *yt*
-    atc-kepware-configuration.exe tags create tag -s [server-url] --channel-name [channelName] --device-name [deviceName] --name [tagName]
+    atc-kepware-configuration.exe connectivity tags search -s [server-url] --search MyTag
+    atc-kepware-configuration.exe connectivity tags search -s [server-url] --search *Tag
+    atc-kepware-configuration.exe connectivity tags search -s [server-url] --search My*
+    atc-kepware-configuration.exe connectivity tags search -s [server-url] --search *yt*
+    atc-kepware-configuration.exe connectivity tags create tag -s [server-url] --channel-name [channelName] --device-name [deviceName] --name [tagName]
 --address [tagAddress] --scan-rate [scanRate] --data-type [dataType] --client-access [clientAccess] --description [description]
 
 OPTIONS:
