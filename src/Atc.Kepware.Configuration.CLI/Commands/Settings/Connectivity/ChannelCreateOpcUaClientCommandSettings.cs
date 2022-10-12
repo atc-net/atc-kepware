@@ -68,8 +68,8 @@ public class ChannelCreateOpcUaClientCommandSettings : ChannelCreateCommandBaseS
         if (ServerSecurityPolicy is not null &&
             ServerSecurityPolicy.IsSet &&
             ServerSecurityPolicy.Value != OpcUaServerSecurityPolicyType.None &&
-            (UserName is not null && UserName.IsSet && Password is not null && !Password.IsSet ||
-             UserName is not null && !UserName.IsSet && Password is not null && Password.IsSet))
+            ((UserName is not null && UserName.IsSet && Password is not null && !Password.IsSet) ||
+             (UserName is not null && !UserName.IsSet && Password is not null && Password.IsSet)))
         {
             return ValidationResult.Error("Both username and password must be set when ServerSecurityPolicy is in effect.");
         }

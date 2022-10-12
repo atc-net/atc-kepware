@@ -8,7 +8,7 @@ public class TagGroupCreateCommandSettings : ChannelAndDeviceCommandBaseSettings
 
     [CommandOption("--description")]
     [Description("Tag Group Description")]
-    public string Description { get; set; } = string.Empty;
+    public string Description { get; init; } = string.Empty;
 
     [CommandOption("--tag-group")]
     [Description("Tag Groups indicating tree structure.")]

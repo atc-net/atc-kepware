@@ -15,7 +15,7 @@ public sealed partial class KepwareConfigurationClient
     {
         ArgumentNullException.ThrowIfNull(channelName);
 
-        if (!TryIsValidNames(
+        if (!IsValidConnectivityName(
                 channelName,
                 deviceName: null,
                 tagGroupNameOrTagName: null,
@@ -53,7 +53,7 @@ public sealed partial class KepwareConfigurationClient
         ArgumentNullException.ThrowIfNull(channelName);
         ArgumentNullException.ThrowIfNull(deviceName);
 
-        if (!TryIsValidNames(
+        if (!IsValidConnectivityName(
                 channelName,
                 deviceName,
                 tagGroupNameOrTagName: null,
@@ -95,7 +95,7 @@ public sealed partial class KepwareConfigurationClient
         ArgumentNullException.ThrowIfNull(tagName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        if (!TryIsValidNames(
+        if (!IsValidConnectivityName(
                 channelName,
                 deviceName,
                 tagName,
@@ -140,7 +140,7 @@ public sealed partial class KepwareConfigurationClient
         ArgumentNullException.ThrowIfNull(tagGroupName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        if (!TryIsValidNames(
+        if (!IsValidConnectivityName(
                 channelName,
                 deviceName,
                 tagGroupName,
@@ -189,7 +189,7 @@ public sealed partial class KepwareConfigurationClient
     {
         ArgumentNullException.ThrowIfNull(channelName);
 
-        if (!TryIsValidNames(
+        if (!IsValidConnectivityName(
                 channelName,
                 deviceName: null,
                 tagGroupNameOrTagName: null,
@@ -215,7 +215,7 @@ public sealed partial class KepwareConfigurationClient
         ArgumentNullException.ThrowIfNull(channelName);
         ArgumentNullException.ThrowIfNull(deviceName);
 
-        if (!TryIsValidNames(
+        if (!IsValidConnectivityName(
                 channelName,
                 deviceName,
                 tagGroupNameOrTagName: null,
@@ -318,7 +318,7 @@ public sealed partial class KepwareConfigurationClient
         ArgumentNullException.ThrowIfNull(deviceName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        if (!TryIsValidNames(
+        if (!IsValidConnectivityName(
                 channelName,
                 deviceName,
                 tagGroupNameOrTagName: null,
@@ -355,7 +355,7 @@ public sealed partial class KepwareConfigurationClient
         ArgumentNullException.ThrowIfNull(deviceName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        if (!TryIsValidNames(
+        if (!IsValidConnectivityName(
                 channelName,
                 deviceName,
                 tagGroupNameOrTagName: null,
@@ -385,7 +385,7 @@ public sealed partial class KepwareConfigurationClient
     {
         ArgumentNullException.ThrowIfNull(channelName);
 
-        return !TryIsValidNames(
+        return !IsValidConnectivityName(
             channelName,
             deviceName: null,
             tagGroupNameOrTagName: null,
@@ -403,7 +403,7 @@ public sealed partial class KepwareConfigurationClient
         ArgumentNullException.ThrowIfNull(channelName);
         ArgumentNullException.ThrowIfNull(deviceName);
 
-        return !TryIsValidNames(
+        return !IsValidConnectivityName(
             channelName,
             deviceName,
             tagGroupNameOrTagName: null,
@@ -425,7 +425,7 @@ public sealed partial class KepwareConfigurationClient
         ArgumentNullException.ThrowIfNull(tagName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        if (!TryIsValidNames(
+        if (!IsValidConnectivityName(
                 channelName,
                 deviceName,
                 tagName,
@@ -455,7 +455,7 @@ public sealed partial class KepwareConfigurationClient
         ArgumentNullException.ThrowIfNull(tagGroupName);
         ArgumentNullException.ThrowIfNull(tagGroupStructure);
 
-        if (!TryIsValidNames(
+        if (!IsValidConnectivityName(
                 channelName,
                 deviceName,
                 tagGroupName,
@@ -764,7 +764,7 @@ public sealed partial class KepwareConfigurationClient
         }
     }
 
-    private static bool TryIsValidNames(
+    private static bool IsValidConnectivityName(
         string channelName,
         string? deviceName,
         string? tagGroupNameOrTagName,

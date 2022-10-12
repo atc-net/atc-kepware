@@ -9,6 +9,7 @@ public static class CommandAppExtensions
         app.Configure(config =>
         {
             config.AddBranch("connectivity", ConfigureConnectivityCommands());
+            config.AddBranch("iot-gateway", ConfigureIotGatewayCommands());
         });
     }
 
@@ -165,5 +166,38 @@ public static class CommandAppExtensions
             create.AddCommand<TagsDeleteTagGroupCommand>("taggroup")
                 .WithDescription("Deletes a tag group (if exists).")
                 .WithExample(new[] { "connectivity tags delete taggroup -s [server-url] --name [tagGroupName]" });
+        });
+
+    private static Action<IConfigurator<CommandSettings>> ConfigureIotGatewayCommands()
+        => node =>
+        {
+            node.AddBranch("iot-agent", ConfigureIotAgentCommands());
+        };
+
+    private static Action<IConfigurator<CommandSettings>> ConfigureIotAgentCommands()
+        => node =>
+        {
+            node.SetDescription("Commands for iot agents");
+
+            ConfigureIotAgentCreateCommands(node);
+        };
+
+    private static void ConfigureIotAgentCreateCommands(
+        IConfigurator<CommandSettings> node)
+        => node.AddBranch("create", create =>
+        {
+            create.SetDescription("Operations related to creating iot agents.");
+
+            create.AddCommand<IotAgentCreateMqttClientCommand>("mqtt-client")
+                .WithDescription("Creates a mqtt iot agent (if not exists).")
+                .WithExample(new[] { "iot-gateway iot-agent create mqtt-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]" });
+
+            create.AddCommand<IotAgentCreateRestClientCommand>("rest-client")
+                .WithDescription("Creates a rest-client iot agent (if not exists).")
+                .WithExample(new[] { "iot-gateway iot-agent create rest-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]" });
+
+            create.AddCommand<IotAgentCreateRestServerCommand>("rest-server")
+                .WithDescription("Creates a rest-server iot agent (if not exists).")
+                .WithExample(new[] { "iot-gateway iot-agent create rest-server -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]" });
         });
 }

@@ -504,6 +504,8 @@ dotnet_diagnostic.S1135.severity = suggestion       # https://github.com/atc-net
 ##########################################
 [*.cs]
 
+dotnet_diagnostic.SA1615.severity = none            # Element return value should be documented
+
 dotnet_diagnostic.CA1056.severity = none            # URI properties should not be strings
 dotnet_diagnostic.CA1812.severity = none            # Internal class that is apparently never instantiated.
 dotnet_diagnostic.CA2007.severity = none            # Consider calling ConfigureAwait on the awaited task

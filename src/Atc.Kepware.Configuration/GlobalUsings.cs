@@ -16,6 +16,8 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcUaClien
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcUaClient;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.IotGateway;
+global using Atc.Kepware.Configuration.Contracts.IotGateway;
 global using Atc.Serialization;
 
 global using Mapster;

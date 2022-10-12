@@ -6,3 +6,4 @@ global using System.Net;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcUaClient;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.IotGateway;

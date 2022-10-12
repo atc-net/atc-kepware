@@ -1,10 +1,14 @@
 namespace Atc.Kepware.Configuration.Services;
 
-public interface IKepwareConfigurationClient
+/// <summary>
+/// IKepwareConfigurationClient - Handles connectivity calls.
+/// </summary>
+[SuppressMessage("Design", "MA0048:File name must match type name", Justification = "OK - By Design")]
+public partial interface IKepwareConfigurationClient
 {
     Task<HttpClientRequestResult<bool>> IsChannelDefined(
-        string channelName,
-        CancellationToken cancellationToken);
+    string channelName,
+    CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<bool>> IsDeviceDefined(
         string channelName,

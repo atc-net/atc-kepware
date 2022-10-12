@@ -8,11 +8,11 @@ public class TagCreateCommandSettings : ChannelAndDeviceCommandBaseSettings
 
     [CommandOption("--address <ADDRESS>")]
     [Description("The tag address")]
-    public string Address { get; set; } = string.Empty;
+    public string Address { get; init; } = string.Empty;
 
     [CommandOption("--scan-rate <SCAN-RATE>")]
     [Description("Specifies the poll interval, in milliseconds, for this tag.")]
-    public int ScanRate { get; set; }
+    public int ScanRate { get; init; }
 
     [CommandOption("--data-type [DATA-TYPE]")]
     [TagDataTypeDescription]
@@ -24,7 +24,7 @@ public class TagCreateCommandSettings : ChannelAndDeviceCommandBaseSettings
 
     [CommandOption("--description")]
     [Description("Tag Description")]
-    public string Description { get; set; } = string.Empty;
+    public string Description { get; init; } = string.Empty;
 
     [CommandOption("--tag-group")]
     [Description("Tag Groups indicating tree structure.")]

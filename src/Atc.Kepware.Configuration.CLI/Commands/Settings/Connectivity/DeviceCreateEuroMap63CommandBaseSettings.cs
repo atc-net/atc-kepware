@@ -4,7 +4,7 @@ public class DeviceCreateEuroMap63CommandBaseSettings : DeviceCreateCommandBaseS
 {
     [CommandOption("--session-file-path <SESSION-FILE-PATH>")]
     [Description("The path to the session file directory")]
-    public string SessionFilePath { get; set; } = string.Empty;
+    public string SessionFilePath { get; init; } = string.Empty;
 
     public override ValidationResult Validate()
     {
