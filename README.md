@@ -56,26 +56,50 @@ OPTIONS:
         --version    Display version
 
 COMMANDS:
+    connectivity
+    iot-gateway
+```
+
+#### Command <span style="color:yellow">connectivity</span>
+
+```powershell
+atc-kepware-configuration connectivity --help
+
+
+USAGE:
+    atc-kepware-configuration.exe connectivity [OPTIONS] <COMMAND>
+
+EXAMPLES:
+    atc-kepware-configuration.exe connectivity channels get all -s [server-url]
+    atc-kepware-configuration.exe connectivity channels get euromap63 -s [server-url] --name [channelName]
+    atc-kepware-configuration.exe connectivity channels get opcuaclient -s [server-url] --name [channelName]
+    atc-kepware-configuration.exe connectivity channels create euromap63 -s [server-url] --name [channelName] --description [description]
+    atc-kepware-configuration.exe connectivity channels create opcuaclient -s [server-url] --name [channelName] --description [description]
+
+OPTIONS:
+    -h, --help    Prints help information
+
+COMMANDS:
     channels    Commands for channels
     devices     Commands for devices
     tags        Commands for tags
 ```
 
-#### Command <span style="color:yellow">channels</span>
+#### Command <span style="color:yellow">connectivity channels</span>
 
 ```powershell
-atc-kepware-configuration channels --help
+atc-kepware-configuration connectivity channels --help
 
 
 USAGE:
-    atc-kepware-configuration.exe channels [OPTIONS] <COMMAND>
+    atc-kepware-configuration.exe connectivity channels [OPTIONS] <COMMAND>
 
 EXAMPLES:
-    atc-kepware-configuration.exe channels get all -s [server-url] 
-    atc-kepware-configuration.exe channels get euromap63 -s [server-url] --name [channelName]
-    atc-kepware-configuration.exe channels get opcuaclient -s [server-url] --name [channelName]
-    atc-kepware-configuration.exe channels create euromap63 -s [server-url] --name [channelName] --description [description]
-    atc-kepware-configuration.exe channels create opcuaclient -s [server-url] --name [channelName] --description [description]
+    atc-kepware-configuration.exe connectivity channels get all -s [server-url]
+    atc-kepware-configuration.exe connectivity channels get euromap63 -s [server-url] --name [channelName]
+    atc-kepware-configuration.exe connectivity channels get opcuaclient -s [server-url] --name [channelName]
+    atc-kepware-configuration.exe connectivity channels create euromap63 -s [server-url] --name [channelName] --description [description]
+    atc-kepware-configuration.exe connectivity channels create opcuaclient -s [server-url] --name [channelName] --description [description]
 
 OPTIONS:
     -h, --help    Prints help information
@@ -86,22 +110,22 @@ COMMANDS:
     delete    Delete channel
 ```
 
-#### Command <span style="color:yellow">devices</span>
+#### Command <span style="color:yellow">connectivity devices</span>
 
 ```powershell
-atc-kepware-configuration devices --help
+atc-kepware-configuration connectivity devices --help
 
 
 USAGE:
-    atc-kepware-configuration.exe devices [OPTIONS] <COMMAND>
+    atc-kepware-configuration.exe connectivity devices [OPTIONS] <COMMAND>
 
 EXAMPLES:
-    atc-kepware-configuration.exe devices get all -s [server-url] --channel-name [channelName]
-    atc-kepware-configuration.exe devices get euromap63 -s [server-url] --channel-name [channelName] --device-name [deviceName]
-    atc-kepware-configuration.exe devices get opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]
-    atc-kepware-configuration.exe devices create euromap63 -s [server-url] --channel-name [channelName] --device-name [deviceName]
+    atc-kepware-configuration.exe connectivity devices get all -s [server-url] --channel-name [channelName]
+    atc-kepware-configuration.exe connectivity devices get euromap63 -s [server-url] --channel-name [channelName] --device-name [deviceName]
+    atc-kepware-configuration.exe connectivity devices get opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]
+    atc-kepware-configuration.exe connectivity devices create euromap63 -s [server-url] --channel-name [channelName] --device-name [deviceName]
 --description [description] --session-file-path [filePath]
-    atc-kepware-configuration.exe devices create opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]
+    atc-kepware-configuration.exe connectivity devices create opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]
 --description [description]
 
 OPTIONS:
@@ -113,21 +137,21 @@ COMMANDS:
     delete    Delete device from channel
 ```
 
-#### Command <span style="color:yellow">tags</span>
+#### Command <span style="color:yellow">connectivity tags</span>
 
 ```powershell
-atc-kepware-configuration tags --help
+atc-kepware-configuration connectivity tags --help
 
 
 USAGE:
-    atc-kepware-configuration.exe tags [OPTIONS] <COMMAND>
+    atc-kepware-configuration.exe connectivity tags [OPTIONS] <COMMAND>
 
 EXAMPLES:
-    atc-kepware-configuration.exe tags search -s [server-url] --search MyTag
-    atc-kepware-configuration.exe tags search -s [server-url] --search *Tag
-    atc-kepware-configuration.exe tags search -s [server-url] --search My*
-    atc-kepware-configuration.exe tags search -s [server-url] --search *yt*
-    atc-kepware-configuration.exe tags create tag -s [server-url] --channel-name [channelName] --device-name [deviceName] --name [tagName]
+    atc-kepware-configuration.exe connectivity tags search -s [server-url] --search MyTag
+    atc-kepware-configuration.exe connectivity tags search -s [server-url] --search *Tag
+    atc-kepware-configuration.exe connectivity tags search -s [server-url] --search My*
+    atc-kepware-configuration.exe connectivity tags search -s [server-url] --search *yt*
+    atc-kepware-configuration.exe connectivity tags create tag -s [server-url] --channel-name [channelName] --device-name [deviceName] --name [tagName]
 --address [tagAddress] --scan-rate [scanRate] --data-type [dataType] --client-access [clientAccess] --description [description]
 
 OPTIONS:
@@ -138,6 +162,106 @@ COMMANDS:
     create    Operations related to creating tags and tag groups
     delete    Operations related to deleting tags and tag groups
     search    Search tags
+```
+
+#### Command <span style="color:yellow">iot-gateway</span>
+
+```powershell
+atc-kepware-configuration iot-gateway --help
+
+
+USAGE:
+    atc-kepware-configuration.exe iot-gateway [OPTIONS] <COMMAND>
+
+EXAMPLES:
+    atc-kepware-configuration.exe iot-gateway iot-agent create mqtt-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent create rest-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent create rest-server -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+
+OPTIONS:
+    -h, --help    Prints help information
+
+COMMANDS:
+    iot-agent   Commands for iot agents
+```
+
+#### Command <span style="color:yellow">iot-gateway iot-agent</span>
+
+```powershell
+atc-kepware-configuration iot-gateway iot-agent --help
+
+
+USAGE:
+    atc-kepware-configuration.exe iot-gateway iot-agent [OPTIONS] <COMMAND>
+
+EXAMPLES:
+    atc-kepware-configuration.exe iot-gateway iot-agent create mqtt-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent create rest-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent create rest-server -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+
+OPTIONS:
+    -h, --help    Prints help information
+
+COMMANDS:
+    create   Operations related to creating iot agents
+```
+
+#### Command <span style="color:yellow">iot-gateway iot-agent create</span>
+
+```powershell
+atc-kepware-configuration iot-gateway iot-agent create --help
+
+
+USAGE:
+    atc-kepware-configuration.exe iot-gateway iot-agent create [OPTIONS] <COMMAND>
+
+EXAMPLES:
+    atc-kepware-configuration.exe iot-gateway iot-agent create mqtt-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent create rest-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent create rest-server -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+
+OPTIONS:
+    -h, --help    Prints help information
+
+COMMANDS:
+    mqtt-client    Creates a mqtt iot agent (if not exists)
+    rest-client    Creates a rest-client iot agent (if not exists)
+    rest-server    Creates a rest-server iot agent (if not exists)
+```
+
+#### Command <span style="color:yellow">iot-gateway iot-agent create rest-client</span>
+
+```powershell
+atc-kepware-configuration iot-gateway iot-agent create rest-client --help
+
+
+USAGE:
+    atc-kepware-configuration.exe iot-gateway iot-agent create rest-client [OPTIONS] <COMMAND>
+
+EXAMPLES:
+     atc-kepware-configuration.exe iot-gateway iot-agent create rest-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+
+OPTIONS:
+    -h, --help                                               Prints help information
+    -v, --verbose                                            Use verbose for more debug/trace information
+    -s, --server-url <SERVER-URL>                            Server Url for Kepserver configuration endpoint
+    -u, --username [USERNAME]                                UserName for Kepware server configuration endpoint
+    -p, --password [PASSWORD]                                Password for Kepware server configuration endpoint
+    -n, --name <NAME>                                        Requested Name
+        --description [DESCRIPTION]                          Requested Description
+        --ignore-quality-changes                             Indicates whether changes in quality should be ignored and not passed on
+        --url <URL>                                          The URl of the endpoint to send data to
+        --publish-http-method <PUBLISH-HTTP-METHOD>          Sets the HttpMethod for Publishing. Valid values are: Post (default), Put
+        --rate <RATE>                                        Specifies the frequency, in milliseconds, at which the agent pushes data to the endpoint
+        --publish-format <PUBLISH-FORMAT>                    Sets the format type for Publishing. Valid values are: Narrow (default), Wide
+        --max-events-per-publish                             The number of tag events the gateway packages in a single transmission when using narrow format
+        --transaction-timeout <TRANSACTION-TIMEOUT>          Defines the maximum amount of time, in seconds, allowed for a transaction to run
+        --send-initial-update                                Indicates if an initial update should be sent out on each tag when the Iot Agent starts up
+        --http-headers <KEY=VALUE>                           The headers to send to url on each connection
+        --publish-message-format <PUBLISH-MESSAGE-FORMAT>    Specifies how messages should be formatted. Valid values are: Standard, Advanced (default)
+        --publish-media-type [PUBLISH-MEDIA-TYPE]            Sets the media type for Publishing. Only valid when PublishMessageFormat is set to (Advanced). Valid values are: Json (default), Xml,
+                                                             XhtmlXml, TextPlain, TextHtml
+
 ```
 
 ## How to contribute
