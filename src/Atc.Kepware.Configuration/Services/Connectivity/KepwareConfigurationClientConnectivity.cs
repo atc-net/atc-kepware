@@ -180,7 +180,7 @@ public sealed partial class KepwareConfigurationClient
             EndpointPathTemplateConstants.Channels,
             cancellationToken);
 
-        return response.Adapt<HttpClientRequestResult<IList<Contracts.Connectivity.ChannelBase>?>>();
+        return response.Adapt<HttpClientRequestResult<IList<ChannelBase>?>>();
     }
 
     public async Task<HttpClientRequestResult<IList<DeviceBase>?>> GetDevicesByChannelName(
@@ -196,14 +196,14 @@ public sealed partial class KepwareConfigurationClient
                 tagGroupStructure: null,
                 out var errorMessage))
         {
-            return await Task.FromResult(HttpClientRequestResultFactory<IList<Contracts.Connectivity.DeviceBase>?>.CreateBadRequest(errorMessage!));
+            return await Task.FromResult(HttpClientRequestResultFactory<IList<DeviceBase>?>.CreateBadRequest(errorMessage!));
         }
 
         var response = await Get<IList<KepwareContracts.Connectivity.DeviceBase>>(
             $"{EndpointPathTemplateConstants.Channels}/{channelName}/{EndpointPathTemplateConstants.Devices}",
             cancellationToken);
 
-        return response.Adapt<HttpClientRequestResult<IList<Contracts.Connectivity.DeviceBase>?>>();
+        return response.Adapt<HttpClientRequestResult<IList<DeviceBase>?>>();
     }
 
     public async Task<HttpClientRequestResult<TagRoot>> GetTags(
@@ -222,10 +222,10 @@ public sealed partial class KepwareConfigurationClient
                 tagGroupStructure: null,
                 out var errorMessage))
         {
-            return (await Task.FromResult(HttpClientRequestResultFactory<Contracts.Connectivity.TagRoot>.CreateBadRequest(errorMessage!)))!;
+            return (await Task.FromResult(HttpClientRequestResultFactory<TagRoot>.CreateBadRequest(errorMessage!)))!;
         }
 
-        var result = new Contracts.Connectivity.TagRoot(deviceName);
+        var result = new TagRoot(deviceName);
         var basePathTemplate = GetBasePathTemplate(channelName, deviceName);
         const int currentDepth = 1;
 
@@ -235,7 +235,7 @@ public sealed partial class KepwareConfigurationClient
             if (tagResult.HasData &&
                 tagResult.Data!.Any())
             {
-                foreach (var tag in tagResult.Data!.Adapt<List<Contracts.Connectivity.Tag>>())
+                foreach (var tag in tagResult.Data!.Adapt<List<Tag>>())
                 {
                     result.Tags.Add(tag);
                 }
@@ -249,7 +249,7 @@ public sealed partial class KepwareConfigurationClient
             {
                 foreach (var kepwareTagGroup in tagGroupResult.Data!)
                 {
-                    var tagGroup = kepwareTagGroup.Adapt<Contracts.Connectivity.TagGroup>();
+                    var tagGroup = kepwareTagGroup.Adapt<TagGroup>();
 
                     if (maxDepth >= currentDepth && kepwareTagGroup.TagCountInTree > 0)
                     {
@@ -267,10 +267,10 @@ public sealed partial class KepwareConfigurationClient
         }
         else if (tagResult.StatusCode != HttpStatusCode.OK)
         {
-            return new HttpClientRequestResult<Contracts.Connectivity.TagRoot>(tagResult.StatusCode);
+            return new HttpClientRequestResult<TagRoot>(tagResult.StatusCode);
         }
 
-        return new HttpClientRequestResult<Contracts.Connectivity.TagRoot>(result);
+        return new HttpClientRequestResult<TagRoot>(result);
     }
 
     public async Task<HttpClientRequestResult<IList<string>>> SearchTags(
@@ -638,7 +638,7 @@ public sealed partial class KepwareConfigurationClient
                 continue;
             }
 
-            var request = new Contracts.Connectivity.TagGroupRequest { Name = tagGroup };
+            var request = new TagGroupRequest { Name = tagGroup };
             var requestResult = await CreateTagGroup(request, channelName, deviceName, testTagGroupStructure.ToArray(), ensureTagGroupStructure: false, cancellationToken);
             if (!requestResult.CommunicationSucceeded || requestResult.HasException)
             {
@@ -833,7 +833,7 @@ public sealed partial class KepwareConfigurationClient
         if (tagResult.HasData &&
             tagResult.Data!.Any())
         {
-            foreach (var tag in tagResult.Data!.Adapt<List<Contracts.Connectivity.Tag>>())
+            foreach (var tag in tagResult.Data!.Adapt<List<Tag>>())
             {
                 tagGroup.Tags.Add(tag);
             }
@@ -848,7 +848,7 @@ public sealed partial class KepwareConfigurationClient
         {
             foreach (var kepwareTagGroup in tagGroupResult.Data!)
             {
-                var subTagGroup = kepwareTagGroup.Adapt<Contracts.Connectivity.TagGroup>();
+                var subTagGroup = kepwareTagGroup.Adapt<TagGroup>();
 
                 if (kepwareTagGroup.TagCountInTree > 0)
                 {
