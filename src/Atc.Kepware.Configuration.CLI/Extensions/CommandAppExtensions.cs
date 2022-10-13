@@ -46,11 +46,11 @@ public static class CommandAppExtensions
                 .WithExample(new[] { "connectivity channels get all" });
 
             get.AddCommand<ChannelGetEuroMap63Command>("euromap63")
-                .WithDescription("Creates a EuroMap63 channel (if not exists).")
+                .WithDescription("Get a EuroMap63 channel.")
                 .WithExample(new[] { "connectivity channels get euromap63 -s [server-url] --name [channelName]" });
 
             get.AddCommand<ChannelGetOpcUaClientCommand>("opcuaclient")
-                .WithDescription("Creates a OPC UA Client channel (if not exists).")
+                .WithDescription("Get a OPC UA Client channel.")
                 .WithExample(new[] { "connectivity channels get opcuaclient -s [server-url] --name [channelName]" });
         });
 
@@ -94,11 +94,11 @@ public static class CommandAppExtensions
                 .WithExample(new[] { "connectivity devices get all -s [server-url] --channel-name [channelName]" });
 
             get.AddCommand<DeviceGetEuroMap63Command>("euromap63")
-                .WithDescription("Creates a EuroMap63 device (if not exists).")
+                .WithDescription("Get a EuroMap63 device.")
                 .WithExample(new[] { "connectivity devices get euromap63 -s [server-url] --channel-name [channelName] --device-name [deviceName]" });
 
             get.AddCommand<DeviceGetOpcUaClientCommand>("opcuaclient")
-                .WithDescription("Creates a OPC UA Client device (if not exists).")
+                .WithDescription("Get a OPC UA Client device.")
                 .WithExample(new[] { "connectivity devices get opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]" });
         });
 
