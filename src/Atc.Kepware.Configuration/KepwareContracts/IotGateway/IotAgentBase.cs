@@ -18,7 +18,9 @@ internal class IotAgentBase : IIotAgentBase
     [JsonPropertyName("iot_gateway.AGENTTYPES_ENABLED")]
     public bool Enabled { get; set; }
 
-    /// <inheritdoc />
+    ///// <summary>
+    ///// The type of Iot Agent as string.
+    ///// </summary>
     [JsonPropertyName("iot_gateway.AGENTTYPES_TYPE")]
     public string Agent { get; set; } = string.Empty;
 
