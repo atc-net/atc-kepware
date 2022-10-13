@@ -11,6 +11,8 @@ public sealed partial class KepwareConfigurationClient
         string channelName,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(channelName);
+
         var response = await Get<KepwareContracts.Connectivity.EuroMap63.EuroMap63Channel>(
             $"{EndpointPathTemplateConstants.Channels}/{channelName}",
             cancellationToken);
@@ -30,6 +32,9 @@ public sealed partial class KepwareConfigurationClient
         string deviceName,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(channelName);
+        ArgumentNullException.ThrowIfNull(deviceName);
+
         var response = await Get<KepwareContracts.Connectivity.EuroMap63.EuroMap63Device>(
             $"{EndpointPathTemplateConstants.Channels}/{channelName}/{EndpointPathTemplateConstants.Devices}/{deviceName}",
             cancellationToken);

@@ -11,6 +11,8 @@ public sealed partial class KepwareConfigurationClient
         string channelName,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(channelName);
+
         var response = await Get<KepwareContracts.Connectivity.OpcUaClient.OpcUaClientChannel>(
             $"{EndpointPathTemplateConstants.Channels}/{channelName}",
             cancellationToken);
@@ -30,6 +32,9 @@ public sealed partial class KepwareConfigurationClient
         string deviceName,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(channelName);
+        ArgumentNullException.ThrowIfNull(deviceName);
+
         var response = await Get<KepwareContracts.Connectivity.OpcUaClient.OpcUaClientDevice>(
             $"{EndpointPathTemplateConstants.Channels}/{channelName}/{EndpointPathTemplateConstants.Devices}/{deviceName}",
             cancellationToken);
@@ -66,6 +71,7 @@ public sealed partial class KepwareConfigurationClient
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(channelName);
 
         if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
         {

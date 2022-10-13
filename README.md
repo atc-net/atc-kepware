@@ -46,7 +46,6 @@ Since the tool is published as a .NET Tool, it can be launched from anywhere usi
 ```powershell
 atc-kepware-configuration --help
 
-
 USAGE:
     atc-kepware-configuration.exe [OPTIONS]
 
@@ -64,7 +63,6 @@ COMMANDS:
 
 ```powershell
 atc-kepware-configuration connectivity --help
-
 
 USAGE:
     atc-kepware-configuration.exe connectivity [OPTIONS] <COMMAND>
@@ -90,7 +88,6 @@ COMMANDS:
 ```powershell
 atc-kepware-configuration connectivity channels --help
 
-
 USAGE:
     atc-kepware-configuration.exe connectivity channels [OPTIONS] <COMMAND>
 
@@ -114,7 +111,6 @@ COMMANDS:
 
 ```powershell
 atc-kepware-configuration connectivity devices --help
-
 
 USAGE:
     atc-kepware-configuration.exe connectivity devices [OPTIONS] <COMMAND>
@@ -142,7 +138,6 @@ COMMANDS:
 ```powershell
 atc-kepware-configuration connectivity tags --help
 
-
 USAGE:
     atc-kepware-configuration.exe connectivity tags [OPTIONS] <COMMAND>
 
@@ -169,14 +164,15 @@ COMMANDS:
 ```powershell
 atc-kepware-configuration iot-gateway --help
 
-
 USAGE:
     atc-kepware-configuration.exe iot-gateway [OPTIONS] <COMMAND>
 
 EXAMPLES:
-    atc-kepware-configuration.exe iot-gateway iot-agent create mqtt-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
-    atc-kepware-configuration.exe iot-gateway iot-agent create rest-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
-    atc-kepware-configuration.exe iot-gateway iot-agent create rest-server -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client get -s [server-url] --name [iotAgentName]
+    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client all -s [server-url]
+    atc-kepware-configuration.exe iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent rest-client get -s [server-url] --name [iotAgentName]
 
 OPTIONS:
     -h, --help    Prints help information
@@ -190,56 +186,57 @@ COMMANDS:
 ```powershell
 atc-kepware-configuration iot-gateway iot-agent --help
 
-
 USAGE:
     atc-kepware-configuration.exe iot-gateway iot-agent [OPTIONS] <COMMAND>
 
 EXAMPLES:
-    atc-kepware-configuration.exe iot-gateway iot-agent create mqtt-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
-    atc-kepware-configuration.exe iot-gateway iot-agent create rest-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
-    atc-kepware-configuration.exe iot-gateway iot-agent create rest-server -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client get -s [server-url] --name [iotAgentName]
+    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client all -s [server-url]
+    atc-kepware-configuration.exe iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent rest-client get -s [server-url] --name [iotAgentName]
 
 OPTIONS:
     -h, --help    Prints help information
 
 COMMANDS:
-    create   Operations related to creating iot agents
+    mqtt-client    Operations related to MQTT Client Iot Agents
+    rest-client    Operations related to Rest Client Iot Agents
+    rest-server    Operations related to Rest Server Iot Agents
 ```
 
-#### Command <span style="color:yellow">iot-gateway iot-agent create</span>
+#### Command <span style="color:yellow">iot-gateway iot-agent rest-client</span>
 
 ```powershell
-atc-kepware-configuration iot-gateway iot-agent create --help
-
+atc-kepware-configuration iot-gateway iot-agent rest-client --help
 
 USAGE:
-    atc-kepware-configuration.exe iot-gateway iot-agent create [OPTIONS] <COMMAND>
+    atc-kepware-configuration.exe iot-gateway iot-agent rest-client [OPTIONS] <COMMAND>
 
 EXAMPLES:
-    atc-kepware-configuration.exe iot-gateway iot-agent create mqtt-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
-    atc-kepware-configuration.exe iot-gateway iot-agent create rest-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
-    atc-kepware-configuration.exe iot-gateway iot-agent create rest-server -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+    atc-kepware-configuration.exe iot-gateway iot-agent rest-client get -s [server-url] --name [iotAgentName]
+    atc-kepware-configuration.exe iot-gateway iot-agent rest-client all -s [server-url]
 
 OPTIONS:
     -h, --help    Prints help information
 
 COMMANDS:
-    mqtt-client    Creates a mqtt iot agent (if not exists)
-    rest-client    Creates a rest-client iot agent (if not exists)
-    rest-server    Creates a rest-server iot agent (if not exists)
+    create    Create a rest-client iot agent (if not exists)
+    get       Get a single rest-client iot agent
+    all       Get all rest-client iot agents
 ```
 
-#### Command <span style="color:yellow">iot-gateway iot-agent create rest-client</span>
+#### Command <span style="color:yellow">iot-gateway iot-agent rest-client create</span>
 
 ```powershell
-atc-kepware-configuration iot-gateway iot-agent create rest-client --help
-
+atc-kepware-configuration iot-gateway iot-agent rest-client create --help
 
 USAGE:
-    atc-kepware-configuration.exe iot-gateway iot-agent create rest-client [OPTIONS] <COMMAND>
+    atc-kepware-configuration.exe iot-gateway iot-agent rest-client create [OPTIONS] <COMMAND>
 
 EXAMPLES:
-     atc-kepware-configuration.exe iot-gateway iot-agent create rest-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
+     atc-kepware-configuration.exe iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
 
 OPTIONS:
     -h, --help                                               Prints help information

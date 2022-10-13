@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.IotGateway;
 
-internal class IotAgentRestClientRequest : IotAgentRequestBase, IIotAgentRestClientRequest
+internal class IotAgentRestClient : IotAgentBase, IIotAgentRestClient
 {
     /// <inheritdoc />
     [JsonPropertyName("iot_gateway.REST_CLIENT_URL")]
@@ -8,25 +8,23 @@ internal class IotAgentRestClientRequest : IotAgentRequestBase, IIotAgentRestCli
 
     /// <inheritdoc />
     [JsonPropertyName("iot_gateway.REST_CLIENT_METHOD")]
-    public IotAgentPublishHttpMethodType PublishHttpMethod { get; set; } = IotAgentPublishHttpMethodType.Post;
+    public IotAgentPublishHttpMethodType PublishHttpMethod { get; set; }
 
     /// <inheritdoc />
-    [Range(100, 60000)]
     [JsonPropertyName("iot_gateway.AGENTTYPES_RATE_MS")]
-    public int Rate { get; set; } = 10000;
+    public int Rate { get; set; }
 
     /// <inheritdoc />
     [JsonPropertyName("iot_gateway.AGENTTYPES_PUBLISH_FORMAT")]
-    public IotAgentPublishFormatType PublishFormat { get; set; } = IotAgentPublishFormatType.Narrow;
+    public IotAgentPublishFormatType PublishFormat { get; set; }
 
     /// <inheritdoc />
     [JsonPropertyName("iot_gateway.AGENTTYPES_MAX_EVENTS")]
     public int MaxEventsPerPublish { get; set; }
 
     /// <inheritdoc />
-    [Range(1, 30)]
     [JsonPropertyName("iot_gateway.AGENTTYPES_TIMEOUT_S")]
-    public int TransactionTimeout { get; set; } = 5;
+    public int TransactionTimeout { get; set; }
 
     /// <inheritdoc />
     [JsonPropertyName("iot_gateway.AGENTTYPES_SEND_INITIAL_UPDATE")]
@@ -38,11 +36,11 @@ internal class IotAgentRestClientRequest : IotAgentRequestBase, IIotAgentRestCli
 
     /// <inheritdoc />
     [JsonPropertyName("iot_gateway.AGENTTYPES_MESSAGE_FORMAT")]
-    public IotAgentPublishMessageFormatType PublishMessageFormat { get; set; } = IotAgentPublishMessageFormatType.Advanced;
+    public IotAgentPublishMessageFormatType PublishMessageFormat { get; set; }
 
     /// <inheritdoc />
     [JsonPropertyName("iot_gateway.REST_CLIENT_PUBLISH_MEDIA_TYPE")]
-    public IotAgentPublishMediaType PublishMediaType { get; set; } = IotAgentPublishMediaType.Json;
+    public IotAgentPublishMediaType PublishMediaType { get; set; }
 
     /// <inheritdoc />
     public override string ToString()

@@ -23,11 +23,6 @@ public interface IIotAgentBase
     bool Enabled { get; set; }
 
     /// <summary>
-    /// The type of Iot Agent as string.
-    /// </summary>
-    string Agent { get; set; }
-
-    /// <summary>
     /// The type of Iot Agent.
     /// </summary>
     IotAgentType AgentType { get; }

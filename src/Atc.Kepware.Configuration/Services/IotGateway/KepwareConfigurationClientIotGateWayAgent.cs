@@ -69,6 +69,36 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
+    public async Task<HttpClientRequestResult<IList<IotAgentRestClient>?>> GetIotAgentRestClients(
+        CancellationToken cancellationToken)
+    {
+        var response = await Get<IList<KepwareContracts.IotGateway.IotAgentRestClient>>(
+            EndpointPathTemplateConstants.IotGatewayRestClients,
+            cancellationToken);
+
+        return response.Adapt<HttpClientRequestResult<IList<IotAgentRestClient>?>>();
+    }
+
+    public async Task<HttpClientRequestResult<IotAgentRestClient?>> GetIotAgentRestClient(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+
+        var response = await Get<KepwareContracts.IotGateway.IotAgentRestClient>(
+            $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}",
+            cancellationToken);
+
+        if (response.CommunicationSucceeded &&
+            response.HasData &&
+            !response.Data!.AgentType.Equals(IotAgentType.RestClient))
+        {
+            return new HttpClientRequestResult<IotAgentRestClient?>(HttpStatusCode.NotFound, data: null, $"Retrieved iot agent '{iotAgentName}' is not a '{IotAgentType.RestClient.GetDescription()}'.");
+        }
+
+        return response.Adapt<HttpClientRequestResult<IotAgentRestClient?>>();
+    }
+
     private Task<HttpClientRequestResult<bool>> InvokeCreateIotAgentRestClient(
         IotAgentRestClientRequest request,
         CancellationToken cancellationToken)
