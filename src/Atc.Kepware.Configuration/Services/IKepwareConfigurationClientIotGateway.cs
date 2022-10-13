@@ -13,4 +13,11 @@ public partial interface IKepwareConfigurationClient
     Task<HttpClientRequestResult<bool>> CreateIotAgentRestClient(
         IotAgentRestClientRequest request,
         CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<IList<IotAgentRestClient>?>> GetIotAgentRestClients(
+        CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<IotAgentRestClient?>> GetIotAgentRestClient(
+        string iotAgentName,
+        CancellationToken cancellationToken);
 }

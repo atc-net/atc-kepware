@@ -179,25 +179,65 @@ public static class CommandAppExtensions
         {
             node.SetDescription("Commands for iot agents");
 
-            ConfigureIotAgentCreateCommands(node);
+            ConfigureIotAgentGetMqttClientCommands(node);
+            ConfigureIotAgentGetRestClientCommands(node);
+            ConfigureIotAgentGetRestServerCommands(node);
         };
 
-    private static void ConfigureIotAgentCreateCommands(
+    private static void ConfigureIotAgentGetMqttClientCommands(
         IConfigurator<CommandSettings> node)
-        => node.AddBranch("create", create =>
+        => node.AddBranch("mqtt-client", mqttClient =>
         {
-            create.SetDescription("Operations related to creating iot agents.");
+            mqttClient.SetDescription("Operations related to MQTT Client Iot Agents");
 
-            create.AddCommand<IotAgentCreateMqttClientCommand>("mqtt-client")
-                .WithDescription("Creates a mqtt iot agent (if not exists).")
-                .WithExample(new[] { "iot-gateway iot-agent create mqtt-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]" });
+            mqttClient.AddCommand<IotAgentCreateMqttClientCommand>("create")
+                .WithDescription("Create a mqtt-client iot agent (if not exists).")
+                .WithExample(new[] { "iot-gateway iot-agent mqtt-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]" });
 
-            create.AddCommand<IotAgentCreateRestClientCommand>("rest-client")
-                .WithDescription("Creates a rest-client iot agent (if not exists).")
-                .WithExample(new[] { "iot-gateway iot-agent create rest-client -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]" });
+            mqttClient.AddCommand<IotAgentGetMqttClientCommand>("get")
+                .WithDescription("Get a single mqtt-client iot agent.")
+                .WithExample(new[] { "iot-gateway iot-agent mqtt-client get -s [server-url] --name [iotAgentName]" });
 
-            create.AddCommand<IotAgentCreateRestServerCommand>("rest-server")
-                .WithDescription("Creates a rest-server iot agent (if not exists).")
-                .WithExample(new[] { "iot-gateway iot-agent create rest-server -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]" });
+            mqttClient.AddCommand<IotAgentGetAllMqttClientsCommand>("all")
+                .WithDescription("Get all mqtt-client iot agents.")
+                .WithExample(new[] { "iot-gateway iot-agent mqtt-client all -s [server-url]" });
+        });
+
+    private static void ConfigureIotAgentGetRestClientCommands(
+        IConfigurator<CommandSettings> node)
+        => node.AddBranch("rest-client", restClient =>
+        {
+            restClient.SetDescription("Operations related to Rest Client Iot Agents");
+
+            restClient.AddCommand<IotAgentCreateRestClientCommand>("create")
+                .WithDescription("Create a rest-client iot agent (if not exists).")
+                .WithExample(new[] { "iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]" });
+
+            restClient.AddCommand<IotAgentGetRestClientCommand>("get")
+                .WithDescription("Get a single rest-client iot agent.")
+                .WithExample(new[] { "iot-gateway iot-agent rest-client get -s [server-url] --name [iotAgentName]" });
+
+            restClient.AddCommand<IotAgentGetAllRestClientsCommand>("all")
+                .WithDescription("Get all rest-client iot agents.")
+                .WithExample(new[] { "iot-gateway iot-agent rest-client all -s [server-url]" });
+        });
+
+    private static void ConfigureIotAgentGetRestServerCommands(
+        IConfigurator<CommandSettings> node)
+        => node.AddBranch("rest-server", restServer =>
+        {
+            restServer.SetDescription("Operations related to Rest Server Iot Agents");
+
+            restServer.AddCommand<IotAgentCreateRestServerCommand>("create")
+                .WithDescription("Create a rest-server iot agent (if not exists).")
+                .WithExample(new[] { "iot-gateway iot-agent rest-server create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]" });
+
+            restServer.AddCommand<IotAgentGetRestServerCommand>("get")
+                .WithDescription("Get a single rest-server iot agent.")
+                .WithExample(new[] { "iot-gateway iot-agent rest-server get -s [server-url] --name [iotAgentName]" });
+
+            restServer.AddCommand<IotAgentGetAllRestServersCommand>("all")
+                .WithDescription("Get all rest-server iot agents.")
+                .WithExample(new[] { "iot-gateway iot-agent rest-server all -s [server-url]" });
         });
 }
