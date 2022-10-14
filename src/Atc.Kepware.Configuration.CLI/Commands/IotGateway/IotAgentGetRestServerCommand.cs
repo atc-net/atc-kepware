@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
 
-public class IotAgentGetRestServerCommand : AsyncCommand<IotAgentGetSingleCommandSettings>
+public class IotAgentGetRestServerCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
     private readonly ILogger<IotAgentGetRestServerCommand> logger;
 
@@ -10,7 +10,7 @@ public class IotAgentGetRestServerCommand : AsyncCommand<IotAgentGetSingleComman
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotAgentGetSingleCommandSettings settings)
+        IotAgentCommandBaseSettings settings)
     {
         ConsoleHelper.WriteHeader();
 

@@ -1,11 +1,11 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
 
-public class IotAgentGetRestClientCommand : AsyncCommand<IotAgentCommandBaseSettings>
+public class IotAgentDeleteRestClientCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
-    private readonly ILogger<IotAgentGetRestClientCommand> logger;
+    private readonly ILogger<IotAgentDeleteRestClientCommand> logger;
 
-    public IotAgentGetRestClientCommand(
-        ILogger<IotAgentGetRestClientCommand> logger)
+    public IotAgentDeleteRestClientCommand(
+        ILogger<IotAgentDeleteRestClientCommand> logger)
         => this.logger = logger;
 
     public override Task<int> ExecuteAsync(
@@ -27,29 +27,24 @@ public class IotAgentGetRestClientCommand : AsyncCommand<IotAgentCommandBaseSett
         {
             var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
-            var result = await kepwareConfigurationClient.GetIotAgentRestClient(
+            var isIotAgentDefinedResult = await kepwareConfigurationClient.IsIotAgentDefined(
                 settings.Name,
                 CancellationToken.None);
 
-            if (result.CommunicationSucceeded &&
-                result.HasData)
+            if (isIotAgentDefinedResult.CommunicationSucceeded &&
+                !isIotAgentDefinedResult.Data)
             {
-                var item = result.Data!;
-                var properties = item.GetType().GetPublicProperties();
-                foreach (var property in properties)
-                {
-                    var typeName = $"{property.BeautifyName()}";
-                    var spaces = string.Empty.PadRight(10 - typeName.Length);
-                    logger.LogInformation($"{typeName}{spaces}{property.Name}: {item.GetPropertyValue(property.Name)}");
-                }
+                logger.LogWarning("Iot Agent does not exist!");
+                return ConsoleExitStatusCodes.Success;
             }
-            else
-            {
-                if (!string.IsNullOrEmpty(result.Message))
-                {
-                    logger.LogWarning(result.Message);
-                }
 
+            var result = await kepwareConfigurationClient.DeleteIotAgentRestClient(
+                settings.Name,
+                CancellationToken.None);
+
+            if (!result.CommunicationSucceeded &&
+                !result.Data)
+            {
                 return ConsoleExitStatusCodes.Failure;
             }
         }

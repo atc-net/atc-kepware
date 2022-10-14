@@ -193,8 +193,8 @@ EXAMPLES:
     atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
     atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client get -s [server-url] --name [iotAgentName]
     atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client all -s [server-url]
+    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client delete -s [server-url] --name [iotAgentName]
     atc-kepware-configuration.exe iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
-    atc-kepware-configuration.exe iot-gateway iot-agent rest-client get -s [server-url] --name [iotAgentName]
 
 OPTIONS:
     -h, --help    Prints help information
@@ -217,6 +217,7 @@ EXAMPLES:
     atc-kepware-configuration.exe iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
     atc-kepware-configuration.exe iot-gateway iot-agent rest-client get -s [server-url] --name [iotAgentName]
     atc-kepware-configuration.exe iot-gateway iot-agent rest-client all -s [server-url]
+    atc-kepware-configuration.exe iot-gateway iot-agent rest-client delete -s [server-url] --name [iotAgentName]
 
 OPTIONS:
     -h, --help    Prints help information
@@ -225,6 +226,7 @@ COMMANDS:
     create    Create a rest-client iot agent (if not exists)
     get       Get a single rest-client iot agent
     all       Get all rest-client iot agents
+    delete    Delete a rest-client iot agent (if exists)
 ```
 
 #### Command <span style="color:yellow">iot-gateway iot-agent rest-client create</span>

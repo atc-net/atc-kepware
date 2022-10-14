@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Settings.IotGateway;
 
-public class IotAgentGetSingleCommandSettings : KepwareBaseCommandSettings
+public class IotAgentCommandBaseSettings : KepwareBaseCommandSettings
 {
     [CommandOption("-n|--name <NAME>")]
     [Description("Requested Name")]

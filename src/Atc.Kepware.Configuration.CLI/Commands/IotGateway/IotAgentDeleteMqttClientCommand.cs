@@ -1,11 +1,11 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
 
-public class IotAgentGetMqttClientCommand : AsyncCommand<IotAgentCommandBaseSettings>
+public class IotAgentDeleteMqttClientCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
-    private readonly ILogger<IotAgentGetMqttClientCommand> logger;
+    private readonly ILogger<IotAgentDeleteMqttClientCommand> logger;
 
-    public IotAgentGetMqttClientCommand(
-        ILogger<IotAgentGetMqttClientCommand> logger)
+    public IotAgentDeleteMqttClientCommand(
+        ILogger<IotAgentDeleteMqttClientCommand> logger)
         => this.logger = logger;
 
     public override Task<int> ExecuteAsync(

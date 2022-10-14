@@ -99,6 +99,17 @@ public sealed partial class KepwareConfigurationClient
         return response.Adapt<HttpClientRequestResult<IotAgentRestClient?>>();
     }
 
+    public Task<HttpClientRequestResult<bool>> DeleteIotAgentRestClient(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+
+        return InvokeDeleteIotAgentRestClient(
+            iotAgentName,
+            cancellationToken);
+    }
+
     private Task<HttpClientRequestResult<bool>> InvokeCreateIotAgentRestClient(
         IotAgentRestClientRequest request,
         CancellationToken cancellationToken)
@@ -108,6 +119,13 @@ public sealed partial class KepwareConfigurationClient
             EndpointPathTemplateConstants.IotGatewayRestClients,
             cancellationToken);
     }
+
+    private Task<HttpClientRequestResult<bool>> InvokeDeleteIotAgentRestClient(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+        => Delete(
+            $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}",
+            cancellationToken);
 
     private static bool IsValidIotGatewayName(
         string clientName,
