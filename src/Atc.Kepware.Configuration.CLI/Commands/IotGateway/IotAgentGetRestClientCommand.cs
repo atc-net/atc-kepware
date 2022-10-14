@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
 
-public class IotAgentGetRestClientCommand : AsyncCommand<IotAgentGetSingleCommandSettings>
+public class IotAgentGetRestClientCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
     private readonly ILogger<IotAgentGetRestClientCommand> logger;
 
@@ -10,7 +10,7 @@ public class IotAgentGetRestClientCommand : AsyncCommand<IotAgentGetSingleComman
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotAgentGetSingleCommandSettings settings)
+        IotAgentCommandBaseSettings settings)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
@@ -19,7 +19,7 @@ public class IotAgentGetRestClientCommand : AsyncCommand<IotAgentGetSingleComman
     }
 
     private async Task<int> ExecuteInternalAsync(
-        IotAgentGetSingleCommandSettings settings)
+        IotAgentCommandBaseSettings settings)
     {
         ConsoleHelper.WriteHeader();
 

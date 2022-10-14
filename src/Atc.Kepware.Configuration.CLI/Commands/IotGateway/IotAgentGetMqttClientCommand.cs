@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
 
-public class IotAgentGetMqttClientCommand : AsyncCommand<IotAgentGetSingleCommandSettings>
+public class IotAgentGetMqttClientCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
     private readonly ILogger<IotAgentGetMqttClientCommand> logger;
 
@@ -10,7 +10,7 @@ public class IotAgentGetMqttClientCommand : AsyncCommand<IotAgentGetSingleComman
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotAgentGetSingleCommandSettings settings)
+        IotAgentCommandBaseSettings settings)
     {
         ConsoleHelper.WriteHeader();
 
