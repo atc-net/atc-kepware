@@ -45,3 +45,7 @@
 ##########################################
 # Custom - Code Analyzers Rules
 ##########################################
+
+dotnet_diagnostic.CA1002.severity = none            # Do not expose generic lists
+
+dotnet_diagnostic.MA0016.severity = none            # Prefer returning collection abstraction instead of implementation
