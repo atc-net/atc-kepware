@@ -5,7 +5,7 @@ public interface IIotAgentBase
     /// <summary>
     /// The ProjectId.
     /// </summary>
-    int ProjectId { get; set; }
+    long ProjectId { get; set; }
 
     /// <summary>
     /// Name of the Iot Agent.

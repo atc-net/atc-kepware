@@ -4,7 +4,7 @@ internal class IotAgentBase : IIotAgentBase
 {
     /// <inheritdoc />
     [JsonPropertyName("PROJECT_ID")]
-    public int ProjectId { get; set; }
+    public long ProjectId { get; set; }
 
     /// <inheritdoc />
     [JsonPropertyName("common.ALLTYPES_NAME")]
