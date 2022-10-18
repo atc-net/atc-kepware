@@ -9,7 +9,7 @@ internal class IotItemRequest : IIotItemRequest
 
     /// <inheritdoc />
     [JsonPropertyName("iot_gateway.IOT_ITEM_SERVER_TAG")]
-    public string ServerTag { get; set; }
+    public string ServerTag { get; set; } = string.Empty;
 
     /// <inheritdoc />
     [JsonPropertyName("iot_gateway.IOT_ITEM_SCAN_RATE_MS")]
