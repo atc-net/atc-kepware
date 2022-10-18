@@ -271,12 +271,15 @@ USAGE:
     atc-kepware-configuration.exe iot-gateway iot-item [OPTIONS] <COMMAND>
 
 EXAMPLES:
-    atc-kepware-configuration.exe iot-gateway iot-item mqtt-client create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag]
---scan-rate [scanRate]
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag]
---scan-rate [scanRate]
-    atc-kepware-configuration.exe iot-gateway iot-item rest-server create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag]
---scan-rate [scanRate]
+    atc-kepware-configuration.exe iot-gateway iot-item mqtt-client create -s [server-url] --iot-agent-name [
+iotAgentName] --name [iotItemName] --server-tag [serverTag] --scan-rate [scanRate]
+    atc-kepware-configuration.exe iot-gateway iot-item mqtt-client get -s [server-url] --iot-agent-name [iotAgentName]
+--name [iotItemName]
+    atc-kepware-configuration.exe iot-gateway iot-item mqtt-client all -s [server-url]
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [
+iotAgentName] --name [iotItemName] --server-tag [serverTag] --scan-rate [scanRate]
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client get -s [server-url] --iot-agent-name [iotAgentName]
+--name [iotItemName]
 
 OPTIONS:
     -h, --help    Prints help information
@@ -294,14 +297,19 @@ USAGE:
     atc-kepware-configuration.exe iot-gateway iot-item rest-client [OPTIONS] <COMMAND>
 
 EXAMPLES:
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag]
---scan-rate [scanRate]
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [
+iotAgentName] --name [iotItemName] --server-tag [serverTag] --scan-rate [scanRate]
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client get -s [server-url] --iot-agent-name [iotAgentName]
+--name [iotItemName]
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client all -s [server-url]
 
 OPTIONS:
     -h, --help    Prints help information
 
 COMMANDS:
     create    Create an iot item on a rest-client iot agent
+    get       Get a single rest-client iot agent iot item
+    all       Get all rest-client iot agent iot items
 ```
 
 ```powershell
@@ -311,13 +319,12 @@ USAGE:
     atc-kepware-configuration.exe iot-gateway iot-item rest-client create [OPTIONS] <COMMAND>
 
 EXAMPLES:
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag]
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag]
 --scan-rate [scanRate]
 
 OPTIONS:
     -h, --help    Prints help information
         --iot-agent-name <IOT-AGENT-NAME>          Iot Agent Name
-    -n, --name <NAME>                              Iot Item Name
         --server-tag <SERVER-TAG>                  The server tag the Iot Item is pointing to
         --scan-rate <SCAN-RATE>                    Specifies the frequency, in milliseconds, at which the iot item should be scanned (default: 10000)
         --send-every-scan                          Specifies if the tag should be published on every scan or only on data changes (default: false)

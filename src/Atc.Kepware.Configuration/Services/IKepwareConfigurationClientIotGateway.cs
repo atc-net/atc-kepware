@@ -29,4 +29,13 @@ public partial interface IKepwareConfigurationClient
         string iotAgentName,
         IotItemRequest request,
         CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<IList<IotItem>?>> GetIotAgentIotItems(
+        string iotAgentName,
+        CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<IotItem?>> GetIotAgentIotItem(
+        string iotAgentName,
+        string iotItemName,
+        CancellationToken cancellationToken);
 }

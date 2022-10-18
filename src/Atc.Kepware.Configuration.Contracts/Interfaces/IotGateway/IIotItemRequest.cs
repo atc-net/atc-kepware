@@ -3,11 +3,6 @@ namespace Atc.Kepware.Configuration.Contracts.Interfaces.IotGateway;
 public interface IIotItemRequest
 {
     /// <summary>
-    /// Name of the Iot Item.
-    /// </summary>
-    string Name { get; set; }
-
-    /// <summary>
     /// The server tag the Iot Item is pointing to.
     /// </summary>
     string ServerTag { get; set; }

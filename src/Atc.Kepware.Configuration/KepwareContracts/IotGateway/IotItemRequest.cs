@@ -3,11 +3,6 @@ namespace Atc.Kepware.Configuration.KepwareContracts.IotGateway;
 internal class IotItemRequest : IIotItemRequest
 {
     /// <inheritdoc />
-    [KeyString]
-    [JsonPropertyName("common.ALLTYPES_NAME")]
-    public string Name { get; set; } = string.Empty;
-
-    /// <inheritdoc />
     [JsonPropertyName("iot_gateway.IOT_ITEM_SERVER_TAG")]
     public string ServerTag { get; set; } = string.Empty;
 

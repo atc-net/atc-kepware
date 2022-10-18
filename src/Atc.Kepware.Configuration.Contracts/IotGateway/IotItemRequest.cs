@@ -3,9 +3,6 @@ namespace Atc.Kepware.Configuration.Contracts.IotGateway;
 public sealed class IotItemRequest : IIotItemRequest
 {
     /// <inheritdoc />
-    public string Name { get; set; } = string.Empty;
-
-    /// <inheritdoc />
     public string ServerTag { get; set; } = string.Empty;
 
     /// <inheritdoc />

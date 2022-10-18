@@ -1,16 +1,16 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
 
-public class IotAgentRestClientIotItemCreateCommand : AsyncCommand<IotItemCreateCommandSettings>
+public class IotAgentIotItemGetCommand : AsyncCommand<IotItemGetCommandSettings>
 {
-    private readonly ILogger<IotAgentRestClientIotItemCreateCommand> logger;
+    private readonly ILogger<IotAgentIotItemGetCommand> logger;
 
-    public IotAgentRestClientIotItemCreateCommand(
-        ILogger<IotAgentRestClientIotItemCreateCommand> logger)
+    public IotAgentIotItemGetCommand(
+        ILogger<IotAgentIotItemGetCommand> logger)
         => this.logger = logger;
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotItemCreateCommandSettings settings)
+        IotItemGetCommandSettings settings)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
@@ -19,7 +19,7 @@ public class IotAgentRestClientIotItemCreateCommand : AsyncCommand<IotItemCreate
     }
 
     private async Task<int> ExecuteInternalAsync(
-        IotItemCreateCommandSettings settings)
+        IotItemGetCommandSettings settings)
     {
         ConsoleHelper.WriteHeader();
 
@@ -38,15 +38,30 @@ public class IotAgentRestClientIotItemCreateCommand : AsyncCommand<IotItemCreate
                 return ConsoleExitStatusCodes.Success;
             }
 
-            var request = BuildIotItemRequest(settings);
-            var result = await kepwareConfigurationClient.CreateIotAgentRestClientIotItem(
+            var result = await kepwareConfigurationClient.GetIotAgentIotItem(
                 settings.IotAgentName,
-                request,
+                GetIotItemInternalNameFromServerTag(settings.ServerTag),
                 CancellationToken.None);
 
-            if (!result.CommunicationSucceeded ||
-                result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
+            if (result.CommunicationSucceeded &&
+                result.HasData)
             {
+                var item = result.Data!;
+                var properties = item.GetType().GetPublicProperties();
+                foreach (var property in properties)
+                {
+                    var typeName = $"{property.BeautifyName()}";
+                    var spaces = string.Empty.PadRight(10 - typeName.Length);
+                    logger.LogInformation($"{typeName}{spaces}{property.Name}: {item.GetPropertyValue(property.Name)}");
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(result.Message))
+                {
+                    logger.LogWarning(result.Message);
+                }
+
                 return ConsoleExitStatusCodes.Failure;
             }
         }
@@ -60,28 +75,7 @@ public class IotAgentRestClientIotItemCreateCommand : AsyncCommand<IotItemCreate
         return ConsoleExitStatusCodes.Success;
     }
 
-    private static IotItemRequest BuildIotItemRequest(
-        IotItemCreateCommandSettings settings)
-    {
-        var request = new IotItemRequest
-        {
-            ServerTag = settings.ServerTag,
-            ScanRate = settings.ScanRate,
-        };
-
-        if (settings.SendEveryScan is not null)
-        {
-            request.SendEveryScan = settings.SendEveryScan.Value;
-        }
-
-        if (settings.DeadBandPercent is not null &&
-            settings.DeadBandPercent.IsSet)
-        {
-            request.DeadBandPercent = settings.DeadBandPercent.Value;
-        }
-
-        request.Enabled = settings.Enabled is null || settings.Enabled.Value;
-
-        return request;
-    }
+    private static string GetIotItemInternalNameFromServerTag(
+        string serverTag)
+        => serverTag.TrimExtended().Replace('.', '_');
 }
