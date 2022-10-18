@@ -23,6 +23,15 @@ public interface IIotItem
     string ServerTag { get; set; }
 
     /// <summary>
+    /// Indicates the Capture Option.
+    /// </summary>
+    /// <remarks>
+    /// Returns <see langword="true"/> if "Scan Tag"; otherwise, <see langword="false"/> if "Explicit Read".
+    /// "Explicit Read" does only apply for Rest Server Clients.
+    /// </remarks>
+    bool UsesScanRate { get; set; }
+
+    /// <summary>
     /// Specifies the frequency, in milliseconds, at which the iot item should be scanned.
     /// </summary>
     int ScanRate { get; set; }

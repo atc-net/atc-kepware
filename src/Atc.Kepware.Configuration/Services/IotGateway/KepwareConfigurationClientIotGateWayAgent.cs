@@ -153,6 +153,36 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
+    public async Task<HttpClientRequestResult<IList<IotItem>?>> GetIotAgentIotItems(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+
+        // It does not matter which path we set here (rest_clients//rest_servers//mqtt_clients) - the call still succeeds
+        var response = await Get< IList<KepwareContracts.IotGateway.IotItem>>(
+            $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}/{EndpointPathTemplateConstants.IotItems}",
+            cancellationToken);
+
+        return response.Adapt<HttpClientRequestResult<IList<IotItem>?>>();
+    }
+
+    public async Task<HttpClientRequestResult<IotItem?>> GetIotAgentIotItem(
+        string iotAgentName,
+        string iotItemName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+        ArgumentNullException.ThrowIfNull(iotItemName);
+
+        // It does not matter which path we set here (rest_clients//rest_servers//mqtt_clients) - the call still succeeds
+        var response = await Get<KepwareContracts.IotGateway.IotItem>(
+            $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}/{EndpointPathTemplateConstants.IotItems}/{iotItemName}",
+            cancellationToken);
+
+        return response.Adapt<HttpClientRequestResult<IotItem?>>();
+    }
+
     private Task<HttpClientRequestResult<bool>> InvokeCreateIotAgentRestClient(
         IotAgentRestClientRequest request,
         CancellationToken cancellationToken)
