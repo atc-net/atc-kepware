@@ -13,4 +13,6 @@ internal static class EndpointPathTemplateConstants
     public const string IotGatewayMqttClients = IotGateway + "/mqtt_clients";
     public const string IotGatewayRestClients = IotGateway + "/rest_clients";
     public const string IotGatewayRestServers = IotGateway + "/rest_servers";
+
+    public const string IotItems = "iot_items";
 }

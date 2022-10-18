@@ -3,11 +3,11 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Settings.IotGateway;
 public class IotAgentCreateCommandBaseSettings : KepwareBaseCommandSettings
 {
     [CommandOption("-n|--name <NAME>")]
-    [Description("Requested Name")]
+    [Description("Iot Agent Name")]
     public string Name { get; init; } = string.Empty;
 
     [CommandOption("--description [DESCRIPTION]")]
-    [Description("Requested Description")]
+    [Description("Iot Agent Description")]
     public FlagValue<string>? Description { get; init; }
 
     [CommandOption("--ignore-quality-changes")]
