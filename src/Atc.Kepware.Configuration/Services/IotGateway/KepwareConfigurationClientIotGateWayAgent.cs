@@ -160,7 +160,7 @@ public sealed partial class KepwareConfigurationClient
         ArgumentNullException.ThrowIfNull(iotAgentName);
 
         // It does not matter which path we set here (rest_clients//rest_servers//mqtt_clients) - the call still succeeds
-        var response = await Get< IList<KepwareContracts.IotGateway.IotItem>>(
+        var response = await Get<IList<KepwareContracts.IotGateway.IotItem>>(
             $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}/{EndpointPathTemplateConstants.IotItems}",
             cancellationToken);
 
