@@ -179,6 +179,7 @@ OPTIONS:
 
 COMMANDS:
     iot-agent   Commands for iot agents
+    iot-item    Commands for iot items
 ```
 
 #### Command <span style="color:yellow">iot-gateway iot-agent</span>
@@ -246,8 +247,8 @@ OPTIONS:
     -s, --server-url <SERVER-URL>                            Server Url for Kepserver configuration endpoint
     -u, --username [USERNAME]                                UserName for Kepware server configuration endpoint
     -p, --password [PASSWORD]                                Password for Kepware server configuration endpoint
-    -n, --name <NAME>                                        Requested Name
-        --description [DESCRIPTION]                          Requested Description
+    -n, --name <NAME>                                        Iot Agent Name
+        --description [DESCRIPTION]                          Iot Agent Description
         --ignore-quality-changes                             Indicates whether changes in quality should be ignored and not passed on
         --url <URL>                                          The URl of the endpoint to send data to
         --publish-http-method <PUBLISH-HTTP-METHOD>          Sets the HttpMethod for Publishing. Valid values are: Post (default), Put
@@ -261,6 +262,70 @@ OPTIONS:
         --publish-media-type [PUBLISH-MEDIA-TYPE]            Sets the media type for Publishing. Only valid when PublishMessageFormat is set to (Advanced). Valid values are: Json (default), Xml,
                                                              XhtmlXml, TextPlain, TextHtml
 
+```
+
+```powershell
+atc-kepware-configuration iot-gateway iot-item --help
+
+USAGE:
+    atc-kepware-configuration.exe iot-gateway iot-item [OPTIONS] <COMMAND>
+
+EXAMPLES:
+    atc-kepware-configuration.exe iot-gateway iot-item mqtt-client create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag]
+--scan-rate [scanRate]
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag]
+--scan-rate [scanRate]
+    atc-kepware-configuration.exe iot-gateway iot-item rest-server create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag]
+--scan-rate [scanRate]
+
+OPTIONS:
+    -h, --help    Prints help information
+
+COMMANDS:
+    mqtt-client    Operations related to MQTT Client Iot Agent Iot Items
+    rest-client    Operations related to Rest Client Iot Agent Iot Items
+    rest-server    Operations related to Rest Server Iot Agent Iot Items
+```
+
+```powershell
+atc-kepware-configuration iot-gateway iot-item rest-client --help
+
+USAGE:
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client [OPTIONS] <COMMAND>
+
+EXAMPLES:
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag]
+--scan-rate [scanRate]
+
+OPTIONS:
+    -h, --help    Prints help information
+
+COMMANDS:
+    create    Create an iot item on a rest-client iot agent
+```
+
+```powershell
+atc-kepware-configuration iot-gateway iot-item rest-client create --help
+
+USAGE:
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client create [OPTIONS] <COMMAND>
+
+EXAMPLES:
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag]
+--scan-rate [scanRate]
+
+OPTIONS:
+    -h, --help    Prints help information
+        --iot-agent-name <IOT-AGENT-NAME>          Iot Agent Name
+    -n, --name <NAME>                              Iot Item Name
+        --server-tag <SERVER-TAG>                  The server tag the Iot Item is pointing to
+        --scan-rate <SCAN-RATE>                    Specifies the frequency, in milliseconds, at which the iot item should be scanned (default: 10000)
+        --send-every-scan                          Specifies if the tag should be published on every scan or only on data changes (default: false)
+        --dead-band-percent [DEAD-BAND-PERCENT]    Specifies the DeadBand (%) when SendEveryScan is false (default: 0)
+        --enabled                                  Indicates whether the Iot Item is enabled (default: true)
+
+COMMANDS:
+    create    Create an iot item on a rest-client iot agent
 ```
 
 ## How to contribute
