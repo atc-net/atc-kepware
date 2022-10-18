@@ -153,6 +153,11 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
+    /// <summary>
+    /// Returns all iot items under a given iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
     public async Task<HttpClientRequestResult<IList<IotItem>?>> GetIotAgentIotItems(
         string iotAgentName,
         CancellationToken cancellationToken)
@@ -167,6 +172,15 @@ public sealed partial class KepwareConfigurationClient
         return response.Adapt<HttpClientRequestResult<IList<IotItem>?>>();
     }
 
+    /// <summary>
+    /// Returns the properties of the specified iot item under a given iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="iotItemName">The Iot Item Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// The iotItemName needs to have all . replaced by _ in order to find the item.
+    /// </remarks>
     public async Task<HttpClientRequestResult<IotItem?>> GetIotAgentIotItem(
         string iotAgentName,
         string iotItemName,
@@ -183,6 +197,15 @@ public sealed partial class KepwareConfigurationClient
         return response.Adapt<HttpClientRequestResult<IotItem?>>();
     }
 
+    /// <summary>
+    /// Deletes the specified iot item under a given iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="iotItemName">The Iot Item Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// The iotItemName needs to have all . replaced by _ in order to find the item.
+    /// </remarks>
     public Task<HttpClientRequestResult<bool>> DeleteIotAgentIotItem(
         string iotAgentName,
         string iotItemName,
