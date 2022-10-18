@@ -183,6 +183,20 @@ public sealed partial class KepwareConfigurationClient
         return response.Adapt<HttpClientRequestResult<IotItem?>>();
     }
 
+    public Task<HttpClientRequestResult<bool>> DeleteIotAgentIotItem(
+        string iotAgentName,
+        string iotItemName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+        ArgumentNullException.ThrowIfNull(iotItemName);
+
+        return InvokeDeleteIotAgentIotItem(
+            iotAgentName,
+            iotItemName,
+            cancellationToken);
+    }
+
     private Task<HttpClientRequestResult<bool>> InvokeCreateIotAgentRestClient(
         IotAgentRestClientRequest request,
         CancellationToken cancellationToken)
@@ -216,6 +230,14 @@ public sealed partial class KepwareConfigurationClient
             iotItemsPath,
             cancellationToken);
     }
+
+    private Task<HttpClientRequestResult<bool>> InvokeDeleteIotAgentIotItem(
+        string iotAgentName,
+        string iotItemName,
+        CancellationToken cancellationToken)
+        => Delete(
+            $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}/{EndpointPathTemplateConstants.IotItems}/{iotItemName}", // It does not matter which path we set here (rest_clients//rest_servers//mqtt_clients) - the call still succeeds
+            cancellationToken);
 
     private static bool IsValidIotGatewayName(
         string clientName,
