@@ -1,15 +1,7 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Settings.IotGateway;
 
-public class IotItemCreateCommandSettings : KepwareBaseCommandSettings
+public class IotItemCreateCommandSettings : IotItemCommandBaseSettings
 {
-    [CommandOption("--iot-agent-name <IOT-AGENT-NAME>")]
-    [Description("Iot Agent Name")]
-    public string IotAgentName { get; init; } = string.Empty;
-
-    [CommandOption("-n|--name <NAME>")]
-    [Description("Iot Item Name")]
-    public string Name { get; init; } = string.Empty;
-
     [CommandOption("--server-tag <SERVER-TAG>")]
     [Description("The server tag the Iot Item is pointing to")]
     public string ServerTag { get; init; } = string.Empty;

@@ -317,7 +317,6 @@ EXAMPLES:
 OPTIONS:
     -h, --help    Prints help information
         --iot-agent-name <IOT-AGENT-NAME>          Iot Agent Name
-    -n, --name <NAME>                              Iot Item Name
         --server-tag <SERVER-TAG>                  The server tag the Iot Item is pointing to
         --scan-rate <SCAN-RATE>                    Specifies the frequency, in milliseconds, at which the iot item should be scanned (default: 10000)
         --send-every-scan                          Specifies if the tag should be published on every scan or only on data changes (default: false)

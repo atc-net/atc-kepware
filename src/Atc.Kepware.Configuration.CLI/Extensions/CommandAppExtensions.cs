@@ -272,7 +272,7 @@ public static class CommandAppExtensions
 
         mqttClient.AddCommand<IotAgentMqttClientIotItemCreateCommand>("create")
             .WithDescription("Create one or more iot items on a mqtt-client iot agent.")
-            .WithExample(new[] { "iot-gateway iot-item mqtt-client create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag] --scan-rate [scanRate]" });
+            .WithExample(new[] { "iot-gateway iot-item mqtt-client create -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag] --scan-rate [scanRate]" });
     });
 
     private static void ConfigureIotItemRestClientCommands(
@@ -283,7 +283,7 @@ public static class CommandAppExtensions
 
             restClient.AddCommand<IotAgentRestClientIotItemCreateCommand>("create")
                 .WithDescription("Create an iot item on a rest-client iot agent.")
-                .WithExample(new[] { "iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag] --scan-rate [scanRate]" });
+                .WithExample(new[] { "iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag] --scan-rate [scanRate]" });
         });
 
     private static void ConfigureIotItemRestServerCommands(
@@ -294,6 +294,6 @@ public static class CommandAppExtensions
 
             restServer.AddCommand<IotAgentRestServerIotItemCreateCommand>("create")
                 .WithDescription("Create one or more iot items on a rest-server iot agent.")
-                .WithExample(new[] { "iot-gateway iot-item rest-server create -s [server-url] --iot-agent-name [iotAgentName] --name [iotItemName] --server-tag [serverTag] --scan-rate [scanRate]" });
+                .WithExample(new[] { "iot-gateway iot-item rest-server create -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag] --scan-rate [scanRate]" });
         });
 }

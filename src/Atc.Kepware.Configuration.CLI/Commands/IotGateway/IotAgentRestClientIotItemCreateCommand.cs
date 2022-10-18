@@ -65,7 +65,6 @@ public class IotAgentRestClientIotItemCreateCommand : AsyncCommand<IotItemCreate
     {
         var request = new IotItemRequest
         {
-            Name = settings.Name,
             ServerTag = settings.ServerTag,
             ScanRate = settings.ScanRate,
         };
