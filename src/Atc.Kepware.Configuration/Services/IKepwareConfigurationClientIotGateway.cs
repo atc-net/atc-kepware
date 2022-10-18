@@ -38,4 +38,9 @@ public partial interface IKepwareConfigurationClient
         string iotAgentName,
         string iotItemName,
         CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<bool>> DeleteIotAgentIotItem(
+        string iotAgentName,
+        string iotItemName,
+        CancellationToken cancellationToken);
 }
