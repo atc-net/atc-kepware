@@ -3,7 +3,7 @@ namespace Atc.Kepware.Configuration.Contracts.IotGateway;
 public class IotAgentBase : IIotAgentBase
 {
     /// <inheritdoc />
-    public int ProjectId { get; set; }
+    public long ProjectId { get; set; }
 
     /// <inheritdoc />
     public string Name { get; set; } = string.Empty;
