@@ -255,7 +255,7 @@ public static class CommandAppExtensions
 
             restServer.AddCommand<IotAgentCreateRestServerCommand>("create")
                 .WithDescription("Create a rest-server iot agent (if not exists).")
-                .WithExample(new[] { "iot-gateway iot-agent rest-server create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]" });
+                .WithExample(new[] { "iot-gateway iot-agent rest-server create -s [server-url] --name [iotAgentName] --url [url]" });
 
             restServer.AddCommand<IotAgentGetRestServerCommand>("get")
                 .WithDescription("Get a single rest-server iot agent.")
