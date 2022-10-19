@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.IotGateway;
 
-public class IotItem : IIotItem
+internal sealed class IotItem : IIotItem
 {
     /// <inheritdoc />
     [JsonPropertyName("PROJECT_ID")]

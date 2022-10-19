@@ -34,7 +34,10 @@ internal class IotAgentBase : IIotAgentBase
                 return IotAgentType.None;
             }
 
-            return Enum<IotAgentType>.TryParse(Agent.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase), true, out var agentType)
+            return Enum<IotAgentType>.TryParse(
+                Agent.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase),
+                ignoreCase: true,
+                out var agentType)
                 ? agentType
                 : IotAgentType.None;
         }

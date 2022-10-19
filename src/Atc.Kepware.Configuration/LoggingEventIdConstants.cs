@@ -9,6 +9,9 @@ internal static class LoggingEventIdConstants
     public const int PostSucceeded = 10010;
     public const int PostFailure = 10011;
 
+    public const int PutSucceeded = 10020;
+    public const int PutFailure = 10021;
+
     public const int DeleteSucceeded = 10030;
     public const int DeleteFailure = 10031;
 }
