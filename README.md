@@ -215,7 +215,7 @@ USAGE:
     atc-kepware-configuration.exe iot-gateway iot-agent rest-client [OPTIONS] <COMMAND>
 
 EXAMPLES:
-atc-kepware-configuration.exe iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [
+    atc-kepware-configuration.exe iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [
 url] --publish-message-format [Standard|Advanced]
     atc-kepware-configuration.exe iot-gateway iot-agent rest-client get -s [server-url] --name [iotAgentName]
     atc-kepware-configuration.exe iot-gateway iot-agent rest-client all -s [server-url]
