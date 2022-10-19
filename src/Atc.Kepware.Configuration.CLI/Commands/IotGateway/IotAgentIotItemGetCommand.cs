@@ -40,7 +40,7 @@ public class IotAgentIotItemGetCommand : AsyncCommand<IotItemGetCommandSettings>
 
             var result = await kepwareConfigurationClient.GetIotAgentIotItem(
                 settings.IotAgentName,
-                GetIotItemInternalNameFromServerTag(settings.ServerTag),
+                CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
                 CancellationToken.None);
 
             if (result.CommunicationSucceeded &&
@@ -74,8 +74,4 @@ public class IotAgentIotItemGetCommand : AsyncCommand<IotItemGetCommandSettings>
         logger.LogInformation($"{EmojisConstants.Success} Done");
         return ConsoleExitStatusCodes.Success;
     }
-
-    private static string GetIotItemInternalNameFromServerTag(
-        string serverTag)
-        => serverTag.TrimExtended().Replace('.', '_');
 }
