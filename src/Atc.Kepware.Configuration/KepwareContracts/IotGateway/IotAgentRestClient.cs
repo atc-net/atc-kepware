@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.IotGateway;
 
-internal class IotAgentRestClient : IotAgentBase, IIotAgentRestClient
+internal sealed class IotAgentRestClient : IotAgentBase, IIotAgentRestClient
 {
     /// <inheritdoc />
     [JsonPropertyName("iot_gateway.REST_CLIENT_URL")]
