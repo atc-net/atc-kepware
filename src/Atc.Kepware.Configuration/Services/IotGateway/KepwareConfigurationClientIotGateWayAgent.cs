@@ -304,6 +304,62 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
+    /// <summary>
+    /// Enables the specified iot item under a given iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="projectId">The Iot Agent ProjectId.</param>
+    /// <param name="iotItemName">The Iot Item Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Requires that the current ProjectId is sent along side the request.
+    /// Retrieve the client forehand to retrieve ProjectId.
+    /// </remarks>
+    public Task<HttpClientRequestResult<bool>> EnableIotAgentIotItem(
+        string iotAgentName,
+        long projectId,
+        string iotItemName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+        ArgumentNullException.ThrowIfNull(projectId);
+        ArgumentNullException.ThrowIfNull(iotItemName);
+
+        return InvokeEnableIotAgentIotItem(
+            iotAgentName,
+            projectId,
+            iotItemName,
+            cancellationToken);
+    }
+
+    /// <summary>
+    /// Disables the specified iot item under a given iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="projectId">The Iot Agent ProjectId.</param>
+    /// <param name="iotItemName">The Iot Item Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Requires that the current ProjectId is sent along side the request.
+    /// Retrieve the client forehand to retrieve ProjectId.
+    /// </remarks>
+    public Task<HttpClientRequestResult<bool>> DisableIotAgentIotItem(
+        string iotAgentName,
+        long projectId,
+        string iotItemName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+        ArgumentNullException.ThrowIfNull(projectId);
+        ArgumentNullException.ThrowIfNull(iotItemName);
+
+        return InvokeDisableIotAgentIotItem(
+            iotAgentName,
+            projectId,
+            iotItemName,
+            cancellationToken);
+    }
+
     private Task<HttpClientRequestResult<bool>> InvokeCreateIotAgentRestClient(
         IotAgentRestClientRequest request,
         CancellationToken cancellationToken)
@@ -379,6 +435,42 @@ public sealed partial class KepwareConfigurationClient
         => Delete(
             $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}/{EndpointPathTemplateConstants.IotItems}/{iotItemName}", // It does not matter which path we set here (rest_clients//rest_servers//mqtt_clients) - the call still succeeds
             cancellationToken);
+
+    private Task<HttpClientRequestResult<bool>> InvokeEnableIotAgentIotItem(
+        string iotAgentName,
+        long projectId,
+        string iotItemName,
+        CancellationToken cancellationToken)
+    {
+        var request = new KepwareContracts.IotGateway.IotItemEnableDisableRequest
+        {
+            ProjectId = projectId,
+            Enabled = true,
+        };
+
+        return Put(
+            request,
+            $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}/{EndpointPathTemplateConstants.IotItems}/{iotItemName}", // It does not matter which path we set here (rest_clients//rest_servers//mqtt_clients) - the call still succeeds
+            cancellationToken);
+    }
+
+    private Task<HttpClientRequestResult<bool>> InvokeDisableIotAgentIotItem(
+        string iotAgentName,
+        long projectId,
+        string iotItemName,
+        CancellationToken cancellationToken)
+    {
+        var request = new KepwareContracts.IotGateway.IotItemEnableDisableRequest
+        {
+            ProjectId = projectId,
+            Enabled = false,
+        };
+
+        return Put(
+            request,
+            $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}/{EndpointPathTemplateConstants.IotItems}/{iotItemName}", // It does not matter which path we set here (rest_clients//rest_servers//mqtt_clients) - the call still succeeds
+            cancellationToken);
+    }
 
     private static bool IsValidIotGatewayName(
         string clientName,

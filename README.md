@@ -276,14 +276,14 @@ USAGE:
 
 EXAMPLES:
     atc-kepware-configuration.exe iot-gateway iot-item mqtt-client create -s [server-url] --iot-agent-name [
-iotAgentName] --name [iotItemName] --server-tag [serverTag] --scan-rate [scanRate]
+iotAgentName] --server-tag [serverTag] --scan-rate [scanRate]
     atc-kepware-configuration.exe iot-gateway iot-item mqtt-client get -s [server-url] --iot-agent-name [iotAgentName]
---name [iotItemName]
+--server-tag [serverTag]
     atc-kepware-configuration.exe iot-gateway iot-item mqtt-client all -s [server-url]
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [
-iotAgentName] --name [iotItemName] --server-tag [serverTag] --scan-rate [scanRate]
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client get -s [server-url] --iot-agent-name [iotAgentName]
---name [iotItemName]
+    atc-kepware-configuration.exe iot-gateway iot-item mqtt-client enable -s [server-url] --iot-agent-name [
+iotAgentName] --server-tag [serverTag]
+    atc-kepware-configuration.exe iot-gateway iot-item mqtt-client disable -s [server-url] --iot-agent-name [
+iotAgentName] --server-tag [serverTag]
 
 OPTIONS:
     -h, --help    Prints help information
@@ -306,17 +306,21 @@ iotAgentName] --server-tag [serverTag] --scan-rate [scanRate]
     atc-kepware-configuration.exe iot-gateway iot-item rest-client get -s [server-url] --iot-agent-name [iotAgentName]
 --server-tag [serverTag]
     atc-kepware-configuration.exe iot-gateway iot-item rest-client all -s [server-url]
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client delete -s [server-url] --iot-agent-name [
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client enable -s [server-url] --iot-agent-name [
+iotAgentName] --server-tag [serverTag]
+    atc-kepware-configuration.exe iot-gateway iot-item rest-client disable -s [server-url] --iot-agent-name [
 iotAgentName] --server-tag [serverTag]
 
 OPTIONS:
     -h, --help    Prints help information
 
 COMMANDS:
-    create    Create an iot item on a rest-client iot agent
-    get       Get a single rest-client iot agent iot item
-    all       Get all rest-client iot agent iot items
-    delete    Delete a rest-client iot agent iot item (if exists)
+    create     Create an iot item on a rest-client iot agent
+    get        Get a single rest-client iot agent iot item
+    all        Get all rest-client iot agent iot items
+    enable     Enable a single rest-client iot agent iot item
+    disable    Disable a single rest-client iot agent iot item
+    delete     Delete a rest-client iot agent iot item (if exists)
 ```
 
 ```powershell

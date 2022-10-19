@@ -57,4 +57,16 @@ public partial interface IKepwareConfigurationClient
         string iotAgentName,
         string iotItemName,
         CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<bool>> EnableIotAgentIotItem(
+        string iotAgentName,
+        long projectId,
+        string iotItemName,
+        CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<bool>> DisableIotAgentIotItem(
+        string iotAgentName,
+        long projectId,
+        string iotItemName,
+        CancellationToken cancellationToken);
 }

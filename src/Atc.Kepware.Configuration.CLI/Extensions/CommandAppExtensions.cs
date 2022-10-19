@@ -306,6 +306,14 @@ public static class CommandAppExtensions
             .WithDescription("Get all mqtt-client iot agent iot items.")
             .WithExample(new[] { "iot-gateway iot-item mqtt-client all -s [server-url]" });
 
+        mqttClient.AddCommand<IotAgentIotItemEnableCommand>("enable")
+            .WithDescription("Enable a single mqtt-client iot agent iot item.")
+            .WithExample(new[] { "iot-gateway iot-item mqtt-client enable -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag]" });
+
+        mqttClient.AddCommand<IotAgentIotItemDisableCommand>("disable")
+            .WithDescription("Disable a single mqtt-client iot agent iot item.")
+            .WithExample(new[] { "iot-gateway iot-item mqtt-client disable -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag]" });
+
         mqttClient.AddCommand<IotAgentIotItemDeleteCommand>("delete")
             .WithDescription("Delete a mqtt-client iot agent iot item (if exists).")
             .WithExample(new[] { "iot-gateway iot-item mqtt-client delete -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag]" });
@@ -329,6 +337,14 @@ public static class CommandAppExtensions
                 .WithDescription("Get all rest-client iot agent iot items.")
                 .WithExample(new[] { "iot-gateway iot-item rest-client all -s [server-url]" });
 
+            restClient.AddCommand<IotAgentIotItemEnableCommand>("enable")
+                .WithDescription("Enable a single rest-client iot agent iot item.")
+                .WithExample(new[] { "iot-gateway iot-item rest-client enable -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag]" });
+
+            restClient.AddCommand<IotAgentIotItemDisableCommand>("disable")
+                .WithDescription("Disable a single rest-client iot agent iot item.")
+                .WithExample(new[] { "iot-gateway iot-item rest-client disable -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag]" });
+
             restClient.AddCommand<IotAgentIotItemDeleteCommand>("delete")
                 .WithDescription("Delete a rest-client iot agent iot item (if exists).")
                 .WithExample(new[] { "iot-gateway iot-item rest-client delete -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag]" });
@@ -351,6 +367,14 @@ public static class CommandAppExtensions
             restServer.AddCommand<IotAgentGetAllIotItemsCommand>("all")
                 .WithDescription("Get all rest-server iot agent iot items.")
                 .WithExample(new[] { "iot-gateway iot-item rest-server all -s [server-url]" });
+
+            restServer.AddCommand<IotAgentIotItemEnableCommand>("enable")
+                .WithDescription("Enable a single rest-server iot agent iot item.")
+                .WithExample(new[] { "iot-gateway iot-item rest-server enable -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag]" });
+
+            restServer.AddCommand<IotAgentIotItemDisableCommand>("disable")
+                .WithDescription("Disable a single rest-server iot agent iot item.")
+                .WithExample(new[] { "iot-gateway iot-item rest-server disable -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag]" });
 
             restServer.AddCommand<IotAgentIotItemDeleteCommand>("delete")
                 .WithDescription("Delete a rest-server iot agent iot item (if exists).")
