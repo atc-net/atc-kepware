@@ -40,6 +40,18 @@ public partial class KepwareConfigurationClient
     private partial void LogPostFailure(string pathTemplate, string errorMessage);
 
     [LoggerMessage(
+        EventId = LoggingEventIdConstants.PutSucceeded,
+        Level = LogLevel.Trace,
+        Message = "Successfully put to pathTemplate '{pathTemplate}'.")]
+    private partial void LogPutSucceeded(string pathTemplate);
+
+    [LoggerMessage(
+        EventId = LoggingEventIdConstants.PutFailure,
+        Level = LogLevel.Error,
+        Message = "Failed to put to pathTemplate '{pathTemplate}': '{errorMessage}'.")]
+    private partial void LogPutFailure(string pathTemplate, string errorMessage);
+
+    [LoggerMessage(
         EventId = LoggingEventIdConstants.DeleteSucceeded,
         Level = LogLevel.Trace,
         Message = "Successfully deleted for pathTemplate '{pathTemplate}'.")]

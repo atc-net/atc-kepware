@@ -49,6 +49,44 @@ public sealed partial class KepwareConfigurationClient
     }
 
     /// <summary>
+    /// Returns base properties of the specified iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Sub iot items will not be returned in this call.
+    /// </remarks>
+    public async Task<HttpClientRequestResult<IotAgentBase?>> GetIotAgentBase(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+
+        if (!IsValidIotGatewayName(
+                iotAgentName,
+                iotItemName: null,
+                out var errorMessage))
+        {
+            return await Task.FromResult(HttpClientRequestResultFactory<IotAgentBase>.CreateBadRequest(errorMessage!));
+        }
+
+        // It does not matter which path we set here (rest_clients//rest_servers//mqtt_clients) - the call still succeeds
+        var response = await Get<KepwareContracts.IotGateway.IotAgentBase>(
+            $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}",
+            cancellationToken,
+            shouldLogNotFound: false);
+
+        if (!response.CommunicationSucceeded)
+        {
+            return new HttpClientRequestResult<IotAgentBase?>(new HttpRequestException("Communication error!"));
+        }
+
+        return response.HasData
+            ? response.Adapt<HttpClientRequestResult<IotAgentBase?>>()
+            : new HttpClientRequestResult<IotAgentBase?>(response.StatusCode, null);
+    }
+
+    /// <summary>
     /// Create an iot agent rest client to Kepware's Iot Gateway.
     /// </summary>
     /// <param name="request">The request.</param>
@@ -130,6 +168,52 @@ public sealed partial class KepwareConfigurationClient
 
         return InvokeDeleteIotAgentRestClient(
             iotAgentName,
+            cancellationToken);
+    }
+
+    /// <summary>
+    /// Enables the specified iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="projectId">The Iot Agent ProjectId.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Requires that the current ProjectId is sent along side the request.
+    /// Retrieve the client forehand to retrieve ProjectId.
+    /// </remarks>
+    public Task<HttpClientRequestResult<bool>> EnableIotAgent(
+        string iotAgentName,
+        long projectId,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+
+        return InvokeEnableIotAgent(
+            iotAgentName,
+            projectId,
+            cancellationToken);
+    }
+
+    /// <summary>
+    /// Disables the specified iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="projectId">The Iot Agent ProjectId.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Requires that the current ProjectId is sent along side the request.
+    /// Retrieve the client forehand to retrieve ProjectId.
+    /// </remarks>
+    public Task<HttpClientRequestResult<bool>> DisableIotAgent(
+        string iotAgentName,
+        long projectId,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+
+        return InvokeDisableIotAgent(
+            iotAgentName,
+            projectId,
             cancellationToken);
     }
 
@@ -236,6 +320,40 @@ public sealed partial class KepwareConfigurationClient
         => Delete(
             $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}",
             cancellationToken);
+
+    private Task<HttpClientRequestResult<bool>> InvokeEnableIotAgent(
+        string iotAgentName,
+        long projectId,
+        CancellationToken cancellationToken)
+    {
+        var request = new KepwareContracts.IotGateway.IotAgentEnableDisableRequest
+        {
+            ProjectId = projectId,
+            Enabled = true,
+        };
+
+        return Put(
+            request,
+            $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}",
+            cancellationToken);
+    }
+
+    private Task<HttpClientRequestResult<bool>> InvokeDisableIotAgent(
+        string iotAgentName,
+        long projectId,
+        CancellationToken cancellationToken)
+    {
+        var request = new KepwareContracts.IotGateway.IotAgentEnableDisableRequest
+        {
+            ProjectId = projectId,
+            Enabled = false,
+        };
+
+        return Put(
+            request,
+            $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}",
+            cancellationToken);
+    }
 
     private Task<HttpClientRequestResult<bool>> InvokeCreateIotAgentRestClientIotItems(
         string iotAgentName,

@@ -152,6 +152,49 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         }
     }
 
+    private async Task<HttpClientRequestResult<bool>> Put<TRequest>(
+        TRequest request,
+        string pathTemplate,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var requestContent = new StringContent(
+                JsonSerializer.Serialize(request, jsonSerializerOptions),
+                Encoding.UTF8,
+                MediaTypeNames.Application.Json);
+
+            var response = await httpClient.PutAsync(pathTemplate, requestContent, cancellationToken);
+            requestContent.Dispose();
+
+            if (response.IsSuccessStatusCode)
+            {
+                LogPutSucceeded(pathTemplate);
+                return new HttpClientRequestResult<bool>(response.StatusCode, data: true);
+            }
+
+            var errorResponseString = await response.Content.ReadAsStringAsync(cancellationToken);
+            if (response.Content.Headers.ContentType?.MediaType == MediaTypeNames.Application.Json)
+            {
+                var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(errorResponseString, jsonSerializerOptions);
+                if (errorResponse is not null)
+                {
+                    var codeMessage = errorResponse.GetCodeAndMessage();
+                    LogPutFailure(pathTemplate, codeMessage);
+                    return new HttpClientRequestResult<bool>(response.StatusCode, data: false, codeMessage);
+                }
+            }
+
+            LogPutFailure(pathTemplate, errorResponseString);
+            return new HttpClientRequestResult<bool>(response.StatusCode, data: false, errorResponseString);
+        }
+        catch (Exception ex)
+        {
+            LogPutFailure(pathTemplate, ex.Message);
+            return new HttpClientRequestResult<bool>(ex);
+        }
+    }
+
     private async Task<HttpClientRequestResult<bool>> Delete(
         string pathTemplate,
         CancellationToken cancellationToken)
