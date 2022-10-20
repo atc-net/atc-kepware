@@ -92,7 +92,7 @@ public sealed partial class KepwareConfigurationClient
     /// <param name="request">The request.</param>
     /// <param name="cancellationToken">The CancellationToken.</param>
     public Task<HttpClientRequestResult<bool>> CreateIotAgentRestClient(
-        IotAgentRestClientRequest request,
+        IotAgentRestClientCreateRequest request,
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
@@ -361,11 +361,11 @@ public sealed partial class KepwareConfigurationClient
     }
 
     private Task<HttpClientRequestResult<bool>> InvokeCreateIotAgentRestClient(
-        IotAgentRestClientRequest request,
+        IotAgentRestClientCreateRequest request,
         CancellationToken cancellationToken)
     {
         return Post(
-            request.Adapt<KepwareContracts.IotGateway.IotAgentRestClientRequest>(),
+            request.Adapt<KepwareContracts.IotGateway.IotAgentRestClientCreateRequest>(),
             EndpointPathTemplateConstants.IotGatewayRestClients,
             cancellationToken);
     }

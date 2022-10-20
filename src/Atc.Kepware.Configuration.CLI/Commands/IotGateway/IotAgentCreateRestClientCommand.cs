@@ -38,7 +38,7 @@ public class IotAgentCreateRestClientCommand : AsyncCommand<IotAgentCreateRestCl
                 return ConsoleExitStatusCodes.Success;
             }
 
-            var request = BuildIotAgentRestClientRequest(settings);
+            var request = BuildIotAgentRestClientCreateRequest(settings);
             var result = await kepwareConfigurationClient.CreateIotAgentRestClient(request, CancellationToken.None);
 
             if (!result.CommunicationSucceeded ||
@@ -57,10 +57,10 @@ public class IotAgentCreateRestClientCommand : AsyncCommand<IotAgentCreateRestCl
         return ConsoleExitStatusCodes.Success;
     }
 
-    private static IotAgentRestClientRequest BuildIotAgentRestClientRequest(
+    private static IotAgentRestClientCreateRequest BuildIotAgentRestClientCreateRequest(
         IotAgentCreateRestClientCommandSettings settings)
     {
-        var request = new IotAgentRestClientRequest
+        var request = new IotAgentRestClientCreateRequest
         {
             Name = settings.Name,
             Description = settings.Description is not null && settings.Description.IsSet
@@ -75,6 +75,11 @@ public class IotAgentCreateRestClientCommand : AsyncCommand<IotAgentCreateRestCl
             PublishMessageFormat = settings.PublishMessageFormat,
         };
 
+        if (settings.IgnoreQualityChanges.HasValue)
+        {
+            request.IgnoreQualityChanges = settings.IgnoreQualityChanges.Value;
+        }
+
         if (settings.SendInitialUpdate is not null)
         {
             request.SendInitialUpdate = settings.SendInitialUpdate.Value;
@@ -82,7 +87,7 @@ public class IotAgentCreateRestClientCommand : AsyncCommand<IotAgentCreateRestCl
 
         if (settings.HttpHeaders.Count > 0)
         {
-            request.HttpHeaders = TransformHttpHeaders(settings.HttpHeaders);
+            request.HttpHeaders = CommandHelper.TransformHttpHeaders(settings.HttpHeaders);
         }
 
         if (settings.PublishMediaType is not null &&
@@ -92,18 +97,5 @@ public class IotAgentCreateRestClientCommand : AsyncCommand<IotAgentCreateRestCl
         }
 
         return request;
-    }
-
-    private static string TransformHttpHeaders(
-        IDictionary<string, string> httpHeaders)
-    {
-        var sb = new StringBuilder();
-
-        foreach (var httpHeader in httpHeaders)
-        {
-            sb.Append($"{httpHeader.Key}: {httpHeader.Value}{Environment.NewLine}", GlobalizationConstants.EnglishCultureInfo);
-        }
-
-        return sb.ToString();
     }
 }

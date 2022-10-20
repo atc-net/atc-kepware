@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.Contracts.Interfaces.IotGateway;
 
-public interface IIotAgentRestClientRequest : IIotAgentRequestBase
+public interface IIotAgentRestClientCreateRequest : IIotAgentCreateRequestBase
 {
     /// <summary>
     /// The IP address or URL and port of the endpoint for the agent connection.

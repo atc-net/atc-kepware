@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.Contracts.Interfaces.IotGateway;
 
-public interface IIotAgentRequestBase
+public interface IIotAgentCreateRequestBase
 {
     /// <summary>
     /// Name of the Iot Agent.

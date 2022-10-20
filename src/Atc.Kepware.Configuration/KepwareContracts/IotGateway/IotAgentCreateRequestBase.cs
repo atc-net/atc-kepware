@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.IotGateway;
 
-internal abstract class IotAgentRequestBase : IIotAgentRequestBase
+internal abstract class IotAgentCreateRequestBase : IIotAgentCreateRequestBase
 {
     /// <inheritdoc />
     [KeyString]
