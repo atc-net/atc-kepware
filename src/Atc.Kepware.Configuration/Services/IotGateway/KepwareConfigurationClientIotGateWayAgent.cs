@@ -153,6 +153,35 @@ public sealed partial class KepwareConfigurationClient
     }
 
     /// <summary>
+    /// Updates the specified rest client iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="request">The request.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Requires that the current ProjectId is sent in the request.
+    /// Retrieve the client forehand to retrieve ProjectId.
+    /// </remarks>
+    public Task<HttpClientRequestResult<bool>> UpdateIotAgentRestClient(
+        string iotAgentName,
+        IotAgentRestClientUpdateRequest request,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+        ArgumentNullException.ThrowIfNull(request);
+
+        if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
+        }
+
+        return InvokeUpdateIotAgentRestClient(
+            iotAgentName,
+            request,
+            cancellationToken);
+    }
+
+    /// <summary>
     /// Deletes the specified rest client iot agent.
     /// </summary>
     /// <param name="iotAgentName">The Iot Agent Name.</param>
@@ -367,6 +396,17 @@ public sealed partial class KepwareConfigurationClient
         return Post(
             request.Adapt<KepwareContracts.IotGateway.IotAgentRestClientCreateRequest>(),
             EndpointPathTemplateConstants.IotGatewayRestClients,
+            cancellationToken);
+    }
+
+    private Task<HttpClientRequestResult<bool>> InvokeUpdateIotAgentRestClient(
+        string iotAgentName,
+        IotAgentRestClientUpdateRequest request,
+        CancellationToken cancellationToken)
+    {
+        return Put(
+            request.Adapt<KepwareContracts.IotGateway.IotAgentRestClientUpdateRequest>(),
+            $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}",
             cancellationToken);
     }
 
