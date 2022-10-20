@@ -211,6 +211,10 @@ public static class CommandAppExtensions
                 .WithDescription("Disable a mqtt-client iot agent (if exists).")
                 .WithExample(new[] { "iot-gateway iot-agent mqtt-client disable -s [server-url] --name [iotAgentName]" });
 
+            mqttClient.AddCommand<IotAgentUpdateMqttClientCommand>("update")
+                .WithDescription("Update a mqtt-client iot agent (if exists).")
+                .WithExample(new[] { "iot-gateway iot-agent mqtt-client update -s [server-url] --name [iotAgentName] --url [url]" });
+
             mqttClient.AddCommand<IotAgentDeleteMqttClientCommand>("delete")
                 .WithDescription("Delete a mqtt-client iot agent (if exists).")
                 .WithExample(new[] { "iot-gateway iot-agent mqtt-client delete -s [server-url] --name [iotAgentName]" });
@@ -242,6 +246,10 @@ public static class CommandAppExtensions
                 .WithDescription("Disable a rest-client iot agent (if exists).")
                 .WithExample(new[] { "iot-gateway iot-agent rest-client disable -s [server-url] --name [iotAgentName]" });
 
+            restClient.AddCommand<IotAgentUpdateRestClientCommand>("update")
+                .WithDescription("Update a rest-client iot agent (if exists).")
+                .WithExample(new[] { "iot-gateway iot-agent rest-client update -s [server-url] --name [iotAgentName] --url [url]" });
+
             restClient.AddCommand<IotAgentDeleteRestClientCommand>("delete")
                 .WithDescription("Delete a rest-client iot agent (if exists).")
                 .WithExample(new[] { "iot-gateway iot-agent rest-client delete -s [server-url] --name [iotAgentName]" });
@@ -272,6 +280,10 @@ public static class CommandAppExtensions
             restServer.AddCommand<IotAgentDisableCommand>("disable")
                 .WithDescription("Disable a rest-server iot agent (if exists).")
                 .WithExample(new[] { "iot-gateway iot-agent rest-server disable -s [server-url] --name [iotAgentName]" });
+
+            restServer.AddCommand<IotAgentUpdateRestServerCommand>("update")
+                .WithDescription("Update a rest-server iot agent (if exists).")
+                .WithExample(new[] { "iot-gateway iot-agent rest-server update -s [server-url] --name [iotAgentName] --url [url]" });
 
             restServer.AddCommand<IotAgentDeleteRestServerCommand>("delete")
                 .WithDescription("Delete a rest-server iot agent (if exists).")

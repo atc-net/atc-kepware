@@ -15,7 +15,7 @@ public partial interface IKepwareConfigurationClient
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<bool>> CreateIotAgentRestClient(
-        IotAgentRestClientRequest request,
+        IotAgentRestClientCreateRequest request,
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<IList<IotAgentRestClient>?>> GetIotAgentRestClients(
@@ -23,6 +23,11 @@ public partial interface IKepwareConfigurationClient
 
     Task<HttpClientRequestResult<IotAgentRestClient?>> GetIotAgentRestClient(
         string iotAgentName,
+        CancellationToken cancellationToken);
+
+    Task<HttpClientRequestResult<bool>> UpdateIotAgentRestClient(
+        string iotAgentName,
+        IotAgentRestClientUpdateRequest request,
         CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<bool>> DeleteIotAgentRestClient(

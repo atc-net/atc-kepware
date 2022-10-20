@@ -231,6 +231,7 @@ COMMANDS:
     all        Get all rest-client iot agents
     enable     Enable a rest-client iot agent (if exists)
     disable    Disable a rest-client iot agent (if exists)
+    update     Update a rest-client iot agent (if exists)
     delete     Delete a rest-client iot agent (if exists)
 ```
 

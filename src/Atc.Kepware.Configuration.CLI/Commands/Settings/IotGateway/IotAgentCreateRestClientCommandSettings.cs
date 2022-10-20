@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Settings.IotGateway;
 
-public class IotAgentCreateRestClientCommandSettings : IotAgentCreateCommandBaseSettings
+public sealed class IotAgentCreateRestClientCommandSettings : IotAgentCreateCommandBaseSettings
 {
     private readonly System.ComponentModel.DataAnnotations.UriAttribute urlValidator;
 
