@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Settings.IotGateway;
 
-public class IotAgentCreateRestServerCommandSettings : IotAgentCreateCommandBaseSettings
+public sealed class IotAgentCreateRestServerCommandSettings : IotAgentCreateCommandBaseSettings
 {
     //// TODO: Fill out
 }
