@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Settings.IotGateway;
 
-public class IotItemCreateCommandSettings : IotItemCommandBaseSettings
+public sealed class IotItemCreateCommandSettings : IotItemCommandBaseSettings
 {
     [CommandOption("--server-tag <SERVER-TAG>")]
     [Description("The server tag the Iot Item is pointing to")]

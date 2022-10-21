@@ -16,6 +16,8 @@ global using Atc.Kepware.Configuration.CLI.Commands.DescriptionAttributes.Connec
 global using Atc.Kepware.Configuration.CLI.Commands.DescriptionAttributes.IotGateway;
 global using Atc.Kepware.Configuration.CLI.Commands.Helpers;
 global using Atc.Kepware.Configuration.CLI.Commands.IotGateway;
+global using Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
+global using Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotItem;
 global using Atc.Kepware.Configuration.CLI.Commands.Settings;
 global using Atc.Kepware.Configuration.CLI.Commands.Settings.Connectivity;
 global using Atc.Kepware.Configuration.CLI.Commands.Settings.IotGateway;
