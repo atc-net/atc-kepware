@@ -1,4 +1,4 @@
-namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
+namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 
 public class IotAgentGetAllRestServersCommand : AsyncCommand<KepwareBaseCommandSettings>
 {

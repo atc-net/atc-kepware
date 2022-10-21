@@ -1,11 +1,11 @@
-namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
+namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 
-public class IotAgentEnableCommand : AsyncCommand<IotAgentCommandBaseSettings>
+public class IotAgentDeleteRestClientCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
-    private readonly ILogger<IotAgentEnableCommand> logger;
+    private readonly ILogger<IotAgentDeleteRestClientCommand> logger;
 
-    public IotAgentEnableCommand(
-        ILogger<IotAgentEnableCommand> logger)
+    public IotAgentDeleteRestClientCommand(
+        ILogger<IotAgentDeleteRestClientCommand> logger)
         => this.logger = logger;
 
     public override Task<int> ExecuteAsync(
@@ -27,26 +27,19 @@ public class IotAgentEnableCommand : AsyncCommand<IotAgentCommandBaseSettings>
         {
             var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
-            var iotAgentResult = await kepwareConfigurationClient.GetIotAgentBase(
+            var isIotAgentDefinedResult = await kepwareConfigurationClient.IsIotAgentDefined(
                 settings.Name,
                 CancellationToken.None);
 
-            if (iotAgentResult.CommunicationSucceeded &&
-                !iotAgentResult.HasData)
+            if (isIotAgentDefinedResult.CommunicationSucceeded &&
+                !isIotAgentDefinedResult.Data)
             {
                 logger.LogWarning("Iot Agent does not exist!");
                 return ConsoleExitStatusCodes.Success;
             }
 
-            if (iotAgentResult.Data!.Enabled)
-            {
-                logger.LogWarning("Iot Agent already enabled!");
-                return ConsoleExitStatusCodes.Success;
-            }
-
-            var result = await kepwareConfigurationClient.EnableIotAgent(
+            var result = await kepwareConfigurationClient.DeleteIotAgentRestClient(
                 settings.Name,
-                iotAgentResult.Data!.ProjectId,
                 CancellationToken.None);
 
             if (!result.CommunicationSucceeded &&

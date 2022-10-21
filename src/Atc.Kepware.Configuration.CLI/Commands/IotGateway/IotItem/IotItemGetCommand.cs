@@ -1,11 +1,11 @@
-namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
+namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotItem;
 
-public class IotAgentIotItemDeleteCommand : AsyncCommand<IotItemGetCommandSettings>
+public class IotItemGetCommand : AsyncCommand<IotItemGetCommandSettings>
 {
-    private readonly ILogger<IotAgentIotItemDeleteCommand> logger;
+    private readonly ILogger<IotItemGetCommand> logger;
 
-    public IotAgentIotItemDeleteCommand(
-        ILogger<IotAgentIotItemDeleteCommand> logger)
+    public IotItemGetCommand(
+        ILogger<IotItemGetCommand> logger)
         => this.logger = logger;
 
     public override Task<int> ExecuteAsync(
@@ -38,14 +38,30 @@ public class IotAgentIotItemDeleteCommand : AsyncCommand<IotItemGetCommandSettin
                 return ConsoleExitStatusCodes.Success;
             }
 
-            var result = await kepwareConfigurationClient.DeleteIotAgentIotItem(
+            var result = await kepwareConfigurationClient.GetIotAgentIotItem(
                 settings.IotAgentName,
                 CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
                 CancellationToken.None);
 
-            if (!result.CommunicationSucceeded &&
-                !result.Data)
+            if (result.CommunicationSucceeded &&
+                result.HasData)
             {
+                var item = result.Data!;
+                var properties = item.GetType().GetPublicProperties();
+                foreach (var property in properties)
+                {
+                    var typeName = $"{property.BeautifyName()}";
+                    var spaces = string.Empty.PadRight(10 - typeName.Length);
+                    logger.LogInformation($"{typeName}{spaces}{property.Name}: {item.GetPropertyValue(property.Name)}");
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(result.Message))
+                {
+                    logger.LogWarning(result.Message);
+                }
+
                 return ConsoleExitStatusCodes.Failure;
             }
         }

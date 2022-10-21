@@ -1,24 +1,15 @@
-namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
+namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 
-public class IotAgentDeleteRestClientCommand : AsyncCommand<IotAgentCommandBaseSettings>
+public class IotAgentGetAllIotItemsCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
-    private readonly ILogger<IotAgentDeleteRestClientCommand> logger;
+    private readonly ILogger<IotAgentGetAllIotItemsCommand> logger;
 
-    public IotAgentDeleteRestClientCommand(
-        ILogger<IotAgentDeleteRestClientCommand> logger)
+    public IotAgentGetAllIotItemsCommand(
+        ILogger<IotAgentGetAllIotItemsCommand> logger)
         => this.logger = logger;
 
-    public override Task<int> ExecuteAsync(
+    public override async Task<int> ExecuteAsync(
         CommandContext context,
-        IotAgentCommandBaseSettings settings)
-    {
-        ArgumentNullException.ThrowIfNull(context);
-        ArgumentNullException.ThrowIfNull(settings);
-
-        return ExecuteInternalAsync(settings);
-    }
-
-    private async Task<int> ExecuteInternalAsync(
         IotAgentCommandBaseSettings settings)
     {
         ConsoleHelper.WriteHeader();
@@ -38,12 +29,12 @@ public class IotAgentDeleteRestClientCommand : AsyncCommand<IotAgentCommandBaseS
                 return ConsoleExitStatusCodes.Success;
             }
 
-            var result = await kepwareConfigurationClient.DeleteIotAgentRestClient(
+            var result = await kepwareConfigurationClient.GetIotAgentIotItems(
                 settings.Name,
                 CancellationToken.None);
 
-            if (!result.CommunicationSucceeded &&
-                !result.Data)
+            if (!result.CommunicationSucceeded ||
+                result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {
                 return ConsoleExitStatusCodes.Failure;
             }

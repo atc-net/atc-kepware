@@ -1,11 +1,11 @@
-namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
+namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotItem;
 
-public class IotAgentRestClientIotItemCreateCommand : AsyncCommand<IotItemCreateCommandSettings>
+public class RestClientIotItemCreateCommand : AsyncCommand<IotItemCreateCommandSettings>
 {
-    private readonly ILogger<IotAgentRestClientIotItemCreateCommand> logger;
+    private readonly ILogger<RestClientIotItemCreateCommand> logger;
 
-    public IotAgentRestClientIotItemCreateCommand(
-        ILogger<IotAgentRestClientIotItemCreateCommand> logger)
+    public RestClientIotItemCreateCommand(
+        ILogger<RestClientIotItemCreateCommand> logger)
         => this.logger = logger;
 
     public override Task<int> ExecuteAsync(

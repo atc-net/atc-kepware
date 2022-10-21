@@ -1,11 +1,11 @@
-namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
+namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotItem;
 
-public class IotAgentIotItemEnableCommand : AsyncCommand<IotItemGetCommandSettings>
+public class IotItemDeleteCommand : AsyncCommand<IotItemGetCommandSettings>
 {
-    private readonly ILogger<IotAgentIotItemEnableCommand> logger;
+    private readonly ILogger<IotItemDeleteCommand> logger;
 
-    public IotAgentIotItemEnableCommand(
-        ILogger<IotAgentIotItemEnableCommand> logger)
+    public IotItemDeleteCommand(
+        ILogger<IotItemDeleteCommand> logger)
         => this.logger = logger;
 
     public override Task<int> ExecuteAsync(
@@ -27,38 +27,19 @@ public class IotAgentIotItemEnableCommand : AsyncCommand<IotItemGetCommandSettin
         {
             var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
 
-            var iotAgentResult = await kepwareConfigurationClient.GetIotAgentBase(
+            var isIotAgentDefinedResult = await kepwareConfigurationClient.IsIotAgentDefined(
                 settings.IotAgentName,
                 CancellationToken.None);
 
-            if (iotAgentResult.CommunicationSucceeded &&
-                !iotAgentResult.HasData)
+            if (isIotAgentDefinedResult.CommunicationSucceeded &&
+                !isIotAgentDefinedResult.Data)
             {
                 logger.LogWarning("Iot Agent does not exist!");
                 return ConsoleExitStatusCodes.Success;
             }
 
-            var iotItemResult = await kepwareConfigurationClient.GetIotAgentIotItem(
+            var result = await kepwareConfigurationClient.DeleteIotAgentIotItem(
                 settings.IotAgentName,
-                CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
-                CancellationToken.None);
-
-            if (iotItemResult.CommunicationSucceeded &&
-                !iotItemResult.HasData)
-            {
-                logger.LogWarning("Iot Agent Iot Item does not exist!");
-                return ConsoleExitStatusCodes.Success;
-            }
-
-            if (iotItemResult.Data!.Enabled)
-            {
-                logger.LogWarning("Iot Agent Iot Item already enabled!");
-                return ConsoleExitStatusCodes.Success;
-            }
-
-            var result = await kepwareConfigurationClient.EnableIotAgentIotItem(
-                settings.IotAgentName,
-                iotAgentResult.Data!.ProjectId,
                 CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
                 CancellationToken.None);
 

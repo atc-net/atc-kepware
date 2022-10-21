@@ -1,5 +1,6 @@
 // ReSharper disable InvertIf
-namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway;
+
+namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 
 public class IotAgentUpdateRestClientCommand : AsyncCommand<IotAgentUpdateRestClientCommandSettings>
 {
