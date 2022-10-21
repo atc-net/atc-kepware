@@ -251,7 +251,10 @@ public sealed partial class KepwareConfigurationClient
         ArgumentNullException.ThrowIfNull(iotAgentName);
         ArgumentNullException.ThrowIfNull(iotItemName);
 
-        return InvokeGetIotAgentIotItem(iotAgentName, iotItemName, cancellationToken);
+        return InvokeGetIotAgentIotItem(
+            iotAgentName,
+            EnsureProperIotItemNameFormat(iotItemName),
+            cancellationToken);
     }
 
     /// <summary>
@@ -282,7 +285,7 @@ public sealed partial class KepwareConfigurationClient
 
         return InvokeUpdateIotAgentRestClientIotItem(
             iotAgentName,
-            iotItemName,
+            EnsureProperIotItemNameFormat(iotItemName),
             request,
             cancellationToken);
     }
@@ -306,7 +309,7 @@ public sealed partial class KepwareConfigurationClient
 
         return InvokeDeleteIotAgentIotItem(
             iotAgentName,
-            iotItemName,
+            EnsureProperIotItemNameFormat(iotItemName),
             cancellationToken);
     }
 
@@ -334,7 +337,7 @@ public sealed partial class KepwareConfigurationClient
         return InvokeEnableIotAgentIotItem(
             iotAgentName,
             projectId,
-            iotItemName,
+            EnsureProperIotItemNameFormat(iotItemName),
             cancellationToken);
     }
 
@@ -362,7 +365,7 @@ public sealed partial class KepwareConfigurationClient
         return InvokeDisableIotAgentIotItem(
             iotAgentName,
             projectId,
-            iotItemName,
+            EnsureProperIotItemNameFormat(iotItemName),
             cancellationToken);
     }
 
@@ -583,4 +586,8 @@ public sealed partial class KepwareConfigurationClient
         errorMessage = null;
         return true;
     }
+
+    private static string EnsureProperIotItemNameFormat(
+        string iotItemName)
+        => iotItemName.TrimExtended().Replace('.', '_');
 }
