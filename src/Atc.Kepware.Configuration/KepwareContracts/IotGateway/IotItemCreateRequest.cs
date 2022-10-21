@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.IotGateway;
 
-internal sealed class IotItemRequest : IIotItemRequest
+internal sealed class IotItemCreateRequest : IIotItemCreateRequest
 {
     /// <inheritdoc />
     [JsonPropertyName("iot_gateway.IOT_ITEM_SERVER_TAG")]

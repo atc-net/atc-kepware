@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.Contracts.IotGateway;
 
-public sealed class IotItemRequest : IIotItemRequest
+public sealed class IotItemCreateRequest : IIotItemCreateRequest
 {
     /// <inheritdoc />
     public string ServerTag { get; set; } = string.Empty;
@@ -17,4 +17,8 @@ public sealed class IotItemRequest : IIotItemRequest
 
     /// <inheritdoc />
     public bool Enabled { get; set; } = true;
+
+    /// <inheritdoc />
+    public override string ToString()
+        => $"{nameof(ServerTag)}: {ServerTag}, {nameof(ScanRate)}: {ScanRate}, {nameof(SendEveryScan)}: {SendEveryScan}, {nameof(DeadBandPercent)}: {DeadBandPercent}, {nameof(Enabled)}: {Enabled}";
 }

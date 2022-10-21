@@ -38,7 +38,7 @@ public class RestClientIotItemCreateCommand : AsyncCommand<IotItemCreateCommandS
                 return ConsoleExitStatusCodes.Success;
             }
 
-            var request = BuildIotItemRequest(settings);
+            var request = BuildIotItemCreateRequest(settings);
             var result = await kepwareConfigurationClient.CreateIotAgentRestClientIotItem(
                 settings.IotAgentName,
                 request,
@@ -60,10 +60,10 @@ public class RestClientIotItemCreateCommand : AsyncCommand<IotItemCreateCommandS
         return ConsoleExitStatusCodes.Success;
     }
 
-    private static IotItemRequest BuildIotItemRequest(
+    private static IotItemCreateRequest BuildIotItemCreateRequest(
         IotItemCreateCommandSettings settings)
     {
-        var request = new IotItemRequest
+        var request = new IotItemCreateRequest
         {
             ServerTag = settings.ServerTag,
             ScanRate = settings.ScanRate,

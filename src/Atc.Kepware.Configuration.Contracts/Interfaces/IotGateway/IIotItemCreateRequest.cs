@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.Contracts.Interfaces.IotGateway;
 
-public interface IIotItemRequest
+public interface IIotItemCreateRequest
 {
     /// <summary>
     /// The server tag the Iot Item is pointing to.
