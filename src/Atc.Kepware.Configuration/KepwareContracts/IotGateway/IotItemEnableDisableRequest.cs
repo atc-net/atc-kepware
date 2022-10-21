@@ -13,4 +13,7 @@ internal sealed class IotItemEnableDisableRequest
     /// </summary>
     [JsonPropertyName("iot_gateway.IOT_ITEM_ENABLED")]
     public bool Enabled { get; set; }
+
+    public override string ToString()
+        => $"{nameof(ProjectId)}: {ProjectId}, {nameof(Enabled)}: {Enabled}";
 }

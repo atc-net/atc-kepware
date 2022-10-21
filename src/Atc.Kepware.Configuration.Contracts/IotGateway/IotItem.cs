@@ -28,4 +28,8 @@ public sealed class IotItem : IIotItem
 
     /// <inheritdoc />
     public bool Enabled { get; set; }
+
+    /// <inheritdoc />
+    public override string ToString()
+        => $"{nameof(ProjectId)}: {ProjectId}, {nameof(Name)}: {Name}, {nameof(Description)}: {Description}, {nameof(ServerTag)}: {ServerTag}, {nameof(UsesScanRate)}: {UsesScanRate}, {nameof(ScanRate)}: {ScanRate}, {nameof(SendEveryScan)}: {SendEveryScan}, {nameof(DeadBandPercent)}: {DeadBandPercent}, {nameof(Enabled)}: {Enabled}";
 }
