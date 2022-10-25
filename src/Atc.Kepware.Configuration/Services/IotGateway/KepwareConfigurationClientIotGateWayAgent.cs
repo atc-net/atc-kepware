@@ -411,7 +411,7 @@ public sealed partial class KepwareConfigurationClient
 
         return response.HasData
             ? response.Adapt<HttpClientRequestResult<IotAgentBase?>>()
-            : new HttpClientRequestResult<IotAgentBase?>(response.StatusCode, null);
+            : new HttpClientRequestResult<IotAgentBase?>(response.StatusCode, data: null);
     }
 
     private Task<HttpClientRequestResult<bool>> InvokeCreateIotAgentRestClient(
