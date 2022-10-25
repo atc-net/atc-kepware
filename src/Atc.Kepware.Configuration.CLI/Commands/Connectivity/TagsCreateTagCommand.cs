@@ -3,10 +3,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
 {
     private readonly ILogger<TagsCreateTagCommand> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public TagsCreateTagCommand(
-        ILogger<TagsCreateTagCommand> logger)
-        => this.logger = logger;
+        ILogger<TagsCreateTagCommand> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,7 +30,10 @@ public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var isTagDefinedResult = await kepwareConfigurationClient.IsTagDefined(
                 settings.ChannelName,
@@ -34,8 +42,12 @@ public class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings>
                 settings.TagGroups,
                 CancellationToken.None);
 
-            if (isTagDefinedResult.CommunicationSucceeded &&
-                isTagDefinedResult.Data)
+            if (!isTagDefinedResult.CommunicationSucceeded)
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+
+            if (isTagDefinedResult.Data)
             {
                 logger.LogWarning("Tag already exists!");
                 return ConsoleExitStatusCodes.Success;

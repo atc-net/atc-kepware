@@ -19,6 +19,12 @@ public static class Program
 
         var serviceCollection = ServiceCollectionFactory.Create(consoleLoggerConfiguration);
 
+        serviceCollection.AddTransient<IKepwareConfigurationClient, KepwareConfigurationClient>(s =>
+        {
+            var loggerFactory = s.GetRequiredService<ILoggerFactory>();
+            return new KepwareConfigurationClient(loggerFactory.CreateLogger<KepwareConfigurationClient>());
+        });
+
         var app = CommandAppFactory.CreateWithRootCommand<RootCommand>(serviceCollection);
         app.ConfigureCommands();
 

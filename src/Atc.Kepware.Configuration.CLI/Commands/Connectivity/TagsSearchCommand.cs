@@ -3,10 +3,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 public class TagsSearchCommand : AsyncCommand<TagsSearchCommandSettings>
 {
     private readonly ILogger<TagsSearchCommand> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public TagsSearchCommand(
-        ILogger<TagsSearchCommand> logger)
-        => this.logger = logger;
+        ILogger<TagsSearchCommand> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,7 +30,10 @@ public class TagsSearchCommand : AsyncCommand<TagsSearchCommandSettings>
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var result = await kepwareConfigurationClient.SearchTags(
                 settings.ChannelName,

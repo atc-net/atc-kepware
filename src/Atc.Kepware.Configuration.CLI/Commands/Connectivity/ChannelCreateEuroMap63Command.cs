@@ -3,10 +3,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 public class ChannelCreateEuroMap63Command : AsyncCommand<ChannelCreateCommandBaseSettings>
 {
     private readonly ILogger<ChannelCreateEuroMap63Command> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public ChannelCreateEuroMap63Command(
-        ILogger<ChannelCreateEuroMap63Command> logger)
-        => this.logger = logger;
+        ILogger<ChannelCreateEuroMap63Command> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,14 +30,21 @@ public class ChannelCreateEuroMap63Command : AsyncCommand<ChannelCreateCommandBa
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
                 CancellationToken.None);
 
-            if (isChannelDefinedResult.CommunicationSucceeded &&
-                isChannelDefinedResult.Data)
+            if (!isChannelDefinedResult.CommunicationSucceeded)
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+
+            if (isChannelDefinedResult.Data)
             {
                 logger.LogWarning("Channel already exists!");
                 return ConsoleExitStatusCodes.Success;

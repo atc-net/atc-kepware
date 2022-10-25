@@ -3,10 +3,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 public class IotAgentCreateRestClientCommand : AsyncCommand<IotAgentCreateRestClientCommandSettings>
 {
     private readonly ILogger<IotAgentCreateRestClientCommand> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public IotAgentCreateRestClientCommand(
-        ILogger<IotAgentCreateRestClientCommand> logger)
-        => this.logger = logger;
+        ILogger<IotAgentCreateRestClientCommand> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,14 +30,21 @@ public class IotAgentCreateRestClientCommand : AsyncCommand<IotAgentCreateRestCl
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var isIotAgentDefinedResult = await kepwareConfigurationClient.IsIotAgentDefined(
                 settings.Name,
                 CancellationToken.None);
 
-            if (isIotAgentDefinedResult.CommunicationSucceeded &&
-                isIotAgentDefinedResult.Data)
+            if (!isIotAgentDefinedResult.CommunicationSucceeded)
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+
+            if (isIotAgentDefinedResult.Data)
             {
                 logger.LogWarning("Iot Agent already exists!");
                 return ConsoleExitStatusCodes.Success;
