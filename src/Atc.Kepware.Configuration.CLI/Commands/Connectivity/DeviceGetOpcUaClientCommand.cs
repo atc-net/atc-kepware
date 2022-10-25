@@ -3,10 +3,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 public class DeviceGetOpcUaClientCommand : AsyncCommand<ChannelAndDeviceCommandBaseSettings>
 {
     private readonly ILogger<DeviceGetOpcUaClientCommand> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public DeviceGetOpcUaClientCommand(
-        ILogger<DeviceGetOpcUaClientCommand> logger)
-        => this.logger = logger;
+        ILogger<DeviceGetOpcUaClientCommand> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,7 +30,10 @@ public class DeviceGetOpcUaClientCommand : AsyncCommand<ChannelAndDeviceCommandB
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var result = await kepwareConfigurationClient.GetOpcUaClientDevice(
                 settings.ChannelName,

@@ -3,10 +3,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 public class IotAgentGetRestClientCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
     private readonly ILogger<IotAgentGetRestClientCommand> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public IotAgentGetRestClientCommand(
-        ILogger<IotAgentGetRestClientCommand> logger)
-        => this.logger = logger;
+        ILogger<IotAgentGetRestClientCommand> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,7 +30,10 @@ public class IotAgentGetRestClientCommand : AsyncCommand<IotAgentCommandBaseSett
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var result = await kepwareConfigurationClient.GetIotAgentRestClient(
                 settings.Name,

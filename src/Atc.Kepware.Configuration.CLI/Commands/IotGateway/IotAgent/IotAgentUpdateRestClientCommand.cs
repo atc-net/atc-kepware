@@ -5,10 +5,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 public class IotAgentUpdateRestClientCommand : AsyncCommand<IotAgentUpdateRestClientCommandSettings>
 {
     private readonly ILogger<IotAgentUpdateRestClientCommand> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public IotAgentUpdateRestClientCommand(
-        ILogger<IotAgentUpdateRestClientCommand> logger)
-        => this.logger = logger;
+        ILogger<IotAgentUpdateRestClientCommand> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -27,14 +32,21 @@ public class IotAgentUpdateRestClientCommand : AsyncCommand<IotAgentUpdateRestCl
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var iotAgentResult = await kepwareConfigurationClient.GetIotAgentRestClient(
                 settings.Name,
                 CancellationToken.None);
 
-            if (iotAgentResult.CommunicationSucceeded &&
-                !iotAgentResult.HasData)
+            if (!iotAgentResult.CommunicationSucceeded)
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+
+            if (!iotAgentResult.HasData)
             {
                 logger.LogWarning("Iot Agent does not exist!");
                 return ConsoleExitStatusCodes.Success;

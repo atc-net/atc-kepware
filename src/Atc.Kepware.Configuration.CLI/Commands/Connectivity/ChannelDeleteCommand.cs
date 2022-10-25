@@ -3,10 +3,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 public class ChannelDeleteCommand : AsyncCommand<ChannelDeleteCommandSettings>
 {
     private readonly ILogger<ChannelDeleteCommand> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public ChannelDeleteCommand(
-        ILogger<ChannelDeleteCommand> logger)
-        => this.logger = logger;
+        ILogger<ChannelDeleteCommand> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,14 +30,21 @@ public class ChannelDeleteCommand : AsyncCommand<ChannelDeleteCommandSettings>
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
                 CancellationToken.None);
 
-            if (isChannelDefinedResult.CommunicationSucceeded &&
-                !isChannelDefinedResult.Data)
+            if (!isChannelDefinedResult.CommunicationSucceeded)
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+
+            if (!isChannelDefinedResult.Data)
             {
                 logger.LogWarning("Channel does not exist!");
                 return ConsoleExitStatusCodes.Success;

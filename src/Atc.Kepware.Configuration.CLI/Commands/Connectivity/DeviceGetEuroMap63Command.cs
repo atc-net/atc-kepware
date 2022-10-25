@@ -3,10 +3,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 public class DeviceGetEuroMap63Command : AsyncCommand<ChannelAndDeviceCommandBaseSettings>
 {
     private readonly ILogger<DeviceGetEuroMap63Command> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public DeviceGetEuroMap63Command(
-        ILogger<DeviceGetEuroMap63Command> logger)
-        => this.logger = logger;
+        ILogger<DeviceGetEuroMap63Command> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,7 +30,10 @@ public class DeviceGetEuroMap63Command : AsyncCommand<ChannelAndDeviceCommandBas
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var result = await kepwareConfigurationClient.GetEuroMap63Device(
                 settings.ChannelName,

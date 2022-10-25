@@ -3,10 +3,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 public class DeviceCreateEuroMap63Command : AsyncCommand<DeviceCreateEuroMap63CommandBaseSettings>
 {
     private readonly ILogger<DeviceCreateEuroMap63Command> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public DeviceCreateEuroMap63Command(
-        ILogger<DeviceCreateEuroMap63Command> logger)
-        => this.logger = logger;
+        ILogger<DeviceCreateEuroMap63Command> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,15 +30,22 @@ public class DeviceCreateEuroMap63Command : AsyncCommand<DeviceCreateEuroMap63Co
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var isDeviceDefinedResult = await kepwareConfigurationClient.IsDeviceDefined(
                 settings.ChannelName,
                 settings.DeviceName,
                 CancellationToken.None);
 
-            if (isDeviceDefinedResult.CommunicationSucceeded &&
-                isDeviceDefinedResult.Data)
+            if (!isDeviceDefinedResult.CommunicationSucceeded)
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+
+            if (isDeviceDefinedResult.Data)
             {
                 logger.LogWarning("Device already exists!");
                 return ConsoleExitStatusCodes.Success;

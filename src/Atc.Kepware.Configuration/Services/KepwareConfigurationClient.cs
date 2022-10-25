@@ -6,28 +6,57 @@ namespace Atc.Kepware.Configuration.Services;
 /// </summary>
 [SuppressMessage("Usage", "CA2234:Pass system uri objects instead of strings", Justification = "OK")]
 [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "OK")]
+[SuppressMessage("Security", "MA0039:Do not write your own certificate validation method", Justification = "OK")]
+[SuppressMessage("Critical Vulnerability", "S4830:Server certificates should be verified during SSL/TLS connections", Justification = "OK")]
 public sealed partial class KepwareConfigurationClient : IKepwareConfigurationClient, IDisposable
 {
     private readonly JsonSerializerOptions jsonSerializerOptions;
-    private readonly HttpClientHandler httpClientHandler;
-    private readonly HttpClient httpClient;
+    private HttpClientHandler? httpClientHandler;
+    private HttpClient? httpClient;
 
-    [SuppressMessage("Security", "MA0039:Do not write your own certificate validation method", Justification = "OK")]
-    [SuppressMessage("Critical Vulnerability", "S4830:Server certificates should be verified during SSL/TLS connections", Justification = "OK")]
+    /// <summary>
+    /// Initializes a new instance of the <see cref="KepwareConfigurationClient"/> class and setting only the ILogger.
+    /// Make sure to invoke SetConnectionInformation when using this constructor.
+    /// </summary>
+    /// <param name="logger">The ILogger</param>
+    /// <exception cref="ArgumentNullException">Throws ArgumentNullException if ILogger is null.</exception>
+    public KepwareConfigurationClient(
+        ILogger logger)
+    {
+        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+        jsonSerializerOptions = InitializeJsonSerializerOptions();
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="KepwareConfigurationClient"/> class with all required properties.
+    /// </summary>
+    /// <param name="logger">The ILogger</param>
+    /// <param name="baseUri">BaseUri of the Kepware server.</param>
+    /// <param name="userName">Optional username to the Kepware server.</param>
+    /// <param name="password">Optional password to the Kepware server.</param>
+    /// <param name="disableCertificateValidationCheck">Indicates if remote certificate validation check should be enabled or not.</param>
+    /// <exception cref="ArgumentNullException">Throws ArgumentNullException if ILogger is null.</exception>
     public KepwareConfigurationClient(
         ILogger logger,
         Uri baseUri,
         string? userName,
         string? password,
         bool disableCertificateValidationCheck = true)
+        : this(logger)
     {
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        SetConnectionInformation(baseUri, userName, password, disableCertificateValidationCheck);
+    }
 
-        jsonSerializerOptions = JsonSerializerOptionsFactory.Create(new JsonSerializerFactorySettings
-        {
-            UseConverterEnumAsString = false,
-        });
+    public bool IsConnectionInformationConfigured()
+        => httpClient is not null;
 
+    public void SetConnectionInformation(
+        Uri baseUri,
+        string? userName,
+        string? password,
+        bool disableCertificateValidationCheck = true)
+    {
         httpClientHandler = new HttpClientHandler();
 
         if (disableCertificateValidationCheck)
@@ -49,14 +78,28 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
         }
     }
 
+    private static JsonSerializerOptions InitializeJsonSerializerOptions()
+        => JsonSerializerOptionsFactory.Create(new JsonSerializerFactorySettings
+        {
+            UseConverterEnumAsString = false,
+        });
+
+    [SuppressMessage("Design", "MA0051:Method is too long", Justification = "OK.")]
     private async Task<HttpClientRequestResult<TResponse?>> Get<TResponse>(
         string pathTemplate,
         CancellationToken cancellationToken,
         bool shouldLogNotFound = true)
     {
+        if (!IsConnectionInformationConfigured())
+        {
+            LogConnectionInformationNotSet();
+            return new HttpClientRequestResult<TResponse?>(
+                new HttpRequestException("Connection information is not set on the client."));
+        }
+
         try
         {
-            var response = await httpClient.GetAsync(pathTemplate, cancellationToken);
+            var response = await httpClient!.GetAsync(pathTemplate, cancellationToken);
 
             if (response.IsSuccessStatusCode)
             {
@@ -116,12 +159,19 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     {
         try
         {
+            if (!IsConnectionInformationConfigured())
+            {
+                LogConnectionInformationNotSet();
+                return new HttpClientRequestResult<bool>(
+                    new HttpRequestException("Connection information is not set on the client."));
+            }
+
             var requestContent = new StringContent(
                 JsonSerializer.Serialize(request, jsonSerializerOptions),
                 Encoding.UTF8,
                 MediaTypeNames.Application.Json);
 
-            var response = await httpClient.PostAsync(pathTemplate, requestContent, cancellationToken);
+            var response = await httpClient!.PostAsync(pathTemplate, requestContent, cancellationToken);
             requestContent.Dispose();
 
             if (response.IsSuccessStatusCode)
@@ -159,12 +209,19 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     {
         try
         {
+            if (!IsConnectionInformationConfigured())
+            {
+                LogConnectionInformationNotSet();
+                return new HttpClientRequestResult<bool>(
+                    new HttpRequestException("Connection information is not set on the client."));
+            }
+
             var requestContent = new StringContent(
                 JsonSerializer.Serialize(request, jsonSerializerOptions),
                 Encoding.UTF8,
                 MediaTypeNames.Application.Json);
 
-            var response = await httpClient.PutAsync(pathTemplate, requestContent, cancellationToken);
+            var response = await httpClient!.PutAsync(pathTemplate, requestContent, cancellationToken);
             requestContent.Dispose();
 
             if (response.IsSuccessStatusCode)
@@ -201,7 +258,14 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     {
         try
         {
-            var response = await httpClient.DeleteAsync(pathTemplate, cancellationToken);
+            if (!IsConnectionInformationConfigured())
+            {
+                LogConnectionInformationNotSet();
+                return new HttpClientRequestResult<bool>(
+                    new HttpRequestException("Connection information is not set on the client."));
+            }
+
+            var response = await httpClient!.DeleteAsync(pathTemplate, cancellationToken);
             if (response.IsSuccessStatusCode)
             {
                 LogDeleteSucceeded(pathTemplate);
@@ -232,7 +296,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
 
     public void Dispose()
     {
-        httpClientHandler.Dispose();
-        httpClient.Dispose();
+        httpClientHandler?.Dispose();
+        httpClient?.Dispose();
     }
 }

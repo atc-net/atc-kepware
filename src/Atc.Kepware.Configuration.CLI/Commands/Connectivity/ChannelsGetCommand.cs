@@ -3,10 +3,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 public class ChannelsGetCommand : AsyncCommand<KepwareBaseCommandSettings>
 {
     private readonly ILogger<ChannelsGetCommand> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public ChannelsGetCommand(
-        ILogger<ChannelsGetCommand> logger)
-        => this.logger = logger;
+        ILogger<ChannelsGetCommand> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,7 +30,10 @@ public class ChannelsGetCommand : AsyncCommand<KepwareBaseCommandSettings>
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var result = await kepwareConfigurationClient.GetChannels(CancellationToken.None);
             if (result.CommunicationSucceeded &&

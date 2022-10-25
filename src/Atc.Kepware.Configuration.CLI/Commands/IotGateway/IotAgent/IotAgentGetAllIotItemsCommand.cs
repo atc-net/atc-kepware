@@ -3,27 +3,48 @@ namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 public class IotAgentGetAllIotItemsCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
     private readonly ILogger<IotAgentGetAllIotItemsCommand> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public IotAgentGetAllIotItemsCommand(
-        ILogger<IotAgentGetAllIotItemsCommand> logger)
-        => this.logger = logger;
+        ILogger<IotAgentGetAllIotItemsCommand> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
-    public override async Task<int> ExecuteAsync(
+    public override Task<int> ExecuteAsync(
         CommandContext context,
+        IotAgentCommandBaseSettings settings)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(settings);
+
+        return ExecuteInternalAsync(settings);
+    }
+
+    private async Task<int> ExecuteInternalAsync(
         IotAgentCommandBaseSettings settings)
     {
         ConsoleHelper.WriteHeader();
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var isIotAgentDefinedResult = await kepwareConfigurationClient.IsIotAgentDefined(
                 settings.Name,
                 CancellationToken.None);
 
-            if (isIotAgentDefinedResult.CommunicationSucceeded &&
-                !isIotAgentDefinedResult.Data)
+            if (!isIotAgentDefinedResult.CommunicationSucceeded)
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+
+            if (!isIotAgentDefinedResult.Data)
             {
                 logger.LogWarning("Iot Agent does not exist!");
                 return ConsoleExitStatusCodes.Success;

@@ -3,10 +3,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 public class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateCommandSettings>
 {
     private readonly ILogger<TagsCreateTagGroupCommand> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public TagsCreateTagGroupCommand(
-        ILogger<TagsCreateTagGroupCommand> logger)
-        => this.logger = logger;
+        ILogger<TagsCreateTagGroupCommand> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,7 +30,10 @@ public class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateCommandSetti
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var isTagGroupDefinedResult = await kepwareConfigurationClient.IsTagGroupDefined(
                 settings.ChannelName,
@@ -34,8 +42,12 @@ public class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateCommandSetti
                 settings.TagGroups,
                 CancellationToken.None);
 
-            if (isTagGroupDefinedResult.CommunicationSucceeded &&
-                isTagGroupDefinedResult.Data)
+            if (!isTagGroupDefinedResult.CommunicationSucceeded)
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+
+            if (isTagGroupDefinedResult.Data)
             {
                 logger.LogWarning("Tag Group already exists!");
                 return ConsoleExitStatusCodes.Success;

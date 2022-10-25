@@ -3,10 +3,15 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 public class DeviceDeleteCommand : AsyncCommand<DeviceDeleteCommandSettings>
 {
     private readonly ILogger<DeviceDeleteCommand> logger;
+    private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public DeviceDeleteCommand(
-        ILogger<DeviceDeleteCommand> logger)
-        => this.logger = logger;
+        ILogger<DeviceDeleteCommand> logger,
+        IKepwareConfigurationClient kepwareConfigurationClient)
+    {
+        this.logger = logger;
+        this.kepwareConfigurationClient = kepwareConfigurationClient;
+    }
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
@@ -25,15 +30,22 @@ public class DeviceDeleteCommand : AsyncCommand<DeviceDeleteCommandSettings>
 
         try
         {
-            var kepwareConfigurationClient = KepwareConfigurationClientBuilder.Build(settings, logger);
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
 
             var isDeviceDefinedResult = await kepwareConfigurationClient.IsDeviceDefined(
                 settings.ChannelName,
                 settings.DeviceName,
                 CancellationToken.None);
 
-            if (isDeviceDefinedResult.CommunicationSucceeded &&
-                !isDeviceDefinedResult.Data)
+            if (!isDeviceDefinedResult.CommunicationSucceeded)
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+
+            if (!isDeviceDefinedResult.Data)
             {
                 logger.LogWarning("Device does not exist!");
                 return ConsoleExitStatusCodes.Success;

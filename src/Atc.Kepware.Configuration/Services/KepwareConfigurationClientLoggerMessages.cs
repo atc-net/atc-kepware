@@ -10,6 +10,12 @@ public partial class KepwareConfigurationClient
     private readonly ILogger logger;
 
     [LoggerMessage(
+        EventId = LoggingEventIdConstants.ConnectionInformationNotSet,
+        Level = LogLevel.Warning,
+        Message = "Connection information is not set on the client.")]
+    private partial void LogConnectionInformationNotSet();
+
+    [LoggerMessage(
         EventId = LoggingEventIdConstants.GetSucceeded,
         Level = LogLevel.Trace,
         Message = "Successfully retrieved data from pathTemplate '{pathTemplate}'.")]

@@ -15,7 +15,6 @@ global using Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 global using Atc.Kepware.Configuration.CLI.Commands.DescriptionAttributes.Connectivity;
 global using Atc.Kepware.Configuration.CLI.Commands.DescriptionAttributes.IotGateway;
 global using Atc.Kepware.Configuration.CLI.Commands.Helpers;
-global using Atc.Kepware.Configuration.CLI.Commands.IotGateway;
 global using Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 global using Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotItem;
 global using Atc.Kepware.Configuration.CLI.Commands.Settings;
@@ -30,6 +29,7 @@ global using Atc.Kepware.Configuration.Contracts.IotGateway;
 global using Atc.Kepware.Configuration.Services;
 
 global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
 
 global using Spectre.Console;
