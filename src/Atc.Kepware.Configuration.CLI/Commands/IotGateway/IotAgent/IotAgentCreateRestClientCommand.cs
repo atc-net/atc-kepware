@@ -1,3 +1,4 @@
+// ReSharper disable InvertIf
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 
 public class IotAgentCreateRestClientCommand : AsyncCommand<IotAgentCreateRestClientCommandSettings>
@@ -106,6 +107,13 @@ public class IotAgentCreateRestClientCommand : AsyncCommand<IotAgentCreateRestCl
             settings.PublishMediaType.IsSet)
         {
             request.PublishMediaType = settings.PublishMediaType.Value;
+        }
+
+        if (settings.UrlUserName is not null && settings.UrlUserName.IsSet &&
+            settings.UrlPassword is not null && settings.UrlPassword.IsSet)
+        {
+            request.UserName = settings.UrlUserName.Value;
+            request.Password = settings.UrlPassword.Value;
         }
 
         return request;
