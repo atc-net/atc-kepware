@@ -58,4 +58,9 @@ public interface IIotAgentRestClient : IIotAgentBase
     /// This setting is only valid for <see cref="IotAgentPublishMessageFormatType.Advanced"/>.
     /// </remarks>
     IotAgentPublishMediaType PublishMediaType { get; set; }
+
+    /// <summary>
+    /// Indicates if the Url endpoint is protected with Basic Authentication.
+    /// </summary>
+    bool IsBasicAuthenticationEnabled { get; }
 }
