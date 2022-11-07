@@ -198,6 +198,14 @@ public class IotAgentUpdateRestClientCommand : AsyncCommand<IotAgentUpdateRestCl
             shouldUpdate = true;
         }
 
+        if (settings.UrlUserName is not null && settings.UrlUserName.IsSet &&
+            settings.UrlPassword is not null && settings.UrlPassword.IsSet)
+        {
+            request.UserName = settings.UrlUserName.Value;
+            request.Password = settings.UrlPassword.Value;
+            shouldUpdate = true;
+        }
+
         return (shouldUpdate, request);
     }
 }

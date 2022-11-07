@@ -56,6 +56,14 @@ public class IotAgentUpdateRestClientCommandSettings : IotAgentUpdateCommandBase
     [IotAgentPublishMediaTypeDescription]
     public FlagValue<IotAgentPublishMediaType>? PublishMediaType { get; init; }
 
+    [CommandOption("--url-username [URL-USERNAME]")]
+    [Description("The username to use when calling the URl endpoint")]
+    public FlagValue<string>? UrlUserName { get; init; }
+
+    [CommandOption("--url-password [URL-PASSWORD]")]
+    [Description("The password to use when calling the URl endpoint")]
+    public FlagValue<string>? UrlPassword { get; init; }
+
     public override ValidationResult Validate()
     {
         var validationResult = base.Validate();
@@ -86,6 +94,12 @@ public class IotAgentUpdateRestClientCommandSettings : IotAgentUpdateCommandBase
             MaxEventsPerPublish.Value <= 0)
         {
             return ValidationResult.Error("--max-events-per-publish is not valid.");
+        }
+
+        if ((UrlUserName is not null && UrlUserName.IsSet && UrlPassword is not null && !UrlPassword.IsSet) ||
+            (UrlUserName is not null && !UrlUserName.IsSet && UrlPassword is not null && UrlPassword.IsSet))
+        {
+            return ValidationResult.Error("Both url-username and url-password must be set.");
         }
 
         return ValidationResult.Success();

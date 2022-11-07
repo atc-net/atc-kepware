@@ -58,4 +58,14 @@ public interface IIotAgentRestClientUpdateRequest : IIotAgentUpdateRequestBase
     /// This setting is only valid for <see cref="IotAgentPublishMessageFormatType.Advanced"/>.
     /// </remarks>
     IotAgentPublishMediaType? PublishMediaType { get; set; }
+
+    /// <summary>
+    /// The Username to use when calling the <see cref="Url"/>.
+    /// </summary>
+    string? UserName { get; set; }
+
+    /// <summary>
+    /// The Password to use when calling the <see cref="Url"/>.
+    /// </summary>
+    string? Password { get; set; }
 }
