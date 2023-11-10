@@ -508,6 +508,7 @@ dotnet_diagnostic.SA1615.severity = none            # Element return value shoul
 
 dotnet_diagnostic.CA1056.severity = none            # URI properties should not be strings
 dotnet_diagnostic.CA1812.severity = none            # Internal class that is apparently never instantiated.
+dotnet_diagnostic.CA1852.severity = none            # False-Positive on sealed classes
 dotnet_diagnostic.CA2007.severity = none            # Consider calling ConfigureAwait on the awaited task
 dotnet_diagnostic.CA2227.severity = none            # Collection properties should be read only
 dotnet_diagnostic.CA5400.severity = none            # Ensure HttpClient certificate revocation list check is not disabled
