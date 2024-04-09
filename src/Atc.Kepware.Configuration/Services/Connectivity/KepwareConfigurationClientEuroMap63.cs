@@ -17,8 +17,7 @@ public sealed partial class KepwareConfigurationClient
             $"{EndpointPathTemplateConstants.Channels}/{channelName}",
             cancellationToken);
 
-        if (response.CommunicationSucceeded &&
-            response.HasData &&
+        if (response is { CommunicationSucceeded: true, HasData: true } &&
             !response.Data!.DeviceDriver.Equals(DriverType.EuroMap63.GetDescription(), StringComparison.Ordinal))
         {
             return new HttpClientRequestResult<EuroMap63Channel?>(HttpStatusCode.NotFound, data: null, $"Retrieved channel '{channelName}' is not a '{DriverType.EuroMap63.GetDescription()}' channel.");
@@ -39,8 +38,7 @@ public sealed partial class KepwareConfigurationClient
             $"{EndpointPathTemplateConstants.Channels}/{channelName}/{EndpointPathTemplateConstants.Devices}/{deviceName}",
             cancellationToken);
 
-        if (response.CommunicationSucceeded &&
-            response.HasData &&
+        if (response is { CommunicationSucceeded: true, HasData: true } &&
             !response.Data!.Driver.Equals(DriverType.EuroMap63.GetDescription(), StringComparison.Ordinal))
         {
             return new HttpClientRequestResult<EuroMap63Device?>(HttpStatusCode.NotFound, data: null, $"Retrieved device '{deviceName}' is not a '{DriverType.EuroMap63.GetDescription()}' device.");

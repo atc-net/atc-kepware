@@ -57,8 +57,7 @@ public class RestClientIotItemUpdateCommand : AsyncCommand<IotItemUpdateCommandS
                 CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
                 CancellationToken.None);
 
-            if (iotItemResult.CommunicationSucceeded &&
-                !iotItemResult.HasData)
+            if (iotItemResult is { CommunicationSucceeded: true, HasData: false })
             {
                 logger.LogWarning("Iot Agent Iot Item does not exist!");
                 return ConsoleExitStatusCodes.Success;

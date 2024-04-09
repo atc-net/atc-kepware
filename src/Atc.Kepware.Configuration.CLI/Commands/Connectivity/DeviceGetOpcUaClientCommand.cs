@@ -40,8 +40,7 @@ public class DeviceGetOpcUaClientCommand : AsyncCommand<ChannelAndDeviceCommandB
                 settings.DeviceName,
                 CancellationToken.None);
 
-            if (result.CommunicationSucceeded &&
-                result.HasData)
+            if (result is { CommunicationSucceeded: true, HasData: true })
             {
                 var item = result.Data!;
                 var properties = item.GetType().GetPublicProperties();

@@ -56,8 +56,7 @@ public class IotItemEnableCommand : AsyncCommand<IotItemGetCommandSettings>
                 CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
                 CancellationToken.None);
 
-            if (iotItemResult.CommunicationSucceeded &&
-                !iotItemResult.HasData)
+            if (iotItemResult is { CommunicationSucceeded: true, HasData: false })
             {
                 logger.LogWarning("Iot Agent Iot Item does not exist!");
                 return ConsoleExitStatusCodes.Success;
@@ -75,8 +74,7 @@ public class IotItemEnableCommand : AsyncCommand<IotItemGetCommandSettings>
                 CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
                 CancellationToken.None);
 
-            if (!result.CommunicationSucceeded &&
-                !result.Data)
+            if (result is { CommunicationSucceeded: false, Data: false })
             {
                 return ConsoleExitStatusCodes.Failure;
             }

@@ -41,7 +41,7 @@ public class TagsSearchCommand : AsyncCommand<TagsSearchCommandSettings>
                 settings.Query,
                 CancellationToken.None);
 
-            if (result.CommunicationSucceeded && result.HasData)
+            if (result is { CommunicationSucceeded: true, HasData: true })
             {
                 foreach (var searchResult in result.Data!)
                 {

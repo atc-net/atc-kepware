@@ -167,8 +167,7 @@ public sealed partial class KepwareConfigurationClient
         long projectId,
         CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(iotAgentName);
-        ArgumentNullException.ThrowIfNull(projectId);
+        ArgumentException.ThrowIfNullOrEmpty(iotAgentName);
 
         return InvokeEnableIotAgent(
             iotAgentName,
@@ -191,8 +190,7 @@ public sealed partial class KepwareConfigurationClient
         long projectId,
         CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(iotAgentName);
-        ArgumentNullException.ThrowIfNull(projectId);
+        ArgumentException.ThrowIfNullOrEmpty(iotAgentName);
 
         return InvokeDisableIotAgent(
             iotAgentName,
@@ -330,9 +328,8 @@ public sealed partial class KepwareConfigurationClient
         string iotItemName,
         CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(iotAgentName);
-        ArgumentNullException.ThrowIfNull(projectId);
-        ArgumentNullException.ThrowIfNull(iotItemName);
+        ArgumentException.ThrowIfNullOrEmpty(iotAgentName);
+        ArgumentException.ThrowIfNullOrEmpty(iotItemName);
 
         return InvokeEnableIotAgentIotItem(
             iotAgentName,
@@ -358,9 +355,8 @@ public sealed partial class KepwareConfigurationClient
         string iotItemName,
         CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(iotAgentName);
-        ArgumentNullException.ThrowIfNull(projectId);
-        ArgumentNullException.ThrowIfNull(iotItemName);
+        ArgumentException.ThrowIfNullOrEmpty(iotAgentName);
+        ArgumentException.ThrowIfNullOrEmpty(iotItemName);
 
         return InvokeDisableIotAgentIotItem(
             iotAgentName,
@@ -430,8 +426,7 @@ public sealed partial class KepwareConfigurationClient
             $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}",
             cancellationToken);
 
-        if (response.CommunicationSucceeded &&
-            response.HasData &&
+        if (response is { CommunicationSucceeded: true, HasData: true } &&
             !response.Data!.AgentType.Equals(IotAgentType.RestClient))
         {
             return new HttpClientRequestResult<IotAgentRestClient?>(HttpStatusCode.NotFound, data: null, $"Retrieved iot agent '{iotAgentName}' is not a '{IotAgentType.RestClient.GetDescription()}'.");
