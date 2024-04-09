@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Atc" Version="2.0.229" />
-    <PackageReference Include="Mapster" Version="7.3.0" />
+    <PackageReference Include="Atc" Version="2.0.465" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
   </ItemGroup>
 
   <ItemGroup>
