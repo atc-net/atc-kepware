@@ -8,10 +8,6 @@ Kepware configuration library for executing commands, reads and writes on Kepwar
 
 The `Atc.Kepware.Configuration.CLI` tool is available through a cross platform command line application.
 
-### Requirements
-
-* [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
-
 ### Installation
 
 The tool can be installed as a .NET global tool by the following command
@@ -347,6 +343,11 @@ OPTIONS:
 COMMANDS:
     create    Create an iot item on a rest-client iot agent
 ```
+
+### Requirements
+
+* [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+
 
 ## How to contribute
 
