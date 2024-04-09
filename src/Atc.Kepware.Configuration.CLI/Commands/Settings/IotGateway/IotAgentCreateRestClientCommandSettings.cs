@@ -2,18 +2,14 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Settings.IotGateway;
 
 public sealed class IotAgentCreateRestClientCommandSettings : IotAgentCreateCommandBaseSettings
 {
-    private readonly System.ComponentModel.DataAnnotations.UriAttribute urlValidator;
-
-    public IotAgentCreateRestClientCommandSettings()
-    {
-        urlValidator = new System.ComponentModel.DataAnnotations.UriAttribute(
-            required: true,
-            allowHttp: true,
-            allowHttps: true,
-            allowFtp: false,
-            allowFile: false,
-            allowOpcTcp: false);
-    }
+    private readonly System.ComponentModel.DataAnnotations.UriAttribute urlValidator = new(
+        required: true,
+        allowHttp: true,
+        allowHttps: true,
+        allowFtp: false,
+        allowFtps: false,
+        allowFile: false,
+        allowOpcTcp: false);
 
     [CommandOption("--url <URL>")]
     [Description("The URl of the endpoint to send data to")]
