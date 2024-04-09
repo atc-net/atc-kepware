@@ -3,7 +3,6 @@ global using System.Diagnostics.CodeAnalysis;
 global using System.Net;
 global using System.Reflection;
 global using System.Text;
-
 global using Atc.Console.Spectre;
 global using Atc.Console.Spectre.CommandSettings;
 global using Atc.Console.Spectre.Factories;
@@ -27,10 +26,8 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcUaClient;
 global using Atc.Kepware.Configuration.Contracts.IotGateway;
 global using Atc.Kepware.Configuration.Services;
-
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
-
 global using Spectre.Console;
 global using Spectre.Console.Cli;

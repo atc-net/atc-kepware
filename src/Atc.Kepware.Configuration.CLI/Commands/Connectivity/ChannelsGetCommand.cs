@@ -36,8 +36,7 @@ public class ChannelsGetCommand : AsyncCommand<KepwareBaseCommandSettings>
                 settings.Password!.Value);
 
             var result = await kepwareConfigurationClient.GetChannels(CancellationToken.None);
-            if (result.CommunicationSucceeded &&
-                result.HasData)
+            if (result is { CommunicationSucceeded: true, HasData: true })
             {
                 foreach (var channelBase in result.Data!)
                 {

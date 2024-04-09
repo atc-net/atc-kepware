@@ -39,8 +39,7 @@ public class ChannelGetOpcUaClientCommand : AsyncCommand<ChannelGetCommandSettin
                 settings.Name,
                 CancellationToken.None);
 
-            if (result.CommunicationSucceeded &&
-                result.HasData)
+            if (result is { CommunicationSucceeded: true, HasData: true })
             {
                 var item = result.Data!;
                 var properties = item.GetType().GetPublicProperties();

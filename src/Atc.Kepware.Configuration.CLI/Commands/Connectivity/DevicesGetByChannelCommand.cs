@@ -36,8 +36,7 @@ public class DevicesGetByChannelCommand : AsyncCommand<DevicesGetCommandSettings
                 settings.Password!.Value);
 
             var result = await kepwareConfigurationClient.GetDevicesByChannelName(settings.ChannelName, CancellationToken.None);
-            if (result.CommunicationSucceeded &&
-                result.HasData)
+            if (result is { CommunicationSucceeded: true, HasData: true })
             {
                 foreach (var deviceBase in result.Data!)
                 {

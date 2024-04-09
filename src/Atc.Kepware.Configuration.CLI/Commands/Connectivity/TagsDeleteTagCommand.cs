@@ -60,7 +60,7 @@ public class TagsDeleteTagCommand : AsyncCommand<TagDeleteCommandSettings>
                 settings.TagGroups,
                 CancellationToken.None);
 
-            if (!result.CommunicationSucceeded && !result.Data)
+            if (result is { CommunicationSucceeded: false, Data: false })
             {
                 return ConsoleExitStatusCodes.Failure;
             }

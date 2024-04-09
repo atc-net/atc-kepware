@@ -243,8 +243,7 @@ public sealed partial class KepwareConfigurationClient
 
             var tagGroupResult = await GetTagGroupResultForPathTemplate(basePathTemplate, cancellationToken);
 
-            if (tagGroupResult.CommunicationSucceeded &&
-                tagGroupResult.HasData &&
+            if (tagGroupResult is { CommunicationSucceeded: true, HasData: true } &&
                 tagGroupResult.Data!.Any())
             {
                 foreach (var kepwareTagGroup in tagGroupResult.Data!)
@@ -497,22 +496,21 @@ public sealed partial class KepwareConfigurationClient
         {
             return channelResult.HasException
                 ? new HttpClientRequestResult<IList<string>>(channelResult.Exception!)
-                : new HttpClientRequestResult<IList<string>>(channelResult.StatusCode, new List<string>());
+                : new HttpClientRequestResult<IList<string>>(channelResult.StatusCode, []);
         }
 
         var searchResults = new List<string>();
         foreach (var channelName in channelResult.Data!
                      .Select(x => x.Name)
-                     .OrderBy(x => x))
+                     .OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
         {
             var devicesResult = await GetDevicesByChannelName(channelName, cancellationToken);
             foreach (var deviceName in devicesResult.Data!
                          .Select(x => x.Name)
-                         .OrderBy(x => x))
+                         .OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
             {
                 var tagsResultForDevice = await GetTags(channelName, deviceName, maxDepth, cancellationToken);
-                if (tagsResultForDevice.CommunicationSucceeded &&
-                    tagsResultForDevice.HasData)
+                if (tagsResultForDevice is { CommunicationSucceeded: true, HasData: true })
                 {
                     SearchInTagRoot(searchResults, channelName, deviceName, query, tagsResultForDevice.Data!);
                 }
@@ -533,17 +531,16 @@ public sealed partial class KepwareConfigurationClient
         {
             return devicesResult.HasException
                 ? new HttpClientRequestResult<IList<string>>(devicesResult.Exception!)
-                : new HttpClientRequestResult<IList<string>>(devicesResult.StatusCode, new List<string>());
+                : new HttpClientRequestResult<IList<string>>(devicesResult.StatusCode, []);
         }
 
         var searchResults = new List<string>();
         foreach (var deviceName in devicesResult.Data!
                      .Select(x => x.Name)
-                     .OrderBy(x => x))
+                     .OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
         {
             var tagsResultForDevice = await GetTags(channelName, deviceName, maxDepth, cancellationToken);
-            if (tagsResultForDevice.CommunicationSucceeded &&
-                tagsResultForDevice.HasData)
+            if (tagsResultForDevice is { CommunicationSucceeded: true, HasData: true })
             {
                 SearchInTagRoot(searchResults, channelName, deviceName, query, tagsResultForDevice.Data!);
             }
@@ -564,7 +561,7 @@ public sealed partial class KepwareConfigurationClient
         {
             return tagsResult.HasException
                 ? new HttpClientRequestResult<IList<string>>(tagsResult.Exception!)
-                : new HttpClientRequestResult<IList<string>>(tagsResult.StatusCode, new List<string>());
+                : new HttpClientRequestResult<IList<string>>(tagsResult.StatusCode, []);
         }
 
         var searchResults = new List<string>();
@@ -631,8 +628,7 @@ public sealed partial class KepwareConfigurationClient
         foreach (var tagGroup in tagGroupStructure)
         {
             var isTagGroupDefinedResult = await IsTagGroupDefined(channelName, deviceName, tagGroup, testTagGroupStructure.ToArray(), cancellationToken);
-            if (isTagGroupDefinedResult.CommunicationSucceeded &&
-                isTagGroupDefinedResult.Data)
+            if (isTagGroupDefinedResult is { CommunicationSucceeded: true, Data: true })
             {
                 testTagGroupStructure.Add(tagGroup);
                 continue;
@@ -842,8 +838,7 @@ public sealed partial class KepwareConfigurationClient
         // TODO: Optimize if tagGroup.TagCountInTree > 0
         var tagGroupResult = await GetTagGroupResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
 
-        if (tagGroupResult.CommunicationSucceeded &&
-            tagGroupResult.HasData &&
+        if (tagGroupResult is { CommunicationSucceeded: true, HasData: true } &&
             tagGroupResult.Data!.Any())
         {
             foreach (var kepwareTagGroup in tagGroupResult.Data!)

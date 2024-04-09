@@ -6,7 +6,6 @@ global using System.Net.Mime;
 global using System.Text;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
-
 global using Atc.Data.Models;
 global using Atc.Helpers;
 global using Atc.Kepware.Configuration.Contracts;
@@ -19,7 +18,5 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcUaCl
 global using Atc.Kepware.Configuration.Contracts.Interfaces.IotGateway;
 global using Atc.Kepware.Configuration.Contracts.IotGateway;
 global using Atc.Serialization;
-
 global using Mapster;
-
 global using Microsoft.Extensions.Logging;

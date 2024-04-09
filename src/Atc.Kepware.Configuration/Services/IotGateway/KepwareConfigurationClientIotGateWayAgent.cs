@@ -159,7 +159,7 @@ public sealed partial class KepwareConfigurationClient
     /// <param name="projectId">The Iot Agent ProjectId.</param>
     /// <param name="cancellationToken">The CancellationToken.</param>
     /// <remarks>
-    /// Requires that the current ProjectId is sent along side the request.
+    /// Requires that the current ProjectId is sent alongside the request.
     /// Retrieve the client forehand to retrieve ProjectId.
     /// </remarks>
     public Task<HttpClientRequestResult<bool>> EnableIotAgent(
@@ -167,8 +167,7 @@ public sealed partial class KepwareConfigurationClient
         long projectId,
         CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(iotAgentName);
-        ArgumentNullException.ThrowIfNull(projectId);
+        ArgumentException.ThrowIfNullOrEmpty(iotAgentName);
 
         return InvokeEnableIotAgent(
             iotAgentName,
@@ -183,7 +182,7 @@ public sealed partial class KepwareConfigurationClient
     /// <param name="projectId">The Iot Agent ProjectId.</param>
     /// <param name="cancellationToken">The CancellationToken.</param>
     /// <remarks>
-    /// Requires that the current ProjectId is sent along side the request.
+    /// Requires that the current ProjectId is sent alongside the request.
     /// Retrieve the client forehand to retrieve ProjectId.
     /// </remarks>
     public Task<HttpClientRequestResult<bool>> DisableIotAgent(
@@ -191,8 +190,7 @@ public sealed partial class KepwareConfigurationClient
         long projectId,
         CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(iotAgentName);
-        ArgumentNullException.ThrowIfNull(projectId);
+        ArgumentException.ThrowIfNullOrEmpty(iotAgentName);
 
         return InvokeDisableIotAgent(
             iotAgentName,
@@ -321,7 +319,7 @@ public sealed partial class KepwareConfigurationClient
     /// <param name="iotItemName">The Iot Item Name.</param>
     /// <param name="cancellationToken">The CancellationToken.</param>
     /// <remarks>
-    /// Requires that the current ProjectId is sent along side the request.
+    /// Requires that the current ProjectId is sent alongside the request.
     /// Retrieve the client forehand to retrieve ProjectId.
     /// </remarks>
     public Task<HttpClientRequestResult<bool>> EnableIotAgentIotItem(
@@ -330,9 +328,8 @@ public sealed partial class KepwareConfigurationClient
         string iotItemName,
         CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(iotAgentName);
-        ArgumentNullException.ThrowIfNull(projectId);
-        ArgumentNullException.ThrowIfNull(iotItemName);
+        ArgumentException.ThrowIfNullOrEmpty(iotAgentName);
+        ArgumentException.ThrowIfNullOrEmpty(iotItemName);
 
         return InvokeEnableIotAgentIotItem(
             iotAgentName,
@@ -349,7 +346,7 @@ public sealed partial class KepwareConfigurationClient
     /// <param name="iotItemName">The Iot Item Name.</param>
     /// <param name="cancellationToken">The CancellationToken.</param>
     /// <remarks>
-    /// Requires that the current ProjectId is sent along side the request.
+    /// Requires that the current ProjectId is sent alongside the request.
     /// Retrieve the client forehand to retrieve ProjectId.
     /// </remarks>
     public Task<HttpClientRequestResult<bool>> DisableIotAgentIotItem(
@@ -358,9 +355,8 @@ public sealed partial class KepwareConfigurationClient
         string iotItemName,
         CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(iotAgentName);
-        ArgumentNullException.ThrowIfNull(projectId);
-        ArgumentNullException.ThrowIfNull(iotItemName);
+        ArgumentException.ThrowIfNullOrEmpty(iotAgentName);
+        ArgumentException.ThrowIfNullOrEmpty(iotItemName);
 
         return InvokeDisableIotAgentIotItem(
             iotAgentName,
@@ -430,8 +426,7 @@ public sealed partial class KepwareConfigurationClient
             $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}",
             cancellationToken);
 
-        if (response.CommunicationSucceeded &&
-            response.HasData &&
+        if (response is { CommunicationSucceeded: true, HasData: true } &&
             !response.Data!.AgentType.Equals(IotAgentType.RestClient))
         {
             return new HttpClientRequestResult<IotAgentRestClient?>(HttpStatusCode.NotFound, data: null, $"Retrieved iot agent '{iotAgentName}' is not a '{IotAgentType.RestClient.GetDescription()}'.");

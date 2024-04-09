@@ -41,8 +41,7 @@ public class TagsGetCommand : AsyncCommand<TagsGetCommandSettings>
                 settings.MaxDepth < 1 ? 1 : settings.MaxDepth,
                 CancellationToken.None);
 
-            if (result.CommunicationSucceeded &&
-                result.HasData)
+            if (result is { CommunicationSucceeded: true, HasData: true })
             {
                 OutputTagRoot(result.Data!);
             }

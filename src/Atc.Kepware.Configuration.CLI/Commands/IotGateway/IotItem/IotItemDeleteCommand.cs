@@ -55,8 +55,7 @@ public class IotItemDeleteCommand : AsyncCommand<IotItemGetCommandSettings>
                 CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
                 CancellationToken.None);
 
-            if (!result.CommunicationSucceeded &&
-                !result.Data)
+            if (result is { CommunicationSucceeded: false, Data: false })
             {
                 return ConsoleExitStatusCodes.Failure;
             }

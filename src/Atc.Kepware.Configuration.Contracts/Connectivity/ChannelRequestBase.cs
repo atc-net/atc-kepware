@@ -2,7 +2,8 @@ namespace Atc.Kepware.Configuration.Contracts.Connectivity;
 
 public abstract class ChannelRequestBase : IChannelRequestBase
 {
-    protected ChannelRequestBase(DriverType deviceDriver)
+    protected ChannelRequestBase(
+        DriverType deviceDriver)
     {
         DeviceDriver = deviceDriver.GetDescription();
     }

@@ -61,8 +61,7 @@ public class IotAgentEnableCommand : AsyncCommand<IotAgentCommandBaseSettings>
                 iotAgentResult.Data!.ProjectId,
                 CancellationToken.None);
 
-            if (!result.CommunicationSucceeded &&
-                !result.Data)
+            if (result is { CommunicationSucceeded: false, Data: false })
             {
                 return ConsoleExitStatusCodes.Failure;
             }

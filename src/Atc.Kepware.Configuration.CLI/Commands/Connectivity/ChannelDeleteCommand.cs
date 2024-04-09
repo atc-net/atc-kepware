@@ -54,7 +54,7 @@ public class ChannelDeleteCommand : AsyncCommand<ChannelDeleteCommandSettings>
                 settings.Name,
                 CancellationToken.None);
 
-            if (!result.CommunicationSucceeded && !result.Data)
+            if (result is { CommunicationSucceeded: false, Data: false })
             {
                 return ConsoleExitStatusCodes.Failure;
             }
