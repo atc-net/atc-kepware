@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <PackageId>atc-kepware-configuration</PackageId>
     <PackageTags>kepware;kepware-configuration</PackageTags>
     <Description>A .NET Tool that can interact with and configure a kepware server through REST API calls.</Description>
