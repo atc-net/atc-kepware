@@ -159,7 +159,7 @@ public sealed partial class KepwareConfigurationClient
     /// <param name="projectId">The Iot Agent ProjectId.</param>
     /// <param name="cancellationToken">The CancellationToken.</param>
     /// <remarks>
-    /// Requires that the current ProjectId is sent along side the request.
+    /// Requires that the current ProjectId is sent alongside the request.
     /// Retrieve the client forehand to retrieve ProjectId.
     /// </remarks>
     public Task<HttpClientRequestResult<bool>> EnableIotAgent(
@@ -183,7 +183,7 @@ public sealed partial class KepwareConfigurationClient
     /// <param name="projectId">The Iot Agent ProjectId.</param>
     /// <param name="cancellationToken">The CancellationToken.</param>
     /// <remarks>
-    /// Requires that the current ProjectId is sent along side the request.
+    /// Requires that the current ProjectId is sent alongside the request.
     /// Retrieve the client forehand to retrieve ProjectId.
     /// </remarks>
     public Task<HttpClientRequestResult<bool>> DisableIotAgent(
@@ -321,7 +321,7 @@ public sealed partial class KepwareConfigurationClient
     /// <param name="iotItemName">The Iot Item Name.</param>
     /// <param name="cancellationToken">The CancellationToken.</param>
     /// <remarks>
-    /// Requires that the current ProjectId is sent along side the request.
+    /// Requires that the current ProjectId is sent alongside the request.
     /// Retrieve the client forehand to retrieve ProjectId.
     /// </remarks>
     public Task<HttpClientRequestResult<bool>> EnableIotAgentIotItem(
@@ -349,7 +349,7 @@ public sealed partial class KepwareConfigurationClient
     /// <param name="iotItemName">The Iot Item Name.</param>
     /// <param name="cancellationToken">The CancellationToken.</param>
     /// <remarks>
-    /// Requires that the current ProjectId is sent along side the request.
+    /// Requires that the current ProjectId is sent alongside the request.
     /// Retrieve the client forehand to retrieve ProjectId.
     /// </remarks>
     public Task<HttpClientRequestResult<bool>> DisableIotAgentIotItem(
