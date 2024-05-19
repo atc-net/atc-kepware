@@ -7,8 +7,8 @@ namespace Atc.Kepware.Configuration.Services;
 public partial interface IKepwareConfigurationClient
 {
     Task<HttpClientRequestResult<bool>> IsChannelDefined(
-    string channelName,
-    CancellationToken cancellationToken);
+        string channelName,
+        CancellationToken cancellationToken);
 
     Task<HttpClientRequestResult<bool>> IsDeviceDefined(
         string channelName,
