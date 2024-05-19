@@ -75,6 +75,18 @@ public partial interface IKepwareConfigurationClient
         CancellationToken cancellationToken);
 
     /// <summary>
+    /// Deletes the specified mqtt client iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// This will delete all child iot items as well.
+    /// </remarks>
+    Task<HttpClientRequestResult<bool>> DeleteIotAgentMqttClient(
+        string iotAgentName,
+        CancellationToken cancellationToken);
+
+    /// <summary>
     /// Deletes the specified rest client iot agent.
     /// </summary>
     /// <param name="iotAgentName">The Iot Agent Name.</param>

@@ -89,6 +89,17 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
+    public Task<HttpClientRequestResult<bool>> DeleteIotAgentMqttClient(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+
+        return InvokeDeleteIotAgentMqttClient(
+            iotAgentName,
+            cancellationToken);
+    }
+
     public Task<HttpClientRequestResult<bool>> DeleteIotAgentRestClient(
         string iotAgentName,
         CancellationToken cancellationToken)
@@ -319,6 +330,13 @@ public sealed partial class KepwareConfigurationClient
         => Put(
             request.Adapt<KepwareContracts.IotGateway.IotAgentRestClientUpdateRequest>(),
             $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}",
+            cancellationToken);
+
+    private Task<HttpClientRequestResult<bool>> InvokeDeleteIotAgentMqttClient(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+        => Delete(
+            $"{EndpointPathTemplateConstants.IotGatewayMqttClients}/{iotAgentName}",
             cancellationToken);
 
     private Task<HttpClientRequestResult<bool>> InvokeDeleteIotAgentRestClient(
