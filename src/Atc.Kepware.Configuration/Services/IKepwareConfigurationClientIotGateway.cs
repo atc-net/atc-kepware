@@ -34,6 +34,10 @@ public partial interface IKepwareConfigurationClient
         string iotAgentName,
         CancellationToken cancellationToken);
 
+    Task<HttpClientRequestResult<bool>> DeleteIotAgentRestServer(
+        string iotAgentName,
+        CancellationToken cancellationToken);
+
     Task<HttpClientRequestResult<bool>> EnableIotAgent(
         string iotAgentName,
         long projectId,

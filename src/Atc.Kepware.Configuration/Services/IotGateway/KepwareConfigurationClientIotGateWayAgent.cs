@@ -153,6 +153,22 @@ public sealed partial class KepwareConfigurationClient
     }
 
     /// <summary>
+    /// Deletes the specified rest server iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    public Task<HttpClientRequestResult<bool>> DeleteIotAgentRestServer(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+
+        return InvokeDeleteIotAgentRestServer(
+            iotAgentName,
+            cancellationToken);
+    }
+
+    /// <summary>
     /// Enables the specified iot agent.
     /// </summary>
     /// <param name="iotAgentName">The Iot Agent Name.</param>
@@ -449,6 +465,13 @@ public sealed partial class KepwareConfigurationClient
         CancellationToken cancellationToken)
         => Delete(
             $"{EndpointPathTemplateConstants.IotGatewayRestClients}/{iotAgentName}",
+            cancellationToken);
+
+    private Task<HttpClientRequestResult<bool>> InvokeDeleteIotAgentRestServer(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+        => Delete(
+            $"{EndpointPathTemplateConstants.IotGatewayRestServers}/{iotAgentName}",
             cancellationToken);
 
     private Task<HttpClientRequestResult<bool>> InvokeEnableIotAgent(
