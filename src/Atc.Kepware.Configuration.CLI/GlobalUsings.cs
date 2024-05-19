@@ -29,5 +29,6 @@ global using Atc.Kepware.Configuration.Services;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Logging.Abstractions;
 global using Spectre.Console;
 global using Spectre.Console.Cli;
