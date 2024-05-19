@@ -1,15 +1,17 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
-public class DevicesGetByChannelCommand : AsyncCommand<DevicesGetCommandSettings>
+public sealed class DevicesGetByChannelCommand : AsyncCommand<DevicesGetCommandSettings>
 {
+    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DevicesGetByChannelCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public DevicesGetByChannelCommand(
-        ILogger<DevicesGetByChannelCommand> logger,
+        ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.logger = logger;
+        this.loggerFactory = loggerFactory;
+        logger = loggerFactory.CreateLogger<DevicesGetByChannelCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }
 

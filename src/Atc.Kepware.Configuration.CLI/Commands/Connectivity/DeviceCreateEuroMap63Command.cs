@@ -1,15 +1,17 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
-public class DeviceCreateEuroMap63Command : AsyncCommand<DeviceCreateEuroMap63CommandBaseSettings>
+public sealed class DeviceCreateEuroMap63Command : AsyncCommand<DeviceCreateEuroMap63CommandBaseSettings>
 {
+    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateEuroMap63Command> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public DeviceCreateEuroMap63Command(
-        ILogger<DeviceCreateEuroMap63Command> logger,
+        ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.logger = logger;
+        this.loggerFactory = loggerFactory;
+        logger = loggerFactory.CreateLogger<DeviceCreateEuroMap63Command>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }
 

@@ -1,15 +1,17 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
-public class ChannelGetOpcUaClientCommand : AsyncCommand<ChannelGetCommandSettings>
+public sealed class ChannelGetOpcUaClientCommand : AsyncCommand<ChannelGetCommandSettings>
 {
+    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelGetOpcUaClientCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public ChannelGetOpcUaClientCommand(
-        ILogger<ChannelGetOpcUaClientCommand> logger,
+        ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.logger = logger;
+        this.loggerFactory = loggerFactory;
+        logger = loggerFactory.CreateLogger<ChannelGetOpcUaClientCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }
 

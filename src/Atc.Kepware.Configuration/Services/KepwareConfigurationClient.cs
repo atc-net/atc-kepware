@@ -18,34 +18,37 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     /// Initializes a new instance of the <see cref="KepwareConfigurationClient"/> class and setting only the ILogger.
     /// Make sure to invoke SetConnectionInformation when using this constructor.
     /// </summary>
-    /// <param name="logger">The ILogger</param>
+    /// <param name="loggerFactory">The ILoggerFactory</param>
     /// <exception cref="ArgumentNullException">Throws ArgumentNullException if ILogger is null.</exception>
     public KepwareConfigurationClient(
-        ILogger logger)
+        ILoggerFactory? loggerFactory)
     {
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-
+        logger = loggerFactory?.CreateLogger<KepwareConfigurationClient>() ?? new NullLogger<KepwareConfigurationClient>();
         jsonSerializerOptions = InitializeJsonSerializerOptions();
     }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="KepwareConfigurationClient"/> class with all required properties.
     /// </summary>
-    /// <param name="logger">The ILogger</param>
+    /// <param name="loggerFactory">The ILoggerFactory</param>
     /// <param name="baseUri">BaseUri of the Kepware server.</param>
     /// <param name="userName">Optional username to the Kepware server.</param>
     /// <param name="password">Optional password to the Kepware server.</param>
     /// <param name="disableCertificateValidationCheck">Indicates if remote certificate validation check should be enabled or not.</param>
     /// <exception cref="ArgumentNullException">Throws ArgumentNullException if ILogger is null.</exception>
     public KepwareConfigurationClient(
-        ILogger logger,
+        ILoggerFactory? loggerFactory,
         Uri baseUri,
         string? userName,
         string? password,
         bool disableCertificateValidationCheck = true)
-        : this(logger)
+        : this(loggerFactory)
     {
-        SetConnectionInformation(baseUri, userName, password, disableCertificateValidationCheck);
+        SetConnectionInformation(
+            baseUri,
+            userName,
+            password,
+            disableCertificateValidationCheck);
     }
 
     public bool IsConnectionInformationConfigured()

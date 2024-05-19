@@ -1,15 +1,17 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
-public class ChannelCreateEuroMap63Command : AsyncCommand<ChannelCreateCommandBaseSettings>
+public sealed class ChannelCreateEuroMap63Command : AsyncCommand<ChannelCreateCommandBaseSettings>
 {
+    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelCreateEuroMap63Command> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public ChannelCreateEuroMap63Command(
-        ILogger<ChannelCreateEuroMap63Command> logger,
+        ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.logger = logger;
+        this.loggerFactory = loggerFactory;
+        logger = loggerFactory.CreateLogger<ChannelCreateEuroMap63Command>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }
 

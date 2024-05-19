@@ -20,3 +20,4 @@ global using Atc.Kepware.Configuration.Contracts.IotGateway;
 global using Atc.Serialization;
 global using Mapster;
 global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Logging.Abstractions;
