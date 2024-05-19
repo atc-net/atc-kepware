@@ -2,14 +2,16 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public class DeviceDeleteCommand : AsyncCommand<DeviceDeleteCommandSettings>
 {
+    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceDeleteCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public DeviceDeleteCommand(
-        ILogger<DeviceDeleteCommand> logger,
+        ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.logger = logger;
+        this.loggerFactory = loggerFactory;
+        logger = loggerFactory.CreateLogger<DeviceDeleteCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }
 

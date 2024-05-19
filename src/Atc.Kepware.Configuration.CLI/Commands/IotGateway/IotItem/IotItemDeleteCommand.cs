@@ -2,14 +2,16 @@ namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotItem;
 
 public class IotItemDeleteCommand : AsyncCommand<IotItemGetCommandSettings>
 {
+    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<IotItemDeleteCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public IotItemDeleteCommand(
-        ILogger<IotItemDeleteCommand> logger,
+        ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.logger = logger;
+        this.loggerFactory = loggerFactory;
+        logger = loggerFactory.CreateLogger<IotItemDeleteCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }
 

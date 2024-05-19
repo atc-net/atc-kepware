@@ -2,14 +2,16 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public class DeviceCreateOpcUaClientCommand : AsyncCommand<DeviceCreateCommandBaseSettings>
 {
+    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateOpcUaClientCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public DeviceCreateOpcUaClientCommand(
-        ILogger<DeviceCreateOpcUaClientCommand> logger,
+        ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.logger = logger;
+        this.loggerFactory = loggerFactory;
+        logger = loggerFactory.CreateLogger<DeviceCreateOpcUaClientCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }
 

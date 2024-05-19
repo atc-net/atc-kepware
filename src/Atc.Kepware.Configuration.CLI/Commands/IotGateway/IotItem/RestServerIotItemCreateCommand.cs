@@ -2,14 +2,16 @@ namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotItem;
 
 public class RestServerIotItemCreateCommand : AsyncCommand<IotItemCreateCommandSettings>
 {
+    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<RestServerIotItemCreateCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public RestServerIotItemCreateCommand(
-        ILogger<RestServerIotItemCreateCommand> logger,
+        ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.logger = logger;
+        this.loggerFactory = loggerFactory;
+        logger = loggerFactory.CreateLogger<RestServerIotItemCreateCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }
 

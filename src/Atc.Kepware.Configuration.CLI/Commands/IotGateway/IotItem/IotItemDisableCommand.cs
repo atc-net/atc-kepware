@@ -2,14 +2,16 @@ namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotItem;
 
 public class IotItemDisableCommand : AsyncCommand<IotItemGetCommandSettings>
 {
+    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<IotItemDisableCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public IotItemDisableCommand(
-        ILogger<IotItemDisableCommand> logger,
+        ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.logger = logger;
+        this.loggerFactory = loggerFactory;
+        logger = loggerFactory.CreateLogger<IotItemDisableCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }
 

@@ -2,14 +2,16 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateCommandSettings>
 {
+    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<TagsCreateTagGroupCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public TagsCreateTagGroupCommand(
-        ILogger<TagsCreateTagGroupCommand> logger,
+        ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.logger = logger;
+        this.loggerFactory = loggerFactory;
+        logger = loggerFactory.CreateLogger<TagsCreateTagGroupCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }
 
