@@ -7,12 +7,6 @@ namespace Atc.Kepware.Configuration.Services;
 [SuppressMessage("Design", "MA0048:File name must match type name", Justification = "OK - By Design.")]
 public sealed partial class KepwareConfigurationClient
 {
-    /// <summary>
-    /// Check if an iot agent is defined by name.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <returns>Returns <see langword="true"/> if <paramref name="iotAgentName"/> is found; otherwise, <see langword="false"/>.</returns>
     public Task<HttpClientRequestResult<bool>> IsIotAgentDefined(
         string iotAgentName,
         CancellationToken cancellationToken)
@@ -27,14 +21,6 @@ public sealed partial class KepwareConfigurationClient
             : InvokeIsIotAgentDefined(iotAgentName, cancellationToken);
     }
 
-    /// <summary>
-    /// Returns base properties of the specified iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <remarks>
-    /// Sub iot items will not be returned in this call.
-    /// </remarks>
     public Task<HttpClientRequestResult<IotAgentBase?>> GetIotAgentBase(
         string iotAgentName,
         CancellationToken cancellationToken)
@@ -49,11 +35,6 @@ public sealed partial class KepwareConfigurationClient
             : InvokeGetIotAgentBase(iotAgentName, cancellationToken);
     }
 
-    /// <summary>
-    /// Create an iot agent rest client to Kepware's Iot Gateway.
-    /// </summary>
-    /// <param name="request">The request.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
     public Task<HttpClientRequestResult<bool>> CreateIotAgentRestClient(
         IotAgentRestClientCreateRequest request,
         CancellationToken cancellationToken)
@@ -70,13 +51,6 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    /// <summary>
-    /// Returns the properties of all rest client iot agents.
-    /// </summary>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <remarks>
-    /// Sub iot items will not be returned in this call.
-    /// </remarks>
     public async Task<HttpClientRequestResult<IList<IotAgentRestClient>?>> GetIotAgentRestClients(
         CancellationToken cancellationToken)
     {
@@ -87,14 +61,6 @@ public sealed partial class KepwareConfigurationClient
         return response.Adapt<HttpClientRequestResult<IList<IotAgentRestClient>?>>();
     }
 
-    /// <summary>
-    /// Returns the properties of the specified rest client iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <remarks>
-    /// Sub iot items will not be returned in this call.
-    /// </remarks>
     public Task<HttpClientRequestResult<IotAgentRestClient?>> GetIotAgentRestClient(
         string iotAgentName,
         CancellationToken cancellationToken)
@@ -104,16 +70,6 @@ public sealed partial class KepwareConfigurationClient
         return InvokeGetIotAgentRestClient(iotAgentName, cancellationToken);
     }
 
-    /// <summary>
-    /// Updates the specified rest client iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="request">The request.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <remarks>
-    /// Requires that the current ProjectId is sent in the request.
-    /// Retrieve the client forehand to retrieve ProjectId.
-    /// </remarks>
     public Task<HttpClientRequestResult<bool>> UpdateIotAgentRestClient(
         string iotAgentName,
         IotAgentRestClientUpdateRequest request,
@@ -133,14 +89,6 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    /// <summary>
-    /// Deletes the specified rest client iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <remarks>
-    /// This will delete all child iot items as well.
-    /// </remarks>
     public Task<HttpClientRequestResult<bool>> DeleteIotAgentRestClient(
         string iotAgentName,
         CancellationToken cancellationToken)
@@ -152,11 +100,6 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    /// <summary>
-    /// Deletes the specified rest server iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
     public Task<HttpClientRequestResult<bool>> DeleteIotAgentRestServer(
         string iotAgentName,
         CancellationToken cancellationToken)
@@ -168,16 +111,6 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    /// <summary>
-    /// Enables the specified iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="projectId">The Iot Agent ProjectId.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <remarks>
-    /// Requires that the current ProjectId is sent alongside the request.
-    /// Retrieve the client forehand to retrieve ProjectId.
-    /// </remarks>
     public Task<HttpClientRequestResult<bool>> EnableIotAgent(
         string iotAgentName,
         long projectId,
@@ -191,16 +124,6 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    /// <summary>
-    /// Disables the specified iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="projectId">The Iot Agent ProjectId.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <remarks>
-    /// Requires that the current ProjectId is sent alongside the request.
-    /// Retrieve the client forehand to retrieve ProjectId.
-    /// </remarks>
     public Task<HttpClientRequestResult<bool>> DisableIotAgent(
         string iotAgentName,
         long projectId,
@@ -214,12 +137,6 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    /// <summary>
-    /// Add a iot item to the specified rest client iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="request">The request.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
     public Task<HttpClientRequestResult<bool>> CreateIotAgentRestClientIotItem(
         string iotAgentName,
         IotItemCreateRequest request,
@@ -234,11 +151,6 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    /// <summary>
-    /// Returns all iot items under a given iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
     public Task<HttpClientRequestResult<IList<IotItem>?>> GetIotAgentIotItems(
         string iotAgentName,
         CancellationToken cancellationToken)
@@ -248,15 +160,6 @@ public sealed partial class KepwareConfigurationClient
         return InvokeGetIotAgentIotItems(iotAgentName, cancellationToken);
     }
 
-    /// <summary>
-    /// Returns the properties of the specified iot item under a given iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="iotItemName">The Iot Item Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <remarks>
-    /// The iotItemName needs to have all . replaced by _ in order to find the item.
-    /// </remarks>
     public Task<HttpClientRequestResult<IotItem?>> GetIotAgentIotItem(
         string iotAgentName,
         string iotItemName,
@@ -271,17 +174,38 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    /// <summary>
-    /// Updates the specified iot item under a given iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="iotItemName">The Iot Item Name.</param>
-    /// <param name="request">The request.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <remarks>
-    /// Requires that the current ProjectId is sent in the request.
-    /// Retrieve the client forehand to retrieve ProjectId.
-    /// </remarks>
+    public Task<HttpClientRequestResult<bool>> EnableIotAgentIotItem(
+        string iotAgentName,
+        long projectId,
+        string iotItemName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(iotAgentName);
+        ArgumentException.ThrowIfNullOrEmpty(iotItemName);
+
+        return InvokeEnableIotAgentIotItem(
+            iotAgentName,
+            projectId,
+            EnsureProperIotItemNameFormat(iotItemName),
+            cancellationToken);
+    }
+
+    public Task<HttpClientRequestResult<bool>> DisableIotAgentIotItem(
+        string iotAgentName,
+        long projectId,
+        string iotItemName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(iotAgentName);
+        ArgumentException.ThrowIfNullOrEmpty(iotItemName);
+
+        return InvokeDisableIotAgentIotItem(
+            iotAgentName,
+            projectId,
+            EnsureProperIotItemNameFormat(iotItemName),
+            cancellationToken);
+    }
+
     public Task<HttpClientRequestResult<bool>> UpdateIotAgentRestClientIotItem(
         string iotAgentName,
         string iotItemName,
@@ -304,15 +228,6 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    /// <summary>
-    /// Deletes the specified iot item under a given iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="iotItemName">The Iot Item Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <remarks>
-    /// The iotItemName needs to have all . replaced by _ in order to find the item.
-    /// </remarks>
     public Task<HttpClientRequestResult<bool>> DeleteIotAgentIotItem(
         string iotAgentName,
         string iotItemName,
@@ -323,60 +238,6 @@ public sealed partial class KepwareConfigurationClient
 
         return InvokeDeleteIotAgentIotItem(
             iotAgentName,
-            EnsureProperIotItemNameFormat(iotItemName),
-            cancellationToken);
-    }
-
-    /// <summary>
-    /// Enables the specified iot item under a given iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="projectId">The Iot Agent ProjectId.</param>
-    /// <param name="iotItemName">The Iot Item Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <remarks>
-    /// Requires that the current ProjectId is sent alongside the request.
-    /// Retrieve the client forehand to retrieve ProjectId.
-    /// </remarks>
-    public Task<HttpClientRequestResult<bool>> EnableIotAgentIotItem(
-        string iotAgentName,
-        long projectId,
-        string iotItemName,
-        CancellationToken cancellationToken)
-    {
-        ArgumentException.ThrowIfNullOrEmpty(iotAgentName);
-        ArgumentException.ThrowIfNullOrEmpty(iotItemName);
-
-        return InvokeEnableIotAgentIotItem(
-            iotAgentName,
-            projectId,
-            EnsureProperIotItemNameFormat(iotItemName),
-            cancellationToken);
-    }
-
-    /// <summary>
-    /// Disables the specified iot item under a given iot agent.
-    /// </summary>
-    /// <param name="iotAgentName">The Iot Agent Name.</param>
-    /// <param name="projectId">The Iot Agent ProjectId.</param>
-    /// <param name="iotItemName">The Iot Item Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    /// <remarks>
-    /// Requires that the current ProjectId is sent alongside the request.
-    /// Retrieve the client forehand to retrieve ProjectId.
-    /// </remarks>
-    public Task<HttpClientRequestResult<bool>> DisableIotAgentIotItem(
-        string iotAgentName,
-        long projectId,
-        string iotItemName,
-        CancellationToken cancellationToken)
-    {
-        ArgumentException.ThrowIfNullOrEmpty(iotAgentName);
-        ArgumentException.ThrowIfNullOrEmpty(iotItemName);
-
-        return InvokeDisableIotAgentIotItem(
-            iotAgentName,
-            projectId,
             EnsureProperIotItemNameFormat(iotItemName),
             cancellationToken);
     }
