@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
-public class DeviceCreateOpcUaClientCommand : AsyncCommand<DeviceCreateCommandBaseSettings>
+public sealed class DeviceCreateOpcUaClientCommand : AsyncCommand<DeviceCreateCommandBaseSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateOpcUaClientCommand> logger;

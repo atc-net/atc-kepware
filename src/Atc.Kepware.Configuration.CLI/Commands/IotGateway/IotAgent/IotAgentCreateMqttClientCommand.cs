@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 
-public class IotAgentCreateMqttClientCommand : AsyncCommand<IotAgentCreateMqttClientCommandSettings>
+public sealed class IotAgentCreateMqttClientCommand : AsyncCommand<IotAgentCreateMqttClientCommandSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<IotAgentCreateMqttClientCommand> logger;

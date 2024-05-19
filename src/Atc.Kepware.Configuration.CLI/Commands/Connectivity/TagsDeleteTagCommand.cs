@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
-public class TagsDeleteTagCommand : AsyncCommand<TagDeleteCommandSettings>
+public sealed class TagsDeleteTagCommand : AsyncCommand<TagDeleteCommandSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<TagsDeleteTagCommand> logger;

@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
-public class TagsGetCommand : AsyncCommand<TagsGetCommandSettings>
+public sealed class TagsGetCommand : AsyncCommand<TagsGetCommandSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<TagsGetCommand> logger;

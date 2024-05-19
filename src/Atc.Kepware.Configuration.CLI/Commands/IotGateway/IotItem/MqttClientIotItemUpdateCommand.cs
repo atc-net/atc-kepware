@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotItem;
 
-public class MqttClientIotItemUpdateCommand : AsyncCommand<IotItemUpdateCommandSettings>
+public sealed class MqttClientIotItemUpdateCommand : AsyncCommand<IotItemUpdateCommandSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<MqttClientIotItemUpdateCommand> logger;

@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 
-public class IotAgentEnableCommand : AsyncCommand<IotAgentCommandBaseSettings>
+public sealed class IotAgentEnableCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<IotAgentEnableCommand> logger;

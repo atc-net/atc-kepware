@@ -1,7 +1,7 @@
 // ReSharper disable InvertIf
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 
-public class IotAgentCreateRestClientCommand : AsyncCommand<IotAgentCreateRestClientCommandSettings>
+public sealed class IotAgentCreateRestClientCommand : AsyncCommand<IotAgentCreateRestClientCommandSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<IotAgentCreateRestClientCommand> logger;

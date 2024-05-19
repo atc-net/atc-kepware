@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotItem;
 
-public class IotItemEnableCommand : AsyncCommand<IotItemGetCommandSettings>
+public sealed class IotItemEnableCommand : AsyncCommand<IotItemGetCommandSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<IotItemEnableCommand> logger;

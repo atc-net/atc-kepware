@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
-public class ChannelGetEuroMap63Command : AsyncCommand<ChannelGetCommandSettings>
+public sealed class ChannelGetEuroMap63Command : AsyncCommand<ChannelGetCommandSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelGetEuroMap63Command> logger;

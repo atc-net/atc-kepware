@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotItem;
 
-public class IotItemDeleteCommand : AsyncCommand<IotItemGetCommandSettings>
+public sealed class IotItemDeleteCommand : AsyncCommand<IotItemGetCommandSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<IotItemDeleteCommand> logger;

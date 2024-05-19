@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
-public class ChannelsGetCommand : AsyncCommand<KepwareBaseCommandSettings>
+public sealed class ChannelsGetCommand : AsyncCommand<KepwareBaseCommandSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelsGetCommand> logger;

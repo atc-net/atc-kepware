@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
-public class DeviceDeleteCommand : AsyncCommand<DeviceDeleteCommandSettings>
+public sealed class DeviceDeleteCommand : AsyncCommand<DeviceDeleteCommandSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceDeleteCommand> logger;

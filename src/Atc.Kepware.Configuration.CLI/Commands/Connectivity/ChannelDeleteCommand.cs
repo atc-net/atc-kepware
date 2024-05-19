@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
-public class ChannelDeleteCommand : AsyncCommand<ChannelDeleteCommandSettings>
+public sealed class ChannelDeleteCommand : AsyncCommand<ChannelDeleteCommandSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelDeleteCommand> logger;

@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 
-public class IotAgentDeleteRestServerCommand : AsyncCommand<IotAgentCommandBaseSettings>
+public sealed class IotAgentDeleteRestServerCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<IotAgentDeleteRestServerCommand> logger;

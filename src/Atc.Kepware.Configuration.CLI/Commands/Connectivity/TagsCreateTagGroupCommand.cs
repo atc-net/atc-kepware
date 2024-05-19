@@ -1,6 +1,6 @@
 namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
-public class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateCommandSettings>
+public sealed class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateCommandSettings>
 {
     private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<TagsCreateTagGroupCommand> logger;
