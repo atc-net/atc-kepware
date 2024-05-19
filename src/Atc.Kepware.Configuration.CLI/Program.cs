@@ -32,14 +32,7 @@ public static class Program
     }
 
     private static string[] SetHelpArgumentIfNeeded(
-        string[] args)
-    {
-        if (args.Length == 0)
-        {
-            return new[] { CommandConstants.ArgumentShortHelp };
-        }
-
-        // TODO: Add multiple command help commands
-        return args;
-    }
+        string[] args) => args.Length == 0
+            ? [CommandConstants.ArgumentShortHelp]
+            : args;
 }
