@@ -15,11 +15,8 @@ public class IotItemCommandBaseSettings : KepwareBaseCommandSettings
         }
 
         var isValidName = IsValidName(IotAgentName);
-        if (!isValidName.Successful)
-        {
-            return isValidName;
-        }
-
-        return ValidationResult.Success();
+        return isValidName.Successful
+            ? ValidationResult.Success()
+            : isValidName;
     }
 }
