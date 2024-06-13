@@ -9,17 +9,8 @@ public class IotItemGetCommandSettings : IotItemCommandBaseSettings
     public override ValidationResult Validate()
     {
         var validationResult = base.Validate();
-        if (!validationResult.Successful)
-        {
-            return validationResult;
-        }
-
-        var isValidName = IsValidName(IotAgentName);
-        if (!isValidName.Successful)
-        {
-            return isValidName;
-        }
-
-        return ValidationResult.Success();
+        return validationResult.Successful
+            ? ValidationResult.Success()
+            : validationResult;
     }
 }
