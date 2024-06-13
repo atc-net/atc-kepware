@@ -9,6 +9,14 @@ namespace Atc.Kepware.Configuration.Services;
 [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "OK")]
 public sealed partial class KepwareConfigurationClient
 {
+    private static readonly KeyStringAttribute ChannelNameKeyStringAttribute = new()
+    {
+        Required = true,
+        InvalidCharacters = ['.', '"'],
+        InvalidPrefixStrings = [" ", "_"],
+        RegularExpression = string.Empty,
+    };
+
     public async Task<HttpClientRequestResult<bool>> IsChannelDefined(
         string channelName,
         CancellationToken cancellationToken)
@@ -767,7 +775,7 @@ public sealed partial class KepwareConfigurationClient
         string[]? tagGroupStructure,
         out string? errorMessage)
     {
-        if (!KeyStringAttribute.TryIsValid(channelName, out var errorMessageChannel))
+        if (!KeyStringAttribute.TryIsValid(channelName, ChannelNameKeyStringAttribute, out var errorMessageChannel))
         {
             errorMessage = errorMessageChannel;
             return false;
