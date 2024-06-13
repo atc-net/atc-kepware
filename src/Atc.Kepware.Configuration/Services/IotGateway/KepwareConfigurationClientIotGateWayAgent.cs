@@ -467,14 +467,14 @@ public sealed partial class KepwareConfigurationClient
         string? iotItemName,
         out string? errorMessage)
     {
-        if (!KeyStringAttribute.TryIsValid(clientName, out var errorMessageClient))
+        if (!KeyStringAttribute.TryIsValid(clientName, NameKeyStringAttribute, out var errorMessageClient))
         {
             errorMessage = errorMessageClient;
             return false;
         }
 
         if (iotItemName is not null &&
-            !KeyStringAttribute.TryIsValid(iotItemName, out var errorMessageIotItem))
+            !KeyStringAttribute.TryIsValid(iotItemName, NameKeyStringAttribute, out var errorMessageIotItem))
         {
             errorMessage = errorMessageIotItem;
             return false;

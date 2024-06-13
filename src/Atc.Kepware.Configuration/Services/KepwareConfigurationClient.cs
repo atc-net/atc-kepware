@@ -10,6 +10,14 @@ namespace Atc.Kepware.Configuration.Services;
 [SuppressMessage("Critical Vulnerability", "S4830:Server certificates should be verified during SSL/TLS connections", Justification = "OK")]
 public sealed partial class KepwareConfigurationClient : IKepwareConfigurationClient, IDisposable
 {
+    public static readonly KeyStringAttribute NameKeyStringAttribute = new()
+    {
+        Required = true,
+        InvalidCharacters = ['.', '"'],
+        InvalidPrefixStrings = [" ", "_"],
+        RegularExpression = string.Empty,
+    };
+
     private readonly JsonSerializerOptions jsonSerializerOptions;
     private HttpClientHandler? httpClientHandler;
     private HttpClient? httpClient;
