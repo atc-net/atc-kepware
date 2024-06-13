@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Atc" Version="2.0.465" />
-    <PackageReference Include="Atc.Console.Spectre" Version="2.0.465" />
+    <PackageReference Include="Atc" Version="2.0.478" />
+    <PackageReference Include="Atc.Console.Spectre" Version="2.0.478" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
