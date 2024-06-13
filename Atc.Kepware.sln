@@ -14,7 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{DAC1423F-D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atc.Kepware.Configuration.CLI", "src\Atc.Kepware.Configuration.CLI\Atc.Kepware.Configuration.CLI.csproj", "{268932F7-56E9-4B76-B488-1F398C71F7DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atc.Kepware.Configuration.Contracts", "src\Atc.Kepware.Configuration.Contracts\Atc.Kepware.Configuration.Contracts.csproj", "{E4E1D746-AFEF-47B6-9CBA-F08E8E1BF8AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atc.Kepware.Configuration.Contracts", "src\Atc.Kepware.Configuration.Contracts\Atc.Kepware.Configuration.Contracts.csproj", "{E4E1D746-AFEF-47B6-9CBA-F08E8E1BF8AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{34BF79A8-5519-4C9C-94E6-8DBEE2EB2D64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atc.Kepware.Configuration.Tests", "test\Atc.Kepware.Configuration.Tests\Atc.Kepware.Configuration.Tests.csproj", "{63FD5C0F-70DC-41DF-A539-7E47B4E9D156}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +38,10 @@ Global
 		{E4E1D746-AFEF-47B6-9CBA-F08E8E1BF8AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4E1D746-AFEF-47B6-9CBA-F08E8E1BF8AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4E1D746-AFEF-47B6-9CBA-F08E8E1BF8AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63FD5C0F-70DC-41DF-A539-7E47B4E9D156}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63FD5C0F-70DC-41DF-A539-7E47B4E9D156}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63FD5C0F-70DC-41DF-A539-7E47B4E9D156}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63FD5C0F-70DC-41DF-A539-7E47B4E9D156}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +50,7 @@ Global
 		{4856D04B-2DA5-4398-90C2-CF13B8FA6191} = {69C84246-AA75-43E8-94B2-66FD555B18B0}
 		{268932F7-56E9-4B76-B488-1F398C71F7DE} = {69C84246-AA75-43E8-94B2-66FD555B18B0}
 		{E4E1D746-AFEF-47B6-9CBA-F08E8E1BF8AF} = {69C84246-AA75-43E8-94B2-66FD555B18B0}
+		{63FD5C0F-70DC-41DF-A539-7E47B4E9D156} = {34BF79A8-5519-4C9C-94E6-8DBEE2EB2D64}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {04120463-05C5-417B-8D7A-2D7D35B71A07}

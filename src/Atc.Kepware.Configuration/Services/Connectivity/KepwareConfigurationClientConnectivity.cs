@@ -9,14 +9,6 @@ namespace Atc.Kepware.Configuration.Services;
 [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "OK")]
 public sealed partial class KepwareConfigurationClient
 {
-    private static readonly KeyStringAttribute ChannelNameKeyStringAttribute = new()
-    {
-        Required = true,
-        InvalidCharacters = ['.', '"'],
-        InvalidPrefixStrings = [" ", "_"],
-        RegularExpression = string.Empty,
-    };
-
     public async Task<HttpClientRequestResult<bool>> IsChannelDefined(
         string channelName,
         CancellationToken cancellationToken)
@@ -775,21 +767,21 @@ public sealed partial class KepwareConfigurationClient
         string[]? tagGroupStructure,
         out string? errorMessage)
     {
-        if (!KeyStringAttribute.TryIsValid(channelName, ChannelNameKeyStringAttribute, out var errorMessageChannel))
+        if (!KeyStringAttribute.TryIsValid(channelName, NameKeyStringAttribute, out var errorMessageChannel))
         {
             errorMessage = errorMessageChannel;
             return false;
         }
 
         if (deviceName is not null &&
-            !KeyStringAttribute.TryIsValid(deviceName, out var errorMessageDevice))
+            !KeyStringAttribute.TryIsValid(deviceName, NameKeyStringAttribute, out var errorMessageDevice))
         {
             errorMessage = errorMessageDevice;
             return false;
         }
 
         if (tagGroupNameOrTagName is not null &&
-            !KeyStringAttribute.TryIsValid(tagGroupNameOrTagName, out var errorMessageTag))
+            !KeyStringAttribute.TryIsValid(tagGroupNameOrTagName, NameKeyStringAttribute, out var errorMessageTag))
         {
             errorMessage = errorMessageTag;
             return false;
@@ -799,7 +791,7 @@ public sealed partial class KepwareConfigurationClient
         {
             foreach (var tagGroupItem in tagGroupStructure)
             {
-                if (KeyStringAttribute.TryIsValid(tagGroupItem, out var errorMessageTagGroupItem))
+                if (KeyStringAttribute.TryIsValid(tagGroupItem, NameKeyStringAttribute, out var errorMessageTagGroupItem))
                 {
                     continue;
                 }

@@ -50,6 +50,7 @@ public class KepwareBaseCommandSettings : BaseCommandSettings
         string parameterValue)
         => System.ComponentModel.DataAnnotations.KeyStringAttribute.TryIsValid(
             parameterValue,
+            KepwareConfigurationClient.NameKeyStringAttribute,
             out var errorMessage)
             ? ValidationResult.Success()
             : ValidationResult.Error($"--{parameterName}: {errorMessage}");

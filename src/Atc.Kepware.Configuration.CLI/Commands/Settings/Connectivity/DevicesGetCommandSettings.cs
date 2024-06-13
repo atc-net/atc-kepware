@@ -14,10 +14,9 @@ public class DevicesGetCommandSettings : KepwareBaseCommandSettings
             return validationResult;
         }
 
-        return System.ComponentModel.DataAnnotations.KeyStringAttribute.TryIsValid(
-            ChannelName,
-            out var errorMessage)
+        var isValidName = IsValidName(ChannelName);
+        return isValidName.Successful
             ? ValidationResult.Success()
-            : ValidationResult.Error($"--{ChannelName}: {errorMessage}");
+            : isValidName;
     }
 }
