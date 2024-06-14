@@ -80,7 +80,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
             BaseAddress = baseUri,
         };
 
-        if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
+        if (!string.IsNullOrEmpty(userName))
         {
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue(
