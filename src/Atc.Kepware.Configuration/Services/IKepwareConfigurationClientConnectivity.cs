@@ -91,6 +91,17 @@ public partial interface IKepwareConfigurationClient
         CancellationToken cancellationToken);
 
     /// <summary>
+    /// Returns a list of all devices under the specified channel.
+    /// </summary>
+    /// <param name="channelName">The Channel Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <typeparam name="TDevice">A driver specific <see cref="DeviceBase"/> implementation.</typeparam>
+    Task<HttpClientRequestResult<IList<TDevice>?>> GetDevicesByChannelName<TDevice>(
+        string channelName,
+        CancellationToken cancellationToken)
+        where TDevice : DeviceBase;
+
+    /// <summary>
     /// Returns the properties of the specified EuroMap63 device.
     /// </summary>
     /// <param name="channelName">The Channel Name.</param>
