@@ -9,6 +9,8 @@ namespace Atc.Kepware.Configuration.Services;
 [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "OK")]
 public sealed partial class KepwareConfigurationClient
 {
+    private static readonly ConcurrentDictionary<Type, Type?> DeviceTypeJsonMappingTypeLookup = [];
+
     public async Task<HttpClientRequestResult<bool>> IsChannelDefined(
         string channelName,
         CancellationToken cancellationToken)
@@ -204,6 +206,30 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
 
         return response.Adapt<HttpClientRequestResult<IList<DeviceBase>?>>();
+    }
+
+    public async Task<HttpClientRequestResult<IList<TDevice>?>> GetDevicesByChannelName<TDevice>(
+        string channelName,
+        CancellationToken cancellationToken)
+        where TDevice : DeviceBase
+    {
+        ArgumentNullException.ThrowIfNull(channelName);
+
+        if (!IsValidConnectivityName(
+                channelName,
+                deviceName: null,
+                tagGroupNameOrTagName: null,
+                tagGroupStructure: null,
+                out var errorMessage))
+        {
+            return await Task.FromResult(HttpClientRequestResultFactory<IList<TDevice>?>.CreateBadRequest(errorMessage!));
+        }
+
+        HttpClientRequestResult<IList<JsonObject>?> response = await Get<IList<JsonObject>>(
+            $"{EndpointPathTemplateConstants.Channels}/{channelName}/{EndpointPathTemplateConstants.Devices}",
+            cancellationToken);
+
+        return ProcessGetDevicesByChannelNameResponse<TDevice>(response);
     }
 
     public async Task<HttpClientRequestResult<TagRoot>> GetTags(
@@ -470,6 +496,92 @@ public sealed partial class KepwareConfigurationClient
             tagGroupName,
             tagGroupStructure,
             cancellationToken);
+    }
+
+    private HttpClientRequestResult<IList<TDevice>?> ProcessGetDevicesByChannelNameResponse<TDevice>(HttpClientRequestResult<IList<JsonObject>?> response)
+        where TDevice : DeviceBase
+    {
+        // No data, return early, nothing to adapt
+        if (!response.HasData)
+        {
+            return new HttpClientRequestResult<IList<TDevice>?>()
+            {
+                CommunicationSucceeded = response.CommunicationSucceeded,
+                StatusCode = response.StatusCode,
+                Message = response.Message,
+                Exception = response.Exception,
+            };
+        }
+
+        // No actual devices, return early, nothing to adapt
+        if (response.Data!.Count == 0)
+        {
+            return new HttpClientRequestResult<IList<TDevice>?>([])
+            {
+                CommunicationSucceeded = response.CommunicationSucceeded,
+                StatusCode = response.StatusCode,
+                Message = response.Message,
+                Exception = response.Exception,
+            };
+        }
+
+        if (!TryGetDeviceTypeJsonMappingType<TDevice>(out Type? jsonMappingType))
+        {
+            return new HttpClientRequestResult<IList<TDevice>?>()
+            {
+                CommunicationSucceeded = response.CommunicationSucceeded,
+                StatusCode = response.StatusCode,
+                Message = response.Message,
+                Exception = new NotSupportedException($"Could not find a JSON mapping type for {typeof(TDevice).Name}"),
+            };
+        }
+
+        // Deserialize from JSON and adapt to the desired type
+        IList<TDevice> deviceTypes = response
+            .Data
+            .Select(x => JsonSerializer.Deserialize(x.ToString(), jsonMappingType, jsonSerializerOptions))
+            .Select(x => x.Adapt<TDevice>())
+            .ToList();
+
+        return new HttpClientRequestResult<IList<TDevice>?>(deviceTypes)
+        {
+            CommunicationSucceeded = response.CommunicationSucceeded,
+            StatusCode = response.StatusCode,
+            Message = response.Message,
+        };
+    }
+
+    private static bool TryGetDeviceTypeJsonMappingType<TDevice>([NotNullWhen(true)] out Type? jsonMappingType)
+        where TDevice : DeviceBase
+    {
+        jsonMappingType = DeviceTypeJsonMappingTypeLookup.GetOrAdd(typeof(TDevice), GetDeviceTypeJsonMappingType);
+        return jsonMappingType != null;
+    }
+
+    /// <summary>
+    /// Each driver device type has a corresponding type in this assembly for mapping from JSON. Try finding
+    /// that type by looking for a shared interface with the device type, that derives from IDeviceBase.
+    /// </summary>
+    /// <returns>
+    /// The type that maps to the device type, or null if not found.
+    /// </returns>
+    private static Type? GetDeviceTypeJsonMappingType(Type deviceType)
+    {
+        // Get the implemented interfaces that derive from IDeviceBase, but are not IDeviceBase
+        ISet<Type> implementedInterfaces = deviceType
+            .GetInterfaces()
+            .Where(x
+                => typeof(IDeviceBase).IsAssignableFrom(x)
+                && x != typeof(IDeviceBase))
+            .ToHashSet();
+
+        // Find the first type in this assembly that shares an interface
+        return typeof(KepwareConfigurationClient)
+            .Assembly
+            .GetTypes()
+            .FirstOrDefault(x => x
+                .GetInterfaces()
+                .Any(y => implementedInterfaces.Contains(y)));
     }
 
     private Task<HttpClientRequestResult<IList<KepwareContracts.Connectivity.Tag>?>> GetTagsResultForPathTemplate(
