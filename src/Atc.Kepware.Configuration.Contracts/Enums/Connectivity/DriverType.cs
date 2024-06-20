@@ -10,4 +10,7 @@ public enum DriverType
 
     [Description("OPC UA Client")]
     OpcUaClient,
+
+    [Description("Simulator")]
+    Simulator,
 }
