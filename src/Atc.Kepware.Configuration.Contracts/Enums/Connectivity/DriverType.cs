@@ -13,4 +13,7 @@ public enum DriverType
 
     [Description("Simulator")]
     Simulator,
+
+    [Description("Modbus TCP/IP Ethernet")]
+    ModbusTcpIpEthernet,
 }
