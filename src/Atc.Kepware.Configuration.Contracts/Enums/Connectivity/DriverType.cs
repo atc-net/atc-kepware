@@ -25,4 +25,7 @@ public enum DriverType
 
     [Description("Siemens TCP/IP Ethernet")]
     SiemensTcpIpEthernet,
+
+    [Description("Siemens S7 Plus Ethernet")]
+    SiemensS7PlusEthernet,
 }
