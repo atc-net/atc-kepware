@@ -4,6 +4,7 @@ global using System.Diagnostics.CodeAnalysis;
 global using System.Net;
 
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyControlLogixEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcUaClient;
