@@ -16,4 +16,7 @@ public enum DriverType
 
     [Description("Modbus TCP/IP Ethernet")]
     ModbusTcpIpEthernet,
+
+    [Description("Allen-Bradley ControlLogix Ethernet")]
+    AllenBradleyControlLogixEthernet,
 }
