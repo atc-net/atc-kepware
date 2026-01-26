@@ -60,6 +60,10 @@ public static class CommandAppExtensions
             get.AddCommand<ChannelGetAllenBradleyControlLogixEthernetCommand>("allenbradleycontrollogixethernet")
                 .WithDescription("Get an Allen-Bradley ControlLogix Ethernet channel.")
                 .WithExample("connectivity channels get allenbradleycontrollogixethernet -s [server-url] --name [channelName]");
+
+            get.AddCommand<ChannelGetAllenBradleyEthernetCommand>("allenbradleyethernet")
+                .WithDescription("Get an Allen-Bradley Ethernet channel.")
+                .WithExample("connectivity channels get allenbradleyethernet -s [server-url] --name [channelName]");
         });
 
     private static void ConfigureChannelCreateCommands(
@@ -82,6 +86,10 @@ public static class CommandAppExtensions
             create.AddCommand<ChannelCreateAllenBradleyControlLogixEthernetCommand>("allenbradleycontrollogixethernet")
                 .WithDescription("Creates an Allen-Bradley ControlLogix Ethernet channel (if not exists).")
                 .WithExample("connectivity channels create allenbradleycontrollogixethernet -s [server-url] --name [channelName] --description [description]");
+
+            create.AddCommand<ChannelCreateAllenBradleyEthernetCommand>("allenbradleyethernet")
+                .WithDescription("Creates an Allen-Bradley Ethernet channel (if not exists).")
+                .WithExample("connectivity channels create allenbradleyethernet -s [server-url] --name [channelName] --description [description]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -124,6 +132,10 @@ public static class CommandAppExtensions
             get.AddCommand<DeviceGetAllenBradleyControlLogixEthernetCommand>("allenbradleycontrollogixethernet")
                 .WithDescription("Get an Allen-Bradley ControlLogix Ethernet device.")
                 .WithExample("connectivity devices get allenbradleycontrollogixethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+            get.AddCommand<DeviceGetAllenBradleyEthernetCommand>("allenbradleyethernet")
+                .WithDescription("Get an Allen-Bradley Ethernet device.")
+                .WithExample("connectivity devices get allenbradleyethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
         });
 
     private static void ConfigureDeviceCreateCommands(
@@ -147,6 +159,10 @@ public static class CommandAppExtensions
             create.AddCommand<DeviceCreateAllenBradleyControlLogixEthernetCommand>("allenbradleycontrollogixethernet")
                 .WithDescription("Creates an Allen-Bradley ControlLogix Ethernet device (if not exists).")
                 .WithExample("connectivity devices create allenbradleycontrollogixethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+            create.AddCommand<DeviceCreateAllenBradleyEthernetCommand>("allenbradleyethernet")
+                .WithDescription("Creates an Allen-Bradley Ethernet device (if not exists).")
+                .WithExample("connectivity devices create allenbradleyethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
