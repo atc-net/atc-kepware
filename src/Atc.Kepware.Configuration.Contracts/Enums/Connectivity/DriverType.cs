@@ -19,4 +19,7 @@ public enum DriverType
 
     [Description("Allen-Bradley ControlLogix Ethernet")]
     AllenBradleyControlLogixEthernet,
+
+    [Description("Allen-Bradley Ethernet")]
+    AllenBradleyEthernet,
 }
