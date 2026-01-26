@@ -52,6 +52,10 @@ public static class CommandAppExtensions
             get.AddCommand<ChannelGetOpcUaClientCommand>("opcuaclient")
                 .WithDescription("Get a OPC UA Client channel.")
                 .WithExample("connectivity channels get opcuaclient -s [server-url] --name [channelName]");
+
+            get.AddCommand<ChannelGetModbusTcpIpEthernetCommand>("modbustcpipethernet")
+                .WithDescription("Get a Modbus TCP/IP Ethernet channel.")
+                .WithExample("connectivity channels get modbustcpipethernet -s [server-url] --name [channelName]");
         });
 
     private static void ConfigureChannelCreateCommands(
@@ -66,6 +70,10 @@ public static class CommandAppExtensions
             create.AddCommand<ChannelCreateOpcUaClientCommand>("opcuaclient")
                 .WithDescription("Creates a OPC UA Client channel (if not exists).")
                 .WithExample("connectivity channels create opcuaclient -s [server-url] --name [channelName] --description [description]");
+
+            create.AddCommand<ChannelCreateModbusTcpIpEthernetCommand>("modbustcpipethernet")
+                .WithDescription("Creates a Modbus TCP/IP Ethernet channel (if not exists).")
+                .WithExample("connectivity channels create modbustcpipethernet -s [server-url] --name [channelName] --description [description]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -100,6 +108,10 @@ public static class CommandAppExtensions
             get.AddCommand<DeviceGetOpcUaClientCommand>("opcuaclient")
                 .WithDescription("Get a OPC UA Client device.")
                 .WithExample("connectivity devices get opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+            get.AddCommand<DeviceGetModbusTcpIpEthernetCommand>("modbustcpipethernet")
+                .WithDescription("Get a Modbus TCP/IP Ethernet device.")
+                .WithExample("connectivity devices get modbustcpipethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
         });
 
     private static void ConfigureDeviceCreateCommands(
@@ -115,6 +127,10 @@ public static class CommandAppExtensions
             create.AddCommand<DeviceCreateOpcUaClientCommand>("opcuaclient")
                 .WithDescription("Creates a OPC UA Client device (if not exists).")
                 .WithExample("connectivity devices create opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName] --description [description] ");
+
+            create.AddCommand<DeviceCreateModbusTcpIpEthernetCommand>("modbustcpipethernet")
+                .WithDescription("Creates a Modbus TCP/IP Ethernet device (if not exists).")
+                .WithExample("connectivity devices create modbustcpipethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
