@@ -22,6 +22,7 @@ global using Atc.Kepware.Configuration.CLI.Commands.Settings.IotGateway;
 global using Atc.Kepware.Configuration.CLI.Extensions;
 global using Atc.Kepware.Configuration.Contracts;
 global using Atc.Kepware.Configuration.Contracts.Connectivity;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyControlLogixEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcUaClient;
