@@ -1,5 +1,5 @@
 {
-  "projectTarget": "DotNet8",
+  "projectTarget": "DotNet10",
   "useLatestMinorNugetVersion": true,
   "useTemporarySuppressions": false,
   "temporarySuppressionAsExcel": false,
@@ -13,6 +13,11 @@
     "test": {
       "paths": [
         "test"
+      ]
+    },
+    "sample": {
+      "paths": [
+        "sample"
       ]
     }
   }
