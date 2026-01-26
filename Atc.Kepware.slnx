@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/docs/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/sample/" />
+  <Folder Name="/src/">
+    <Project Path="src/Atc.Kepware.Configuration.CLI/Atc.Kepware.Configuration.CLI.csproj" />
+    <Project Path="src/Atc.Kepware.Configuration.Contracts/Atc.Kepware.Configuration.Contracts.csproj" />
+    <Project Path="src/Atc.Kepware.Configuration/Atc.Kepware.Configuration.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/Atc.Kepware.Configuration.Tests/Atc.Kepware.Configuration.Tests.csproj" />
+  </Folder>
+</Solution>
