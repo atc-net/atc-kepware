@@ -18,6 +18,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradl
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcUaClient;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensS7PlusEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.Simulator;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradleyEthernet;
@@ -27,6 +28,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBr
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcUaClient;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SiemensS7PlusEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SiemensTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Simulator;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.IotGateway;
