@@ -64,6 +64,10 @@ public static class CommandAppExtensions
             get.AddCommand<ChannelGetAllenBradleyEthernetCommand>("allenbradleyethernet")
                 .WithDescription("Get an Allen-Bradley Ethernet channel.")
                 .WithExample("connectivity channels get allenbradleyethernet -s [server-url] --name [channelName]");
+
+            get.AddCommand<ChannelGetSiemensTcpIpEthernetCommand>("siemenstcpipethernet")
+                .WithDescription("Get a Siemens TCP/IP Ethernet channel.")
+                .WithExample("connectivity channels get siemenstcpipethernet -s [server-url] --name [channelName]");
         });
 
     private static void ConfigureChannelCreateCommands(
@@ -90,6 +94,10 @@ public static class CommandAppExtensions
             create.AddCommand<ChannelCreateAllenBradleyEthernetCommand>("allenbradleyethernet")
                 .WithDescription("Creates an Allen-Bradley Ethernet channel (if not exists).")
                 .WithExample("connectivity channels create allenbradleyethernet -s [server-url] --name [channelName] --description [description]");
+
+            create.AddCommand<ChannelCreateSiemensTcpIpEthernetCommand>("siemenstcpipethernet")
+                .WithDescription("Creates a Siemens TCP/IP Ethernet channel (if not exists).")
+                .WithExample("connectivity channels create siemenstcpipethernet -s [server-url] --name [channelName] --description [description]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -136,6 +144,10 @@ public static class CommandAppExtensions
             get.AddCommand<DeviceGetAllenBradleyEthernetCommand>("allenbradleyethernet")
                 .WithDescription("Get an Allen-Bradley Ethernet device.")
                 .WithExample("connectivity devices get allenbradleyethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+            get.AddCommand<DeviceGetSiemensTcpIpEthernetCommand>("siemenstcpipethernet")
+                .WithDescription("Get a Siemens TCP/IP Ethernet device.")
+                .WithExample("connectivity devices get siemenstcpipethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
         });
 
     private static void ConfigureDeviceCreateCommands(
@@ -163,6 +175,10 @@ public static class CommandAppExtensions
             create.AddCommand<DeviceCreateAllenBradleyEthernetCommand>("allenbradleyethernet")
                 .WithDescription("Creates an Allen-Bradley Ethernet device (if not exists).")
                 .WithExample("connectivity devices create allenbradleyethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+            create.AddCommand<DeviceCreateSiemensTcpIpEthernetCommand>("siemenstcpipethernet")
+                .WithDescription("Creates a Siemens TCP/IP Ethernet device (if not exists).")
+                .WithExample("connectivity devices create siemenstcpipethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
