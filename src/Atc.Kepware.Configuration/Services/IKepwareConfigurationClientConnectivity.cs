@@ -64,33 +64,6 @@ public partial interface IKepwareConfigurationClient
         CancellationToken cancellationToken);
 
     /// <summary>
-    /// Returns the properties of the specified EuroMap63 channel.
-    /// </summary>
-    /// <param name="channelName">The Channel Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    Task<HttpClientRequestResult<EuroMap63Channel?>> GetEuroMap63Channel(
-        string channelName,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Returns the properties of the specified OpcUaClient channel.
-    /// </summary>
-    /// <param name="channelName">The Channel Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    Task<HttpClientRequestResult<OpcUaClientChannel?>> GetOpcUaClientChannel(
-        string channelName,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Returns the properties of the specified Simulator channel.
-    /// </summary>
-    /// <param name="channelName">The Channel Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    Task<HttpClientRequestResult<SimulatorChannel?>> GetSimulatorChannel(
-        string channelName,
-        CancellationToken cancellationToken);
-
-    /// <summary>
     /// Returns a list of all devices under the specified channel.
     /// </summary>
     /// <param name="channelName">The Channel Name.</param>
@@ -109,39 +82,6 @@ public partial interface IKepwareConfigurationClient
         string channelName,
         CancellationToken cancellationToken)
         where TDevice : DeviceBase;
-
-    /// <summary>
-    /// Returns the properties of the specified EuroMap63 device.
-    /// </summary>
-    /// <param name="channelName">The Channel Name.</param>
-    /// <param name="deviceName">The Device Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    Task<HttpClientRequestResult<EuroMap63Device?>> GetEuroMap63Device(
-        string channelName,
-        string deviceName,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Returns the properties of the specified OpcUaClient device.
-    /// </summary>
-    /// <param name="channelName">The Channel Name.</param>
-    /// <param name="deviceName">The Device Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    Task<HttpClientRequestResult<OpcUaClientDevice?>> GetOpcUaClientDevice(
-        string channelName,
-        string deviceName,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Returns the properties of the specified Simulator device.
-    /// </summary>
-    /// <param name="channelName">The Channel Name.</param>
-    /// <param name="deviceName">The Device Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    Task<HttpClientRequestResult<SimulatorDevice?>> GetSimulatorDevice(
-        string channelName,
-        string deviceName,
-        CancellationToken cancellationToken);
 
     /// <summary>
     /// Returns a tree of all tags under the specified device.
@@ -201,66 +141,6 @@ public partial interface IKepwareConfigurationClient
         string deviceName,
         string[] tagGroupStructure,
         bool ensureTagGroupStructure,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Creates a new EuroMap63 channel.
-    /// </summary>
-    /// <param name="request">The EuroMap63 Channel Request.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    Task<HttpClientRequestResult<bool>> CreateEuroMap63Channel(
-        EuroMap63ChannelRequest request,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Creates a new EuroMap63 device under the specified channel.
-    /// </summary>
-    /// <param name="request">The EuroMap63 Device Request.</param>
-    /// <param name="channelName">The Channel Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    Task<HttpClientRequestResult<bool>> CreateEuroMap63Device(
-        EuroMap63DeviceRequest request,
-        string channelName,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Creates a new OpcUaClient channel.
-    /// </summary>
-    /// <param name="request">The OpcUaClient Channel Request.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    Task<HttpClientRequestResult<bool>> CreateOpcUaClientChannel(
-        OpcUaClientChannelRequest request,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Creates a new OpcUaClient device under the specified channel.
-    /// </summary>
-    /// <param name="request">The OpcUaClient Device Request.</param>
-    /// <param name="channelName">The Channel Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    Task<HttpClientRequestResult<bool>> CreateOpcUaClientDevice(
-        OpcUaClientDeviceRequest request,
-        string channelName,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Creates a new Simulator channel.
-    /// </summary>
-    /// <param name="request">The Simulator Channel Request.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    Task<HttpClientRequestResult<bool>> CreateSimulatorChannel(
-        SimulatorChannelRequest request,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    /// Creates a new Simulator device under the specified channel.
-    /// </summary>
-    /// <param name="request">The Simulator Device Request.</param>
-    /// <param name="channelName">The Channel Name.</param>
-    /// <param name="cancellationToken">The CancellationToken.</param>
-    Task<HttpClientRequestResult<bool>> CreateSimulatorDevice(
-        SimulatorDeviceRequest request,
-        string channelName,
         CancellationToken cancellationToken);
 
     /// <summary>
