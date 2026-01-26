@@ -68,6 +68,10 @@ public static class CommandAppExtensions
             get.AddCommand<ChannelGetSiemensTcpIpEthernetCommand>("siemenstcpipethernet")
                 .WithDescription("Get a Siemens TCP/IP Ethernet channel.")
                 .WithExample("connectivity channels get siemenstcpipethernet -s [server-url] --name [channelName]");
+
+            get.AddCommand<ChannelGetSiemensS7PlusEthernetCommand>("siemenss7plusethernet")
+                .WithDescription("Get a Siemens S7 Plus Ethernet channel.")
+                .WithExample("connectivity channels get siemenss7plusethernet -s [server-url] --name [channelName]");
         });
 
     private static void ConfigureChannelCreateCommands(
@@ -98,6 +102,10 @@ public static class CommandAppExtensions
             create.AddCommand<ChannelCreateSiemensTcpIpEthernetCommand>("siemenstcpipethernet")
                 .WithDescription("Creates a Siemens TCP/IP Ethernet channel (if not exists).")
                 .WithExample("connectivity channels create siemenstcpipethernet -s [server-url] --name [channelName] --description [description]");
+
+            create.AddCommand<ChannelCreateSiemensS7PlusEthernetCommand>("siemenss7plusethernet")
+                .WithDescription("Creates a Siemens S7 Plus Ethernet channel (if not exists).")
+                .WithExample("connectivity channels create siemenss7plusethernet -s [server-url] --name [channelName] --description [description]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -148,6 +156,10 @@ public static class CommandAppExtensions
             get.AddCommand<DeviceGetSiemensTcpIpEthernetCommand>("siemenstcpipethernet")
                 .WithDescription("Get a Siemens TCP/IP Ethernet device.")
                 .WithExample("connectivity devices get siemenstcpipethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+            get.AddCommand<DeviceGetSiemensS7PlusEthernetCommand>("siemenss7plusethernet")
+                .WithDescription("Get a Siemens S7 Plus Ethernet device.")
+                .WithExample("connectivity devices get siemenss7plusethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
         });
 
     private static void ConfigureDeviceCreateCommands(
@@ -179,6 +191,10 @@ public static class CommandAppExtensions
             create.AddCommand<DeviceCreateSiemensTcpIpEthernetCommand>("siemenstcpipethernet")
                 .WithDescription("Creates a Siemens TCP/IP Ethernet device (if not exists).")
                 .WithExample("connectivity devices create siemenstcpipethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+            create.AddCommand<DeviceCreateSiemensS7PlusEthernetCommand>("siemenss7plusethernet")
+                .WithDescription("Creates a Siemens S7 Plus Ethernet device (if not exists).")
+                .WithExample("connectivity devices create siemenss7plusethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
