@@ -1,5 +1,4 @@
-// ReSharper disable CheckNamespace
-namespace Atc.Kepware.Configuration.Contracts;
+namespace Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradleyMicro800Ethernet;
 
 /// <summary>
 /// Specifies the amount of time, in seconds, a connection can remain idle before being closed by the controller.

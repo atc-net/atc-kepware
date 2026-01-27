@@ -86,5 +86,18 @@ public sealed class DeviceCreateMitsubishiFxNetCommand : AsyncCommand<DeviceCrea
 
             // Mitsubishi FX Net Specific Settings
             Model = settings.Model,
+            DeviceId = settings.DeviceId,
+            IpAddress = settings.IpAddress,
+            Port = settings.Port,
+            Protocol = settings.Protocol is not null && settings.Protocol.IsSet
+                ? settings.Protocol.Value
+                : MitsubishiFxNetProtocolType.TcpIp,
+            ConnectTimeout = settings.ConnectTimeout,
+            RequestTimeout = settings.RequestTimeout,
+            RetryAttempts = settings.RetryAttempts,
+            DemoteOnFailure = settings.DemoteOnFailure,
+            TimeoutsToDemote = settings.TimeoutsToDemote,
+            DemotionPeriod = settings.DemotionPeriod,
+            DiscardRequestsWhenDemoted = settings.DiscardRequestsWhenDemoted,
         };
 }

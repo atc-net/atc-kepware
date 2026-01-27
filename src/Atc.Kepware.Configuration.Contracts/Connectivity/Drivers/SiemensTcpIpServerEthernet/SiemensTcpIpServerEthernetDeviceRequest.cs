@@ -14,11 +14,17 @@ public class SiemensTcpIpServerEthernetDeviceRequest : DeviceRequestBase, ISieme
     }
 
     /// <inheritdoc />
+    [Range(0, 7)]
     public int RackNumber { get; set; }
 
     /// <inheritdoc />
+    [Range(0, 31)]
     public int CpuSlot { get; set; }
 
     /// <inheritdoc />
     public SiemensTcpIpServerMaxPduSize MaxPduSize { get; set; } = SiemensTcpIpServerMaxPduSize.Pdu960;
+
+    /// <inheritdoc />
+    public override string ToString()
+        => $"{base.ToString()}, {nameof(RackNumber)}: {RackNumber}, {nameof(CpuSlot)}: {CpuSlot}, {nameof(MaxPduSize)}: {MaxPduSize}";
 }

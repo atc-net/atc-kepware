@@ -14,5 +14,13 @@ public class SiemensTcpIpServerEthernetChannelRequest : ChannelRequestBase, ISie
     }
 
     /// <inheritdoc />
+    public string? NetworkAdapter { get; set; }
+
+    /// <inheritdoc />
+    [Range(0, 65535)]
     public int PortNumber { get; set; } = 102;
+
+    /// <inheritdoc />
+    public override string ToString()
+        => $"{base.ToString()}, {nameof(NetworkAdapter)}: {NetworkAdapter}, {nameof(PortNumber)}: {PortNumber}";
 }
