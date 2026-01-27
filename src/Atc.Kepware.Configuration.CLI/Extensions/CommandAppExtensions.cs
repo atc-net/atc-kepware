@@ -138,6 +138,10 @@ public static class CommandAppExtensions
         get.AddCommand<ChannelGetOmronNjEthernetCommand>("omronnjethernet")
             .WithDescription("Get an Omron NJ Ethernet channel.")
             .WithExample("connectivity channels get omronnjethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetYokogawaCxEthernetCommand>("yokogawacxethernet")
+            .WithDescription("Get a Yokogawa CX Ethernet channel.")
+            .WithExample("connectivity channels get yokogawacxethernet -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -238,6 +242,10 @@ public static class CommandAppExtensions
         create.AddCommand<ChannelCreateOmronNjEthernetCommand>("omronnjethernet")
             .WithDescription("Creates an Omron NJ Ethernet channel (if not exists).")
             .WithExample("connectivity channels create omronnjethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateYokogawaCxEthernetCommand>("yokogawacxethernet")
+            .WithDescription("Creates a Yokogawa CX Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create yokogawacxethernet -s [server-url] --name [channelName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -358,6 +366,10 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetOmronNjEthernetCommand>("omronnjethernet")
             .WithDescription("Get an Omron NJ Ethernet device.")
             .WithExample("connectivity devices get omronnjethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetYokogawaCxEthernetCommand>("yokogawacxethernet")
+            .WithDescription("Get a Yokogawa CX Ethernet device.")
+            .WithExample("connectivity devices get yokogawacxethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -459,6 +471,10 @@ public static class CommandAppExtensions
         create.AddCommand<DeviceCreateOmronNjEthernetCommand>("omronnjethernet")
             .WithDescription("Creates an Omron NJ Ethernet device (if not exists).")
             .WithExample("connectivity devices create omronnjethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateYokogawaCxEthernetCommand>("yokogawacxethernet")
+            .WithDescription("Creates a Yokogawa CX Ethernet device (if not exists).")
+            .WithExample("connectivity devices create yokogawacxethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()

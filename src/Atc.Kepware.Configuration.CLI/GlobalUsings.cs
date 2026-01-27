@@ -44,6 +44,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcUaClien
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensS7PlusEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensTcpIpServerEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.YokogawaCxEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.GeEthernet;
@@ -55,6 +56,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronFinsEth
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronNjEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OpcDaClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.SiemensTcpIpEthernet;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.YokogawaCxEthernet;
 global using Atc.Kepware.Configuration.Contracts.IotGateway;
 global using Atc.Kepware.Configuration.Services;
 global using Microsoft.Extensions.Configuration;
