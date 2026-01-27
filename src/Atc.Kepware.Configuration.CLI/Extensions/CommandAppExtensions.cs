@@ -88,6 +88,10 @@ public static class CommandAppExtensions
             get.AddCommand<ChannelGetBacNetIpCommand>("bacnetip")
                 .WithDescription("Get a BACnet/IP channel.")
                 .WithExample("connectivity channels get bacnetip -s [server-url] --name [channelName]");
+
+            get.AddCommand<ChannelGetMqttClientCommand>("mqttclient")
+                .WithDescription("Get an MQTT Client channel.")
+                .WithExample("connectivity channels get mqttclient -s [server-url] --name [channelName]");
         });
 
     private static void ConfigureChannelCreateCommands(
@@ -138,6 +142,10 @@ public static class CommandAppExtensions
             create.AddCommand<ChannelCreateBacNetIpCommand>("bacnetip")
                 .WithDescription("Creates a BACnet/IP channel (if not exists).")
                 .WithExample("connectivity channels create bacnetip -s [server-url] --name [channelName] --description [description]");
+
+            create.AddCommand<ChannelCreateMqttClientCommand>("mqttclient")
+                .WithDescription("Creates an MQTT Client channel (if not exists).")
+                .WithExample("connectivity channels create mqttclient -s [server-url] --name [channelName] --host [host] --port [port]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -208,6 +216,10 @@ public static class CommandAppExtensions
             get.AddCommand<DeviceGetBacNetIpCommand>("bacnetip")
                 .WithDescription("Get a BACnet/IP device.")
                 .WithExample("connectivity devices get bacnetip -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+            get.AddCommand<DeviceGetMqttClientCommand>("mqttclient")
+                .WithDescription("Get an MQTT Client device.")
+                .WithExample("connectivity devices get mqttclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
         });
 
     private static void ConfigureDeviceCreateCommands(
@@ -259,6 +271,10 @@ public static class CommandAppExtensions
             create.AddCommand<DeviceCreateBacNetIpCommand>("bacnetip")
                 .WithDescription("Creates a BACnet/IP device (if not exists).")
                 .WithExample("connectivity devices create bacnetip -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+            create.AddCommand<DeviceCreateMqttClientCommand>("mqttclient")
+                .WithDescription("Creates an MQTT Client device (if not exists).")
+                .WithExample("connectivity devices create mqttclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()

@@ -28,6 +28,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MitsubishiEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.ModbusTcpIpEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OmronFinsEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcDaClient;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcUaClient;
@@ -36,6 +37,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensTcp
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiEthernet;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronFinsEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OpcDaClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.SiemensTcpIpEthernet;
