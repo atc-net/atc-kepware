@@ -31,8 +31,8 @@ public static class Program
         return app.RunAsync(args);
     }
 
-    private static string[] SetHelpArgumentIfNeeded(
-        string[] args) => args.Length == 0
+    private static string[] SetHelpArgumentIfNeeded(string[] args)
+        => args.Length == 0
             ? [CommandConstants.ArgumentShortHelp]
             : args;
 }

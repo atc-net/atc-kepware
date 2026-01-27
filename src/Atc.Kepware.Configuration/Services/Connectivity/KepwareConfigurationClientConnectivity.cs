@@ -498,7 +498,8 @@ public sealed partial class KepwareConfigurationClient
             cancellationToken);
     }
 
-    private HttpClientRequestResult<IList<TDevice>?> ProcessGetDevicesByChannelNameResponse<TDevice>(HttpClientRequestResult<IList<JsonObject>?> response)
+    private HttpClientRequestResult<IList<TDevice>?> ProcessGetDevicesByChannelNameResponse<TDevice>(
+        HttpClientRequestResult<IList<JsonObject>?> response)
         where TDevice : DeviceBase
     {
         // No data, return early, nothing to adapt
@@ -551,7 +552,8 @@ public sealed partial class KepwareConfigurationClient
         };
     }
 
-    private static bool TryGetDeviceTypeJsonMappingType<TDevice>([NotNullWhen(true)] out Type? jsonMappingType)
+    private static bool TryGetDeviceTypeJsonMappingType<TDevice>(
+        [NotNullWhen(true)] out Type? jsonMappingType)
         where TDevice : DeviceBase
     {
         jsonMappingType = DeviceTypeJsonMappingTypeLookup.GetOrAdd(typeof(TDevice), GetDeviceTypeJsonMappingType);

@@ -484,7 +484,6 @@ public sealed partial class KepwareConfigurationClient
         return true;
     }
 
-    private static string EnsureProperIotItemNameFormat(
-        string iotItemName)
+    private static string EnsureProperIotItemNameFormat(string iotItemName)
         => iotItemName.TrimExtended().Replace('.', '_');
 }

@@ -80,8 +80,7 @@ public sealed class TagsCreateTagCommand : AsyncCommand<TagCreateCommandSettings
         return ConsoleExitStatusCodes.Success;
     }
 
-    private static TagRequest BuildTagRequest(
-        TagCreateCommandSettings settings)
+    private static TagRequest BuildTagRequest(TagCreateCommandSettings settings)
         => new()
         {
             Name = settings.Name,

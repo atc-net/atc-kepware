@@ -2,8 +2,7 @@ namespace Atc.Kepware.Configuration.CLI.Extensions;
 
 public static class CommandAppExtensions
 {
-    public static void ConfigureCommands(
-        this CommandApp<RootCommand> app)
+    public static void ConfigureCommands(this CommandApp<RootCommand> app)
     {
         ArgumentNullException.ThrowIfNull(app);
 

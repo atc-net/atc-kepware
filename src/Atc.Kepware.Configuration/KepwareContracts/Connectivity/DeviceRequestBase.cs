@@ -2,8 +2,7 @@ namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity;
 
 internal abstract class DeviceRequestBase : IDeviceRequestBase
 {
-    protected DeviceRequestBase(
-        DriverType deviceDriver)
+    protected DeviceRequestBase(DriverType deviceDriver)
     {
         Driver = deviceDriver.GetDescription();
     }
