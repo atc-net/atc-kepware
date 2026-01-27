@@ -76,4 +76,7 @@ public enum DriverType
 
     [Description("Yokogawa CX Ethernet")]
     YokogawaCxEthernet,
+
+    [Description("Yokogawa Darwin Ethernet")]
+    YokogawaDarwinEthernet,
 }
