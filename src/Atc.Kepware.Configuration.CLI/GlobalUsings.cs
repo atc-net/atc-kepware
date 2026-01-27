@@ -25,6 +25,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyControlLogixEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MitsubishiEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OmronFinsEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcDaClient;
@@ -32,6 +33,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcUaClien
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensS7PlusEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradleyEthernet;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronFinsEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OpcDaClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.SiemensTcpIpEthernet;
