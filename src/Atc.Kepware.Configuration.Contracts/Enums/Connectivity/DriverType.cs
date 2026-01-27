@@ -43,4 +43,7 @@ public enum DriverType
 
     [Description("MQTT Client")]
     MqttClient,
+
+    [Description("DNP Client Ethernet")]
+    DnpClientEthernet,
 }
