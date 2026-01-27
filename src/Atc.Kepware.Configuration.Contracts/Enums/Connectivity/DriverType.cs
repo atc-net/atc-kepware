@@ -52,4 +52,7 @@ public enum DriverType
 
     [Description("Allen-Bradley Micro800 Ethernet")]
     AllenBradleyMicro800Ethernet,
+
+    [Description("Allen-Bradley Server Ethernet")]
+    AllenBradleyServerEthernet,
 }

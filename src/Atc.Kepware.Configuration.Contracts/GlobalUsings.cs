@@ -16,6 +16,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBr
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyControlLogixServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyMicro800Ethernet;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
