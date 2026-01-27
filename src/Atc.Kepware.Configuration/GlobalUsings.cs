@@ -23,6 +23,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.DnpClientE
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MitsubishiCncEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MitsubishiEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MitsubishiFxNet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OmronFinsEthernet;
@@ -35,6 +36,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.Simulator;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiEthernet;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiFxNet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronFinsEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OpcDaClient;
@@ -49,6 +51,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClie
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiCncEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiEthernet;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiFxNet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OmronFinsEthernet;
