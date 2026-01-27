@@ -12,6 +12,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiEt
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiFxNet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronFinsEthernet;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronNjEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OpcDaClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.SiemensTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity;
@@ -31,6 +32,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Mitsubi
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OmronFinsEthernet;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OmronNjEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcDaClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcUaClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SiemensS7PlusEthernet;

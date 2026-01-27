@@ -35,6 +35,9 @@ public enum DriverType
     [Description("Omron FINS Ethernet")]
     OmronFinsEthernet,
 
+    [Description("Omron NJ Ethernet")]
+    OmronNjEthernet,
+
     [Description("Mitsubishi Ethernet")]
     MitsubishiEthernet,
 
