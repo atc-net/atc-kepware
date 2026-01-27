@@ -58,4 +58,7 @@ public enum DriverType
 
     [Description("Siemens TCP/IP Server Ethernet")]
     SiemensTcpIpServerEthernet,
+
+    [Description("Mitsubishi CNC Ethernet")]
+    MitsubishiCncEthernet,
 }

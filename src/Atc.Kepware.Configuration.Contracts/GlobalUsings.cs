@@ -20,6 +20,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBr
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiCncEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MqttClient;
