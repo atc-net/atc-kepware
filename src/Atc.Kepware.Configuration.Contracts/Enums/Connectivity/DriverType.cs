@@ -73,4 +73,7 @@ public enum DriverType
 
     [Description("GE Ethernet Global Data")]
     GeEthernetGlobalData,
+
+    [Description("Yokogawa CX Ethernet")]
+    YokogawaCxEthernet,
 }
