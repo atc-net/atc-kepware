@@ -76,6 +76,10 @@ public static class CommandAppExtensions
             get.AddCommand<ChannelGetOpcDaClientCommand>("opcdaclient")
                 .WithDescription("Get an OPC DA Client channel.")
                 .WithExample("connectivity channels get opcdaclient -s [server-url] --name [channelName]");
+
+            get.AddCommand<ChannelGetOmronFinsEthernetCommand>("omronfinsethernet")
+                .WithDescription("Get an Omron FINS Ethernet channel.")
+                .WithExample("connectivity channels get omronfinsethernet -s [server-url] --name [channelName]");
         });
 
     private static void ConfigureChannelCreateCommands(
@@ -114,6 +118,10 @@ public static class CommandAppExtensions
             create.AddCommand<ChannelCreateOpcDaClientCommand>("opcdaclient")
                 .WithDescription("Creates an OPC DA Client channel (if not exists).")
                 .WithExample("connectivity channels create opcdaclient -s [server-url] --name [channelName] --program-id [programId]");
+
+            create.AddCommand<ChannelCreateOmronFinsEthernetCommand>("omronfinsethernet")
+                .WithDescription("Creates an Omron FINS Ethernet channel (if not exists).")
+                .WithExample("connectivity channels create omronfinsethernet -s [server-url] --name [channelName] --description [description]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -172,6 +180,10 @@ public static class CommandAppExtensions
             get.AddCommand<DeviceGetOpcDaClientCommand>("opcdaclient")
                 .WithDescription("Get an OPC DA Client device.")
                 .WithExample("connectivity devices get opcdaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+            get.AddCommand<DeviceGetOmronFinsEthernetCommand>("omronfinsethernet")
+                .WithDescription("Get an Omron FINS Ethernet device.")
+                .WithExample("connectivity devices get omronfinsethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
         });
 
     private static void ConfigureDeviceCreateCommands(
@@ -211,6 +223,10 @@ public static class CommandAppExtensions
             create.AddCommand<DeviceCreateOpcDaClientCommand>("opcdaclient")
                 .WithDescription("Creates an OPC DA Client device (if not exists).")
                 .WithExample("connectivity devices create opcdaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+            create.AddCommand<DeviceCreateOmronFinsEthernetCommand>("omronfinsethernet")
+                .WithDescription("Creates an Omron FINS Ethernet device (if not exists).")
+                .WithExample("connectivity devices create omronfinsethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
