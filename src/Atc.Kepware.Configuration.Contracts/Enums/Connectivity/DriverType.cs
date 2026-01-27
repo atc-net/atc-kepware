@@ -94,4 +94,10 @@ public enum DriverType
 
     [Description("Yokogawa MX Ethernet")]
     YokogawaMxEthernet,
+
+    [Description("IEC 60870-5-104 Client")]
+    Iec608705104Client,
+
+    [Description("IEC 61850 MMS Client")]
+    Iec61850MmsClient,
 }

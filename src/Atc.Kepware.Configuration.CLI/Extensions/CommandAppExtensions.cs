@@ -139,6 +139,20 @@ public static class CommandAppExtensions
             .WithDescription("Get an Omron NJ Ethernet channel.")
             .WithExample("connectivity channels get omronnjethernet -s [server-url] --name [channelName]");
 
+        ConfigureChannelGetIecCommands(get);
+    }
+
+    private static void ConfigureChannelGetIecCommands(
+        IConfigurator<CommandSettings> get)
+    {
+        get.AddCommand<ChannelGetIec608705104ClientCommand>("iec608705104client")
+            .WithDescription("Get an IEC 60870-5-104 Client channel.")
+            .WithExample("connectivity channels get iec608705104client -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetIec61850MmsClientCommand>("iec61850mmsclient")
+            .WithDescription("Get an IEC 61850 MMS Client channel.")
+            .WithExample("connectivity channels get iec61850mmsclient -s [server-url] --name [channelName]");
+
         ConfigureChannelGetYokogawaCommands(get);
     }
 
@@ -272,6 +286,20 @@ public static class CommandAppExtensions
         create.AddCommand<ChannelCreateOmronNjEthernetCommand>("omronnjethernet")
             .WithDescription("Creates an Omron NJ Ethernet channel (if not exists).")
             .WithExample("connectivity channels create omronnjethernet -s [server-url] --name [channelName]");
+
+        ConfigureChannelCreateIecCommands(create);
+    }
+
+    private static void ConfigureChannelCreateIecCommands(
+        IConfigurator<CommandSettings> create)
+    {
+        create.AddCommand<ChannelCreateIec608705104ClientCommand>("iec608705104client")
+            .WithDescription("Creates an IEC 60870-5-104 Client channel (if not exists).")
+            .WithExample("connectivity channels create iec608705104client -s [server-url] --name [channelName] --destination-host [host]");
+
+        create.AddCommand<ChannelCreateIec61850MmsClientCommand>("iec61850mmsclient")
+            .WithDescription("Creates an IEC 61850 MMS Client channel (if not exists).")
+            .WithExample("connectivity channels create iec61850mmsclient -s [server-url] --name [channelName]");
 
         ConfigureChannelCreateYokogawaCommands(create);
     }
@@ -427,6 +455,20 @@ public static class CommandAppExtensions
             .WithDescription("Get an Omron NJ Ethernet device.")
             .WithExample("connectivity devices get omronnjethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
 
+        ConfigureDeviceGetIecCommands(get);
+    }
+
+    private static void ConfigureDeviceGetIecCommands(
+        IConfigurator<CommandSettings> get)
+    {
+        get.AddCommand<DeviceGetIec608705104ClientCommand>("iec608705104client")
+            .WithDescription("Get an IEC 60870-5-104 Client device.")
+            .WithExample("connectivity devices get iec608705104client -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetIec61850MmsClientCommand>("iec61850mmsclient")
+            .WithDescription("Get an IEC 61850 MMS Client device.")
+            .WithExample("connectivity devices get iec61850mmsclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
         ConfigureDeviceGetYokogawaCommands(get);
     }
 
@@ -561,6 +603,20 @@ public static class CommandAppExtensions
         create.AddCommand<DeviceCreateOmronNjEthernetCommand>("omronnjethernet")
             .WithDescription("Creates an Omron NJ Ethernet device (if not exists).")
             .WithExample("connectivity devices create omronnjethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        ConfigureDeviceCreateIecCommands(create);
+    }
+
+    private static void ConfigureDeviceCreateIecCommands(
+        IConfigurator<CommandSettings> create)
+    {
+        create.AddCommand<DeviceCreateIec608705104ClientCommand>("iec608705104client")
+            .WithDescription("Creates an IEC 60870-5-104 Client device (if not exists).")
+            .WithExample("connectivity devices create iec608705104client -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        create.AddCommand<DeviceCreateIec61850MmsClientCommand>("iec61850mmsclient")
+            .WithDescription("Creates an IEC 61850 MMS Client device (if not exists).")
+            .WithExample("connectivity devices create iec61850mmsclient -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
 
         ConfigureDeviceCreateYokogawaCommands(create);
     }

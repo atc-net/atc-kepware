@@ -9,6 +9,8 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradley
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.GeEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.GeEthernetGlobalData;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.Iec608705104Client;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.Iec61850MmsClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiCncEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiFxNet;
@@ -35,6 +37,8 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClie
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.GeEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.GeEthernetGlobalData;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Iec608705104Client;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Iec61850MmsClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiCncEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiFxNet;
