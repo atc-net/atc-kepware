@@ -64,4 +64,7 @@ public enum DriverType
 
     [Description("Mitsubishi FX Net")]
     MitsubishiFxNet,
+
+    [Description("GE Ethernet")]
+    GeEthernet,
 }
