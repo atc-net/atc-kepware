@@ -72,6 +72,10 @@ public static class CommandAppExtensions
             get.AddCommand<ChannelGetSiemensS7PlusEthernetCommand>("siemenss7plusethernet")
                 .WithDescription("Get a Siemens S7 Plus Ethernet channel.")
                 .WithExample("connectivity channels get siemenss7plusethernet -s [server-url] --name [channelName]");
+
+            get.AddCommand<ChannelGetOpcDaClientCommand>("opcdaclient")
+                .WithDescription("Get an OPC DA Client channel.")
+                .WithExample("connectivity channels get opcdaclient -s [server-url] --name [channelName]");
         });
 
     private static void ConfigureChannelCreateCommands(
@@ -106,6 +110,10 @@ public static class CommandAppExtensions
             create.AddCommand<ChannelCreateSiemensS7PlusEthernetCommand>("siemenss7plusethernet")
                 .WithDescription("Creates a Siemens S7 Plus Ethernet channel (if not exists).")
                 .WithExample("connectivity channels create siemenss7plusethernet -s [server-url] --name [channelName] --description [description]");
+
+            create.AddCommand<ChannelCreateOpcDaClientCommand>("opcdaclient")
+                .WithDescription("Creates an OPC DA Client channel (if not exists).")
+                .WithExample("connectivity channels create opcdaclient -s [server-url] --name [channelName] --program-id [programId]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -160,6 +168,10 @@ public static class CommandAppExtensions
             get.AddCommand<DeviceGetSiemensS7PlusEthernetCommand>("siemenss7plusethernet")
                 .WithDescription("Get a Siemens S7 Plus Ethernet device.")
                 .WithExample("connectivity devices get siemenss7plusethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+            get.AddCommand<DeviceGetOpcDaClientCommand>("opcdaclient")
+                .WithDescription("Get an OPC DA Client device.")
+                .WithExample("connectivity devices get opcdaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
         });
 
     private static void ConfigureDeviceCreateCommands(
@@ -195,6 +207,10 @@ public static class CommandAppExtensions
             create.AddCommand<DeviceCreateSiemensS7PlusEthernetCommand>("siemenss7plusethernet")
                 .WithDescription("Creates a Siemens S7 Plus Ethernet device (if not exists).")
                 .WithExample("connectivity devices create siemenss7plusethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+            create.AddCommand<DeviceCreateOpcDaClientCommand>("opcdaclient")
+                .WithDescription("Creates an OPC DA Client device (if not exists).")
+                .WithExample("connectivity devices create opcdaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
