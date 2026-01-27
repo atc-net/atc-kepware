@@ -126,6 +126,10 @@ public static class CommandAppExtensions
         get.AddCommand<ChannelGetMitsubishiFxNetCommand>("mitsubishifxnet")
             .WithDescription("Get a Mitsubishi FX Net channel.")
             .WithExample("connectivity channels get mitsubishifxnet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetGeEthernetCommand>("geethernet")
+            .WithDescription("Get a GE Ethernet channel.")
+            .WithExample("connectivity channels get geethernet -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -214,6 +218,10 @@ public static class CommandAppExtensions
         create.AddCommand<ChannelCreateMitsubishiFxNetCommand>("mitsubishifxnet")
             .WithDescription("Creates a Mitsubishi FX Net channel (if not exists).")
             .WithExample("connectivity channels create mitsubishifxnet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateGeEthernetCommand>("geethernet")
+            .WithDescription("Creates a GE Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create geethernet -s [server-url] --name [channelName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -322,6 +330,10 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetMitsubishiFxNetCommand>("mitsubishifxnet")
             .WithDescription("Get a Mitsubishi FX Net device.")
             .WithExample("connectivity devices get mitsubishifxnet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetGeEthernetCommand>("geethernet")
+            .WithDescription("Get a GE Ethernet device.")
+            .WithExample("connectivity devices get geethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -411,6 +423,10 @@ public static class CommandAppExtensions
         create.AddCommand<DeviceCreateMitsubishiFxNetCommand>("mitsubishifxnet")
             .WithDescription("Creates a Mitsubishi FX Net device (if not exists).")
             .WithExample("connectivity devices create mitsubishifxnet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        create.AddCommand<DeviceCreateGeEthernetCommand>("geethernet")
+            .WithDescription("Creates a GE Ethernet device (if not exists).")
+            .WithExample("connectivity devices create geethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
