@@ -122,6 +122,10 @@ public static class CommandAppExtensions
         get.AddCommand<ChannelGetMitsubishiCncEthernetCommand>("mitsubishicncethernet")
             .WithDescription("Get a Mitsubishi CNC Ethernet channel.")
             .WithExample("connectivity channels get mitsubishicncethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetMitsubishiFxNetCommand>("mitsubishifxnet")
+            .WithDescription("Get a Mitsubishi FX Net channel.")
+            .WithExample("connectivity channels get mitsubishifxnet -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -206,6 +210,10 @@ public static class CommandAppExtensions
         create.AddCommand<ChannelCreateMitsubishiCncEthernetCommand>("mitsubishicncethernet")
             .WithDescription("Creates a Mitsubishi CNC Ethernet channel (if not exists).")
             .WithExample("connectivity channels create mitsubishicncethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateMitsubishiFxNetCommand>("mitsubishifxnet")
+            .WithDescription("Creates a Mitsubishi FX Net channel (if not exists).")
+            .WithExample("connectivity channels create mitsubishifxnet -s [server-url] --name [channelName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -310,6 +318,10 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetMitsubishiCncEthernetCommand>("mitsubishicncethernet")
             .WithDescription("Get a Mitsubishi CNC Ethernet device.")
             .WithExample("connectivity devices get mitsubishicncethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetMitsubishiFxNetCommand>("mitsubishifxnet")
+            .WithDescription("Get a Mitsubishi FX Net device.")
+            .WithExample("connectivity devices get mitsubishifxnet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -395,6 +407,10 @@ public static class CommandAppExtensions
         create.AddCommand<DeviceCreateMitsubishiCncEthernetCommand>("mitsubishicncethernet")
             .WithDescription("Creates a Mitsubishi CNC Ethernet device (if not exists).")
             .WithExample("connectivity devices create mitsubishicncethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        create.AddCommand<DeviceCreateMitsubishiFxNetCommand>("mitsubishifxnet")
+            .WithDescription("Creates a Mitsubishi FX Net device (if not exists).")
+            .WithExample("connectivity devices create mitsubishifxnet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
