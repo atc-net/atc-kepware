@@ -92,6 +92,10 @@ public static class CommandAppExtensions
             get.AddCommand<ChannelGetMqttClientCommand>("mqttclient")
                 .WithDescription("Get an MQTT Client channel.")
                 .WithExample("connectivity channels get mqttclient -s [server-url] --name [channelName]");
+
+            get.AddCommand<ChannelGetDnpClientEthernetCommand>("dnpclientethernet")
+                .WithDescription("Get a DNP Client Ethernet channel.")
+                .WithExample("connectivity channels get dnpclientethernet -s [server-url] --name [channelName]");
         });
 
     private static void ConfigureChannelCreateCommands(
@@ -146,6 +150,10 @@ public static class CommandAppExtensions
             create.AddCommand<ChannelCreateMqttClientCommand>("mqttclient")
                 .WithDescription("Creates an MQTT Client channel (if not exists).")
                 .WithExample("connectivity channels create mqttclient -s [server-url] --name [channelName] --host [host] --port [port]");
+
+            create.AddCommand<ChannelCreateDnpClientEthernetCommand>("dnpclientethernet")
+                .WithDescription("Creates a DNP Client Ethernet channel (if not exists).")
+                .WithExample("connectivity channels create dnpclientethernet -s [server-url] --name [channelName]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -220,6 +228,10 @@ public static class CommandAppExtensions
             get.AddCommand<DeviceGetMqttClientCommand>("mqttclient")
                 .WithDescription("Get an MQTT Client device.")
                 .WithExample("connectivity devices get mqttclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+            get.AddCommand<DeviceGetDnpClientEthernetCommand>("dnpclientethernet")
+                .WithDescription("Get a DNP Client Ethernet device.")
+                .WithExample("connectivity devices get dnpclientethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
         });
 
     private static void ConfigureDeviceCreateCommands(
@@ -275,6 +287,10 @@ public static class CommandAppExtensions
             create.AddCommand<DeviceCreateMqttClientCommand>("mqttclient")
                 .WithDescription("Creates an MQTT Client device (if not exists).")
                 .WithExample("connectivity devices create mqttclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+            create.AddCommand<DeviceCreateDnpClientEthernetCommand>("dnpclientethernet")
+                .WithDescription("Creates a DNP Client Ethernet device (if not exists).")
+                .WithExample("connectivity devices create dnpclientethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
