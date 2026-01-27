@@ -23,6 +23,7 @@ global using Atc.Kepware.Configuration.CLI.Extensions;
 global using Atc.Kepware.Configuration.Contracts;
 global using Atc.Kepware.Configuration.Contracts.Connectivity;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyControlLogixEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyControlLogixServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.DnpClientEthernet;
