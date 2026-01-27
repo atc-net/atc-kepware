@@ -17,16 +17,18 @@ public sealed class IotAgentDeleteRestServerCommand : AsyncCommand<IotAgentComma
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotAgentCommandBaseSettings settings)
+        IotAgentCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        IotAgentCommandBaseSettings settings)
+        IotAgentCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class IotAgentDeleteRestServerCommand : AsyncCommand<IotAgentComma
 
             var isIotAgentDefinedResult = await kepwareConfigurationClient.IsIotAgentDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isIotAgentDefinedResult.CommunicationSucceeded)
             {
@@ -54,7 +56,7 @@ public sealed class IotAgentDeleteRestServerCommand : AsyncCommand<IotAgentComma
 
             var result = await kepwareConfigurationClient.DeleteIotAgentRestServer(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (result is { CommunicationSucceeded: false, Data: false })
             {

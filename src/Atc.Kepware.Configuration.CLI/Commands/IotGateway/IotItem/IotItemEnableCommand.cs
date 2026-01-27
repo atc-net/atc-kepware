@@ -17,17 +17,19 @@ public sealed class IotItemEnableCommand : AsyncCommand<IotItemGetCommandSetting
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotItemGetCommandSettings settings)
+        IotItemGetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     [SuppressMessage("Design", "MA0051:Method is too long", Justification = "OK.")]
     private async Task<int> ExecuteInternalAsync(
-        IotItemGetCommandSettings settings)
+        IotItemGetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -40,7 +42,7 @@ public sealed class IotItemEnableCommand : AsyncCommand<IotItemGetCommandSetting
 
             var iotAgentResult = await kepwareConfigurationClient.GetIotAgentBase(
                 settings.IotAgentName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!iotAgentResult.CommunicationSucceeded)
             {
@@ -56,7 +58,7 @@ public sealed class IotItemEnableCommand : AsyncCommand<IotItemGetCommandSetting
             var iotItemResult = await kepwareConfigurationClient.GetIotAgentIotItem(
                 settings.IotAgentName,
                 CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
-                CancellationToken.None);
+                cancellationToken);
 
             if (iotItemResult is { CommunicationSucceeded: true, HasData: false })
             {
@@ -74,7 +76,7 @@ public sealed class IotItemEnableCommand : AsyncCommand<IotItemGetCommandSetting
                 settings.IotAgentName,
                 iotAgentResult.Data!.ProjectId,
                 CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
-                CancellationToken.None);
+                cancellationToken);
 
             if (result is { CommunicationSucceeded: false, Data: false })
             {

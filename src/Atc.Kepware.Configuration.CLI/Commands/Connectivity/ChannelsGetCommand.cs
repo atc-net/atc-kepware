@@ -17,16 +17,18 @@ public sealed class ChannelsGetCommand : AsyncCommand<KepwareBaseCommandSettings
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        KepwareBaseCommandSettings settings)
+        KepwareBaseCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        KepwareBaseCommandSettings settings)
+        KepwareBaseCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -37,7 +39,7 @@ public sealed class ChannelsGetCommand : AsyncCommand<KepwareBaseCommandSettings
                 settings.UserName!.Value,
                 settings.Password!.Value);
 
-            var result = await kepwareConfigurationClient.GetChannels(CancellationToken.None);
+            var result = await kepwareConfigurationClient.GetChannels(cancellationToken);
             if (result is { CommunicationSucceeded: true, HasData: true })
             {
                 foreach (var channelBase in result.Data!)

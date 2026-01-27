@@ -17,7 +17,8 @@ public sealed class IotAgentCreateRestServerCommand : AsyncCommand<IotAgentCreat
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotAgentCreateRestServerCommandSettings settings)
+        IotAgentCreateRestServerCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 

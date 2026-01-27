@@ -18,16 +18,18 @@ public sealed class IotAgentUpdateRestClientCommand : AsyncCommand<IotAgentUpdat
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotAgentUpdateRestClientCommandSettings settings)
+        IotAgentUpdateRestClientCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        IotAgentUpdateRestClientCommandSettings settings)
+        IotAgentUpdateRestClientCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -40,7 +42,7 @@ public sealed class IotAgentUpdateRestClientCommand : AsyncCommand<IotAgentUpdat
 
             var iotAgentResult = await kepwareConfigurationClient.GetIotAgentRestClient(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!iotAgentResult.CommunicationSucceeded)
             {
@@ -66,7 +68,7 @@ public sealed class IotAgentUpdateRestClientCommand : AsyncCommand<IotAgentUpdat
             var result = await kepwareConfigurationClient.UpdateIotAgentRestClient(
                 settings.Name,
                 request,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))

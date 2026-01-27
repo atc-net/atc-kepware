@@ -17,16 +17,18 @@ public sealed class ChannelCreateEuroMap63Command : AsyncCommand<ChannelCreateCo
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateCommandBaseSettings settings)
+        ChannelCreateCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateCommandBaseSettings settings)
+        ChannelCreateCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateEuroMap63Command : AsyncCommand<ChannelCreateCo
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateEuroMap63Command : AsyncCommand<ChannelCreateCo
             }
 
             var request = BuildEuroMap63ChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateEuroMap63Channel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateEuroMap63Channel(request, cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))

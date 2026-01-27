@@ -17,16 +17,18 @@ public sealed class TagsDeleteTagGroupCommand : AsyncCommand<TagGroupDeleteComma
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        TagGroupDeleteCommandSettings settings)
+        TagGroupDeleteCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        TagGroupDeleteCommandSettings settings)
+        TagGroupDeleteCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -42,7 +44,7 @@ public sealed class TagsDeleteTagGroupCommand : AsyncCommand<TagGroupDeleteComma
                 settings.DeviceName,
                 settings.Name,
                 settings.TagGroups,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isTagGroupDefinedResult.CommunicationSucceeded)
             {
@@ -60,7 +62,7 @@ public sealed class TagsDeleteTagGroupCommand : AsyncCommand<TagGroupDeleteComma
                 settings.DeviceName,
                 settings.Name,
                 settings.TagGroups,
-                CancellationToken.None);
+                cancellationToken);
 
             if (result is { CommunicationSucceeded: false, Data: false })
             {

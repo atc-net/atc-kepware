@@ -17,16 +17,18 @@ public sealed class DeviceDeleteCommand : AsyncCommand<DeviceDeleteCommandSettin
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        DeviceDeleteCommandSettings settings)
+        DeviceDeleteCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        DeviceDeleteCommandSettings settings)
+        DeviceDeleteCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -40,7 +42,7 @@ public sealed class DeviceDeleteCommand : AsyncCommand<DeviceDeleteCommandSettin
             var isDeviceDefinedResult = await kepwareConfigurationClient.IsDeviceDefined(
                 settings.ChannelName,
                 settings.DeviceName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isDeviceDefinedResult.CommunicationSucceeded)
             {
@@ -56,7 +58,7 @@ public sealed class DeviceDeleteCommand : AsyncCommand<DeviceDeleteCommandSettin
             var result = await kepwareConfigurationClient.DeleteDevice(
                 settings.ChannelName,
                 settings.DeviceName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (result is { CommunicationSucceeded: false, Data: false })
             {
