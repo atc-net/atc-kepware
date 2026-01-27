@@ -1,0 +1,49 @@
+// ReSharper disable CheckNamespace
+namespace Atc.Kepware.Configuration.Services;
+
+/// <summary>
+/// IKepwareConfigurationClient - Handles Yokogawa CX Ethernet calls.
+/// </summary>
+[SuppressMessage("Design", "MA0048:File name must match type name", Justification = "OK - By Design")]
+public partial interface IKepwareConfigurationClient
+{
+    /// <summary>
+    /// Returns the properties of the specified Yokogawa CX Ethernet channel.
+    /// </summary>
+    /// <param name="channelName">The Channel Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    Task<HttpClientRequestResult<YokogawaCxEthernetChannel?>> GetYokogawaCxEthernetChannel(
+        string channelName,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Returns the properties of the specified Yokogawa CX Ethernet device.
+    /// </summary>
+    /// <param name="channelName">The Channel Name.</param>
+    /// <param name="deviceName">The Device Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    Task<HttpClientRequestResult<YokogawaCxEthernetDevice?>> GetYokogawaCxEthernetDevice(
+        string channelName,
+        string deviceName,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Creates a new Yokogawa CX Ethernet channel.
+    /// </summary>
+    /// <param name="request">The Yokogawa CX Ethernet Channel Request.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    Task<HttpClientRequestResult<bool>> CreateYokogawaCxEthernetChannel(
+        YokogawaCxEthernetChannelRequest request,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Creates a new Yokogawa CX Ethernet device under the specified channel.
+    /// </summary>
+    /// <param name="request">The Yokogawa CX Ethernet Device Request.</param>
+    /// <param name="channelName">The Channel Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    Task<HttpClientRequestResult<bool>> CreateYokogawaCxEthernetDevice(
+        YokogawaCxEthernetDeviceRequest request,
+        string channelName,
+        CancellationToken cancellationToken);
+}

@@ -36,6 +36,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensS7P
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensTcpIpServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.Simulator;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.YokogawaCxEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.GeEthernet;
@@ -47,6 +48,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronFinsEth
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronNjEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OpcDaClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.SiemensTcpIpEthernet;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.YokogawaCxEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyControlLogixEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyControlLogixServerEthernet;
@@ -70,6 +72,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Siemens
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SiemensTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SiemensTcpIpServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Simulator;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.YokogawaCxEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.IotGateway;
 global using Atc.Kepware.Configuration.Contracts.IotGateway;
 global using Atc.Kepware.Configuration.Options;
