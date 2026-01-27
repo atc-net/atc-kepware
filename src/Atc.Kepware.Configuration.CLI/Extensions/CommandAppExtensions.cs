@@ -139,6 +139,12 @@ public static class CommandAppExtensions
             .WithDescription("Get an Omron NJ Ethernet channel.")
             .WithExample("connectivity channels get omronnjethernet -s [server-url] --name [channelName]");
 
+        ConfigureChannelGetYokogawaCommands(get);
+    }
+
+    private static void ConfigureChannelGetYokogawaCommands(
+        IConfigurator<CommandSettings> get)
+    {
         get.AddCommand<ChannelGetYokogawaCxEthernetCommand>("yokogawacxethernet")
             .WithDescription("Get a Yokogawa CX Ethernet channel.")
             .WithExample("connectivity channels get yokogawacxethernet -s [server-url] --name [channelName]");
@@ -146,6 +152,26 @@ public static class CommandAppExtensions
         get.AddCommand<ChannelGetYokogawaDarwinEthernetCommand>("yokogawadarwinethernet")
             .WithDescription("Get a Yokogawa Darwin Ethernet channel.")
             .WithExample("connectivity channels get yokogawadarwinethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetYokogawaDxEthernetCommand>("yokogawadxethernet")
+            .WithDescription("Get a Yokogawa DX Ethernet channel.")
+            .WithExample("connectivity channels get yokogawadxethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetYokogawaDxpEthernetCommand>("yokogawadxpethernet")
+            .WithDescription("Get a Yokogawa DXP Ethernet channel.")
+            .WithExample("connectivity channels get yokogawadxpethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetYokogawaMwEthernetCommand>("yokogawamwethernet")
+            .WithDescription("Get a Yokogawa MW Ethernet channel.")
+            .WithExample("connectivity channels get yokogawamwethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetYokogawaGxEthernetCommand>("yokogawagxethernet")
+            .WithDescription("Get a Yokogawa GX Ethernet channel.")
+            .WithExample("connectivity channels get yokogawagxethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetYokogawaMxEthernetCommand>("yokogawamxethernet")
+            .WithDescription("Get a Yokogawa MX Ethernet channel.")
+            .WithExample("connectivity channels get yokogawamxethernet -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -247,6 +273,12 @@ public static class CommandAppExtensions
             .WithDescription("Creates an Omron NJ Ethernet channel (if not exists).")
             .WithExample("connectivity channels create omronnjethernet -s [server-url] --name [channelName]");
 
+        ConfigureChannelCreateYokogawaCommands(create);
+    }
+
+    private static void ConfigureChannelCreateYokogawaCommands(
+        IConfigurator<CommandSettings> create)
+    {
         create.AddCommand<ChannelCreateYokogawaCxEthernetCommand>("yokogawacxethernet")
             .WithDescription("Creates a Yokogawa CX Ethernet channel (if not exists).")
             .WithExample("connectivity channels create yokogawacxethernet -s [server-url] --name [channelName]");
@@ -254,6 +286,26 @@ public static class CommandAppExtensions
         create.AddCommand<ChannelCreateYokogawaDarwinEthernetCommand>("yokogawadarwinethernet")
             .WithDescription("Creates a Yokogawa Darwin Ethernet channel (if not exists).")
             .WithExample("connectivity channels create yokogawadarwinethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateYokogawaDxEthernetCommand>("yokogawadxethernet")
+            .WithDescription("Creates a Yokogawa DX Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create yokogawadxethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateYokogawaDxpEthernetCommand>("yokogawadxpethernet")
+            .WithDescription("Creates a Yokogawa DXP Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create yokogawadxpethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateYokogawaMwEthernetCommand>("yokogawamwethernet")
+            .WithDescription("Creates a Yokogawa MW Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create yokogawamwethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateYokogawaGxEthernetCommand>("yokogawagxethernet")
+            .WithDescription("Creates a Yokogawa GX Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create yokogawagxethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateYokogawaMxEthernetCommand>("yokogawamxethernet")
+            .WithDescription("Creates a Yokogawa MX Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create yokogawamxethernet -s [server-url] --name [channelName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -375,6 +427,12 @@ public static class CommandAppExtensions
             .WithDescription("Get an Omron NJ Ethernet device.")
             .WithExample("connectivity devices get omronnjethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
 
+        ConfigureDeviceGetYokogawaCommands(get);
+    }
+
+    private static void ConfigureDeviceGetYokogawaCommands(
+        IConfigurator<CommandSettings> get)
+    {
         get.AddCommand<DeviceGetYokogawaCxEthernetCommand>("yokogawacxethernet")
             .WithDescription("Get a Yokogawa CX Ethernet device.")
             .WithExample("connectivity devices get yokogawacxethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
@@ -382,6 +440,26 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetYokogawaDarwinEthernetCommand>("yokogawadarwinethernet")
             .WithDescription("Get a Yokogawa Darwin Ethernet device.")
             .WithExample("connectivity devices get yokogawadarwinethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetYokogawaDxEthernetCommand>("yokogawadxethernet")
+            .WithDescription("Get a Yokogawa DX Ethernet device.")
+            .WithExample("connectivity devices get yokogawadxethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetYokogawaDxpEthernetCommand>("yokogawadxpethernet")
+            .WithDescription("Get a Yokogawa DXP Ethernet device.")
+            .WithExample("connectivity devices get yokogawadxpethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetYokogawaMwEthernetCommand>("yokogawamwethernet")
+            .WithDescription("Get a Yokogawa MW Ethernet device.")
+            .WithExample("connectivity devices get yokogawamwethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetYokogawaGxEthernetCommand>("yokogawagxethernet")
+            .WithDescription("Get a Yokogawa GX Ethernet device.")
+            .WithExample("connectivity devices get yokogawagxethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetYokogawaMxEthernetCommand>("yokogawamxethernet")
+            .WithDescription("Get a Yokogawa MX Ethernet device.")
+            .WithExample("connectivity devices get yokogawamxethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -484,6 +562,12 @@ public static class CommandAppExtensions
             .WithDescription("Creates an Omron NJ Ethernet device (if not exists).")
             .WithExample("connectivity devices create omronnjethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
 
+        ConfigureDeviceCreateYokogawaCommands(create);
+    }
+
+    private static void ConfigureDeviceCreateYokogawaCommands(
+        IConfigurator<CommandSettings> create)
+    {
         create.AddCommand<DeviceCreateYokogawaCxEthernetCommand>("yokogawacxethernet")
             .WithDescription("Creates a Yokogawa CX Ethernet device (if not exists).")
             .WithExample("connectivity devices create yokogawacxethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
@@ -491,6 +575,26 @@ public static class CommandAppExtensions
         create.AddCommand<DeviceCreateYokogawaDarwinEthernetCommand>("yokogawadarwinethernet")
             .WithDescription("Creates a Yokogawa Darwin Ethernet device (if not exists).")
             .WithExample("connectivity devices create yokogawadarwinethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateYokogawaDxEthernetCommand>("yokogawadxethernet")
+            .WithDescription("Creates a Yokogawa DX Ethernet device (if not exists).")
+            .WithExample("connectivity devices create yokogawadxethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateYokogawaDxpEthernetCommand>("yokogawadxpethernet")
+            .WithDescription("Creates a Yokogawa DXP Ethernet device (if not exists).")
+            .WithExample("connectivity devices create yokogawadxpethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateYokogawaMwEthernetCommand>("yokogawamwethernet")
+            .WithDescription("Creates a Yokogawa MW Ethernet device (if not exists).")
+            .WithExample("connectivity devices create yokogawamwethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateYokogawaGxEthernetCommand>("yokogawagxethernet")
+            .WithDescription("Creates a Yokogawa GX Ethernet device (if not exists).")
+            .WithExample("connectivity devices create yokogawagxethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateYokogawaMxEthernetCommand>("yokogawamxethernet")
+            .WithDescription("Creates a Yokogawa MX Ethernet device (if not exists).")
+            .WithExample("connectivity devices create yokogawamxethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()

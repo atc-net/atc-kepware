@@ -79,4 +79,19 @@ public enum DriverType
 
     [Description("Yokogawa Darwin Ethernet")]
     YokogawaDarwinEthernet,
+
+    [Description("Yokogawa DX Ethernet")]
+    YokogawaDxEthernet,
+
+    [Description("Yokogawa DXP Ethernet")]
+    YokogawaDxpEthernet,
+
+    [Description("Yokogawa GX Ethernet")]
+    YokogawaGxEthernet,
+
+    [Description("Yokogawa MW Ethernet")]
+    YokogawaMwEthernet,
+
+    [Description("Yokogawa MX Ethernet")]
+    YokogawaMxEthernet,
 }

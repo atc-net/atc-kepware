@@ -1,0 +1,31 @@
+namespace Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.YokogawaDxpEthernet;
+
+/// <summary>
+/// Yokogawa DXP Ethernet device.
+/// </summary>
+public class YokogawaDxpEthernetDevice : DeviceBase, IYokogawaDxpEthernetDevice
+{
+    /// <inheritdoc />
+    public YokogawaDxpEthernetModel Model { get; set; } = YokogawaDxpEthernetModel.Dxp100;
+
+    /// <inheritdoc />
+    public YokogawaDxpEthernetDataHandling DataHandling { get; set; } = YokogawaDxpEthernetDataHandling.None;
+
+    /// <inheritdoc />
+    public int PollingInterval { get; set; } = 1000;
+
+    /// <inheritdoc />
+    public bool StartMath { get; set; }
+
+    /// <inheritdoc />
+    public YokogawaDxpEthernetDateTimeSource DateAndTime { get; set; } = YokogawaDxpEthernetDateTimeSource.DeviceTime;
+
+    /// <inheritdoc />
+    public YokogawaDxpEthernetDateFormat DateFormat { get; set; } = YokogawaDxpEthernetDateFormat.MmDdYy;
+
+    /// <inheritdoc />
+    public bool SetClock { get; set; }
+
+    /// <inheritdoc />
+    public YokogawaDxpEthernetTagDatabaseSource TagDatabaseSource { get; set; } = YokogawaDxpEthernetTagDatabaseSource.PhysicalChannelNumber;
+}
