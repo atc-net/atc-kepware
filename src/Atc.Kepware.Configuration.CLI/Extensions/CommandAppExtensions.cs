@@ -130,6 +130,10 @@ public static class CommandAppExtensions
         get.AddCommand<ChannelGetGeEthernetCommand>("geethernet")
             .WithDescription("Get a GE Ethernet channel.")
             .WithExample("connectivity channels get geethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetGeEthernetGlobalDataCommand>("geethernetglobaldata")
+            .WithDescription("Get a GE Ethernet Global Data channel.")
+            .WithExample("connectivity channels get geethernetglobaldata -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -222,6 +226,10 @@ public static class CommandAppExtensions
         create.AddCommand<ChannelCreateGeEthernetCommand>("geethernet")
             .WithDescription("Creates a GE Ethernet channel (if not exists).")
             .WithExample("connectivity channels create geethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateGeEthernetGlobalDataCommand>("geethernetglobaldata")
+            .WithDescription("Creates a GE Ethernet Global Data channel (if not exists).")
+            .WithExample("connectivity channels create geethernetglobaldata -s [server-url] --name [channelName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -334,6 +342,10 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetGeEthernetCommand>("geethernet")
             .WithDescription("Get a GE Ethernet device.")
             .WithExample("connectivity devices get geethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetGeEthernetGlobalDataCommand>("geethernetglobaldata")
+            .WithDescription("Get a GE Ethernet Global Data device.")
+            .WithExample("connectivity devices get geethernetglobaldata -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -427,6 +439,10 @@ public static class CommandAppExtensions
         create.AddCommand<DeviceCreateGeEthernetCommand>("geethernet")
             .WithDescription("Creates a GE Ethernet device (if not exists).")
             .WithExample("connectivity devices create geethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        create.AddCommand<DeviceCreateGeEthernetGlobalDataCommand>("geethernetglobaldata")
+            .WithDescription("Creates a GE Ethernet Global Data device (if not exists).")
+            .WithExample("connectivity devices create geethernetglobaldata -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
