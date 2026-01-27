@@ -6,6 +6,19 @@ namespace Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Mitsubishi
 public interface IMitsubishiCncEthernetDeviceRequest : IDeviceRequestBase
 {
     /// <summary>
+    /// Gets or sets the device IP address.
+    /// </summary>
+    /// <remarks>
+    /// Format: IP.Address (e.g., "255.255.255.255").
+    /// </remarks>
+    string DeviceId { get; set; }
+
+    /// <summary>
+    /// Gets or sets the device model type.
+    /// </summary>
+    MitsubishiCncEthernetDeviceModelType Model { get; set; }
+
+    /// <summary>
     /// Gets or sets a value indicating whether the first word is low for 32-bit data types.
     /// </summary>
     bool FirstWordLow { get; set; }

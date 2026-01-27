@@ -6,6 +6,11 @@ namespace Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SiemensTcp
 public interface ISiemensTcpIpServerEthernetChannelRequest : IChannelRequestBase
 {
     /// <summary>
+    /// Gets or sets the network adapter to bind for Ethernet communication.
+    /// </summary>
+    string? NetworkAdapter { get; set; }
+
+    /// <summary>
     /// Gets or sets the port number on which the driver will listen.
     /// </summary>
     /// <remarks>

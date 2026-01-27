@@ -2,6 +2,14 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Settings.Connectivity;
 
 public class DeviceCreateMitsubishiCncEthernetCommandSettings : DeviceCreateCommandBaseSettings
 {
+    [CommandOption("--device-id <DEVICE-ID>")]
+    [Description("Device IP address (e.g., 192.168.1.1)")]
+    public string DeviceId { get; init; } = "255.255.255.255";
+
+    [CommandOption("--model [MODEL]")]
+    [Description("Device model (C64)")]
+    public FlagValue<MitsubishiCncEthernetDeviceModelType>? Model { get; init; } = new();
+
     [CommandOption("--first-word-low")]
     [Description("First word low for 32-bit data types")]
     [DefaultValue(true)]
@@ -38,6 +46,11 @@ public class DeviceCreateMitsubishiCncEthernetCommandSettings : DeviceCreateComm
         if (!validationResult.Successful)
         {
             return validationResult;
+        }
+
+        if (string.IsNullOrEmpty(DeviceId))
+        {
+            return ValidationResult.Error("--device-id is required.");
         }
 
         if (PortNumber < 1 || PortNumber > 65535)

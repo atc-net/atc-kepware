@@ -1,5 +1,4 @@
-// ReSharper disable CheckNamespace
-namespace Atc.Kepware.Configuration.Contracts;
+namespace Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradleyMicro800Ethernet;
 
 /// <summary>
 /// The default data type to assign to a tag when the default type is selected.

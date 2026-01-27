@@ -85,6 +85,10 @@ public sealed class DeviceCreateMitsubishiCncEthernetCommand : AsyncCommand<Devi
                 : string.Empty,
 
             // Mitsubishi CNC Ethernet Specific Settings
+            DeviceId = settings.DeviceId,
+            Model = settings.Model is not null && settings.Model.IsSet
+                ? settings.Model.Value
+                : MitsubishiCncEthernetDeviceModelType.C64,
             FirstWordLow = settings.FirstWordLow,
             PortNumber = settings.PortNumber,
             SourceNetwork = settings.SourceNetwork,

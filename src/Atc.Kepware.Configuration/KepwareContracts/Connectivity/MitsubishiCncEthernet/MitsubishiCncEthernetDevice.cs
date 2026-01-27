@@ -5,6 +5,12 @@ namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.MitsubishiCncE
 /// </summary>
 internal sealed class MitsubishiCncEthernetDevice : DeviceBase, IMitsubishiCncEthernetDevice
 {
+    [JsonPropertyName("servermain.DEVICE_ID_STRING")]
+    public string DeviceId { get; set; } = string.Empty;
+
+    [JsonPropertyName("servermain.DEVICE_MODEL")]
+    public MitsubishiCncEthernetDeviceModelType Model { get; set; }
+
     [JsonPropertyName("mitsubishi_cnc_ethernet.DEVICE_FIRST_WORD_LOW")]
     public bool FirstWordLow { get; set; } = true;
 
@@ -24,5 +30,5 @@ internal sealed class MitsubishiCncEthernetDevice : DeviceBase, IMitsubishiCncEt
     public int DestinationStation { get; set; } = 2;
 
     public override string ToString()
-        => $"{base.ToString()}, {nameof(FirstWordLow)}: {FirstWordLow}, {nameof(PortNumber)}: {PortNumber}, {nameof(SourceNetwork)}: {SourceNetwork}, {nameof(SourceStation)}: {SourceStation}, {nameof(DestinationNetwork)}: {DestinationNetwork}, {nameof(DestinationStation)}: {DestinationStation}";
+        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Model)}: {Model}";
 }

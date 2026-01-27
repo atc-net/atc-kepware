@@ -6,6 +6,12 @@ namespace Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MitsubishiCnc
 public class MitsubishiCncEthernetDevice : DeviceBase, IMitsubishiCncEthernetDevice
 {
     /// <inheritdoc />
+    public string DeviceId { get; set; } = "255.255.255.255";
+
+    /// <inheritdoc />
+    public MitsubishiCncEthernetDeviceModelType Model { get; set; } = MitsubishiCncEthernetDeviceModelType.C64;
+
+    /// <inheritdoc />
     public bool FirstWordLow { get; set; } = true;
 
     /// <inheritdoc />
@@ -22,4 +28,8 @@ public class MitsubishiCncEthernetDevice : DeviceBase, IMitsubishiCncEthernetDev
 
     /// <inheritdoc />
     public int DestinationStation { get; set; } = 2;
+
+    /// <inheritdoc />
+    public override string ToString()
+        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Model)}: {Model}";
 }

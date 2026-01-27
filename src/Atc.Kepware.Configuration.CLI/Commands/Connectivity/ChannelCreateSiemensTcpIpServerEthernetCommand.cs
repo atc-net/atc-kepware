@@ -88,6 +88,9 @@ public sealed class ChannelCreateSiemensTcpIpServerEthernetCommand : AsyncComman
                 : ChannelNonNormalizedFloatingPointHandlingType.ReplaceWithZero,
 
             // Siemens TCP/IP Server Ethernet Specific Settings
+            NetworkAdapter = settings.NetworkAdapter is not null && settings.NetworkAdapter.IsSet
+                ? settings.NetworkAdapter.Value
+                : null,
             PortNumber = settings.PortNumber,
         };
 }

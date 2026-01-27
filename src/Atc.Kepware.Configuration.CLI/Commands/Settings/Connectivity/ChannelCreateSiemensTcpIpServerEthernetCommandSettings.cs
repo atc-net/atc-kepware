@@ -2,6 +2,10 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Settings.Connectivity;
 
 public class ChannelCreateSiemensTcpIpServerEthernetCommandSettings : ChannelCreateCommandBaseSettings
 {
+    [CommandOption("--network-adapter [NETWORK-ADAPTER]")]
+    [Description("Network adapter to bind for Ethernet communication")]
+    public FlagValue<string>? NetworkAdapter { get; init; } = new();
+
     [CommandOption("--port-number")]
     [Description("Port number on which the driver will listen (0-65535)")]
     [DefaultValue(102)]
