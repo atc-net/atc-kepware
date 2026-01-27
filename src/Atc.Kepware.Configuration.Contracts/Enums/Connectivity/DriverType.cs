@@ -31,4 +31,7 @@ public enum DriverType
 
     [Description("OPC DA Client")]
     OpcDaClient,
+
+    [Description("Omron FINS Ethernet")]
+    OmronFinsEthernet,
 }
