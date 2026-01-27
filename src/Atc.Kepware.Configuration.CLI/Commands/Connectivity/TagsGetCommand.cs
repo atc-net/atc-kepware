@@ -17,16 +17,18 @@ public sealed class TagsGetCommand : AsyncCommand<TagsGetCommandSettings>
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        TagsGetCommandSettings settings)
+        TagsGetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        TagsGetCommandSettings settings)
+        TagsGetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -41,7 +43,7 @@ public sealed class TagsGetCommand : AsyncCommand<TagsGetCommandSettings>
                 settings.ChannelName,
                 settings.DeviceName,
                 settings.MaxDepth < 1 ? 1 : settings.MaxDepth,
-                CancellationToken.None);
+                cancellationToken);
 
             if (result is { CommunicationSucceeded: true, HasData: true })
             {

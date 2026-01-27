@@ -17,7 +17,8 @@ public sealed class IotAgentGetAllRestServersCommand : AsyncCommand<KepwareBaseC
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        KepwareBaseCommandSettings settings)
+        KepwareBaseCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 

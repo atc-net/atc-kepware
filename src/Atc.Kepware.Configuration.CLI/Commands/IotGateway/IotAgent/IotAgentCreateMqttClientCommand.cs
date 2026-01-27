@@ -17,7 +17,8 @@ public sealed class IotAgentCreateMqttClientCommand : AsyncCommand<IotAgentCreat
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotAgentCreateMqttClientCommandSettings settings)
+        IotAgentCreateMqttClientCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 

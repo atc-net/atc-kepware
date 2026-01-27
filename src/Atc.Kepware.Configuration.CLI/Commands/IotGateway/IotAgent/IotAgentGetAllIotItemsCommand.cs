@@ -17,16 +17,18 @@ public sealed class IotAgentGetAllIotItemsCommand : AsyncCommand<IotAgentCommand
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotAgentCommandBaseSettings settings)
+        IotAgentCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        IotAgentCommandBaseSettings settings)
+        IotAgentCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class IotAgentGetAllIotItemsCommand : AsyncCommand<IotAgentCommand
 
             var isIotAgentDefinedResult = await kepwareConfigurationClient.IsIotAgentDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isIotAgentDefinedResult.CommunicationSucceeded)
             {
@@ -54,7 +56,7 @@ public sealed class IotAgentGetAllIotItemsCommand : AsyncCommand<IotAgentCommand
 
             var result = await kepwareConfigurationClient.GetIotAgentIotItems(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))

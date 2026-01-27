@@ -17,7 +17,8 @@ public sealed class MqttClientIotItemUpdateCommand : AsyncCommand<IotItemUpdateC
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotItemUpdateCommandSettings settings)
+        IotItemUpdateCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 

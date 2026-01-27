@@ -17,16 +17,18 @@ public sealed class ChannelDeleteCommand : AsyncCommand<ChannelDeleteCommandSett
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelDeleteCommandSettings settings)
+        ChannelDeleteCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelDeleteCommandSettings settings)
+        ChannelDeleteCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelDeleteCommand : AsyncCommand<ChannelDeleteCommandSett
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -54,7 +56,7 @@ public sealed class ChannelDeleteCommand : AsyncCommand<ChannelDeleteCommandSett
 
             var result = await kepwareConfigurationClient.DeleteChannel(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (result is { CommunicationSucceeded: false, Data: false })
             {

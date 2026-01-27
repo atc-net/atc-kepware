@@ -17,16 +17,18 @@ public sealed class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateComma
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        TagGroupCreateCommandSettings settings)
+        TagGroupCreateCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        TagGroupCreateCommandSettings settings)
+        TagGroupCreateCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -42,7 +44,7 @@ public sealed class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateComma
                 settings.DeviceName,
                 settings.Name,
                 settings.TagGroups,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isTagGroupDefinedResult.CommunicationSucceeded)
             {
@@ -62,7 +64,7 @@ public sealed class TagsCreateTagGroupCommand : AsyncCommand<TagGroupCreateComma
                 settings.DeviceName,
                 settings.TagGroups,
                 ensureTagGroupStructure: true,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))

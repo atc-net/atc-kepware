@@ -17,16 +17,18 @@ public sealed class IotItemGetCommand : AsyncCommand<IotItemGetCommandSettings>
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotItemGetCommandSettings settings)
+        IotItemGetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        IotItemGetCommandSettings settings)
+        IotItemGetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class IotItemGetCommand : AsyncCommand<IotItemGetCommandSettings>
 
             var isIotAgentDefinedResult = await kepwareConfigurationClient.IsIotAgentDefined(
                 settings.IotAgentName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isIotAgentDefinedResult.CommunicationSucceeded)
             {
@@ -55,7 +57,7 @@ public sealed class IotItemGetCommand : AsyncCommand<IotItemGetCommandSettings>
             var result = await kepwareConfigurationClient.GetIotAgentIotItem(
                 settings.IotAgentName,
                 CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
-                CancellationToken.None);
+                cancellationToken);
 
             if (result is { CommunicationSucceeded: true, HasData: true })
             {

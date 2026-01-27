@@ -18,17 +18,19 @@ public sealed class RestClientIotItemUpdateCommand : AsyncCommand<IotItemUpdateC
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotItemUpdateCommandSettings settings)
+        IotItemUpdateCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     [SuppressMessage("Design", "MA0051:Method is too long", Justification = "OK.")]
     private async Task<int> ExecuteInternalAsync(
-        IotItemUpdateCommandSettings settings)
+        IotItemUpdateCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -41,7 +43,7 @@ public sealed class RestClientIotItemUpdateCommand : AsyncCommand<IotItemUpdateC
 
             var iotAgentResult = await kepwareConfigurationClient.GetIotAgentRestClient(
                 settings.IotAgentName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!iotAgentResult.CommunicationSucceeded)
             {
@@ -57,7 +59,7 @@ public sealed class RestClientIotItemUpdateCommand : AsyncCommand<IotItemUpdateC
             var iotItemResult = await kepwareConfigurationClient.GetIotAgentIotItem(
                 settings.IotAgentName,
                 CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
-                CancellationToken.None);
+                cancellationToken);
 
             if (iotItemResult is { CommunicationSucceeded: true, HasData: false })
             {
@@ -79,7 +81,7 @@ public sealed class RestClientIotItemUpdateCommand : AsyncCommand<IotItemUpdateC
                 settings.IotAgentName,
                 CommandHelper.GetIotItemInternalNameFromServerTag(settings.ServerTag),
                 request,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))

@@ -17,16 +17,18 @@ public sealed class IotAgentGetRestClientCommand : AsyncCommand<IotAgentCommandB
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        IotAgentCommandBaseSettings settings)
+        IotAgentCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        IotAgentCommandBaseSettings settings)
+        IotAgentCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class IotAgentGetRestClientCommand : AsyncCommand<IotAgentCommandB
 
             var result = await kepwareConfigurationClient.GetIotAgentRestClient(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (result is { CommunicationSucceeded: true, HasData: true })
             {

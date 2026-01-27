@@ -4,16 +4,18 @@ public class RootCommand : AsyncCommand<RootCommandSettings>
 {
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        RootCommandSettings settings)
+        RootCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private static async Task<int> ExecuteInternalAsync(
-        RootCommandSettings settings)
+        RootCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         if (!NetworkInformationHelper.HasConnection())
         {
@@ -33,7 +35,7 @@ public class RootCommand : AsyncCommand<RootCommandSettings>
             }
         }
 
-        await Task.Delay(1);
+        await Task.Delay(1, cancellationToken);
         return ConsoleExitStatusCodes.Success;
     }
 
