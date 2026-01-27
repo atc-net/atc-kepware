@@ -28,5 +28,6 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcDaCl
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcUaClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SiemensS7PlusEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SiemensTcpIpEthernet;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SiemensTcpIpServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Simulator;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.IotGateway;
