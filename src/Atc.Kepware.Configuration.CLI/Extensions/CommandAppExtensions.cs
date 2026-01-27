@@ -106,6 +106,10 @@ public static class CommandAppExtensions
         get.AddCommand<ChannelGetAllenBradleyControlLogixServerEthernetCommand>("allenbradleycontrollogixserverethernet")
             .WithDescription("Get an Allen-Bradley ControlLogix Server Ethernet channel.")
             .WithExample("connectivity channels get allenbradleycontrollogixserverethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetAllenBradleyMicro800EthernetCommand>("allenbradleymicro800ethernet")
+            .WithDescription("Get an Allen-Bradley Micro800 Ethernet channel.")
+            .WithExample("connectivity channels get allenbradleymicro800ethernet -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -149,26 +153,36 @@ public static class CommandAppExtensions
                 .WithDescription("Creates an Omron FINS Ethernet channel (if not exists).")
                 .WithExample("connectivity channels create omronfinsethernet -s [server-url] --name [channelName] --description [description]");
 
-            create.AddCommand<ChannelCreateMitsubishiEthernetCommand>("mitsubishiethernet")
-                .WithDescription("Creates a Mitsubishi Ethernet channel (if not exists).")
-                .WithExample("connectivity channels create mitsubishiethernet -s [server-url] --name [channelName] --description [description]");
-
-            create.AddCommand<ChannelCreateBacNetIpCommand>("bacnetip")
-                .WithDescription("Creates a BACnet/IP channel (if not exists).")
-                .WithExample("connectivity channels create bacnetip -s [server-url] --name [channelName] --description [description]");
-
-            create.AddCommand<ChannelCreateMqttClientCommand>("mqttclient")
-                .WithDescription("Creates an MQTT Client channel (if not exists).")
-                .WithExample("connectivity channels create mqttclient -s [server-url] --name [channelName] --host [host] --port [port]");
-
-            create.AddCommand<ChannelCreateDnpClientEthernetCommand>("dnpclientethernet")
-                .WithDescription("Creates a DNP Client Ethernet channel (if not exists).")
-                .WithExample("connectivity channels create dnpclientethernet -s [server-url] --name [channelName]");
-
-            create.AddCommand<ChannelCreateAllenBradleyControlLogixServerEthernetCommand>("allenbradleycontrollogixserverethernet")
-                .WithDescription("Creates an Allen-Bradley ControlLogix Server Ethernet channel (if not exists).")
-                .WithExample("connectivity channels create allenbradleycontrollogixserverethernet -s [server-url] --name [channelName]");
+            ConfigureChannelCreateCommandsExtended(create);
         });
+
+    private static void ConfigureChannelCreateCommandsExtended(
+        IConfigurator<CommandSettings> create)
+    {
+        create.AddCommand<ChannelCreateMitsubishiEthernetCommand>("mitsubishiethernet")
+            .WithDescription("Creates a Mitsubishi Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create mitsubishiethernet -s [server-url] --name [channelName] --description [description]");
+
+        create.AddCommand<ChannelCreateBacNetIpCommand>("bacnetip")
+            .WithDescription("Creates a BACnet/IP channel (if not exists).")
+            .WithExample("connectivity channels create bacnetip -s [server-url] --name [channelName] --description [description]");
+
+        create.AddCommand<ChannelCreateMqttClientCommand>("mqttclient")
+            .WithDescription("Creates an MQTT Client channel (if not exists).")
+            .WithExample("connectivity channels create mqttclient -s [server-url] --name [channelName] --host [host] --port [port]");
+
+        create.AddCommand<ChannelCreateDnpClientEthernetCommand>("dnpclientethernet")
+            .WithDescription("Creates a DNP Client Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create dnpclientethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateAllenBradleyControlLogixServerEthernetCommand>("allenbradleycontrollogixserverethernet")
+            .WithDescription("Creates an Allen-Bradley ControlLogix Server Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create allenbradleycontrollogixserverethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateAllenBradleyMicro800EthernetCommand>("allenbradleymicro800ethernet")
+            .WithDescription("Creates an Allen-Bradley Micro800 Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create allenbradleymicro800ethernet -s [server-url] --name [channelName]");
+    }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
         => node =>
@@ -256,6 +270,10 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetAllenBradleyControlLogixServerEthernetCommand>("allenbradleycontrollogixserverethernet")
             .WithDescription("Get an Allen-Bradley ControlLogix Server Ethernet device.")
             .WithExample("connectivity devices get allenbradleycontrollogixserverethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetAllenBradleyMicro800EthernetCommand>("allenbradleymicro800ethernet")
+            .WithDescription("Get an Allen-Bradley Micro800 Ethernet device.")
+            .WithExample("connectivity devices get allenbradleymicro800ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -300,26 +318,36 @@ public static class CommandAppExtensions
                 .WithDescription("Creates an Omron FINS Ethernet device (if not exists).")
                 .WithExample("connectivity devices create omronfinsethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
 
-            create.AddCommand<DeviceCreateMitsubishiEthernetCommand>("mitsubishiethernet")
-                .WithDescription("Creates a Mitsubishi Ethernet device (if not exists).")
-                .WithExample("connectivity devices create mitsubishiethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
-
-            create.AddCommand<DeviceCreateBacNetIpCommand>("bacnetip")
-                .WithDescription("Creates a BACnet/IP device (if not exists).")
-                .WithExample("connectivity devices create bacnetip -s [server-url] --channel-name [channelName] --device-name [deviceName]");
-
-            create.AddCommand<DeviceCreateMqttClientCommand>("mqttclient")
-                .WithDescription("Creates an MQTT Client device (if not exists).")
-                .WithExample("connectivity devices create mqttclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
-
-            create.AddCommand<DeviceCreateDnpClientEthernetCommand>("dnpclientethernet")
-                .WithDescription("Creates a DNP Client Ethernet device (if not exists).")
-                .WithExample("connectivity devices create dnpclientethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
-
-            create.AddCommand<DeviceCreateAllenBradleyControlLogixServerEthernetCommand>("allenbradleycontrollogixserverethernet")
-                .WithDescription("Creates an Allen-Bradley ControlLogix Server Ethernet device (if not exists).")
-                .WithExample("connectivity devices create allenbradleycontrollogixserverethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+            ConfigureDeviceCreateCommandsExtended(create);
         });
+
+    private static void ConfigureDeviceCreateCommandsExtended(
+        IConfigurator<CommandSettings> create)
+    {
+        create.AddCommand<DeviceCreateMitsubishiEthernetCommand>("mitsubishiethernet")
+            .WithDescription("Creates a Mitsubishi Ethernet device (if not exists).")
+            .WithExample("connectivity devices create mitsubishiethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateBacNetIpCommand>("bacnetip")
+            .WithDescription("Creates a BACnet/IP device (if not exists).")
+            .WithExample("connectivity devices create bacnetip -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        create.AddCommand<DeviceCreateMqttClientCommand>("mqttclient")
+            .WithDescription("Creates an MQTT Client device (if not exists).")
+            .WithExample("connectivity devices create mqttclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        create.AddCommand<DeviceCreateDnpClientEthernetCommand>("dnpclientethernet")
+            .WithDescription("Creates a DNP Client Ethernet device (if not exists).")
+            .WithExample("connectivity devices create dnpclientethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        create.AddCommand<DeviceCreateAllenBradleyControlLogixServerEthernetCommand>("allenbradleycontrollogixserverethernet")
+            .WithDescription("Creates an Allen-Bradley ControlLogix Server Ethernet device (if not exists).")
+            .WithExample("connectivity devices create allenbradleycontrollogixserverethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        create.AddCommand<DeviceCreateAllenBradleyMicro800EthernetCommand>("allenbradleymicro800ethernet")
+            .WithDescription("Creates an Allen-Bradley Micro800 Ethernet device (if not exists).")
+            .WithExample("connectivity devices create allenbradleymicro800ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+    }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
         => node =>

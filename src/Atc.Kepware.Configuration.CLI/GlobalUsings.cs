@@ -25,6 +25,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyControlLogixEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyControlLogixServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyMicro800Ethernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
