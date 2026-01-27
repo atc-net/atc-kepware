@@ -37,4 +37,7 @@ public enum DriverType
 
     [Description("Mitsubishi Ethernet")]
     MitsubishiEthernet,
+
+    [Description("BACnet/IP")]
+    BacNetIp,
 }
