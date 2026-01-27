@@ -21,6 +21,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradl
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.GeEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MitsubishiCncEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MitsubishiEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MitsubishiFxNet;
@@ -35,6 +36,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensTcp
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.Simulator;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BacNetIp;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.GeEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiFxNet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MqttClient;
@@ -49,6 +51,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBr
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.GeEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiCncEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiFxNet;
