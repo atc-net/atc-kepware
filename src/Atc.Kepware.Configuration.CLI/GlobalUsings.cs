@@ -38,6 +38,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.Mitsubishi
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OmronFinsEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OmronNjEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcDaClient;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcUaClient;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensS7PlusEthernet;
@@ -51,6 +52,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiEt
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiFxNet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronFinsEthernet;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronNjEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OpcDaClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.SiemensTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.IotGateway;
