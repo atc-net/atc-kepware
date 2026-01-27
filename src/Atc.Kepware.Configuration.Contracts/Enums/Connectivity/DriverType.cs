@@ -28,4 +28,7 @@ public enum DriverType
 
     [Description("Siemens S7 Plus Ethernet")]
     SiemensS7PlusEthernet,
+
+    [Description("OPC DA Client")]
+    OpcDaClient,
 }
