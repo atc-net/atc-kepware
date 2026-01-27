@@ -118,6 +118,10 @@ public static class CommandAppExtensions
         get.AddCommand<ChannelGetSiemensTcpIpServerEthernetCommand>("siemenstcpipserverethernet")
             .WithDescription("Get a Siemens TCP/IP Server Ethernet channel.")
             .WithExample("connectivity channels get siemenstcpipserverethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetMitsubishiCncEthernetCommand>("mitsubishicncethernet")
+            .WithDescription("Get a Mitsubishi CNC Ethernet channel.")
+            .WithExample("connectivity channels get mitsubishicncethernet -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -198,6 +202,10 @@ public static class CommandAppExtensions
         create.AddCommand<ChannelCreateSiemensTcpIpServerEthernetCommand>("siemenstcpipserverethernet")
             .WithDescription("Creates a Siemens TCP/IP Server Ethernet channel (if not exists).")
             .WithExample("connectivity channels create siemenstcpipserverethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateMitsubishiCncEthernetCommand>("mitsubishicncethernet")
+            .WithDescription("Creates a Mitsubishi CNC Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create mitsubishicncethernet -s [server-url] --name [channelName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -298,6 +306,10 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetSiemensTcpIpServerEthernetCommand>("siemenstcpipserverethernet")
             .WithDescription("Get a Siemens TCP/IP Server Ethernet device.")
             .WithExample("connectivity devices get siemenstcpipserverethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetMitsubishiCncEthernetCommand>("mitsubishicncethernet")
+            .WithDescription("Get a Mitsubishi CNC Ethernet device.")
+            .WithExample("connectivity devices get mitsubishicncethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -379,6 +391,10 @@ public static class CommandAppExtensions
         create.AddCommand<DeviceCreateSiemensTcpIpServerEthernetCommand>("siemenstcpipserverethernet")
             .WithDescription("Creates a Siemens TCP/IP Server Ethernet device (if not exists).")
             .WithExample("connectivity devices create siemenstcpipserverethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        create.AddCommand<DeviceCreateMitsubishiCncEthernetCommand>("mitsubishicncethernet")
+            .WithDescription("Creates a Mitsubishi CNC Ethernet device (if not exists).")
+            .WithExample("connectivity devices create mitsubishicncethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
