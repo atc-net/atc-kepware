@@ -61,4 +61,7 @@ public enum DriverType
 
     [Description("Mitsubishi CNC Ethernet")]
     MitsubishiCncEthernet,
+
+    [Description("Mitsubishi FX Net")]
+    MitsubishiFxNet,
 }

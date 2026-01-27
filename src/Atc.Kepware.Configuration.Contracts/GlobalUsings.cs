@@ -7,6 +7,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradl
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiEthernet;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiFxNet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronFinsEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OpcDaClient;
@@ -22,6 +23,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClie
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiCncEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiEthernet;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiFxNet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OmronFinsEthernet;
