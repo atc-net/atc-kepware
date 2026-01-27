@@ -40,4 +40,7 @@ public enum DriverType
 
     [Description("BACnet/IP")]
     BacNetIp,
+
+    [Description("MQTT Client")]
+    MqttClient,
 }
