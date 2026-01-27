@@ -16,6 +16,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OmronNjEther
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OpcDaClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.SiemensTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.YokogawaCxEthernet;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.YokogawaDarwinEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyControlLogixEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyControlLogixServerEthernet;
@@ -41,4 +42,5 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Siemens
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SiemensTcpIpServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Simulator;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.YokogawaCxEthernet;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.YokogawaDarwinEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.IotGateway;
