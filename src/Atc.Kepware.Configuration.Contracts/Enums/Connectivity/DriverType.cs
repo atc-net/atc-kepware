@@ -55,4 +55,7 @@ public enum DriverType
 
     [Description("Allen-Bradley Server Ethernet")]
     AllenBradleyServerEthernet,
+
+    [Description("Siemens TCP/IP Server Ethernet")]
+    SiemensTcpIpServerEthernet,
 }
