@@ -2,8 +2,7 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Helpers;
 
 public static class CommandHelper
 {
-    public static string GetIotItemInternalNameFromServerTag(
-        string serverTag)
+    public static string GetIotItemInternalNameFromServerTag(string serverTag)
         => serverTag.TrimExtended().Replace('.', '_');
 
     public static string TransformHttpHeaders(

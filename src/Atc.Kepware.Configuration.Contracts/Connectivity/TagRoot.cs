@@ -2,8 +2,7 @@ namespace Atc.Kepware.Configuration.Contracts.Connectivity;
 
 public sealed class TagRoot
 {
-    public TagRoot(
-        string deviceName)
+    public TagRoot(string deviceName)
     {
         DeviceName = deviceName;
     }

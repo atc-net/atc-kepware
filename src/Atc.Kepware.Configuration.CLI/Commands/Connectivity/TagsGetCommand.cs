@@ -62,8 +62,7 @@ public sealed class TagsGetCommand : AsyncCommand<TagsGetCommandSettings>
         return ConsoleExitStatusCodes.Success;
     }
 
-    private void OutputTagRoot(
-        TagRoot tagRoot)
+    private void OutputTagRoot(TagRoot tagRoot)
     {
         logger.LogInformation($"Device:   {tagRoot.DeviceName}");
 

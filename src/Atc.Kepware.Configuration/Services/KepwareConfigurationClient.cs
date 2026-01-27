@@ -28,8 +28,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
     /// </summary>
     /// <param name="loggerFactory">The ILoggerFactory</param>
     /// <exception cref="ArgumentNullException">Throws ArgumentNullException if ILogger is null.</exception>
-    public KepwareConfigurationClient(
-        ILoggerFactory? loggerFactory)
+    public KepwareConfigurationClient(ILoggerFactory? loggerFactory)
     {
         logger = loggerFactory?.CreateLogger<KepwareConfigurationClient>() ?? new NullLogger<KepwareConfigurationClient>();
         jsonSerializerOptions = InitializeJsonSerializerOptions();
