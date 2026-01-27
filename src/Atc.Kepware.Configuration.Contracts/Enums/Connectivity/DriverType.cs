@@ -67,4 +67,7 @@ public enum DriverType
 
     [Description("GE Ethernet")]
     GeEthernet,
+
+    [Description("GE Ethernet Global Data")]
+    GeEthernetGlobalData,
 }
