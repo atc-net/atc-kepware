@@ -16,6 +16,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyControlLogixEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.BacNetIp;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MitsubishiEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.ModbusTcpIpEthernet;
@@ -36,6 +37,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.SiemensTcpIp
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyControlLogixEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BacNetIp;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.ModbusTcpIpEthernet;
