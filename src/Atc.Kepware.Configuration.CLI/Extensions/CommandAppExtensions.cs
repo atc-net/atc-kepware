@@ -81,22 +81,32 @@ public static class CommandAppExtensions
                 .WithDescription("Get an Omron FINS Ethernet channel.")
                 .WithExample("connectivity channels get omronfinsethernet -s [server-url] --name [channelName]");
 
-            get.AddCommand<ChannelGetMitsubishiEthernetCommand>("mitsubishiethernet")
-                .WithDescription("Get a Mitsubishi Ethernet channel.")
-                .WithExample("connectivity channels get mitsubishiethernet -s [server-url] --name [channelName]");
-
-            get.AddCommand<ChannelGetBacNetIpCommand>("bacnetip")
-                .WithDescription("Get a BACnet/IP channel.")
-                .WithExample("connectivity channels get bacnetip -s [server-url] --name [channelName]");
-
-            get.AddCommand<ChannelGetMqttClientCommand>("mqttclient")
-                .WithDescription("Get an MQTT Client channel.")
-                .WithExample("connectivity channels get mqttclient -s [server-url] --name [channelName]");
-
-            get.AddCommand<ChannelGetDnpClientEthernetCommand>("dnpclientethernet")
-                .WithDescription("Get a DNP Client Ethernet channel.")
-                .WithExample("connectivity channels get dnpclientethernet -s [server-url] --name [channelName]");
+            ConfigureChannelGetCommandsExtended(get);
         });
+
+    private static void ConfigureChannelGetCommandsExtended(
+        IConfigurator<CommandSettings> get)
+    {
+        get.AddCommand<ChannelGetMitsubishiEthernetCommand>("mitsubishiethernet")
+            .WithDescription("Get a Mitsubishi Ethernet channel.")
+            .WithExample("connectivity channels get mitsubishiethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetBacNetIpCommand>("bacnetip")
+            .WithDescription("Get a BACnet/IP channel.")
+            .WithExample("connectivity channels get bacnetip -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetMqttClientCommand>("mqttclient")
+            .WithDescription("Get an MQTT Client channel.")
+            .WithExample("connectivity channels get mqttclient -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetDnpClientEthernetCommand>("dnpclientethernet")
+            .WithDescription("Get a DNP Client Ethernet channel.")
+            .WithExample("connectivity channels get dnpclientethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetAllenBradleyControlLogixServerEthernetCommand>("allenbradleycontrollogixserverethernet")
+            .WithDescription("Get an Allen-Bradley ControlLogix Server Ethernet channel.")
+            .WithExample("connectivity channels get allenbradleycontrollogixserverethernet -s [server-url] --name [channelName]");
+    }
 
     private static void ConfigureChannelCreateCommands(
         IConfigurator<CommandSettings> node)
@@ -154,6 +164,10 @@ public static class CommandAppExtensions
             create.AddCommand<ChannelCreateDnpClientEthernetCommand>("dnpclientethernet")
                 .WithDescription("Creates a DNP Client Ethernet channel (if not exists).")
                 .WithExample("connectivity channels create dnpclientethernet -s [server-url] --name [channelName]");
+
+            create.AddCommand<ChannelCreateAllenBradleyControlLogixServerEthernetCommand>("allenbradleycontrollogixserverethernet")
+                .WithDescription("Creates an Allen-Bradley ControlLogix Server Ethernet channel (if not exists).")
+                .WithExample("connectivity channels create allenbradleycontrollogixserverethernet -s [server-url] --name [channelName]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -217,22 +231,32 @@ public static class CommandAppExtensions
                 .WithDescription("Get an Omron FINS Ethernet device.")
                 .WithExample("connectivity devices get omronfinsethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
 
-            get.AddCommand<DeviceGetMitsubishiEthernetCommand>("mitsubishiethernet")
-                .WithDescription("Get a Mitsubishi Ethernet device.")
-                .WithExample("connectivity devices get mitsubishiethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
-
-            get.AddCommand<DeviceGetBacNetIpCommand>("bacnetip")
-                .WithDescription("Get a BACnet/IP device.")
-                .WithExample("connectivity devices get bacnetip -s [server-url] --channel-name [channelName] --device-name [deviceName]");
-
-            get.AddCommand<DeviceGetMqttClientCommand>("mqttclient")
-                .WithDescription("Get an MQTT Client device.")
-                .WithExample("connectivity devices get mqttclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
-
-            get.AddCommand<DeviceGetDnpClientEthernetCommand>("dnpclientethernet")
-                .WithDescription("Get a DNP Client Ethernet device.")
-                .WithExample("connectivity devices get dnpclientethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+            ConfigureDeviceGetCommandsExtended(get);
         });
+
+    private static void ConfigureDeviceGetCommandsExtended(
+        IConfigurator<CommandSettings> get)
+    {
+        get.AddCommand<DeviceGetMitsubishiEthernetCommand>("mitsubishiethernet")
+            .WithDescription("Get a Mitsubishi Ethernet device.")
+            .WithExample("connectivity devices get mitsubishiethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetBacNetIpCommand>("bacnetip")
+            .WithDescription("Get a BACnet/IP device.")
+            .WithExample("connectivity devices get bacnetip -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetMqttClientCommand>("mqttclient")
+            .WithDescription("Get an MQTT Client device.")
+            .WithExample("connectivity devices get mqttclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetDnpClientEthernetCommand>("dnpclientethernet")
+            .WithDescription("Get a DNP Client Ethernet device.")
+            .WithExample("connectivity devices get dnpclientethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetAllenBradleyControlLogixServerEthernetCommand>("allenbradleycontrollogixserverethernet")
+            .WithDescription("Get an Allen-Bradley ControlLogix Server Ethernet device.")
+            .WithExample("connectivity devices get allenbradleycontrollogixserverethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+    }
 
     private static void ConfigureDeviceCreateCommands(
         IConfigurator<CommandSettings> node)
@@ -291,6 +315,10 @@ public static class CommandAppExtensions
             create.AddCommand<DeviceCreateDnpClientEthernetCommand>("dnpclientethernet")
                 .WithDescription("Creates a DNP Client Ethernet device (if not exists).")
                 .WithExample("connectivity devices create dnpclientethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+            create.AddCommand<DeviceCreateAllenBradleyControlLogixServerEthernetCommand>("allenbradleycontrollogixserverethernet")
+                .WithDescription("Creates an Allen-Bradley ControlLogix Server Ethernet device (if not exists).")
+                .WithExample("connectivity devices create allenbradleycontrollogixserverethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
