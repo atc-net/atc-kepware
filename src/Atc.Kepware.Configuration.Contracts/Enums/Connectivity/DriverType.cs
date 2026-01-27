@@ -46,4 +46,7 @@ public enum DriverType
 
     [Description("DNP Client Ethernet")]
     DnpClientEthernet,
+
+    [Description("Allen-Bradley ControlLogix Server Ethernet")]
+    AllenBradleyControlLogixServerEthernet,
 }

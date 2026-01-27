@@ -13,6 +13,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OpcDaClient;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.SiemensTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyControlLogixEthernet;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyControlLogixServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClientEthernet;
