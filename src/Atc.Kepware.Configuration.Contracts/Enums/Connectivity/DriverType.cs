@@ -121,4 +121,7 @@ public enum DriverType
 
     [Description("Bristol BSAP IP")]
     BristolBsapIp,
+
+    [Description("Busware Ethernet")]
+    BuswareEthernet,
 }

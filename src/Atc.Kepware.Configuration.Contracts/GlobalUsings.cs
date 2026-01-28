@@ -47,6 +47,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Automat
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BeckhoffTwinCat;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BristolBsapIp;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BuswareEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.GeEthernet;
