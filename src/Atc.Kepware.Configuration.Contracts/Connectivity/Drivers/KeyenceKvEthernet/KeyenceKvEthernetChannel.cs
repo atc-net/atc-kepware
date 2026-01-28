@@ -1,0 +1,14 @@
+namespace Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.KeyenceKvEthernet;
+
+public sealed class KeyenceKvEthernetChannel : ChannelBase, IKeyenceKvEthernetChannel
+{
+    /// <inheritdoc />
+    public string? NetworkAdapter { get; set; }
+
+    /// <inheritdoc />
+    public int Port { get; set; }
+
+    /// <inheritdoc />
+    public override string ToString()
+        => $"{base.ToString()}, {nameof(NetworkAdapter)}: {NetworkAdapter}, {nameof(Port)}: {Port}";
+}
