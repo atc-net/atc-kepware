@@ -224,6 +224,26 @@ public static class CommandAppExtensions
         get.AddCommand<ChannelGetBuswareEthernetCommand>("buswareethernet")
             .WithDescription("Get a Busware Ethernet channel.")
             .WithExample("connectivity channels get buswareethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetHoneywellHc900EthernetCommand>("honeywellhc900ethernet")
+            .WithDescription("Get a Honeywell HC900 Ethernet channel.")
+            .WithExample("connectivity channels get honeywellhc900ethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetFanucFocasEthernetCommand>("fanucfocasethernet")
+            .WithDescription("Get a Fanuc Focas Ethernet channel.")
+            .WithExample("connectivity channels get fanucfocasethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetHoneywellUdcEthernetCommand>("honeywelludcethernet")
+            .WithDescription("Get a Honeywell UDC Ethernet channel.")
+            .WithExample("connectivity channels get honeywelludcethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetCutlerHammerElcEthernetCommand>("cutlerhammerelcethernet")
+            .WithDescription("Get a Cutler-Hammer ELC Ethernet channel.")
+            .WithExample("connectivity channels get cutlerhammerelcethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetCodesysCommand>("codesys")
+            .WithDescription("Get a CODESYS channel.")
+            .WithExample("connectivity channels get codesys -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -406,6 +426,26 @@ public static class CommandAppExtensions
         create.AddCommand<ChannelCreateBuswareEthernetCommand>("buswareethernet")
             .WithDescription("Creates a Busware Ethernet channel (if not exists).")
             .WithExample("connectivity channels create buswareethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateHoneywellHc900EthernetCommand>("honeywellhc900ethernet")
+            .WithDescription("Creates a Honeywell HC900 Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create honeywellhc900ethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateFanucFocasEthernetCommand>("fanucfocasethernet")
+            .WithDescription("Creates a Fanuc Focas Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create fanucfocasethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateHoneywellUdcEthernetCommand>("honeywelludcethernet")
+            .WithDescription("Creates a Honeywell UDC Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create honeywelludcethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateCutlerHammerElcEthernetCommand>("cutlerhammerelcethernet")
+            .WithDescription("Creates a Cutler-Hammer ELC Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create cutlerhammerelcethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateCodesysCommand>("codesys")
+            .WithDescription("Creates a CODESYS channel (if not exists).")
+            .WithExample("connectivity channels create codesys -s [server-url] --name [channelName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -612,6 +652,22 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetBuswareEthernetCommand>("buswareethernet")
             .WithDescription("Get a Busware Ethernet device.")
             .WithExample("connectivity devices get buswareethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetHoneywellHc900EthernetCommand>("honeywellhc900ethernet")
+            .WithDescription("Get a Honeywell HC900 Ethernet device.")
+            .WithExample("connectivity devices get honeywellhc900ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetFanucFocasEthernetCommand>("fanucfocasethernet")
+            .WithDescription("Get a Fanuc Focas Ethernet device.")
+            .WithExample("connectivity devices get fanucfocasethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetCutlerHammerElcEthernetCommand>("cutlerhammerelcethernet")
+            .WithDescription("Get a Cutler-Hammer ELC Ethernet device.")
+            .WithExample("connectivity devices get cutlerhammerelcethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetCodesysCommand>("codesys")
+            .WithDescription("Get a CODESYS device.")
+            .WithExample("connectivity devices get codesys -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -799,6 +855,26 @@ public static class CommandAppExtensions
         create.AddCommand<DeviceCreateBuswareEthernetCommand>("buswareethernet")
             .WithDescription("Creates a Busware Ethernet device (if not exists).")
             .WithExample("connectivity devices create buswareethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateHoneywellHc900EthernetCommand>("honeywellhc900ethernet")
+            .WithDescription("Creates a Honeywell HC900 Ethernet device (if not exists).")
+            .WithExample("connectivity devices create honeywellhc900ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateFanucFocasEthernetCommand>("fanucfocasethernet")
+            .WithDescription("Creates a Fanuc Focas Ethernet device (if not exists).")
+            .WithExample("connectivity devices create fanucfocasethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateCodesysCommand>("codesys")
+            .WithDescription("Creates a CODESYS device (if not exists).")
+            .WithExample("connectivity devices create codesys -s [server-url] --channel-name [channelName] --device-name [deviceName] --ip-address [ipAddress]");
+
+        create.AddCommand<DeviceCreateCutlerHammerElcEthernetCommand>("cutlerhammerelcethernet")
+            .WithDescription("Creates a Cutler-Hammer ELC Ethernet device (if not exists).")
+            .WithExample("connectivity devices create cutlerhammerelcethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateHoneywellUdcEthernetCommand>("honeywelludcethernet")
+            .WithDescription("Creates a Honeywell UDC Ethernet device (if not exists).")
+            .WithExample("connectivity devices create honeywelludcethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()

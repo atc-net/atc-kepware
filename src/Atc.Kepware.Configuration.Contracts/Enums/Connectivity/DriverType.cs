@@ -124,4 +124,19 @@ public enum DriverType
 
     [Description("Busware Ethernet")]
     BuswareEthernet,
+
+    [Description("Honeywell HC900 Ethernet")]
+    HoneywellHc900Ethernet,
+
+    [Description("Fanuc Focas Ethernet")]
+    FanucFocasEthernet,
+
+    [Description("Honeywell UDC Ethernet")]
+    HoneywellUdcEthernet,
+
+    [Description("CODESYS")]
+    Codesys,
+
+    [Description("Cutler-Hammer ELC Ethernet")]
+    CutlerHammerElcEthernet,
 }
