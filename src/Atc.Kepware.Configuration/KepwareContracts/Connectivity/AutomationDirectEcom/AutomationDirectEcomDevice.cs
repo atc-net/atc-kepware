@@ -1,0 +1,61 @@
+namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.AutomationDirectEcom;
+
+/// <summary>
+/// Device properties for the AutomationDirect ECOM driver.
+/// </summary>
+internal sealed class AutomationDirectEcomDevice : DeviceBase, IAutomationDirectEcomDevice
+{
+    [JsonPropertyName("servermain.DEVICE_MODEL")]
+    public AutomationDirectEcomDeviceModelType Model { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_ID_FORMAT")]
+    public AutomationDirectEcomDeviceIdFormatType IdFormat { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_ID_STRING")]
+    public string DeviceId { get; set; } = string.Empty;
+
+    [JsonPropertyName("servermain.DEVICE_CONNECTION_TIMEOUT_SECONDS")]
+    public int ConnectTimeoutSeconds { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_REQUEST_TIMEOUT_MILLISECONDS")]
+    public int RequestTimeoutMs { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_RETRY_ATTEMPTS")]
+    public int RetryAttempts { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_ENABLE_ON_COMMUNICATIONS_FAILURES")]
+    public bool DemoteOnFailure { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_DEMOTE_AFTER_SUCCESSIVE_TIMEOUTS")]
+    public int TimeoutsToDemote { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_PERIOD_MS")]
+    public int DemotionPeriodMs { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_DISCARD_WRITES")]
+    public bool DiscardRequestsWhenDemoted { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_TAG_GENERATION_ON_STARTUP")]
+    public DeviceTagGenerationOnStartupType TagGenerationOnStartup { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_TAG_GENERATION_DUPLICATE_HANDLING")]
+    public DeviceTagGenerationDuplicateHandlingType TagGenerationDuplicateHandling { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_TAG_GENERATION_GROUP")]
+    public string? TagGenerationGroup { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_TAG_GENERATION_ALLOW_SUB_GROUPS")]
+    public bool AllowAutomaticallyGeneratedSubgroups { get; set; }
+
+    [JsonPropertyName("plcdirect_ecom.DEVICE_PORT_NUMBER")]
+    public int Port { get; set; }
+
+    [JsonPropertyName("plcdirect_ecom.DEVICE_TAG_IMPORT_FILE")]
+    public string? TagImportFile { get; set; }
+
+    [JsonPropertyName("plcdirect_ecom.DEVICE_DISPLAY_DESCRIPTIONS")]
+    public bool DisplayDescriptions { get; set; }
+
+    public override string ToString()
+        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(IdFormat)}: {IdFormat}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}";
+}

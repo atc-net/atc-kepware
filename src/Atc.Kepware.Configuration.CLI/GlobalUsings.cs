@@ -27,7 +27,13 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradl
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyMicro800Ethernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyServerEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AlstomRedundantEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AromatEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AutomationDirectEbc;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AutomationDirectEcom;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AutomationDirectProductivitySeriesEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.BacNetIp;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.BeckhoffTwinCat;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.GeEthernet;
@@ -55,7 +61,11 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.YokogawaMw
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.YokogawaMxEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradleyEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AllenBradleyMicro800Ethernet;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AromatEthernet;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AutomationDirectEbc;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AutomationDirectEcom;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BacNetIp;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BeckhoffTwinCat;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.GeEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.GeEthernetGlobalData;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.Iec608705104Client;

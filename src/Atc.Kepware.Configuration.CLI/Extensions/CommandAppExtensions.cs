@@ -87,6 +87,10 @@ public static class CommandAppExtensions
     private static void ConfigureChannelGetCommandsExtended(
         IConfigurator<CommandSettings> get)
     {
+        get.AddCommand<ChannelGetAromatEthernetCommand>("aromatethernet")
+            .WithDescription("Get an Aromat Ethernet channel.")
+            .WithExample("connectivity channels get aromatethernet -s [server-url] --name [channelName]");
+
         get.AddCommand<ChannelGetMitsubishiEthernetCommand>("mitsubishiethernet")
             .WithDescription("Get a Mitsubishi Ethernet channel.")
             .WithExample("connectivity channels get mitsubishiethernet -s [server-url] --name [channelName]");
@@ -186,6 +190,32 @@ public static class CommandAppExtensions
         get.AddCommand<ChannelGetYokogawaMxEthernetCommand>("yokogawamxethernet")
             .WithDescription("Get a Yokogawa MX Ethernet channel.")
             .WithExample("connectivity channels get yokogawamxethernet -s [server-url] --name [channelName]");
+
+        ConfigureChannelGetAutomationDirectCommands(get);
+    }
+
+    private static void ConfigureChannelGetAutomationDirectCommands(
+        IConfigurator<CommandSettings> get)
+    {
+        get.AddCommand<ChannelGetAutomationDirectProductivitySeriesEthernetCommand>("automationdirectproductivityseriesethernet")
+            .WithDescription("Get an AutomationDirect Productivity Series Ethernet channel.")
+            .WithExample("connectivity channels get automationdirectproductivityseriesethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetAutomationDirectEbcCommand>("automationdirectebc")
+            .WithDescription("Get an AutomationDirect EBC channel.")
+            .WithExample("connectivity channels get automationdirectebc -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetAutomationDirectEcomCommand>("automationdirectecom")
+            .WithDescription("Get an AutomationDirect ECOM channel.")
+            .WithExample("connectivity channels get automationdirectecom -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetAlstomRedundantEthernetCommand>("alstomredundantethernet")
+            .WithDescription("Get an Alstom Redundant Ethernet channel.")
+            .WithExample("connectivity channels get alstomredundantethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetBeckhoffTwinCatCommand>("beckhofftwincat")
+            .WithDescription("Get a Beckhoff TwinCAT channel.")
+            .WithExample("connectivity channels get beckhofftwincat -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -235,6 +265,10 @@ public static class CommandAppExtensions
     private static void ConfigureChannelCreateCommandsExtended(
         IConfigurator<CommandSettings> create)
     {
+        create.AddCommand<ChannelCreateAromatEthernetCommand>("aromatethernet")
+            .WithDescription("Creates an Aromat Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create aromatethernet -s [server-url] --name [channelName]");
+
         create.AddCommand<ChannelCreateMitsubishiEthernetCommand>("mitsubishiethernet")
             .WithDescription("Creates a Mitsubishi Ethernet channel (if not exists).")
             .WithExample("connectivity channels create mitsubishiethernet -s [server-url] --name [channelName] --description [description]");
@@ -334,6 +368,28 @@ public static class CommandAppExtensions
         create.AddCommand<ChannelCreateYokogawaMxEthernetCommand>("yokogawamxethernet")
             .WithDescription("Creates a Yokogawa MX Ethernet channel (if not exists).")
             .WithExample("connectivity channels create yokogawamxethernet -s [server-url] --name [channelName]");
+
+        ConfigureChannelCreateAutomationDirectCommands(create);
+    }
+
+    private static void ConfigureChannelCreateAutomationDirectCommands(
+        IConfigurator<CommandSettings> create)
+    {
+        create.AddCommand<ChannelCreateAutomationDirectProductivitySeriesEthernetCommand>("automationdirectproductivityseriesethernet")
+            .WithDescription("Creates an AutomationDirect Productivity Series Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create automationdirectproductivityseriesethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateAutomationDirectEbcCommand>("automationdirectebc")
+            .WithDescription("Creates an AutomationDirect EBC channel (if not exists).")
+            .WithExample("connectivity channels create automationdirectebc -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateAutomationDirectEcomCommand>("automationdirectecom")
+            .WithDescription("Creates an AutomationDirect ECOM channel (if not exists).")
+            .WithExample("connectivity channels create automationdirectecom -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateBeckhoffTwinCatCommand>("beckhofftwincat")
+            .WithDescription("Creates a Beckhoff TwinCAT channel (if not exists).")
+            .WithExample("connectivity channels create beckhofftwincat -s [server-url] --name [channelName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -403,6 +459,10 @@ public static class CommandAppExtensions
     private static void ConfigureDeviceGetCommandsExtended(
         IConfigurator<CommandSettings> get)
     {
+        get.AddCommand<DeviceGetAromatEthernetCommand>("aromatethernet")
+            .WithDescription("Get an Aromat Ethernet device.")
+            .WithExample("connectivity devices get aromatethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
         get.AddCommand<DeviceGetMitsubishiEthernetCommand>("mitsubishiethernet")
             .WithDescription("Get a Mitsubishi Ethernet device.")
             .WithExample("connectivity devices get mitsubishiethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
@@ -502,6 +562,32 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetYokogawaMxEthernetCommand>("yokogawamxethernet")
             .WithDescription("Get a Yokogawa MX Ethernet device.")
             .WithExample("connectivity devices get yokogawamxethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        ConfigureDeviceGetAutomationDirectCommands(get);
+    }
+
+    private static void ConfigureDeviceGetAutomationDirectCommands(
+        IConfigurator<CommandSettings> get)
+    {
+        get.AddCommand<DeviceGetAutomationDirectProductivitySeriesEthernetCommand>("automationdirectproductivityseriesethernet")
+            .WithDescription("Get an AutomationDirect Productivity Series Ethernet device.")
+            .WithExample("connectivity devices get automationdirectproductivityseriesethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetAutomationDirectEbcCommand>("automationdirectebc")
+            .WithDescription("Get an AutomationDirect EBC device.")
+            .WithExample("connectivity devices get automationdirectebc -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetAutomationDirectEcomCommand>("automationdirectecom")
+            .WithDescription("Get an AutomationDirect ECOM device.")
+            .WithExample("connectivity devices get automationdirectecom -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetBeckhoffTwinCatCommand>("beckhofftwincat")
+            .WithDescription("Get a Beckhoff TwinCAT device.")
+            .WithExample("connectivity devices get beckhofftwincat -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetAlstomRedundantEthernetCommand>("alstomredundantethernet")
+            .WithDescription("Get an Alstom Redundant Ethernet device.")
+            .WithExample("connectivity devices get alstomredundantethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -552,6 +638,10 @@ public static class CommandAppExtensions
     private static void ConfigureDeviceCreateCommandsExtended(
         IConfigurator<CommandSettings> create)
     {
+        create.AddCommand<DeviceCreateAromatEthernetCommand>("aromatethernet")
+            .WithDescription("Creates an Aromat Ethernet device (if not exists).")
+            .WithExample("connectivity devices create aromatethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
         create.AddCommand<DeviceCreateMitsubishiEthernetCommand>("mitsubishiethernet")
             .WithDescription("Creates a Mitsubishi Ethernet device (if not exists).")
             .WithExample("connectivity devices create mitsubishiethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
@@ -651,6 +741,32 @@ public static class CommandAppExtensions
         create.AddCommand<DeviceCreateYokogawaMxEthernetCommand>("yokogawamxethernet")
             .WithDescription("Creates a Yokogawa MX Ethernet device (if not exists).")
             .WithExample("connectivity devices create yokogawamxethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        ConfigureDeviceCreateAutomationDirectCommands(create);
+    }
+
+    private static void ConfigureDeviceCreateAutomationDirectCommands(
+        IConfigurator<CommandSettings> create)
+    {
+        create.AddCommand<DeviceCreateAutomationDirectProductivitySeriesEthernetCommand>("automationdirectproductivityseriesethernet")
+            .WithDescription("Creates an AutomationDirect Productivity Series Ethernet device (if not exists).")
+            .WithExample("connectivity devices create automationdirectproductivityseriesethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateAutomationDirectEbcCommand>("automationdirectebc")
+            .WithDescription("Creates an AutomationDirect EBC device (if not exists).")
+            .WithExample("connectivity devices create automationdirectebc -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateAutomationDirectEcomCommand>("automationdirectecom")
+            .WithDescription("Creates an AutomationDirect ECOM device (if not exists).")
+            .WithExample("connectivity devices create automationdirectecom -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateBeckhoffTwinCatCommand>("beckhofftwincat")
+            .WithDescription("Creates a Beckhoff TwinCAT device (if not exists).")
+            .WithExample("connectivity devices create beckhofftwincat -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateAlstomRedundantEthernetCommand>("alstomredundantethernet")
+            .WithDescription("Creates an Alstom Redundant Ethernet device (if not exists).")
+            .WithExample("connectivity devices create alstomredundantethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --primary-normal-ip [ip]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()

@@ -100,4 +100,22 @@ public enum DriverType
 
     [Description("IEC 61850 MMS Client")]
     Iec61850MmsClient,
+
+    [Description("Aromat Ethernet")]
+    AromatEthernet,
+
+    [Description("AutomationDirect Productivity Series Ethernet")]
+    AutomationDirectProductivitySeriesEthernet,
+
+    [Description("AutomationDirect EBC")]
+    AutomationDirectEbc,
+
+    [Description("AutomationDirect ECOM")]
+    AutomationDirectEcom,
+
+    [Description("Beckhoff TwinCAT")]
+    BeckhoffTwinCat,
+
+    [Description("Alstom Redundant Ethernet")]
+    AlstomRedundantEthernet,
 }
