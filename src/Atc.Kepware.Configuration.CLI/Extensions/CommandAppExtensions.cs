@@ -244,6 +244,32 @@ public static class CommandAppExtensions
         get.AddCommand<ChannelGetCodesysCommand>("codesys")
             .WithDescription("Get a CODESYS channel.")
             .WithExample("connectivity channels get codesys -s [server-url] --name [channelName]");
+
+        ConfigureChannelGetPriority5BatchCommands(get);
+    }
+
+    private static void ConfigureChannelGetPriority5BatchCommands(
+        IConfigurator<CommandSettings> get)
+    {
+        get.AddCommand<ChannelGetKeyenceKvEthernetCommand>("keyencekvethernet")
+            .WithDescription("Get a Keyence KV Ethernet channel.")
+            .WithExample("connectivity channels get keyencekvethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetOpcXmlDaClientCommand>("opcxmldaclient")
+            .WithDescription("Get an OPC XML-DA Client channel.")
+            .WithExample("connectivity channels get opcxmldaclient -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetOpto22EthernetCommand>("opto22ethernet")
+            .WithDescription("Get an Opto 22 Ethernet channel.")
+            .WithExample("connectivity channels get opto22ethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetMtConnectClientCommand>("mtconnectclient")
+            .WithDescription("Get an MTConnect Client channel.")
+            .WithExample("connectivity channels get mtconnectclient -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetKraussMaffeiMc4EthernetCommand>("kraussmaffeimc4ethernet")
+            .WithDescription("Get a KraussMaffei MC4 Ethernet channel.")
+            .WithExample("connectivity channels get kraussmaffeimc4ethernet -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -446,6 +472,10 @@ public static class CommandAppExtensions
         create.AddCommand<ChannelCreateCodesysCommand>("codesys")
             .WithDescription("Creates a CODESYS channel (if not exists).")
             .WithExample("connectivity channels create codesys -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateKeyenceKvEthernetCommand>("keyencekvethernet")
+            .WithDescription("Creates a Keyence KV Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create keyencekvethernet -s [server-url] --name [channelName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -668,6 +698,32 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetCodesysCommand>("codesys")
             .WithDescription("Get a CODESYS device.")
             .WithExample("connectivity devices get codesys -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetOpcXmlDaClientCommand>("opcxmldaclient")
+            .WithDescription("Get an OPC XML-DA Client device.")
+            .WithExample("connectivity devices get opcxmldaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        ConfigureDeviceGetPriority5BatchCommands(get);
+    }
+
+    private static void ConfigureDeviceGetPriority5BatchCommands(
+        IConfigurator<CommandSettings> get)
+    {
+        get.AddCommand<DeviceGetKeyenceKvEthernetCommand>("keyencekvethernet")
+            .WithDescription("Get a Keyence KV Ethernet device.")
+            .WithExample("connectivity devices get keyencekvethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetOpto22EthernetCommand>("opto22ethernet")
+            .WithDescription("Get an Opto 22 Ethernet device.")
+            .WithExample("connectivity devices get opto22ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetKraussMaffeiMc4EthernetCommand>("kraussmaffeimc4ethernet")
+            .WithDescription("Get a KraussMaffei MC4 Ethernet device.")
+            .WithExample("connectivity devices get kraussmaffeimc4ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetMtConnectClientCommand>("mtconnectclient")
+            .WithDescription("Get an MTConnect Client device.")
+            .WithExample("connectivity devices get mtconnectclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -875,6 +931,32 @@ public static class CommandAppExtensions
         create.AddCommand<DeviceCreateHoneywellUdcEthernetCommand>("honeywelludcethernet")
             .WithDescription("Creates a Honeywell UDC Ethernet device (if not exists).")
             .WithExample("connectivity devices create honeywelludcethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateOpcXmlDaClientCommand>("opcxmldaclient")
+            .WithDescription("Creates an OPC XML-DA Client device (if not exists).")
+            .WithExample("connectivity devices create opcxmldaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        ConfigureDeviceCreatePriority5BatchCommands(create);
+    }
+
+    private static void ConfigureDeviceCreatePriority5BatchCommands(
+        IConfigurator<CommandSettings> create)
+    {
+        create.AddCommand<DeviceCreateKeyenceKvEthernetCommand>("keyencekvethernet")
+            .WithDescription("Creates a Keyence KV Ethernet device (if not exists).")
+            .WithExample("connectivity devices create keyencekvethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateOpto22EthernetCommand>("opto22ethernet")
+            .WithDescription("Creates an Opto 22 Ethernet device (if not exists).")
+            .WithExample("connectivity devices create opto22ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateMtConnectClientCommand>("mtconnectclient")
+            .WithDescription("Creates an MTConnect Client device (if not exists).")
+            .WithExample("connectivity devices create mtconnectclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        create.AddCommand<DeviceCreateKraussMaffeiMc4EthernetCommand>("kraussmaffeimc4ethernet")
+            .WithDescription("Creates a KraussMaffei MC4 Ethernet device (if not exists).")
+            .WithExample("connectivity devices create kraussmaffeimc4ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()

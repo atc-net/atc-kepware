@@ -139,4 +139,19 @@ public enum DriverType
 
     [Description("Cutler-Hammer ELC Ethernet")]
     CutlerHammerElcEthernet,
+
+    [Description("Keyence KV Ethernet")]
+    KeyenceKvEthernet,
+
+    [Description("OPC XML-DA Client")]
+    OpcXmlDaClient,
+
+    [Description("MTConnect Client")]
+    MtConnectClient,
+
+    [Description("Opto 22 Ethernet")]
+    Opto22Ethernet,
+
+    [Description("KraussMaffei MC4 Ethernet")]
+    KraussMaffeiMc4Ethernet,
 }
