@@ -25,6 +25,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.Automation
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AutomationDirectProductivitySeriesEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.BeckhoffTwinCat;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.BristolBsapIp;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.GeEthernet;
@@ -60,6 +61,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AutomationDi
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AutomationDirectProductivitySeriesEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BeckhoffTwinCat;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BristolBsapIp;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.GeEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.GeEthernetGlobalData;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.Iec608705104Client;
@@ -91,6 +93,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Automat
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AutomationDirectProductivitySeriesEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BeckhoffTwinCat;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BristolBsapIp;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.GeEthernet;

@@ -118,4 +118,7 @@ public enum DriverType
 
     [Description("Alstom Redundant Ethernet")]
     AlstomRedundantEthernet,
+
+    [Description("Bristol BSAP IP")]
+    BristolBsapIp,
 }

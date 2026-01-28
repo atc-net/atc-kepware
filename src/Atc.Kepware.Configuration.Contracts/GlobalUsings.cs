@@ -13,6 +13,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AutomationDi
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AutomationDirectProductivitySeriesEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BeckhoffTwinCat;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BristolBsapIp;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.GeEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.GeEthernetGlobalData;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.Iec608705104Client;
@@ -45,6 +46,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Automat
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AutomationDirectProductivitySeriesEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BeckhoffTwinCat;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BristolBsapIp;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.GeEthernet;
