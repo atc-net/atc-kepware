@@ -220,6 +220,10 @@ public static class CommandAppExtensions
         get.AddCommand<ChannelGetBristolBsapIpCommand>("bristolbsapip")
             .WithDescription("Get a Bristol BSAP IP channel.")
             .WithExample("connectivity channels get bristolbsapip -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetBuswareEthernetCommand>("buswareethernet")
+            .WithDescription("Get a Busware Ethernet channel.")
+            .WithExample("connectivity channels get buswareethernet -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -398,6 +402,10 @@ public static class CommandAppExtensions
         create.AddCommand<ChannelCreateBristolBsapIpCommand>("bristolbsapip")
             .WithDescription("Creates a Bristol BSAP IP channel (if not exists).")
             .WithExample("connectivity channels create bristolbsapip -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateBuswareEthernetCommand>("buswareethernet")
+            .WithDescription("Creates a Busware Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create buswareethernet -s [server-url] --name [channelName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -600,6 +608,10 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetBristolBsapIpCommand>("bristolbsapip")
             .WithDescription("Get a Bristol BSAP IP device.")
             .WithExample("connectivity devices get bristolbsapip -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetBuswareEthernetCommand>("buswareethernet")
+            .WithDescription("Get a Busware Ethernet device.")
+            .WithExample("connectivity devices get buswareethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -783,6 +795,10 @@ public static class CommandAppExtensions
         create.AddCommand<DeviceCreateBristolBsapIpCommand>("bristolbsapip")
             .WithDescription("Creates a Bristol BSAP IP device (if not exists).")
             .WithExample("connectivity devices create bristolbsapip -s [server-url] --channel-name [channelName] --device-name [deviceName] --rtu-ip-address [ip]");
+
+        create.AddCommand<DeviceCreateBuswareEthernetCommand>("buswareethernet")
+            .WithDescription("Creates a Busware Ethernet device (if not exists).")
+            .WithExample("connectivity devices create buswareethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
