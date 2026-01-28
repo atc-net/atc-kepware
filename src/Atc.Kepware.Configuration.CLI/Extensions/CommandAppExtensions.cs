@@ -216,6 +216,10 @@ public static class CommandAppExtensions
         get.AddCommand<ChannelGetBeckhoffTwinCatCommand>("beckhofftwincat")
             .WithDescription("Get a Beckhoff TwinCAT channel.")
             .WithExample("connectivity channels get beckhofftwincat -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetBristolBsapIpCommand>("bristolbsapip")
+            .WithDescription("Get a Bristol BSAP IP channel.")
+            .WithExample("connectivity channels get bristolbsapip -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -390,6 +394,10 @@ public static class CommandAppExtensions
         create.AddCommand<ChannelCreateBeckhoffTwinCatCommand>("beckhofftwincat")
             .WithDescription("Creates a Beckhoff TwinCAT channel (if not exists).")
             .WithExample("connectivity channels create beckhofftwincat -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateBristolBsapIpCommand>("bristolbsapip")
+            .WithDescription("Creates a Bristol BSAP IP channel (if not exists).")
+            .WithExample("connectivity channels create bristolbsapip -s [server-url] --name [channelName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -588,6 +596,10 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetAlstomRedundantEthernetCommand>("alstomredundantethernet")
             .WithDescription("Get an Alstom Redundant Ethernet device.")
             .WithExample("connectivity devices get alstomredundantethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetBristolBsapIpCommand>("bristolbsapip")
+            .WithDescription("Get a Bristol BSAP IP device.")
+            .WithExample("connectivity devices get bristolbsapip -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -767,6 +779,10 @@ public static class CommandAppExtensions
         create.AddCommand<DeviceCreateAlstomRedundantEthernetCommand>("alstomredundantethernet")
             .WithDescription("Creates an Alstom Redundant Ethernet device (if not exists).")
             .WithExample("connectivity devices create alstomredundantethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --primary-normal-ip [ip]");
+
+        create.AddCommand<DeviceCreateBristolBsapIpCommand>("bristolbsapip")
+            .WithDescription("Creates a Bristol BSAP IP device (if not exists).")
+            .WithExample("connectivity devices create bristolbsapip -s [server-url] --channel-name [channelName] --device-name [deviceName] --rtu-ip-address [ip]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()
