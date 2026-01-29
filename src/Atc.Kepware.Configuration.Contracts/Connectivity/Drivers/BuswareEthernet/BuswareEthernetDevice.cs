@@ -6,6 +6,12 @@ namespace Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.BuswareEthern
 public class BuswareEthernetDevice : DeviceBase, IBuswareEthernetDevice
 {
     /// <inheritdoc />
+    public BuswareEthernetDeviceModelType Model { get; set; }
+
+    /// <inheritdoc />
+    public BuswareEthernetDeviceIdFormatType IdFormat { get; set; }
+
+    /// <inheritdoc />
     public string DeviceId { get; set; } = "255.255.255.255";
 
     /// <inheritdoc />

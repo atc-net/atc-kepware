@@ -11,6 +11,12 @@ public sealed class KeyenceKvEthernetDeviceRequest : DeviceRequestBase, IKeyence
     }
 
     /// <inheritdoc />
+    public KeyenceKvEthernetDeviceModelType Model { get; set; } = KeyenceKvEthernetDeviceModelType.KvSeries;
+
+    /// <inheritdoc />
+    public KeyenceKvEthernetDeviceIdFormatType IdFormat { get; set; } = KeyenceKvEthernetDeviceIdFormatType.Octal;
+
+    /// <inheritdoc />
     [Required]
     public string DeviceId { get; set; } = string.Empty;
 

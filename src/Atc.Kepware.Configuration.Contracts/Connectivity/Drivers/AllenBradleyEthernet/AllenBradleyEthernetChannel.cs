@@ -6,6 +6,18 @@ namespace Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyE
 public class AllenBradleyEthernetChannel : ChannelBase, IAllenBradleyEthernetChannel
 {
     /// <inheritdoc />
+    public string? NetworkAdapter { get; set; }
+
+    /// <inheritdoc />
+    public int? VirtualNetwork { get; set; }
+
+    /// <inheritdoc />
+    public int TransactionsPerCycle { get; set; }
+
+    /// <inheritdoc />
+    public AllenBradleyEthernetChannelNetworkModeType NetworkMode { get; set; }
+
+    /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}";
+        => $"{base.ToString()}, {nameof(NetworkAdapter)}: {NetworkAdapter}";
 }

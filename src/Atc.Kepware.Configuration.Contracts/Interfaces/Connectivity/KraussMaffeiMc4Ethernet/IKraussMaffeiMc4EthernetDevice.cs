@@ -6,6 +6,16 @@ namespace Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.KraussMaff
 public interface IKraussMaffeiMc4EthernetDevice : IDeviceBase
 {
     /// <summary>
+    /// Gets or sets the device model.
+    /// </summary>
+    KraussMaffeiMc4EthernetDeviceModelType Model { get; set; }
+
+    /// <summary>
+    /// Gets or sets the device ID format.
+    /// </summary>
+    KraussMaffeiMc4EthernetDeviceIdFormatType IdFormat { get; set; }
+
+    /// <summary>
     /// Specify the device's driver-specific station or node (IP Address).
     /// </summary>
     string DeviceId { get; set; }

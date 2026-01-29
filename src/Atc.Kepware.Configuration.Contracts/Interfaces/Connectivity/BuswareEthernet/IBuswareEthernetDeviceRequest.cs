@@ -6,6 +6,16 @@ namespace Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BuswareEth
 public interface IBuswareEthernetDeviceRequest : IDeviceRequestBase
 {
     /// <summary>
+    /// Gets or sets the device model.
+    /// </summary>
+    BuswareEthernetDeviceModelType Model { get; set; }
+
+    /// <summary>
+    /// Gets or sets the device ID format.
+    /// </summary>
+    BuswareEthernetDeviceIdFormatType IdFormat { get; set; }
+
+    /// <summary>
     /// Gets or sets the device IP address.
     /// </summary>
     /// <remarks>

@@ -9,6 +9,15 @@ public sealed class AllenBradleyMicro800EthernetChannel : ChannelBase, IAllenBra
     public string? NetworkAdapter { get; set; }
 
     /// <inheritdoc />
+    public int? VirtualNetwork { get; set; }
+
+    /// <inheritdoc />
+    public int TransactionsPerCycle { get; set; }
+
+    /// <inheritdoc />
+    public AllenBradleyMicro800EthernetChannelNetworkModeType NetworkMode { get; set; }
+
+    /// <inheritdoc />
     public override string ToString()
         => $"{base.ToString()}, {nameof(NetworkAdapter)}: {NetworkAdapter}";
 }

@@ -14,6 +14,9 @@ public class SimaticTi505EthernetDeviceRequest : DeviceRequestBase, ISimaticTi50
     }
 
     /// <inheritdoc />
+    public SimaticTi505EthernetDeviceModelType Model { get; set; } = SimaticTi505EthernetDeviceModelType.Model505Cp2572;
+
+    /// <inheritdoc />
     public SimaticTi505EthernetIpProtocol IpProtocol { get; set; } = SimaticTi505EthernetIpProtocol.Udp;
 
     /// <inheritdoc />

@@ -14,6 +14,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AutomationDi
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BacNetIp;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BeckhoffTwinCat;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BristolBsapIp;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BuswareEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.Codesys;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.CutlerHammerElcEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.DnpClientEthernet;
@@ -24,6 +25,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.HoneywellHc9
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.HoneywellUdcEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.Iec608705104Client;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.Iec61850MmsClient;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.KeyenceKvEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.KraussMaffeiMc4Ethernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiCncEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.MitsubishiEthernet;
@@ -36,6 +38,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.OpcXmlDaClie
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.Opto22Ethernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.ScanivalveEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.SiemensTcpIpEthernet;
+global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.SiemensTcpIpServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.SimaticTi505Ethernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.Snmp;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.ToyopucEthernet;

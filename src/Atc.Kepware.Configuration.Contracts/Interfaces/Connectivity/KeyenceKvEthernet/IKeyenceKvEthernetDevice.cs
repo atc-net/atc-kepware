@@ -3,6 +3,16 @@ namespace Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.KeyenceKvE
 public interface IKeyenceKvEthernetDevice : IDeviceBase
 {
     /// <summary>
+    /// Gets or sets the device model.
+    /// </summary>
+    KeyenceKvEthernetDeviceModelType Model { get; set; }
+
+    /// <summary>
+    /// Gets or sets the device ID format.
+    /// </summary>
+    KeyenceKvEthernetDeviceIdFormatType IdFormat { get; set; }
+
+    /// <summary>
     /// Specify the device's IP address.
     /// Format: &lt;IP_Address&gt; (e.g., "192.168.1.1")
     /// </summary>

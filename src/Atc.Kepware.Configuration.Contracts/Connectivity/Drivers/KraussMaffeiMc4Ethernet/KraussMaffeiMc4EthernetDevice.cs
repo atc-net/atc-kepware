@@ -6,6 +6,12 @@ namespace Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.KraussMaffeiM
 public sealed class KraussMaffeiMc4EthernetDevice : DeviceBase, IKraussMaffeiMc4EthernetDevice
 {
     /// <inheritdoc />
+    public KraussMaffeiMc4EthernetDeviceModelType Model { get; set; }
+
+    /// <inheritdoc />
+    public KraussMaffeiMc4EthernetDeviceIdFormatType IdFormat { get; set; }
+
+    /// <inheritdoc />
     public string DeviceId { get; set; } = string.Empty;
 
     /// <inheritdoc />

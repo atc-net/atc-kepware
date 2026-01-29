@@ -13,10 +13,19 @@ public class AllenBradleyEthernetChannelRequest : ChannelRequestBase, IAllenBrad
     {
     }
 
-    /// <summary>
-    /// Gets or sets the network adapter to bind for Ethernet communication.
-    /// </summary>
+    /// <inheritdoc />
     public string? NetworkAdapter { get; set; }
+
+    /// <inheritdoc />
+    [Range(0, 500)]
+    public int? VirtualNetwork { get; set; }
+
+    /// <inheritdoc />
+    [Range(1, 99)]
+    public int TransactionsPerCycle { get; set; } = 1;
+
+    /// <inheritdoc />
+    public AllenBradleyEthernetChannelNetworkModeType NetworkMode { get; set; } = AllenBradleyEthernetChannelNetworkModeType.LoadBalanced;
 
     /// <inheritdoc />
     public override string ToString()

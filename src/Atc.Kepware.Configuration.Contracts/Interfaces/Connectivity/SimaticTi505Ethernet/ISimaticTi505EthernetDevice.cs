@@ -6,6 +6,11 @@ namespace Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SimaticTi5
 public interface ISimaticTi505EthernetDevice : IDeviceBase
 {
     /// <summary>
+    /// Gets or sets the device model.
+    /// </summary>
+    SimaticTi505EthernetDeviceModelType Model { get; set; }
+
+    /// <summary>
     /// Gets or sets the IP protocol (UDP or TCP).
     /// </summary>
     SimaticTi505EthernetIpProtocol IpProtocol { get; set; }

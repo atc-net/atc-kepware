@@ -6,6 +6,16 @@ namespace Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SiemensTcp
 public interface ISiemensTcpIpServerEthernetDeviceRequest : IDeviceRequestBase
 {
     /// <summary>
+    /// Gets or sets the device model.
+    /// </summary>
+    SiemensTcpIpServerEthernetDeviceModelType Model { get; set; }
+
+    /// <summary>
+    /// Gets or sets the device ID format.
+    /// </summary>
+    SiemensTcpIpServerEthernetDeviceIdFormatType IdFormat { get; set; }
+
+    /// <summary>
     /// Gets or sets the rack number where the simulated CPU resides.
     /// </summary>
     /// <remarks>

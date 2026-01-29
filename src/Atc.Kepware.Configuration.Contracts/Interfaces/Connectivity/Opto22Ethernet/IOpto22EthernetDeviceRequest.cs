@@ -8,6 +8,11 @@ public interface IOpto22EthernetDeviceRequest : IDeviceRequestBase
     Opto22EthernetDeviceModelType Model { get; set; }
 
     /// <summary>
+    /// Gets or sets the device ID format.
+    /// </summary>
+    Opto22EthernetDeviceIdFormatType IdFormat { get; set; }
+
+    /// <summary>
     /// Specify the device's driver-specific station or node.
     /// Format: IP Address (e.g., "192.168.1.1")
     /// </summary>
@@ -67,4 +72,25 @@ public interface IOpto22EthernetDeviceRequest : IDeviceRequestBase
     /// Specify the browser database file (*.bdb) from which tags will be imported.
     /// </summary>
     string? ImportFile { get; set; }
+
+    /// <summary>
+    /// Gets or sets the automatic tag generation action to be taken on device startup.
+    /// </summary>
+    Opto22EthernetTagGenerationOnStartupType TagGenerationOnStartup { get; set; }
+
+    /// <summary>
+    /// Gets or sets the preferred method of avoiding creation of duplicate tags.
+    /// </summary>
+    Opto22EthernetTagGenerationDuplicateHandlingType TagGenerationDuplicateHandling { get; set; }
+
+    /// <summary>
+    /// Gets or sets the tag group name for new generated tags.
+    /// If empty, generated tags are added at the device level.
+    /// </summary>
+    string? TagGenerationGroup { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the server should automatically create sub groups for automatically generated tags.
+    /// </summary>
+    bool AllowAutomaticallyGeneratedSubgroups { get; set; }
 }

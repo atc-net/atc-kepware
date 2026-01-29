@@ -6,6 +6,9 @@ public sealed class Opto22EthernetDevice : DeviceBase, IOpto22EthernetDevice
     public Opto22EthernetDeviceModelType Model { get; set; }
 
     /// <inheritdoc />
+    public Opto22EthernetDeviceIdFormatType IdFormat { get; set; }
+
+    /// <inheritdoc />
     public string DeviceId { get; set; } = string.Empty;
 
     /// <inheritdoc />
@@ -40,6 +43,18 @@ public sealed class Opto22EthernetDevice : DeviceBase, IOpto22EthernetDevice
 
     /// <inheritdoc />
     public string? ImportFile { get; set; }
+
+    /// <inheritdoc />
+    public Opto22EthernetTagGenerationOnStartupType TagGenerationOnStartup { get; set; }
+
+    /// <inheritdoc />
+    public Opto22EthernetTagGenerationDuplicateHandlingType TagGenerationDuplicateHandling { get; set; }
+
+    /// <inheritdoc />
+    public string? TagGenerationGroup { get; set; }
+
+    /// <inheritdoc />
+    public bool AllowAutomaticallyGeneratedSubgroups { get; set; }
 
     /// <inheritdoc />
     public override string ToString()

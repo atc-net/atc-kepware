@@ -6,6 +6,12 @@ namespace Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SiemensTcpIpS
 public class SiemensTcpIpServerEthernetDevice : DeviceBase, ISiemensTcpIpServerEthernetDevice
 {
     /// <inheritdoc />
+    public SiemensTcpIpServerEthernetDeviceModelType Model { get; set; }
+
+    /// <inheritdoc />
+    public SiemensTcpIpServerEthernetDeviceIdFormatType IdFormat { get; set; } = SiemensTcpIpServerEthernetDeviceIdFormatType.Decimal;
+
+    /// <inheritdoc />
     public int RackNumber { get; set; }
 
     /// <inheritdoc />

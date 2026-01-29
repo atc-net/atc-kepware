@@ -5,6 +5,12 @@ namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.BuswareEtherne
 /// </summary>
 internal sealed class BuswareEthernetDevice : DeviceBase, IBuswareEthernetDevice
 {
+    [JsonPropertyName("servermain.DEVICE_MODEL")]
+    public BuswareEthernetDeviceModelType Model { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_ID_FORMAT")]
+    public BuswareEthernetDeviceIdFormatType IdFormat { get; set; }
+
     [JsonPropertyName("servermain.DEVICE_ID_STRING")]
     public string DeviceId { get; set; } = string.Empty;
 

@@ -1,9 +1,8 @@
 namespace Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyMicro800Ethernet;
 
-public interface IAllenBradleyMicro800EthernetChannel : IChannelBase
+/// <summary>
+/// Defines the Allen-Bradley Micro800 Ethernet channel properties.
+/// </summary>
+public interface IAllenBradleyMicro800EthernetChannel : IChannelBase, IAllenBradleyMicro800EthernetChannelRequest
 {
-    /// <summary>
-    /// Specify the name of a network adapter to bind or allow the OS to select the default.
-    /// </summary>
-    string? NetworkAdapter { get; set; }
 }

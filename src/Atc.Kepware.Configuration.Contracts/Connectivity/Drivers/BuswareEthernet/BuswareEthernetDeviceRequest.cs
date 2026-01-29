@@ -13,6 +13,12 @@ public class BuswareEthernetDeviceRequest : DeviceRequestBase, IBuswareEthernetD
     {
     }
 
+    /// <inheritdoc />
+    public BuswareEthernetDeviceModelType Model { get; set; } = BuswareEthernetDeviceModelType.BuswareEthernet;
+
+    /// <inheritdoc />
+    public BuswareEthernetDeviceIdFormatType IdFormat { get; set; } = BuswareEthernetDeviceIdFormatType.Octal;
+
     /// <summary>
     /// Gets or sets the device IP address.
     /// </summary>

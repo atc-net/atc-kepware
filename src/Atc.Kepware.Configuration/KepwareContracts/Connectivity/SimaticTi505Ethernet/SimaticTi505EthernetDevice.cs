@@ -5,6 +5,9 @@ namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.SimaticTi505Et
 /// </summary>
 internal sealed class SimaticTi505EthernetDevice : DeviceBase, ISimaticTi505EthernetDevice
 {
+    [JsonPropertyName("servermain.DEVICE_MODEL")]
+    public SimaticTi505EthernetDeviceModelType Model { get; set; } = SimaticTi505EthernetDeviceModelType.Model505Cp2572;
+
     [JsonPropertyName("simatic505_ethernet.DEVICE_IP_PROTOCOL")]
     public SimaticTi505EthernetIpProtocol IpProtocol { get; set; } = SimaticTi505EthernetIpProtocol.Udp;
 

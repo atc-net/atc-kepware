@@ -5,6 +5,12 @@ namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.KeyenceKvEther
 /// </summary>
 internal class KeyenceKvEthernetDevice : DeviceBase, IKeyenceKvEthernetDevice
 {
+    [JsonPropertyName("servermain.DEVICE_MODEL")]
+    public KeyenceKvEthernetDeviceModelType Model { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_ID_FORMAT")]
+    public KeyenceKvEthernetDeviceIdFormatType IdFormat { get; set; }
+
     [JsonPropertyName("servermain.DEVICE_ID_STRING")]
     public string DeviceId { get; set; } = string.Empty;
 
