@@ -14,6 +14,8 @@
   <ItemGroup>
     <PackageReference Include="Atc" Version="3.0.16" />
     <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.2" />
   </ItemGroup>
 
   <ItemGroup>
