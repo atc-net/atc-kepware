@@ -15,4 +15,10 @@ internal static class EndpointPathTemplateConstants
     public const string IotGatewayRestServers = IotGateway + "/rest_servers";
 
     public const string IotItems = "iot_items";
+
+    public const string MeterGroups = "Meter_Groups";
+    public const string AbbTotalflowMeters = "abb_totalflow_meters";
+    public const string FisherRocEthernetMeters = "fisher_roc_ethernet_meters";
+    public const string FisherRocPlusEthernetMeters = "fisher_rocplus_ethernet_meters";
+    public const string OmniMeters = "omni_meters";
 }

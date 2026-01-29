@@ -217,4 +217,16 @@ public enum DriverType
 
     [Description("Memory Based")]
     MemoryBased,
+
+    [Description("ABB Totalflow")]
+    AbbTotalflow,
+
+    [Description("Fisher ROC Ethernet")]
+    FisherRocEthernet,
+
+    [Description("Fisher ROC Plus Ethernet")]
+    FisherRocPlusEthernet,
+
+    [Description("Omni Flow Computer")]
+    OmniFlowComputer,
 }

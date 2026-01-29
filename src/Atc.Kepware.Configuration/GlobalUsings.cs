@@ -13,6 +13,7 @@ global using Atc.Data.Models;
 global using Atc.Helpers;
 global using Atc.Kepware.Configuration.Contracts;
 global using Atc.Kepware.Configuration.Contracts.Connectivity;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AbbTotalflow;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyControlLogixEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyControlLogixServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyEthernet;
@@ -32,6 +33,8 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.CutlerHamm
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.FanucFocasEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.FisherRocEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.FisherRocPlusEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.GeEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.GeEthernetGlobalData;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.HoneywellHc900Ethernet;
@@ -46,6 +49,7 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.Mitsubishi
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.MtConnectClient;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OmniFlowComputer;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OmronFinsEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OmronNjEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcDaClient;
@@ -124,6 +128,7 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.YokogawaGxEt
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.YokogawaMwEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.YokogawaMxEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AbbTotalflow;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyBulletin1609;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyBulletin900;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyControlLogixEthernet;
@@ -148,6 +153,8 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClie
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.FanucFocasEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.FanucFocasHssb;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.FisherRocEthernet;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.FisherRocPlusEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.GeEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.GeEthernetGlobalData;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.HoneywellHc900Ethernet;
@@ -163,6 +170,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Mitsubi
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.ModbusTcpIpEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MqttClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MtConnectClient;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OmniFlowComputer;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OmronFinsEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OmronNjEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcDaClient;
