@@ -2,7 +2,9 @@
   <Folder Name="/docs/">
     <File Path="README.md" />
   </Folder>
-  <Folder Name="/sample/" />
+  <Folder Name="/sample/">
+    <Project Path="sample/Atc.Kepware.Sample/Atc.Kepware.Sample.csproj" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/Atc.Kepware.Configuration.CLI/Atc.Kepware.Configuration.CLI.csproj" />
     <Project Path="src/Atc.Kepware.Configuration.Contracts/Atc.Kepware.Configuration.Contracts.csproj" />
