@@ -27,28 +27,19 @@ public sealed class KraussMaffeiMc4EthernetDeviceRequest : DeviceRequestBase, IK
     public int RetryAttempts { get; set; } = 3;
 
     /// <inheritdoc />
-    public bool DemoteOnFailure { get; set; }
-
-    /// <inheritdoc />
-    [Range(1, 30)]
-    public int TimeoutsToDemote { get; set; } = 3;
-
-    /// <inheritdoc />
-    [Range(100, 3600000)]
-    public int DemotionPeriodMs { get; set; } = 10000;
-
-    /// <inheritdoc />
-    public bool DiscardRequestsWhenDemoted { get; set; }
-
-    /// <inheritdoc />
     [Range(0, 65535)]
-    public int Port { get; set; } = 2001;
+    public int Port { get; set; } = 18901;
 
     /// <inheritdoc />
-    [Range(1, 255)]
-    public int MachineId { get; set; } = 1;
+    public KraussMaffeiMc4ProtocolType Protocol { get; set; } = KraussMaffeiMc4ProtocolType.TcpIp;
+
+    /// <inheritdoc />
+    public KraussMaffeiMc4RequestSizeModeType RequestSizeMode { get; set; } = KraussMaffeiMc4RequestSizeModeType.ExtendedMode;
+
+    /// <inheritdoc />
+    public bool ParameterHandles { get; set; } = true;
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}, {nameof(MachineId)}: {MachineId}";
+        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}, {nameof(Protocol)}: {Protocol}, {nameof(RequestSizeMode)}: {RequestSizeMode}, {nameof(ParameterHandles)}: {ParameterHandles}";
 }

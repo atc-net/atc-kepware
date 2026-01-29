@@ -15,11 +15,6 @@ internal class KeyenceKvEthernetChannelRequest : ChannelRequestBase, IKeyenceKvE
     public string? NetworkAdapter { get; set; }
 
     /// <inheritdoc />
-    [Range(0, 65535)]
-    [JsonPropertyName("keyence_kv_ethernet.CHANNEL_PORT")]
-    public int Port { get; set; } = 8501;
-
-    /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(NetworkAdapter)}: {NetworkAdapter}, {nameof(Port)}: {Port}";
+        => $"{base.ToString()}, {nameof(NetworkAdapter)}: {NetworkAdapter}";
 }

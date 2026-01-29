@@ -87,11 +87,13 @@ public sealed class DeviceCreateYokogawaMwEthernetCommand : AsyncCommand<DeviceC
             // Yokogawa MW Ethernet Specific Settings
             Model = settings.Model,
             DataHandling = settings.DataHandling,
-            PollingInterval = settings.PollingInterval,
             StartMath = settings.StartMath,
+            StartMeasuring = settings.StartMeasuring,
             DateAndTime = settings.DateAndTime,
             DateFormat = settings.DateFormat,
             SetClock = settings.SetClock,
             TagDatabaseSource = settings.TagDatabaseSource,
+            Username = settings.Username,
+            Password = settings.DevicePassword,
         };
 }

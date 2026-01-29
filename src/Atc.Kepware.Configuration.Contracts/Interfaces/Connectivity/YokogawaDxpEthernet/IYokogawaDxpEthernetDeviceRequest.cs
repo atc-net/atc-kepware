@@ -44,4 +44,24 @@ public interface IYokogawaDxpEthernetDeviceRequest : IDeviceRequestBase
     /// Gets or sets the tag database generation source.
     /// </summary>
     YokogawaDxpEthernetTagDatabaseSource TagDatabaseSource { get; set; }
+
+    /// <summary>
+    /// Gets or sets the username.
+    /// </summary>
+    string Username { get; set; }
+
+    /// <summary>
+    /// Gets or sets the password.
+    /// </summary>
+    string Password { get; set; }
+
+    /// <summary>
+    /// Gets or sets the user ID.
+    /// </summary>
+    string UserId { get; set; }
+
+    /// <summary>
+    /// Gets or sets the user function.
+    /// </summary>
+    YokogawaDxpEthernetUserFunction UserFunction { get; set; }
 }

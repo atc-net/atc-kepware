@@ -59,6 +59,9 @@ internal class CodesysDevice : DeviceBase, ICodesysDevice
     [JsonPropertyName("CODESYS.DEVICE_GATEWAY_PORT")]
     public int? GatewayPort { get; set; }
 
+    [JsonPropertyName("CODESYS.DEVICE_GATEWAY_PASSWORD")]
+    public string? GatewayPassword { get; set; }
+
     [JsonPropertyName("CODESYS.DEVICE_ATG_METHOD")]
     public CodesysDeviceTagGenerationMethodType? TagGenerationMethod { get; set; }
 
@@ -73,6 +76,9 @@ internal class CodesysDevice : DeviceBase, ICodesysDevice
 
     [JsonPropertyName("CODESYS.DEVICE_PLC_USERNAME")]
     public string? PlcUsername { get; set; }
+
+    [JsonPropertyName("CODESYS.DEVICE_PLC_PASSWORD")]
+    public string? PlcPassword { get; set; }
 
     public override string ToString()
         => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(IpAddress)}: {IpAddress}, {nameof(Port)}: {Port}";

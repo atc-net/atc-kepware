@@ -11,19 +11,14 @@ public interface IYokogawaMxEthernetDevice : IDeviceBase
     YokogawaMxEthernetModel Model { get; set; }
 
     /// <summary>
-    /// Gets or sets the data handling for out of range and error conditions.
+    /// Gets or sets a value indicating whether to stop MX when the server is exited.
+    /// </summary>
+    bool StopMxOnShutdown { get; set; }
+
+    /// <summary>
+    /// Gets or sets the data handling for special condition statuses.
     /// </summary>
     YokogawaMxEthernetDataHandling DataHandling { get; set; }
-
-    /// <summary>
-    /// Gets or sets the polling interval in milliseconds.
-    /// </summary>
-    int PollingInterval { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to start math computation on communication startup.
-    /// </summary>
-    bool StartMath { get; set; }
 
     /// <summary>
     /// Gets or sets the source of the date and time data.
@@ -34,14 +29,4 @@ public interface IYokogawaMxEthernetDevice : IDeviceBase
     /// Gets or sets the date format for the return string.
     /// </summary>
     YokogawaMxEthernetDateFormat DateFormat { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to set the device clock on communication startup.
-    /// </summary>
-    bool SetClock { get; set; }
-
-    /// <summary>
-    /// Gets or sets the tag database generation source.
-    /// </summary>
-    YokogawaMxEthernetTagDatabaseSource TagDatabaseSource { get; set; }
 }

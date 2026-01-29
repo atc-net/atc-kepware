@@ -4,16 +4,29 @@ public class DeviceCreateOpto22EthernetCommandSettings : DeviceCreateCommandBase
 {
     [CommandOption("--device-id <DEVICE-ID>")]
     [Description("Device ID (IP Address)")]
-    public string DeviceId { get; init; } = string.Empty;
+    public string DeviceId { get; init; } = "255.255.255.255";
 
     [CommandOption("--model [MODEL]")]
-    [Description("Device model (SnapPacR1, SnapPacR2, SnapPacS1, SnapPacS2, SnapPacEb1, SnapPacEb2, SnapEthernetBrain, SnapUltimateBrain, SnapLce, Mistic, E1, E2)")]
+    [Description("Device model (Opto22)")]
     public FlagValue<Opto22EthernetDeviceModelType>? Model { get; init; } = new();
 
-    [CommandOption("--port")]
-    [Description("Port number for device")]
+    [CommandOption("--io-unit-protocol [PROTOCOL]")]
+    [Description("I/O Unit IP Protocol (Udp, TcpIp)")]
+    public FlagValue<Opto22EthernetIoUnitProtocolType>? IoUnitProtocol { get; init; } = new();
+
+    [CommandOption("--io-unit-port-number")]
+    [Description("I/O Unit port number for MMIO communications (1-65535)")]
     [DefaultValue(2001)]
-    public int Port { get; init; }
+    public int IoUnitPortNumber { get; init; }
+
+    [CommandOption("--control-engine-port-number")]
+    [Description("Control Engine port number for CONT communications (1-65535)")]
+    [DefaultValue(22001)]
+    public int ControlEnginePortNumber { get; init; }
+
+    [CommandOption("--import-file")]
+    [Description("Browser database file (*.bdb) for tag import")]
+    public string? ImportFile { get; init; }
 
     [CommandOption("--connect-timeout-seconds")]
     [Description("Connection timeout in seconds (1-30)")]
@@ -43,9 +56,14 @@ public class DeviceCreateOpto22EthernetCommandSettings : DeviceCreateCommandBase
             return ValidationResult.Error("--device-id is required.");
         }
 
-        if (Port < 0 || Port > 65535)
+        if (IoUnitPortNumber < 1 || IoUnitPortNumber > 65535)
         {
-            return ValidationResult.Error("--port must be between 0 and 65535.");
+            return ValidationResult.Error("--io-unit-port-number must be between 1 and 65535.");
+        }
+
+        if (ControlEnginePortNumber < 1 || ControlEnginePortNumber > 65535)
+        {
+            return ValidationResult.Error("--control-engine-port-number must be between 1 and 65535.");
         }
 
         if (ConnectTimeoutSeconds < 1 || ConnectTimeoutSeconds > 30)

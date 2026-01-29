@@ -86,9 +86,14 @@ public sealed class DeviceCreateKeyenceKvEthernetCommand : AsyncCommand<DeviceCr
 
             // Keyence KV Ethernet Specific Settings
             DeviceId = settings.DeviceId,
-            Port = settings.Port,
+            IpProtocol = settings.IpProtocol is not null && settings.IpProtocol.IsSet
+                ? settings.IpProtocol.Value
+                : KeyenceKvEthernetIpProtocolType.TcpIp,
+            PortNumber = settings.PortNumber,
             ConnectTimeoutSeconds = settings.ConnectTimeoutSeconds,
             RequestTimeoutMs = settings.RequestTimeoutMs,
             RetryAttempts = settings.RetryAttempts,
+            WordMemoryBlockSize = settings.WordMemoryBlockSize,
+            TimerCounterMemoryBlockSize = settings.TimerCounterMemoryBlockSize,
         };
 }

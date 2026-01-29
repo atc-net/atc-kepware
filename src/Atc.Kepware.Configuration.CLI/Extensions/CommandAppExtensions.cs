@@ -245,15 +245,23 @@ public static class CommandAppExtensions
             .WithDescription("Get a CODESYS channel.")
             .WithExample("connectivity channels get codesys -s [server-url] --name [channelName]");
 
-        ConfigureChannelGetPriority5BatchCommands(get);
+        ConfigureChannelGetKToYCommands(get);
     }
 
-    private static void ConfigureChannelGetPriority5BatchCommands(
+    private static void ConfigureChannelGetKToYCommands(
         IConfigurator<CommandSettings> get)
     {
         get.AddCommand<ChannelGetKeyenceKvEthernetCommand>("keyencekvethernet")
             .WithDescription("Get a Keyence KV Ethernet channel.")
             .WithExample("connectivity channels get keyencekvethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetKraussMaffeiMc4EthernetCommand>("kraussmaffeimc4ethernet")
+            .WithDescription("Get a KraussMaffei MC4 Ethernet channel.")
+            .WithExample("connectivity channels get kraussmaffeimc4ethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetMtConnectClientCommand>("mtconnectclient")
+            .WithDescription("Get an MTConnect Client channel.")
+            .WithExample("connectivity channels get mtconnectclient -s [server-url] --name [channelName]");
 
         get.AddCommand<ChannelGetOpcXmlDaClientCommand>("opcxmldaclient")
             .WithDescription("Get an OPC XML-DA Client channel.")
@@ -263,13 +271,63 @@ public static class CommandAppExtensions
             .WithDescription("Get an Opto 22 Ethernet channel.")
             .WithExample("connectivity channels get opto22ethernet -s [server-url] --name [channelName]");
 
-        get.AddCommand<ChannelGetMtConnectClientCommand>("mtconnectclient")
-            .WithDescription("Get an MTConnect Client channel.")
-            .WithExample("connectivity channels get mtconnectclient -s [server-url] --name [channelName]");
+        get.AddCommand<ChannelGetSattBusEthernetCommand>("sattbusethernet")
+            .WithDescription("Get a SattBus Ethernet channel.")
+            .WithExample("connectivity channels get sattbusethernet -s [server-url] --name [channelName]");
 
-        get.AddCommand<ChannelGetKraussMaffeiMc4EthernetCommand>("kraussmaffeimc4ethernet")
-            .WithDescription("Get a KraussMaffei MC4 Ethernet channel.")
-            .WithExample("connectivity channels get kraussmaffeimc4ethernet -s [server-url] --name [channelName]");
+        get.AddCommand<ChannelGetScanivalveEthernetCommand>("scanivalveethernet")
+            .WithDescription("Get a Scanivalve Ethernet channel.")
+            .WithExample("connectivity channels get scanivalveethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetSimaticTi505EthernetCommand>("simaticti505ethernet")
+            .WithDescription("Get a Simatic/TI 505 Ethernet channel.")
+            .WithExample("connectivity channels get simaticti505ethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetSixnetEthertrakCommand>("sixnetethertrak")
+            .WithDescription("Get a SIXNET EtherTRAK channel.")
+            .WithExample("connectivity channels get sixnetethertrak -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetSnmpCommand>("snmp")
+            .WithDescription("Get an SNMP channel.")
+            .WithExample("connectivity channels get snmp -s [server-url] --name [channelName]");
+
+        ConfigureChannelGetTToYCommands(get);
+    }
+
+    private static void ConfigureChannelGetTToYCommands(
+        IConfigurator<CommandSettings> get)
+    {
+        get.AddCommand<ChannelGetThermoWestronicsEthernetCommand>("thermowestronicsethernet")
+            .WithDescription("Get a Thermo Westronics Ethernet channel.")
+            .WithExample("connectivity channels get thermowestronicsethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetTorqueToolEthernetCommand>("torquetoolethernet")
+            .WithDescription("Get a Torque Tool Ethernet channel.")
+            .WithExample("connectivity channels get torquetoolethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetToshibaEthernetCommand>("toshibaethernet")
+            .WithDescription("Get a Toshiba Ethernet channel.")
+            .WithExample("connectivity channels get toshibaethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetToyopucEthernetCommand>("toyopucethernet")
+            .WithDescription("Get a Toyopuc PC3/PC2 Ethernet channel.")
+            .WithExample("connectivity channels get toyopucethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetTriconexEthernetCommand>("triconexethernet")
+            .WithDescription("Get a Triconex Ethernet channel.")
+            .WithExample("connectivity channels get triconexethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetWagoEthernetCommand>("wagoethernet")
+            .WithDescription("Get a Wago Ethernet channel.")
+            .WithExample("connectivity channels get wagoethernet -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetWonderwareIntouchClientCommand>("wonderwareintouchclient")
+            .WithDescription("Get a Wonderware InTouch Client channel.")
+            .WithExample("connectivity channels get wonderwareintouchclient -s [server-url] --name [channelName]");
+
+        get.AddCommand<ChannelGetYaskawaMpSeriesEthernetCommand>("yaskawampseriesethernet")
+            .WithDescription("Get a Yaskawa MP Series Ethernet channel.")
+            .WithExample("connectivity channels get yaskawampseriesethernet -s [server-url] --name [channelName]");
     }
 
     private static void ConfigureChannelCreateCommands(
@@ -473,9 +531,73 @@ public static class CommandAppExtensions
             .WithDescription("Creates a CODESYS channel (if not exists).")
             .WithExample("connectivity channels create codesys -s [server-url] --name [channelName]");
 
+        ConfigureChannelCreateKToYCommands(create);
+    }
+
+    private static void ConfigureChannelCreateKToYCommands(
+        IConfigurator<CommandSettings> create)
+    {
         create.AddCommand<ChannelCreateKeyenceKvEthernetCommand>("keyencekvethernet")
             .WithDescription("Creates a Keyence KV Ethernet channel (if not exists).")
             .WithExample("connectivity channels create keyencekvethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateSattBusEthernetCommand>("sattbusethernet")
+            .WithDescription("Creates a SattBus Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create sattbusethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateScanivalveEthernetCommand>("scanivalveethernet")
+            .WithDescription("Creates a Scanivalve Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create scanivalveethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateSimaticTi505EthernetCommand>("simaticti505ethernet")
+            .WithDescription("Creates a Simatic/TI 505 Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create simaticti505ethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateSixnetEthertrakCommand>("sixnetethertrak")
+            .WithDescription("Creates a SIXNET EtherTRAK channel (if not exists).")
+            .WithExample("connectivity channels create sixnetethertrak -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateSnmpCommand>("snmp")
+            .WithDescription("Creates an SNMP channel (if not exists).")
+            .WithExample("connectivity channels create snmp -s [server-url] --name [channelName]");
+
+        ConfigureChannelCreateTToYCommands(create);
+    }
+
+    private static void ConfigureChannelCreateTToYCommands(
+        IConfigurator<CommandSettings> create)
+    {
+        create.AddCommand<ChannelCreateThermoWestronicsEthernetCommand>("thermowestronicsethernet")
+            .WithDescription("Creates a Thermo Westronics Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create thermowestronicsethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateTorqueToolEthernetCommand>("torquetoolethernet")
+            .WithDescription("Creates a Torque Tool Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create torquetoolethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateToshibaEthernetCommand>("toshibaethernet")
+            .WithDescription("Creates a Toshiba Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create toshibaethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateToyopucEthernetCommand>("toyopucethernet")
+            .WithDescription("Creates a Toyopuc PC3/PC2 Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create toyopucethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateTriconexEthernetCommand>("triconexethernet")
+            .WithDescription("Creates a Triconex Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create triconexethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateWagoEthernetCommand>("wagoethernet")
+            .WithDescription("Creates a Wago Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create wagoethernet -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateWonderwareIntouchClientCommand>("wonderwareintouchclient")
+            .WithDescription("Creates a Wonderware InTouch Client channel (if not exists).")
+            .WithExample("connectivity channels create wonderwareintouchclient -s [server-url] --name [channelName]");
+
+        create.AddCommand<ChannelCreateYaskawaMpSeriesEthernetCommand>("yaskawampseriesethernet")
+            .WithDescription("Creates a Yaskawa MP Series Ethernet channel (if not exists).")
+            .WithExample("connectivity channels create yaskawampseriesethernet -s [server-url] --name [channelName]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureDevicesCommands()
@@ -703,19 +825,15 @@ public static class CommandAppExtensions
             .WithDescription("Get an OPC XML-DA Client device.")
             .WithExample("connectivity devices get opcxmldaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
 
-        ConfigureDeviceGetPriority5BatchCommands(get);
+        ConfigureDeviceGetKToYCommands(get);
     }
 
-    private static void ConfigureDeviceGetPriority5BatchCommands(
+    private static void ConfigureDeviceGetKToYCommands(
         IConfigurator<CommandSettings> get)
     {
         get.AddCommand<DeviceGetKeyenceKvEthernetCommand>("keyencekvethernet")
             .WithDescription("Get a Keyence KV Ethernet device.")
             .WithExample("connectivity devices get keyencekvethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
-
-        get.AddCommand<DeviceGetOpto22EthernetCommand>("opto22ethernet")
-            .WithDescription("Get an Opto 22 Ethernet device.")
-            .WithExample("connectivity devices get opto22ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
 
         get.AddCommand<DeviceGetKraussMaffeiMc4EthernetCommand>("kraussmaffeimc4ethernet")
             .WithDescription("Get a KraussMaffei MC4 Ethernet device.")
@@ -724,6 +842,68 @@ public static class CommandAppExtensions
         get.AddCommand<DeviceGetMtConnectClientCommand>("mtconnectclient")
             .WithDescription("Get an MTConnect Client device.")
             .WithExample("connectivity devices get mtconnectclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetOpto22EthernetCommand>("opto22ethernet")
+            .WithDescription("Get an Opto 22 Ethernet device.")
+            .WithExample("connectivity devices get opto22ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetSattBusEthernetCommand>("sattbusethernet")
+            .WithDescription("Get a SattBus Ethernet device.")
+            .WithExample("connectivity devices get sattbusethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetScanivalveEthernetCommand>("scanivalveethernet")
+            .WithDescription("Get a Scanivalve Ethernet device.")
+            .WithExample("connectivity devices get scanivalveethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetSimaticTi505EthernetCommand>("simaticti505ethernet")
+            .WithDescription("Get a Simatic/TI 505 Ethernet device.")
+            .WithExample("connectivity devices get simaticti505ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetSixnetEthertrakCommand>("sixnetethertrak")
+            .WithDescription("Get a SIXNET EtherTRAK device.")
+            .WithExample("connectivity devices get sixnetethertrak -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetSnmpCommand>("snmp")
+            .WithDescription("Get an SNMP device.")
+            .WithExample("connectivity devices get snmp -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        ConfigureDeviceGetTToYCommands(get);
+    }
+
+    private static void ConfigureDeviceGetTToYCommands(
+        IConfigurator<CommandSettings> get)
+    {
+        get.AddCommand<DeviceGetThermoWestronicsEthernetCommand>("thermowestronicsethernet")
+            .WithDescription("Get a Thermo Westronics Ethernet device.")
+            .WithExample("connectivity devices get thermowestronicsethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetTorqueToolEthernetCommand>("torquetoolethernet")
+            .WithDescription("Get a Torque Tool Ethernet device.")
+            .WithExample("connectivity devices get torquetoolethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetToshibaEthernetCommand>("toshibaethernet")
+            .WithDescription("Get a Toshiba Ethernet device.")
+            .WithExample("connectivity devices get toshibaethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetToyopucEthernetCommand>("toyopucethernet")
+            .WithDescription("Get a Toyopuc PC3/PC2 Ethernet device.")
+            .WithExample("connectivity devices get toyopucethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetTriconexEthernetCommand>("triconexethernet")
+            .WithDescription("Get a Triconex Ethernet device.")
+            .WithExample("connectivity devices get triconexethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetWagoEthernetCommand>("wagoethernet")
+            .WithDescription("Get a Wago Ethernet device.")
+            .WithExample("connectivity devices get wagoethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetWonderwareIntouchClientCommand>("wonderwareintouchclient")
+            .WithDescription("Get a Wonderware InTouch Client device.")
+            .WithExample("connectivity devices get wonderwareintouchclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        get.AddCommand<DeviceGetYaskawaMpSeriesEthernetCommand>("yaskawampseriesethernet")
+            .WithDescription("Get a Yaskawa MP Series Ethernet device.")
+            .WithExample("connectivity devices get yaskawampseriesethernet -s [server-url] --channel-name [channelName] --device-name [deviceName]");
     }
 
     private static void ConfigureDeviceCreateCommands(
@@ -936,27 +1116,85 @@ public static class CommandAppExtensions
             .WithDescription("Creates an OPC XML-DA Client device (if not exists).")
             .WithExample("connectivity devices create opcxmldaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
 
-        ConfigureDeviceCreatePriority5BatchCommands(create);
+        ConfigureDeviceCreateKToYCommands(create);
     }
 
-    private static void ConfigureDeviceCreatePriority5BatchCommands(
+    private static void ConfigureDeviceCreateKToYCommands(
         IConfigurator<CommandSettings> create)
     {
         create.AddCommand<DeviceCreateKeyenceKvEthernetCommand>("keyencekvethernet")
             .WithDescription("Creates a Keyence KV Ethernet device (if not exists).")
             .WithExample("connectivity devices create keyencekvethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
 
-        create.AddCommand<DeviceCreateOpto22EthernetCommand>("opto22ethernet")
-            .WithDescription("Creates an Opto 22 Ethernet device (if not exists).")
-            .WithExample("connectivity devices create opto22ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+        create.AddCommand<DeviceCreateKraussMaffeiMc4EthernetCommand>("kraussmaffeimc4ethernet")
+            .WithDescription("Creates a KraussMaffei MC4 Ethernet device (if not exists).")
+            .WithExample("connectivity devices create kraussmaffeimc4ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
 
         create.AddCommand<DeviceCreateMtConnectClientCommand>("mtconnectclient")
             .WithDescription("Creates an MTConnect Client device (if not exists).")
             .WithExample("connectivity devices create mtconnectclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
 
-        create.AddCommand<DeviceCreateKraussMaffeiMc4EthernetCommand>("kraussmaffeimc4ethernet")
-            .WithDescription("Creates a KraussMaffei MC4 Ethernet device (if not exists).")
-            .WithExample("connectivity devices create kraussmaffeimc4ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+        create.AddCommand<DeviceCreateOpto22EthernetCommand>("opto22ethernet")
+            .WithDescription("Creates an Opto 22 Ethernet device (if not exists).")
+            .WithExample("connectivity devices create opto22ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateSattBusEthernetCommand>("sattbusethernet")
+            .WithDescription("Creates a SattBus Ethernet device (if not exists).")
+            .WithExample("connectivity devices create sattbusethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateScanivalveEthernetCommand>("scanivalveethernet")
+            .WithDescription("Creates a Scanivalve Ethernet device (if not exists).")
+            .WithExample("connectivity devices create scanivalveethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateSimaticTi505EthernetCommand>("simaticti505ethernet")
+            .WithDescription("Creates a Simatic/TI 505 Ethernet device (if not exists).")
+            .WithExample("connectivity devices create simaticti505ethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateSixnetEthertrakCommand>("sixnetethertrak")
+            .WithDescription("Creates a SIXNET EtherTRAK device (if not exists).")
+            .WithExample("connectivity devices create sixnetethertrak -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateSnmpCommand>("snmp")
+            .WithDescription("Creates an SNMP device (if not exists).")
+            .WithExample("connectivity devices create snmp -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        ConfigureDeviceCreateTToYCommands(create);
+    }
+
+    private static void ConfigureDeviceCreateTToYCommands(
+        IConfigurator<CommandSettings> create)
+    {
+        create.AddCommand<DeviceCreateThermoWestronicsEthernetCommand>("thermowestronicsethernet")
+            .WithDescription("Creates a Thermo Westronics Ethernet device (if not exists).")
+            .WithExample("connectivity devices create thermowestronicsethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateTorqueToolEthernetCommand>("torquetoolethernet")
+            .WithDescription("Creates a Torque Tool Ethernet device (if not exists).")
+            .WithExample("connectivity devices create torquetoolethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateToshibaEthernetCommand>("toshibaethernet")
+            .WithDescription("Creates a Toshiba Ethernet device (if not exists).")
+            .WithExample("connectivity devices create toshibaethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateToyopucEthernetCommand>("toyopucethernet")
+            .WithDescription("Creates a Toyopuc PC3/PC2 Ethernet device (if not exists).")
+            .WithExample("connectivity devices create toyopucethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateTriconexEthernetCommand>("triconexethernet")
+            .WithDescription("Creates a Triconex Ethernet device (if not exists).")
+            .WithExample("connectivity devices create triconexethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateWagoEthernetCommand>("wagoethernet")
+            .WithDescription("Creates a Wago Ethernet device (if not exists).")
+            .WithExample("connectivity devices create wagoethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
+
+        create.AddCommand<DeviceCreateWonderwareIntouchClientCommand>("wonderwareintouchclient")
+            .WithDescription("Creates a Wonderware InTouch Client device (if not exists).")
+            .WithExample("connectivity devices create wonderwareintouchclient -s [server-url] --channel-name [channelName] --device-name [deviceName]");
+
+        create.AddCommand<DeviceCreateYaskawaMpSeriesEthernetCommand>("yaskawampseriesethernet")
+            .WithDescription("Creates a Yaskawa MP Series Ethernet device (if not exists).")
+            .WithExample("connectivity devices create yaskawampseriesethernet -s [server-url] --channel-name [channelName] --device-name [deviceName] --device-id [deviceId]");
     }
 
     private static Action<IConfigurator<CommandSettings>> ConfigureTagsCommands()

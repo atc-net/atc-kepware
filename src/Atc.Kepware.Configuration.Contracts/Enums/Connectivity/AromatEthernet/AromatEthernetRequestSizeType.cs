@@ -6,14 +6,10 @@ namespace Atc.Kepware.Configuration.Contracts.Enums.Connectivity.AromatEthernet;
 /// <remarks>
 /// Specifies the request size in bytes. This determines the maximum number of bytes the driver can request in a transaction.
 /// </remarks>
+[SuppressMessage("Design", "CA1008:Enums should have zero value", Justification = "Values match Kepware API.")]
 [SuppressMessage("Design", "CA1027:Mark enums with FlagsAttribute", Justification = "Values represent byte sizes, not flags")]
 public enum AromatEthernetRequestSizeType
 {
-    /// <summary>
-    /// None - not set.
-    /// </summary>
-    None = 0,
-
     /// <summary>
     /// 32 bytes.
     /// </summary>

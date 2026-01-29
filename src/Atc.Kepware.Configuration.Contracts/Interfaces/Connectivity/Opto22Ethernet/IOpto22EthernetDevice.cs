@@ -49,7 +49,22 @@ public interface IOpto22EthernetDevice : IDeviceBase
     bool DiscardRequestsWhenDemoted { get; set; }
 
     /// <summary>
-    /// Specify the TCP/IP port this device will be using.
+    /// Specify IP protocol that the device has been configured to use for MMIO communications.
     /// </summary>
-    int Port { get; set; }
+    Opto22EthernetIoUnitProtocolType IoUnitProtocol { get; set; }
+
+    /// <summary>
+    /// Specify the port number that the device has been configured to use for MMIO communications.
+    /// </summary>
+    int IoUnitPortNumber { get; set; }
+
+    /// <summary>
+    /// Specify the port number that the device has been configured to use for CONT communications.
+    /// </summary>
+    int ControlEnginePortNumber { get; set; }
+
+    /// <summary>
+    /// Specify the browser database file (*.bdb) from which tags will be imported.
+    /// </summary>
+    string? ImportFile { get; set; }
 }

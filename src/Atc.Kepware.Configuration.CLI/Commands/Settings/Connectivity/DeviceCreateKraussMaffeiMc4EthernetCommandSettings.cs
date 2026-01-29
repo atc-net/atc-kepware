@@ -3,18 +3,28 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Settings.Connectivity;
 public class DeviceCreateKraussMaffeiMc4EthernetCommandSettings : DeviceCreateCommandBaseSettings
 {
     [CommandOption("--device-id <DEVICE-ID>")]
-    [Description("Device ID (IP Address of the injection molding machine)")]
+    [Description("Device ID (IP Address of the device)")]
     public string DeviceId { get; init; } = string.Empty;
 
     [CommandOption("--port")]
     [Description("TCP/IP port number (0-65535)")]
-    [DefaultValue(2001)]
+    [DefaultValue(18901)]
     public int Port { get; init; }
 
-    [CommandOption("--machine-id")]
-    [Description("Machine ID for the injection molding machine (1-255)")]
-    [DefaultValue(1)]
-    public int MachineId { get; init; }
+    [CommandOption("--protocol")]
+    [Description("Ethernet protocol (Udp, TcpIp)")]
+    [DefaultValue(KraussMaffeiMc4ProtocolType.TcpIp)]
+    public KraussMaffeiMc4ProtocolType Protocol { get; init; }
+
+    [CommandOption("--request-size-mode")]
+    [Description("Request Size Mode (StandardMode, ExtendedMode)")]
+    [DefaultValue(KraussMaffeiMc4RequestSizeModeType.ExtendedMode)]
+    public KraussMaffeiMc4RequestSizeModeType RequestSizeMode { get; init; }
+
+    [CommandOption("--parameter-handles")]
+    [Description("Enable Parameter Handles")]
+    [DefaultValue(true)]
+    public bool ParameterHandles { get; init; }
 
     [CommandOption("--connect-timeout-seconds")]
     [Description("Connection timeout in seconds (1-30)")]
@@ -47,11 +57,6 @@ public class DeviceCreateKraussMaffeiMc4EthernetCommandSettings : DeviceCreateCo
         if (Port < 0 || Port > 65535)
         {
             return ValidationResult.Error("--port must be between 0 and 65535.");
-        }
-
-        if (MachineId < 1 || MachineId > 255)
-        {
-            return ValidationResult.Error("--machine-id must be between 1 and 255.");
         }
 
         if (ConnectTimeoutSeconds < 1 || ConnectTimeoutSeconds > 30)

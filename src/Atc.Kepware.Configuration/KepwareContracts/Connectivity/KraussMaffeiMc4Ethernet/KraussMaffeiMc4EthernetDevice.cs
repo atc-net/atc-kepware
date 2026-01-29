@@ -17,24 +17,18 @@ internal sealed class KraussMaffeiMc4EthernetDevice : DeviceBase, IKraussMaffeiM
     [JsonPropertyName("servermain.DEVICE_RETRY_ATTEMPTS")]
     public int RetryAttempts { get; set; }
 
-    [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_ENABLE_ON_COMMUNICATIONS_FAILURES")]
-    public bool DemoteOnFailure { get; set; }
-
-    [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_DEMOTE_AFTER_SUCCESSIVE_TIMEOUTS")]
-    public int TimeoutsToDemote { get; set; }
-
-    [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_PERIOD_MS")]
-    public int DemotionPeriodMs { get; set; }
-
-    [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_DISCARD_WRITES")]
-    public bool DiscardRequestsWhenDemoted { get; set; }
-
-    [JsonPropertyName("kraussmaffei_mc4_ethernet.DEVICE_PORT")]
+    [JsonPropertyName("kraussmaffei_mc4_ethernet.DEVICE_PORT_NUMBER")]
     public int Port { get; set; }
 
-    [JsonPropertyName("kraussmaffei_mc4_ethernet.DEVICE_MACHINE_ID")]
-    public int MachineId { get; set; }
+    [JsonPropertyName("kraussmaffei_mc4_ethernet.DEVICE_PROTOCOL")]
+    public KraussMaffeiMc4ProtocolType Protocol { get; set; }
+
+    [JsonPropertyName("kraussmaffei_mc4_ethernet.DEVICE_REQUEST_SIZE")]
+    public KraussMaffeiMc4RequestSizeModeType RequestSizeMode { get; set; }
+
+    [JsonPropertyName("kraussmaffei_mc4_ethernet.DEVICE_PARAMETER_HANDLES")]
+    public bool ParameterHandles { get; set; }
 
     public override string ToString()
-        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}, {nameof(MachineId)}: {MachineId}";
+        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}, {nameof(Protocol)}: {Protocol}, {nameof(RequestSizeMode)}: {RequestSizeMode}, {nameof(ParameterHandles)}: {ParameterHandles}";
 }

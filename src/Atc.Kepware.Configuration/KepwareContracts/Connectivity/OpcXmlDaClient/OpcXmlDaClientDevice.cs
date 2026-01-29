@@ -6,24 +6,28 @@ namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.OpcXmlDaClient
 internal sealed class OpcXmlDaClientDevice : DeviceBase, IOpcXmlDaClientDevice
 {
     /// <inheritdoc />
-    [JsonPropertyName("opcxmldaclient.DEVICE_RETURN_ITEM_TIME")]
-    public bool ReturnItemTime { get; set; } = true;
+    [JsonPropertyName("opcxmldaclient.DEVICE_UPDATE_MODE")]
+    public OpcXmlDaClientUpdateMode UpdateMode { get; set; }
 
     /// <inheritdoc />
-    [JsonPropertyName("opcxmldaclient.DEVICE_RETURN_ITEM_PATH")]
-    public bool ReturnItemPath { get; set; }
+    [JsonPropertyName("opcxmldaclient.DEVICE_UPDATE_POLL_RATE_MS")]
+    public int UpdatePollRate { get; set; } = 5000;
 
     /// <inheritdoc />
-    [JsonPropertyName("opcxmldaclient.DEVICE_RETURN_ITEM_NAME")]
-    public bool ReturnItemName { get; set; }
+    [JsonPropertyName("opcxmldaclient.DEVICE_LANGUAGE_ID")]
+    public int LanguageId { get; set; } = 1033;
 
     /// <inheritdoc />
-    [JsonPropertyName("opcxmldaclient.DEVICE_RETURN_DIAGNOSTIC_INFO")]
-    public bool ReturnDiagnosticInfo { get; set; }
+    [JsonPropertyName("opcxmldaclient.DEVICE_HOLD_TIME_MS")]
+    public int HoldTime { get; set; }
 
     /// <inheritdoc />
-    [JsonPropertyName("opcxmldaclient.DEVICE_RETURN_ERROR_TEXT")]
-    public bool ReturnErrorText { get; set; } = true;
+    [JsonPropertyName("opcxmldaclient.DEVICE_WAIT_TIME_MS")]
+    public int WaitTime { get; set; }
+
+    /// <inheritdoc />
+    [JsonPropertyName("opcxmldaclient.DEVICE_PERCENT_DEADBAND")]
+    public float PercentDeadband { get; set; }
 
     /// <inheritdoc />
     [JsonPropertyName("opcxmldaclient.DEVICE_MAX_ITEMS_PER_READ")]
@@ -34,10 +38,18 @@ internal sealed class OpcXmlDaClientDevice : DeviceBase, IOpcXmlDaClientDevice
     public int MaxItemsPerWrite { get; set; } = 512;
 
     /// <inheritdoc />
+    [JsonPropertyName("opcxmldaclient.DEVICE_READ_TIMEOUT_MS")]
+    public int ReadTimeout { get; set; } = 5000;
+
+    /// <inheritdoc />
+    [JsonPropertyName("opcxmldaclient.DEVICE_WRITE_TIMEOUT_MS")]
+    public int WriteTimeout { get; set; } = 5000;
+
+    /// <inheritdoc />
     [JsonPropertyName("opcxmldaclient.DEVICE_READ_AFTER_WRITE")]
     public bool ReadAfterWrite { get; set; } = true;
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(MaxItemsPerRead)}: {MaxItemsPerRead}, {nameof(MaxItemsPerWrite)}: {MaxItemsPerWrite}";
+        => $"{base.ToString()}, {nameof(UpdateMode)}: {UpdateMode}, {nameof(MaxItemsPerRead)}: {MaxItemsPerRead}, {nameof(MaxItemsPerWrite)}: {MaxItemsPerWrite}";
 }

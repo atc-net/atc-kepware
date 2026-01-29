@@ -48,22 +48,22 @@ public class DeviceCreateYokogawaDxEthernetCommandSettings : DeviceCreateCommand
     public bool As1SecurityOption { get; init; }
 
     [CommandOption("--username")]
-    [Description("Username for AS1 security (max 16 characters)")]
-    [DefaultValue("")]
-    public string Username { get; init; } = string.Empty;
+    [Description("Username for AS1 security (max 256 characters)")]
+    [DefaultValue("admin")]
+    public string Username { get; init; } = "admin";
 
     [CommandOption("--device-password")]
-    [Description("Password for AS1 security (max 6 characters)")]
-    [DefaultValue("")]
-    public string DevicePassword { get; init; } = string.Empty;
+    [Description("Password for AS1 security (max 256 characters)")]
+    [DefaultValue("0")]
+    public string DevicePassword { get; init; } = "0";
 
     [CommandOption("--user-id")]
-    [Description("User ID for AS1 security (0-99)")]
-    [DefaultValue(0)]
-    public int UserId { get; init; }
+    [Description("User ID for AS1 security")]
+    [DefaultValue("")]
+    public string UserId { get; init; } = string.Empty;
 
     [CommandOption("--user-function")]
     [Description("User function for AS1 security")]
-    [DefaultValue(YokogawaDxEthernetUserFunction.User)]
-    public YokogawaDxEthernetUserFunction UserFunction { get; init; } = YokogawaDxEthernetUserFunction.User;
+    [DefaultValue(YokogawaDxEthernetUserFunction.Monitor)]
+    public YokogawaDxEthernetUserFunction UserFunction { get; init; } = YokogawaDxEthernetUserFunction.Monitor;
 }

@@ -15,15 +15,15 @@ public class DeviceCreateBacNetIpCommandSettings : DeviceCreateCommandBaseSettin
     public FlagValue<string>? BacNetMac { get; init; } = new();
 
     [CommandOption("--remote-data-link [REMOTE-DATA-LINK]")]
-    [Description("Remote data link technology (BacNetIp, MsTp, PointToPoint, Ethernet, ArcNet, LonTalk)")]
+    [Description("Remote data link technology (Disabled, Enabled)")]
     public FlagValue<BacNetIpRemoteDataLinkType>? RemoteDataLinkTechnology { get; init; } = new();
 
     [CommandOption("--cov-mode [COV-MODE]")]
-    [Description("COV subscription mode (Disabled, Enabled)")]
+    [Description("COV subscription mode (UseUnconfirmedCov, UseConfirmedCov, DoNotUseCov)")]
     public FlagValue<BacNetIpCovModeType>? CovMode { get; init; } = new();
 
     [CommandOption("--cov-resubscription-interval")]
-    [Description("COV resubscription interval in seconds (60-86400)")]
+    [Description("COV resubscription interval in seconds (0-86400)")]
     [DefaultValue(3600)]
     public int CovResubscriptionInterval { get; init; }
 
@@ -38,13 +38,13 @@ public class DeviceCreateBacNetIpCommandSettings : DeviceCreateCommandBaseSettin
     public int MaximumApduLength { get; init; }
 
     [CommandOption("--max-items-per-request")]
-    [Description("Maximum items per request")]
-    [DefaultValue(16)]
+    [Description("Maximum items per request (1-64)")]
+    [DefaultValue(64)]
     public int MaximumItemsPerRequest { get; init; }
 
     [CommandOption("--command-priority")]
     [Description("Command priority for writes (1-16)")]
-    [DefaultValue(16)]
+    [DefaultValue(8)]
     public int CommandPriority { get; init; }
 
     public override ValidationResult Validate()
@@ -55,9 +55,14 @@ public class DeviceCreateBacNetIpCommandSettings : DeviceCreateCommandBaseSettin
             return validationResult;
         }
 
-        if (CovResubscriptionInterval < 60 || CovResubscriptionInterval > 86400)
+        if (CovResubscriptionInterval < 0 || CovResubscriptionInterval > 86400)
         {
-            return ValidationResult.Error("--cov-resubscription-interval must be between 60 and 86400.");
+            return ValidationResult.Error("--cov-resubscription-interval must be between 0 and 86400.");
+        }
+
+        if (MaximumItemsPerRequest < 1 || MaximumItemsPerRequest > 64)
+        {
+            return ValidationResult.Error("--max-items-per-request must be between 1 and 64.");
         }
 
         if (CommandPriority < 1 || CommandPriority > 16)

@@ -13,27 +13,18 @@ internal sealed class YokogawaGxEthernetDeviceRequest : DeviceRequestBase, IYoko
     [JsonPropertyName("servermain.DEVICE_MODEL")]
     public YokogawaGxEthernetModel Model { get; set; } = YokogawaGxEthernetModel.Gx;
 
-    [JsonPropertyName("yokogawa_gx.DEVICE_SPECIAL_DATA_HANDLING")]
-    public YokogawaGxEthernetDataHandling DataHandling { get; set; } = YokogawaGxEthernetDataHandling.None;
+    [JsonPropertyName("yokogawa_gx.DEVICE_AS1_SECURITY_OPTION")]
+    public bool As1SecurityOption { get; set; }
 
-    [JsonPropertyName("yokogawa_gx.DEVICE_POLLING_INTERVAL_MS")]
-    public int PollingInterval { get; set; } = 1000;
+    [JsonPropertyName("yokogawa_gx.DEVICE_USERNAME")]
+    public string Username { get; set; } = "admin";
 
-    [JsonPropertyName("yokogawa_gx.DEVICE_START_MATH")]
-    public bool StartMath { get; set; }
+    [JsonPropertyName("yokogawa_gx.DEVICE_PASSWORD")]
+    public string Password { get; set; } = "0";
 
-    [JsonPropertyName("yokogawa_gx.DEVICE_DATE_AND_TIME")]
-    public YokogawaGxEthernetDateTimeSource DateAndTime { get; set; } = YokogawaGxEthernetDateTimeSource.DeviceTime;
-
-    [JsonPropertyName("yokogawa_gx.DEVICE_DATE_FORMAT")]
-    public YokogawaGxEthernetDateFormat DateFormat { get; set; } = YokogawaGxEthernetDateFormat.MmDdYy;
-
-    [JsonPropertyName("yokogawa_gx.DEVICE_SET_CLOCK")]
-    public bool SetClock { get; set; }
-
-    [JsonPropertyName("yokogawa_gx.DEVICE_GENERATE_TAG_DATABASE_USING")]
-    public YokogawaGxEthernetTagDatabaseSource TagDatabaseSource { get; set; } = YokogawaGxEthernetTagDatabaseSource.PhysicalChannelNumber;
+    [JsonPropertyName("yokogawa_gx.DEVICE_USER_ID")]
+    public string UserId { get; set; } = string.Empty;
 
     public override string ToString()
-        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DataHandling)}: {DataHandling}, {nameof(PollingInterval)}: {PollingInterval}, {nameof(StartMath)}: {StartMath}, {nameof(DateAndTime)}: {DateAndTime}, {nameof(DateFormat)}: {DateFormat}, {nameof(SetClock)}: {SetClock}, {nameof(TagDatabaseSource)}: {TagDatabaseSource}";
+        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(As1SecurityOption)}: {As1SecurityOption}, {nameof(Username)}: {Username}";
 }

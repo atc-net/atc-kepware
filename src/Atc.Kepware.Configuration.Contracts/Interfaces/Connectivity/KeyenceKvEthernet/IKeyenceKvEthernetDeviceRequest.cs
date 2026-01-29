@@ -24,11 +24,6 @@ public interface IKeyenceKvEthernetDeviceRequest : IDeviceRequestBase
     int RetryAttempts { get; set; }
 
     /// <summary>
-    /// Define how long, in milliseconds, the driver waits before sending the next request.
-    /// </summary>
-    int InterRequestDelayMs { get; set; }
-
-    /// <summary>
     /// Automatically remove the device from the scan due to communication failures.
     /// </summary>
     bool DemoteOnFailure { get; set; }
@@ -49,8 +44,28 @@ public interface IKeyenceKvEthernetDeviceRequest : IDeviceRequestBase
     bool DiscardRequestsWhenDemoted { get; set; }
 
     /// <summary>
-    /// Specify the port number that the remote device is configured to use.
+    /// Indicate the correct protocol to use when communicating with the device.
+    /// Default: TcpIp.
+    /// </summary>
+    KeyenceKvEthernetIpProtocolType IpProtocol { get; set; }
+
+    /// <summary>
+    /// Specify the port number to use when communicating with the device.
     /// Default: 8501.
     /// </summary>
-    int Port { get; set; }
+    int PortNumber { get; set; }
+
+    /// <summary>
+    /// Specify the block size for Word memory registers.
+    /// These include Device Types R, B, MR, LR, CR, VB, DM, EM, FM, ZF, W, TM, CM, and VM.
+    /// Default: 1000.
+    /// </summary>
+    int WordMemoryBlockSize { get; set; }
+
+    /// <summary>
+    /// Specify the block size for Timer and Counter memory registers.
+    /// These include Device Types T, TC, TS, C, CC, CS.
+    /// Default: 120.
+    /// </summary>
+    int TimerCounterMemoryBlockSize { get; set; }
 }

@@ -6,33 +6,36 @@ namespace Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcXmlDaClien
 public class OpcXmlDaClientChannel : ChannelBase, IOpcXmlDaClientChannel
 {
     /// <inheritdoc />
-    public string ServerUrl { get; set; } = string.Empty;
+    public string ServerUrl { get; set; } = "http://localhost:80/Kepware/xmldaservice.asp";
 
     /// <inheritdoc />
-    public int HttpTimeout { get; set; } = 30;
+    public int KeepAlive { get; set; }
 
     /// <inheritdoc />
-    public int SubscriptionUpdateRate { get; set; } = 1000;
+    public string? TrustedCertificatesPath { get; set; }
 
     /// <inheritdoc />
-    public int ReadTimeout { get; set; } = 1000;
+    public OpcXmlDaClientItemPathDelimiter ItemPathDelimiter { get; set; }
 
     /// <inheritdoc />
-    public int WriteTimeout { get; set; } = 1000;
+    public string? ProxyServerAddress { get; set; }
 
     /// <inheritdoc />
-    public string? LocaleId { get; set; }
+    public int ProxyPort { get; set; } = 8080;
 
     /// <inheritdoc />
-    public bool UseHttpAuthentication { get; set; }
+    public string? ProxyUsername { get; set; }
 
     /// <inheritdoc />
-    public string? HttpAuthenticationUserName { get; set; }
+    public string? ProxyPassword { get; set; }
 
     /// <inheritdoc />
-    public string? HttpAuthenticationPassword { get; set; }
+    public string? HttpAuthUsername { get; set; }
+
+    /// <inheritdoc />
+    public string? HttpAuthPassword { get; set; }
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(ServerUrl)}: {ServerUrl}, {nameof(HttpTimeout)}: {HttpTimeout}";
+        => $"{base.ToString()}, {nameof(ServerUrl)}: {ServerUrl}, {nameof(KeepAlive)}: {KeepAlive}";
 }

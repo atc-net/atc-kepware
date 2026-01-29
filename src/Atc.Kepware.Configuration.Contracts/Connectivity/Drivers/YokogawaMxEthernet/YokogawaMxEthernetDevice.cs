@@ -9,23 +9,14 @@ public class YokogawaMxEthernetDevice : DeviceBase, IYokogawaMxEthernetDevice
     public YokogawaMxEthernetModel Model { get; set; } = YokogawaMxEthernetModel.Mx100;
 
     /// <inheritdoc />
-    public YokogawaMxEthernetDataHandling DataHandling { get; set; } = YokogawaMxEthernetDataHandling.None;
+    public bool StopMxOnShutdown { get; set; }
 
     /// <inheritdoc />
-    public int PollingInterval { get; set; } = 1000;
-
-    /// <inheritdoc />
-    public bool StartMath { get; set; }
+    public YokogawaMxEthernetDataHandling DataHandling { get; set; } = YokogawaMxEthernetDataHandling.MinusInfPlusInf;
 
     /// <inheritdoc />
     public YokogawaMxEthernetDateTimeSource DateAndTime { get; set; } = YokogawaMxEthernetDateTimeSource.DeviceTime;
 
     /// <inheritdoc />
     public YokogawaMxEthernetDateFormat DateFormat { get; set; } = YokogawaMxEthernetDateFormat.MmDdYy;
-
-    /// <inheritdoc />
-    public bool SetClock { get; set; }
-
-    /// <inheritdoc />
-    public YokogawaMxEthernetTagDatabaseSource TagDatabaseSource { get; set; } = YokogawaMxEthernetTagDatabaseSource.PhysicalChannelNumber;
 }

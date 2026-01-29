@@ -23,26 +23,19 @@ internal sealed class KraussMaffeiMc4EthernetDeviceRequest : DeviceRequestBase, 
     [JsonPropertyName("servermain.DEVICE_RETRY_ATTEMPTS")]
     public int RetryAttempts { get; set; } = 3;
 
-    [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_ENABLE_ON_COMMUNICATIONS_FAILURES")]
-    public bool DemoteOnFailure { get; set; }
+    [Range(0, 65535)]
+    [JsonPropertyName("kraussmaffei_mc4_ethernet.DEVICE_PORT_NUMBER")]
+    public int Port { get; set; } = 18901;
 
-    [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_DEMOTE_AFTER_SUCCESSIVE_TIMEOUTS")]
-    public int TimeoutsToDemote { get; set; } = 3;
+    [JsonPropertyName("kraussmaffei_mc4_ethernet.DEVICE_PROTOCOL")]
+    public KraussMaffeiMc4ProtocolType Protocol { get; set; } = KraussMaffeiMc4ProtocolType.TcpIp;
 
-    [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_PERIOD_MS")]
-    public int DemotionPeriodMs { get; set; } = 10000;
+    [JsonPropertyName("kraussmaffei_mc4_ethernet.DEVICE_REQUEST_SIZE")]
+    public KraussMaffeiMc4RequestSizeModeType RequestSizeMode { get; set; } = KraussMaffeiMc4RequestSizeModeType.ExtendedMode;
 
-    [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_DISCARD_WRITES")]
-    public bool DiscardRequestsWhenDemoted { get; set; }
-
-    [Range(1, 65535)]
-    [JsonPropertyName("kraussmaffei_mc4_ethernet.DEVICE_PORT")]
-    public int Port { get; set; } = 4001;
-
-    [Range(1, 255)]
-    [JsonPropertyName("kraussmaffei_mc4_ethernet.DEVICE_MACHINE_ID")]
-    public int MachineId { get; set; } = 1;
+    [JsonPropertyName("kraussmaffei_mc4_ethernet.DEVICE_PARAMETER_HANDLES")]
+    public bool ParameterHandles { get; set; } = true;
 
     public override string ToString()
-        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}, {nameof(MachineId)}: {MachineId}";
+        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}, {nameof(Protocol)}: {Protocol}, {nameof(RequestSizeMode)}: {RequestSizeMode}, {nameof(ParameterHandles)}: {ParameterHandles}";
 }

@@ -20,10 +20,10 @@ public class YokogawaMwEthernetDeviceRequest : DeviceRequestBase, IYokogawaMwEth
     public YokogawaMwEthernetDataHandling DataHandling { get; set; } = YokogawaMwEthernetDataHandling.None;
 
     /// <inheritdoc />
-    public int PollingInterval { get; set; } = 1000;
+    public bool StartMath { get; set; }
 
     /// <inheritdoc />
-    public bool StartMath { get; set; }
+    public bool StartMeasuring { get; set; }
 
     /// <inheritdoc />
     public YokogawaMwEthernetDateTimeSource DateAndTime { get; set; } = YokogawaMwEthernetDateTimeSource.DeviceTime;
@@ -36,4 +36,10 @@ public class YokogawaMwEthernetDeviceRequest : DeviceRequestBase, IYokogawaMwEth
 
     /// <inheritdoc />
     public YokogawaMwEthernetTagDatabaseSource TagDatabaseSource { get; set; } = YokogawaMwEthernetTagDatabaseSource.PhysicalChannelNumber;
+
+    /// <inheritdoc />
+    public string Username { get; set; } = "admin";
+
+    /// <inheritdoc />
+    public string Password { get; set; } = string.Empty;
 }

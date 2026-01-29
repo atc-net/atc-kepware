@@ -11,11 +11,11 @@ internal sealed class Opto22EthernetDeviceRequest : DeviceRequestBase, IOpto22Et
     }
 
     [JsonPropertyName("servermain.DEVICE_MODEL")]
-    public Opto22EthernetDeviceModelType Model { get; set; } = Opto22EthernetDeviceModelType.SnapPacR1;
+    public Opto22EthernetDeviceModelType Model { get; set; } = Opto22EthernetDeviceModelType.Opto22;
 
     [Required]
     [JsonPropertyName("servermain.DEVICE_ID_STRING")]
-    public string DeviceId { get; set; } = string.Empty;
+    public string DeviceId { get; set; } = "255.255.255.255";
 
     [Range(1, 30)]
     [JsonPropertyName("servermain.DEVICE_CONNECTION_TIMEOUT_SECONDS")]
@@ -43,10 +43,20 @@ internal sealed class Opto22EthernetDeviceRequest : DeviceRequestBase, IOpto22Et
     [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_DISCARD_WRITES")]
     public bool DiscardRequestsWhenDemoted { get; set; }
 
-    [Range(0, 65535)]
-    [JsonPropertyName("opto_22_ethernet.DEVICE_PORT")]
-    public int Port { get; set; } = 2001;
+    [JsonPropertyName("opto22_ethernet.DEVICE_IO_UNIT_PROTOCOL")]
+    public Opto22EthernetIoUnitProtocolType IoUnitProtocol { get; set; } = Opto22EthernetIoUnitProtocolType.TcpIp;
+
+    [Range(1, 65535)]
+    [JsonPropertyName("opto22_ethernet.DEVICE_IO_UNIT_PORT_NUMBER")]
+    public int IoUnitPortNumber { get; set; } = 2001;
+
+    [Range(1, 65535)]
+    [JsonPropertyName("opto22_ethernet.DEVICE_CONTROL_ENGINE_PORT_NUMBER")]
+    public int ControlEnginePortNumber { get; set; } = 22001;
+
+    [JsonPropertyName("opto22_ethernet.DEVICE_IMPORT_FILE")]
+    public string? ImportFile { get; set; }
 
     public override string ToString()
-        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}";
+        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DeviceId)}: {DeviceId}, {nameof(IoUnitPortNumber)}: {IoUnitPortNumber}";
 }

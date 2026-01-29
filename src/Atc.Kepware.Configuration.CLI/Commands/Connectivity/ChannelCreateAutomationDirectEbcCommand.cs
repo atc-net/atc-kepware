@@ -81,5 +81,16 @@ public sealed class ChannelCreateAutomationDirectEbcCommand : AsyncCommand<Chann
             Description = settings.Description is not null && settings.Description.IsSet
                 ? settings.Description.Value
                 : string.Empty,
+            CaptureDiagnostics = settings.CaptureDiagnostics,
+            OptimizationMethod = settings.OptimizationMethod is not null && settings.OptimizationMethod.IsSet
+                ? settings.OptimizationMethod.Value
+                : ChannelOptimizationMethodType.WriteOnlyLatestValueForAllTags,
+            WriteOptimizationDutyCycle = settings.WriteOptimizationDutyCycle,
+            NonNormalizedFloatingPointHandling = settings.NonNormalizedFloatingPointHandling is not null && settings.NonNormalizedFloatingPointHandling.IsSet
+                ? settings.NonNormalizedFloatingPointHandling.Value
+                : ChannelNonNormalizedFloatingPointHandlingType.ReplaceWithZero,
+            NetworkAdapter = settings.NetworkAdapter is not null && settings.NetworkAdapter.IsSet
+                ? settings.NetworkAdapter.Value
+                : null,
         };
 }

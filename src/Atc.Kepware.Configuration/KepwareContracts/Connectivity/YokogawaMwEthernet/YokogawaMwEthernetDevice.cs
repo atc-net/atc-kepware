@@ -8,14 +8,14 @@ internal sealed class YokogawaMwEthernetDevice : DeviceBase, IYokogawaMwEthernet
     [JsonPropertyName("servermain.DEVICE_MODEL")]
     public YokogawaMwEthernetModel Model { get; set; } = YokogawaMwEthernetModel.Mw100;
 
-    [JsonPropertyName("yokogawa_mw.DEVICE_SPECIAL_DATA_HANDLING")]
+    [JsonPropertyName("yokogawa_mw.DEVICE_DATA_HANDLING")]
     public YokogawaMwEthernetDataHandling DataHandling { get; set; } = YokogawaMwEthernetDataHandling.None;
-
-    [JsonPropertyName("yokogawa_mw.DEVICE_POLLING_INTERVAL_MS")]
-    public int PollingInterval { get; set; } = 1000;
 
     [JsonPropertyName("yokogawa_mw.DEVICE_START_MATH")]
     public bool StartMath { get; set; }
+
+    [JsonPropertyName("yokogawa_mw.DEVICE_START_MEASURING")]
+    public bool StartMeasuring { get; set; }
 
     [JsonPropertyName("yokogawa_mw.DEVICE_DATE_AND_TIME")]
     public YokogawaMwEthernetDateTimeSource DateAndTime { get; set; } = YokogawaMwEthernetDateTimeSource.DeviceTime;
@@ -23,12 +23,18 @@ internal sealed class YokogawaMwEthernetDevice : DeviceBase, IYokogawaMwEthernet
     [JsonPropertyName("yokogawa_mw.DEVICE_DATE_FORMAT")]
     public YokogawaMwEthernetDateFormat DateFormat { get; set; } = YokogawaMwEthernetDateFormat.MmDdYy;
 
-    [JsonPropertyName("yokogawa_mw.DEVICE_SET_CLOCK")]
+    [JsonPropertyName("yokogawa_mw.DEVICE_SET_CLOCK_WHEN_START")]
     public bool SetClock { get; set; }
 
     [JsonPropertyName("yokogawa_mw.DEVICE_GENERATE_TAG_DATABASE_USING")]
     public YokogawaMwEthernetTagDatabaseSource TagDatabaseSource { get; set; } = YokogawaMwEthernetTagDatabaseSource.PhysicalChannelNumber;
 
+    [JsonPropertyName("yokogawa_mw.DEVICE_USERNAME")]
+    public string Username { get; set; } = "admin";
+
+    [JsonPropertyName("yokogawa_mw.DEVICE_PASSWORD")]
+    public string Password { get; set; } = string.Empty;
+
     public override string ToString()
-        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DataHandling)}: {DataHandling}, {nameof(PollingInterval)}: {PollingInterval}, {nameof(StartMath)}: {StartMath}, {nameof(DateAndTime)}: {DateAndTime}, {nameof(DateFormat)}: {DateFormat}, {nameof(SetClock)}: {SetClock}, {nameof(TagDatabaseSource)}: {TagDatabaseSource}";
+        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DataHandling)}: {DataHandling}, {nameof(StartMath)}: {StartMath}, {nameof(StartMeasuring)}: {StartMeasuring}, {nameof(DateAndTime)}: {DateAndTime}, {nameof(DateFormat)}: {DateFormat}, {nameof(SetClock)}: {SetClock}, {nameof(TagDatabaseSource)}: {TagDatabaseSource}, {nameof(Username)}: {Username}";
 }

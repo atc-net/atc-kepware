@@ -32,9 +32,18 @@ internal sealed class Opto22EthernetDevice : DeviceBase, IOpto22EthernetDevice
     [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_DISCARD_WRITES")]
     public bool DiscardRequestsWhenDemoted { get; set; }
 
-    [JsonPropertyName("opto_22_ethernet.DEVICE_PORT_NUMBER")]
-    public int Port { get; set; }
+    [JsonPropertyName("opto22_ethernet.DEVICE_IO_UNIT_PROTOCOL")]
+    public Opto22EthernetIoUnitProtocolType IoUnitProtocol { get; set; }
+
+    [JsonPropertyName("opto22_ethernet.DEVICE_IO_UNIT_PORT_NUMBER")]
+    public int IoUnitPortNumber { get; set; }
+
+    [JsonPropertyName("opto22_ethernet.DEVICE_CONTROL_ENGINE_PORT_NUMBER")]
+    public int ControlEnginePortNumber { get; set; }
+
+    [JsonPropertyName("opto22_ethernet.DEVICE_IMPORT_FILE")]
+    public string? ImportFile { get; set; }
 
     public override string ToString()
-        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}";
+        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DeviceId)}: {DeviceId}, {nameof(IoUnitPortNumber)}: {IoUnitPortNumber}";
 }

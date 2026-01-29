@@ -6,12 +6,17 @@ namespace Atc.Kepware.Configuration.Contracts.Enums.Connectivity.BacNetIp;
 public enum BacNetIpCovModeType
 {
     /// <summary>
-    /// COV subscriptions disabled.
+    /// Use unconfirmed COV notifications.
     /// </summary>
-    Disabled = 0,
+    UseUnconfirmedCov = 0,
 
     /// <summary>
-    /// COV subscriptions enabled.
+    /// Use confirmed COV notifications.
     /// </summary>
-    Enabled = 1,
+    UseConfirmedCov = 1,
+
+    /// <summary>
+    /// Do not use COV.
+    /// </summary>
+    DoNotUseCov = 2,
 }

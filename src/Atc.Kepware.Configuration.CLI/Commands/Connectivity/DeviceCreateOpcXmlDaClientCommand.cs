@@ -85,13 +85,16 @@ public sealed class DeviceCreateOpcXmlDaClientCommand : AsyncCommand<DeviceCreat
                 : string.Empty,
 
             // OPC XML-DA Client Specific Settings
-            ReturnItemTime = settings.ReturnItemTime,
-            ReturnItemPath = settings.ReturnItemPath,
-            ReturnItemName = settings.ReturnItemName,
-            ReturnDiagnosticInfo = settings.ReturnDiagnosticInfo,
-            ReturnErrorText = settings.ReturnErrorText,
+            UpdateMode = settings.UpdateMode,
+            UpdatePollRate = settings.UpdatePollRate,
+            LanguageId = settings.LanguageId,
+            HoldTime = settings.HoldTime,
+            WaitTime = settings.WaitTime,
+            PercentDeadband = settings.PercentDeadband,
             MaxItemsPerRead = settings.MaxItemsPerRead,
             MaxItemsPerWrite = settings.MaxItemsPerWrite,
+            ReadTimeout = settings.ReadTimeout,
+            WriteTimeout = settings.WriteTimeout,
             ReadAfterWrite = settings.ReadAfterWrite,
         };
 }

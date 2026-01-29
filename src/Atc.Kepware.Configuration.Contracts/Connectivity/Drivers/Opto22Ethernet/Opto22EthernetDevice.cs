@@ -30,9 +30,18 @@ public sealed class Opto22EthernetDevice : DeviceBase, IOpto22EthernetDevice
     public bool DiscardRequestsWhenDemoted { get; set; }
 
     /// <inheritdoc />
-    public int Port { get; set; }
+    public Opto22EthernetIoUnitProtocolType IoUnitProtocol { get; set; }
+
+    /// <inheritdoc />
+    public int IoUnitPortNumber { get; set; }
+
+    /// <inheritdoc />
+    public int ControlEnginePortNumber { get; set; }
+
+    /// <inheritdoc />
+    public string? ImportFile { get; set; }
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}";
+        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DeviceId)}: {DeviceId}, {nameof(IoUnitPortNumber)}: {IoUnitPortNumber}";
 }

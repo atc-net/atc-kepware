@@ -9,15 +9,15 @@ public sealed class EuroMap63DeviceRequest : DeviceRequestBase, IEuroMap63Device
 
     /// <inheritdoc />
     [Range(1, 30)]
-    public int ConnectionTimeout { get; set; } = 30;
+    public int ConnectionTimeout { get; set; } = 3;
 
     /// <inheritdoc />
     [Range(1000, 9000000)]
-    public int RequestTimeout { get; set; } = 120000;
+    public int RequestTimeout { get; set; } = 60000;
 
     /// <inheritdoc />
     [Range(1, 10)]
-    public int RetryAttempts { get; set; } = 3;
+    public int RetryAttempts { get; set; } = 1;
 
     /// <inheritdoc />
     public bool DemoteOnFailure { get; set; }
@@ -34,7 +34,7 @@ public sealed class EuroMap63DeviceRequest : DeviceRequestBase, IEuroMap63Device
     public bool DiscardWriteRequestsWhenDemoted { get; set; }
 
     /// <inheritdoc />
-    public EuroMap63DeviceTagGenerationOnStartupType TagGenerationOnStartup { get; set; } = EuroMap63DeviceTagGenerationOnStartupType.AlwaysGenerateOnStartup;
+    public EuroMap63DeviceTagGenerationOnStartupType TagGenerationOnStartup { get; set; } = EuroMap63DeviceTagGenerationOnStartupType.DoNotGenerateOnStartup;
 
     /// <inheritdoc />
     public EuroMap63DeviceTagGenerationDuplicateHandlingType TagGenerationDuplicateHandling { get; set; } = EuroMap63DeviceTagGenerationDuplicateHandlingType.DeleteOnCreate;
@@ -68,13 +68,13 @@ public sealed class EuroMap63DeviceRequest : DeviceRequestBase, IEuroMap63Device
 
     /// <inheritdoc />
     [Range(50, 65535)]
-    public int MaxFileSize { get; set; } = 20000;
+    public int MaxFileSize { get; set; } = 2000;
 
     /// <inheritdoc />
-    public EuroMap63CharacterEncodingType CharacterEncoding { get; set; } = EuroMap63CharacterEncodingType.Utf8;
+    public EuroMap63CharacterEncodingType CharacterEncoding { get; set; } = EuroMap63CharacterEncodingType.Ansi;
 
     /// <inheritdoc />
-    public bool IncludeCyclic { get; set; }
+    public bool IncludeCyclic { get; set; } = true;
 
     /// <inheritdoc />
     public override string ToString()

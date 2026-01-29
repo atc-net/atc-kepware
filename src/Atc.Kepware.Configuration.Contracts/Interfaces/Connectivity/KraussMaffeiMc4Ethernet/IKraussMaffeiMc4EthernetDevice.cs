@@ -12,46 +12,46 @@ public interface IKraussMaffeiMc4EthernetDevice : IDeviceBase
 
     /// <summary>
     /// Define the maximum amount of time, in seconds, allowed to establish a connection to a remote device.
+    /// Valid range: 1-30. Default: 3.
     /// </summary>
     int ConnectTimeoutSeconds { get; set; }
 
     /// <summary>
     /// Specify an interval, in milliseconds, to determine how long the driver waits for a response.
+    /// Valid range: 50-9999999. Default: 1000.
     /// </summary>
     int RequestTimeoutMs { get; set; }
 
     /// <summary>
     /// Indicate how many times the driver sends a communications request before considering it failed.
+    /// Valid range: 1-10. Default: 3.
     /// </summary>
     int RetryAttempts { get; set; }
 
     /// <summary>
-    /// Automatically remove the device from the scan due to communication failures.
-    /// </summary>
-    bool DemoteOnFailure { get; set; }
-
-    /// <summary>
-    /// Specify how many successive cycles of request timeouts occur before the device is placed off-scan.
-    /// </summary>
-    int TimeoutsToDemote { get; set; }
-
-    /// <summary>
-    /// Indicate how long, in milliseconds, before scanning is attempted again on a demoted device.
-    /// </summary>
-    int DemotionPeriodMs { get; set; }
-
-    /// <summary>
-    /// Select whether write requests are discarded during the off-scan period.
-    /// </summary>
-    bool DiscardRequestsWhenDemoted { get; set; }
-
-    /// <summary>
-    /// Specify the TCP/IP port number that the remote device is configured to use.
+    /// Specify the TCP/IP port number the device is configured to use.
+    /// Valid range: 0-65535. Default: 18901.
     /// </summary>
     int Port { get; set; }
 
     /// <summary>
-    /// Specify the machine ID for the injection molding machine.
+    /// Specify the Ethernet protocol used by the device.
+    /// Default: TcpIp.
     /// </summary>
-    int MachineId { get; set; }
+    KraussMaffeiMc4ProtocolType Protocol { get; set; }
+
+    /// <summary>
+    /// Specify the Request Size Operating Mode.
+    /// In Standard Mode, up to 4 parameters per request can be sent.
+    /// In Extended Mode, up to 16 parameters per request can be sent.
+    /// Default: ExtendedMode.
+    /// </summary>
+    KraussMaffeiMc4RequestSizeModeType RequestSizeMode { get; set; }
+
+    /// <summary>
+    /// Specify whether to use Parameter Handles.
+    /// If enabled, Parameter Handles will be acquired and used for all Tags.
+    /// Default: true.
+    /// </summary>
+    bool ParameterHandles { get; set; }
 }

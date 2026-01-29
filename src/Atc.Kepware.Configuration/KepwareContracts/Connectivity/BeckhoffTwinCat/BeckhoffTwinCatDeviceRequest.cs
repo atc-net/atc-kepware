@@ -16,7 +16,7 @@ internal sealed class BeckhoffTwinCatDeviceRequest : DeviceRequestBase, IBeckhof
 
     /// <inheritdoc />
     [JsonPropertyName("servermain.DEVICE_ID_FORMAT")]
-    public BeckhoffTwinCatIdFormat IdFormat { get; set; } = BeckhoffTwinCatIdFormat.Decimal;
+    public BeckhoffTwinCatIdFormat IdFormat { get; set; } = BeckhoffTwinCatIdFormat.Octal;
 
     /// <inheritdoc />
     [Required]

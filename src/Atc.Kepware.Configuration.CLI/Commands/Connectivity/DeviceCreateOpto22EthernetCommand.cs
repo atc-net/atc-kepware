@@ -88,8 +88,13 @@ public sealed class DeviceCreateOpto22EthernetCommand : AsyncCommand<DeviceCreat
             DeviceId = settings.DeviceId,
             Model = settings.Model is not null && settings.Model.IsSet
                 ? settings.Model.Value
-                : Opto22EthernetDeviceModelType.SnapPacR1,
-            Port = settings.Port,
+                : Opto22EthernetDeviceModelType.Opto22,
+            IoUnitProtocol = settings.IoUnitProtocol is not null && settings.IoUnitProtocol.IsSet
+                ? settings.IoUnitProtocol.Value
+                : Opto22EthernetIoUnitProtocolType.TcpIp,
+            IoUnitPortNumber = settings.IoUnitPortNumber,
+            ControlEnginePortNumber = settings.ControlEnginePortNumber,
+            ImportFile = settings.ImportFile,
             ConnectTimeoutSeconds = settings.ConnectTimeoutSeconds,
             RequestTimeoutMs = settings.RequestTimeoutMs,
             RetryAttempts = settings.RetryAttempts,
