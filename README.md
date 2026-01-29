@@ -1,355 +1,410 @@
 [![NuGet Version](https://img.shields.io/nuget/v/atc.kepware.configuration.svg?logo=nuget&style=for-the-badge)](https://www.nuget.org/packages/atc.kepware.configuration)
 
-# Atc.Kepware
+# Introduction
 
-Kepware configuration library for executing commands, reads and writes on Kepware servers
+Atc.Kepware is a .NET library and CLI tool for configuring Kepware servers via REST API. It provides a streamlined interface for managing connectivity resources (channels, devices, tags) and IoT Gateway features (agents, items).
 
-## CLI Tool
+## Table of Contents
 
-The `Atc.Kepware.Configuration.CLI` tool is available through a cross platform command line application.
+- [Introduction](#introduction)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+    - [Basic Usage](#basic-usage)
+    - [Configuring with ServiceCollection Extensions](#configuring-with-servicecollection-extensions)
+      - [Setup with Explicit Parameters](#setup-with-explicit-parameters)
+      - [Setup with Pre-Configured Options](#setup-with-pre-configured-options)
+      - [Setup with Configuration Delegate](#setup-with-configuration-delegate)
+  - [Connectivity Operations](#connectivity-operations)
+    - [Channels](#channels)
+    - [Devices](#devices)
+    - [Tags](#tags)
+  - [IoT Gateway Operations](#iot-gateway-operations)
+    - [IoT Agents](#iot-agents)
+    - [IoT Items](#iot-items)
+  - [Supported Drivers](#supported-drivers)
+- [CLI Tool](#cli-tool)
+  - [Installation](#installation-1)
+  - [Commands](#commands)
+    - [Connectivity Commands](#connectivity-commands)
+    - [IoT Gateway Commands](#iot-gateway-commands)
+- [Sample](#sample)
+- [Requirements](#requirements)
+- [How to contribute](#how-to-contribute)
+
+## Features
+
+The library provides comprehensive Kepware server management capabilities:
+
+- ✅ **Channel Management**: Create, retrieve, and delete channels for various drivers (EuroMap63, OPC UA Client, Simulator)
+- ✅ **Device Management**: Configure devices under channels with driver-specific settings
+- ✅ **Tag Management**: Create tags and tag groups with hierarchical structures, search for tags with wildcards
+- ✅ **IoT Gateway**: Manage MQTT and REST client/server agents and their associated items
+- ✅ **Cross-Platform CLI**: Global .NET tool for command-line configuration management
+
+## Getting Started
 
 ### Installation
 
-The tool can be installed as a .NET global tool by the following command
+Install the NuGet package:
 
-```powershell
+```bash
+dotnet add package Atc.Kepware.Configuration
+```
+
+### Basic Usage
+
+Here's a minimal example to connect to a Kepware server and retrieve channels:
+
+```csharp
+using Atc.Kepware.Configuration.Services;
+using Microsoft.Extensions.Logging;
+
+// Create logger
+using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+
+// Create client with connection information
+using var client = new KepwareConfigurationClient(
+    loggerFactory,
+    baseUri: new Uri("https://localhost:57412/config/v1/"),
+    userName: "Administrator",
+    password: "",
+    disableCertificateValidationCheck: true);
+
+// Get all channels
+var result = await client.GetChannels(CancellationToken.None);
+
+if (result is { CommunicationSucceeded: true, HasData: true })
+{
+    foreach (var channel in result.Data!)
+    {
+        Console.WriteLine($"Channel: {channel.Name} (Driver: {channel.DeviceDriver})");
+    }
+}
+```
+
+### Configuring with ServiceCollection Extensions
+
+To seamlessly integrate the Kepware Configuration Client into your application, you can utilize the provided `ServiceCollection` extension methods. These methods simplify the setup process and ensure that the client is correctly configured and ready to use within your application's service architecture.
+
+The extension methods allow you to configure the client using different approaches — explicit parameters, a pre-configured `KepwareConfigurationOptions` instance, or an `Action<KepwareConfigurationOptions>` delegate for dynamic configuration.
+
+#### Setup with Explicit Parameters
+
+If you prefer to configure the client with explicit values for the server's URI, credentials, and certificate validation, you can use the following approach:
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddKepwareConfiguration(
+    new Uri(builder.Configuration["Kepware:BaseUri"]!),
+    builder.Configuration["Kepware:UserName"],
+    builder.Configuration["Kepware:Password"],
+    disableCertificateValidationCheck: true);
+```
+
+#### Setup with Pre-Configured Options
+
+When you already have a pre-configured `KepwareConfigurationOptions` instance, you can directly pass it to the configuration method:
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+
+var kepwareOptions = new KepwareConfigurationOptions
+{
+    BaseUri = new Uri(builder.Configuration["Kepware:BaseUri"]!),
+    UserName = builder.Configuration["Kepware:UserName"],
+    Password = builder.Configuration["Kepware:Password"],
+    DisableCertificateValidationCheck = true,
+};
+
+builder.Services.AddKepwareConfiguration(kepwareOptions);
+```
+
+#### Setup with Configuration Delegate
+
+For more flexibility, you can configure the client using an `Action<KepwareConfigurationOptions>` delegate. This is particularly useful when you need to dynamically adjust settings during application startup:
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddKepwareConfiguration(options =>
+{
+    options.BaseUri = new Uri(builder.Configuration["Kepware:BaseUri"]!);
+    options.UserName = builder.Configuration["Kepware:UserName"];
+    options.Password = builder.Configuration["Kepware:Password"];
+    options.DisableCertificateValidationCheck = true;
+});
+```
+
+After configuration, inject `IKepwareConfigurationClient` into your services:
+
+```csharp
+public class MyService
+{
+    private readonly IKepwareConfigurationClient client;
+
+    public MyService(IKepwareConfigurationClient client)
+    {
+        this.client = client;
+    }
+
+    public async Task<IList<ChannelBase>?> GetChannelsAsync(CancellationToken cancellationToken)
+    {
+        var result = await client.GetChannels(cancellationToken);
+        return result.Data;
+    }
+}
+```
+
+## Connectivity Operations
+
+### Channels
+
+```csharp
+// Check if channel exists
+var exists = await client.IsChannelDefined("MyChannel", cancellationToken);
+
+// Get all channels
+var channels = await client.GetChannels(cancellationToken);
+
+// Get specific channel by driver type
+var simulatorChannel = await client.GetSimulatorChannel("MySimulator", cancellationToken);
+var opcUaChannel = await client.GetOpcUaClientChannel("MyOpcUa", cancellationToken);
+var euroMapChannel = await client.GetEuroMap63Channel("MyEuroMap", cancellationToken);
+
+// Create a Simulator channel
+var request = new SimulatorChannelRequest("MySimulator")
+{
+    Description = "Test simulator channel"
+};
+await client.CreateSimulatorChannel(request, cancellationToken);
+
+// Delete a channel
+await client.DeleteChannel("MyChannel", cancellationToken);
+```
+
+### Devices
+
+```csharp
+// Get all devices for a channel
+var devices = await client.GetDevicesByChannelName("MyChannel", cancellationToken);
+
+// Get specific device by driver type
+var device = await client.GetSimulatorDevice("MyChannel", "MyDevice", cancellationToken);
+
+// Create a Simulator device
+var deviceRequest = new SimulatorDeviceRequest("MyDevice");
+await client.CreateSimulatorDevice(deviceRequest, "MyChannel", cancellationToken);
+
+// Delete a device
+await client.DeleteDevice("MyChannel", "MyDevice", cancellationToken);
+```
+
+### Tags
+
+```csharp
+// Get all tags for a device (with max depth for nested groups)
+var tags = await client.GetTags("MyChannel", "MyDevice", maxDepth: 5, cancellationToken);
+
+// Search for tags with wildcards
+var searchResults = await client.SearchTags(
+    channelName: "MyChannel",
+    deviceName: "MyDevice",
+    query: "*Temperature*",
+    cancellationToken);
+
+// Create a tag
+var tagRequest = new TagRequest("MyTag")
+{
+    Address = "R0001",
+    DataType = TagDataType.Word,
+    ScanRate = 1000,
+    Description = "My test tag"
+};
+await client.CreateTag(
+    tagRequest,
+    channelName: "MyChannel",
+    deviceName: "MyDevice",
+    tagGroupStructure: Array.Empty<string>(),
+    ensureTagGroupStructure: false,
+    cancellationToken);
+
+// Create a tag group
+var groupRequest = new TagGroupRequest("MyTagGroup")
+{
+    Description = "Group for related tags"
+};
+await client.CreateTagGroup(
+    groupRequest,
+    channelName: "MyChannel",
+    deviceName: "MyDevice",
+    tagGroupStructure: Array.Empty<string>(),
+    ensureTagGroupStructure: false,
+    cancellationToken);
+
+// Delete a tag
+await client.DeleteTag("MyChannel", "MyDevice", "MyTag", Array.Empty<string>(), cancellationToken);
+```
+
+## IoT Gateway Operations
+
+### IoT Agents
+
+```csharp
+// Get all REST client agents
+var agents = await client.GetIotAgentRestClients(cancellationToken);
+
+// Get a specific agent
+var agent = await client.GetIotAgentRestClient("MyAgent", cancellationToken);
+
+// Create a REST client agent
+var agentRequest = new IotAgentRestClientRequest("MyAgent", new Uri("https://my-endpoint.com/data"))
+{
+    Description = "My REST client agent",
+    PublishMessageFormat = IotAgentPublishMessageFormat.Advanced
+};
+await client.CreateIotAgentRestClient(agentRequest, cancellationToken);
+
+// Enable/disable agent
+await client.EnableIotAgentRestClient("MyAgent", cancellationToken);
+await client.DisableIotAgentRestClient("MyAgent", cancellationToken);
+
+// Delete agent
+await client.DeleteIotAgentRestClient("MyAgent", cancellationToken);
+```
+
+### IoT Items
+
+```csharp
+// Get all items for an agent
+var items = await client.GetIotAgentRestClientIotItems("MyAgent", cancellationToken);
+
+// Create an IoT item
+var itemRequest = new IotItemRequest("MyChannel.MyDevice.MyTag")
+{
+    ScanRate = 5000,
+    SendEveryUpdate = true
+};
+await client.CreateIotAgentRestClientIotItem(itemRequest, "MyAgent", cancellationToken);
+
+// Enable/disable item
+await client.EnableIotAgentRestClientIotItem("MyAgent", "MyChannel.MyDevice.MyTag", cancellationToken);
+await client.DisableIotAgentRestClientIotItem("MyAgent", "MyChannel.MyDevice.MyTag", cancellationToken);
+
+// Delete item
+await client.DeleteIotAgentRestClientIotItem("MyAgent", "MyChannel.MyDevice.MyTag", cancellationToken);
+```
+
+## Supported Drivers
+
+| Driver | Channel Type | Device Type |
+|--------|-------------|-------------|
+| EuroMap 63 | `EuroMap63Channel` | `EuroMap63Device` |
+| OPC UA Client | `OpcUaClientChannel` | `OpcUaClientDevice` |
+| Simulator | `SimulatorChannel` | `SimulatorDevice` |
+
+# CLI Tool
+
+The `atc-kepware-configuration` CLI tool provides command-line access to all Kepware configuration operations.
+
+## Installation
+
+Install as a .NET global tool:
+
+```bash
 dotnet tool install --global atc-kepware-configuration
 ```
 
-or by following the instructions [here](https://www.nuget.org/packages/atc-kepware-configuration/) to install a specific version of the tool.
+Update to the latest version:
 
-A successful installation will output something like
-
-```powershell
-The tool can be invoked by the following command: atc-kepware-configuration
-Tool 'atc-kepware-configuration' (version '1.0.xxx') was successfully installed.`
-```
-
-### Update
-
-The tool can be updated by the following command
-
-```powershell
+```bash
 dotnet tool update --global atc-kepware-configuration
 ```
 
-### Usage
+## Commands
 
-Since the tool is published as a .NET Tool, it can be launched from anywhere using any shell or command-line interface by calling **atc-kepware-configuration**. The help information is displayed when providing the `--help` argument to **atc-kepware-configuration**
+The CLI is organized into two main command groups:
 
-#### Option <span style="color:yellow">--help</span>
+### Connectivity Commands
 
-```powershell
+Manage channels, devices, and tags:
+
+```bash
+# List all channels
+atc-kepware-configuration connectivity channels get all -s https://localhost:57412/config/v1/
+
+# Get a specific Simulator channel
+atc-kepware-configuration connectivity channels get simulator -s <server-url> --name MyChannel
+
+# Create an OPC UA Client channel
+atc-kepware-configuration connectivity channels create opcuaclient -s <server-url> --name MyOpcUa --description "OPC UA Channel"
+
+# List devices for a channel
+atc-kepware-configuration connectivity devices get all -s <server-url> --channel-name MyChannel
+
+# Get tags for a device
+atc-kepware-configuration connectivity tags get -s <server-url> --channel-name MyChannel --device-name MyDevice
+
+# Search for tags
+atc-kepware-configuration connectivity tags search -s <server-url> --search "*Temperature*"
+
+# Create a tag
+atc-kepware-configuration connectivity tags create tag -s <server-url> \
+    --channel-name MyChannel \
+    --device-name MyDevice \
+    --name MyTag \
+    --address R0001 \
+    --data-type Word \
+    --scan-rate 1000
+```
+
+### IoT Gateway Commands
+
+Manage IoT agents and items:
+
+```bash
+# List all REST client agents
+atc-kepware-configuration iot-gateway iot-agent rest-client all -s <server-url>
+
+# Create a REST client agent
+atc-kepware-configuration iot-gateway iot-agent rest-client create -s <server-url> \
+    --name MyAgent \
+    --url https://my-endpoint.com/data \
+    --publish-message-format Advanced
+
+# Enable/disable an agent
+atc-kepware-configuration iot-gateway iot-agent rest-client enable -s <server-url> --name MyAgent
+atc-kepware-configuration iot-gateway iot-agent rest-client disable -s <server-url> --name MyAgent
+
+# Create an IoT item
+atc-kepware-configuration iot-gateway iot-item rest-client create -s <server-url> \
+    --iot-agent-name MyAgent \
+    --server-tag MyChannel.MyDevice.MyTag \
+    --scan-rate 5000
+
+# List all items for an agent
+atc-kepware-configuration iot-gateway iot-item rest-client all -s <server-url> --iot-agent-name MyAgent
+```
+
+Use `--help` on any command for detailed options:
+
+```bash
 atc-kepware-configuration --help
-
-USAGE:
-    atc-kepware-configuration.exe [OPTIONS]
-
-OPTIONS:
-    -h, --help       Prints help information
-    -v, --verbose    Use verbose for more debug/trace information
-        --version    Display version
-
-COMMANDS:
-    connectivity
-    iot-gateway
-```
-
-#### Command <span style="color:yellow">connectivity</span>
-
-```powershell
 atc-kepware-configuration connectivity --help
-
-USAGE:
-    atc-kepware-configuration.exe connectivity [OPTIONS] <COMMAND>
-
-EXAMPLES:
-    atc-kepware-configuration.exe connectivity channels get all -s [server-url]
-    atc-kepware-configuration.exe connectivity channels get euromap63 -s [server-url] --name [channelName]
-    atc-kepware-configuration.exe connectivity channels get opcuaclient -s [server-url] --name [channelName]
-    atc-kepware-configuration.exe connectivity channels create euromap63 -s [server-url] --name [channelName] --description [description]
-    atc-kepware-configuration.exe connectivity channels create opcuaclient -s [server-url] --name [channelName] --description [description]
-
-OPTIONS:
-    -h, --help    Prints help information
-
-COMMANDS:
-    channels    Commands for channels
-    devices     Commands for devices
-    tags        Commands for tags
+atc-kepware-configuration connectivity channels create opcuaclient --help
 ```
 
-#### Command <span style="color:yellow">connectivity channels</span>
+# Sample
 
-```powershell
-atc-kepware-configuration connectivity channels --help
+See the [sample project](./sample/Atc.Kepware.Sample/) for a complete example demonstrating how to use the library to connect to a Kepware server and retrieve configuration data.
 
-USAGE:
-    atc-kepware-configuration.exe connectivity channels [OPTIONS] <COMMAND>
+# Requirements
 
-EXAMPLES:
-    atc-kepware-configuration.exe connectivity channels get all -s [server-url]
-    atc-kepware-configuration.exe connectivity channels get euromap63 -s [server-url] --name [channelName]
-    atc-kepware-configuration.exe connectivity channels get opcuaclient -s [server-url] --name [channelName]
-    atc-kepware-configuration.exe connectivity channels create euromap63 -s [server-url] --name [channelName] --description [description]
-    atc-kepware-configuration.exe connectivity channels create opcuaclient -s [server-url] --name [channelName] --description [description]
+- [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 
-OPTIONS:
-    -h, --help    Prints help information
-
-COMMANDS:
-    get       Operations related to retrieving channels
-    create    Operations related to creating channels
-    delete    Delete channel
-```
-
-#### Command <span style="color:yellow">connectivity devices</span>
-
-```powershell
-atc-kepware-configuration connectivity devices --help
-
-USAGE:
-    atc-kepware-configuration.exe connectivity devices [OPTIONS] <COMMAND>
-
-EXAMPLES:
-    atc-kepware-configuration.exe connectivity devices get all -s [server-url] --channel-name [channelName]
-    atc-kepware-configuration.exe connectivity devices get euromap63 -s [server-url] --channel-name [channelName] --device-name [deviceName]
-    atc-kepware-configuration.exe connectivity devices get opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]
-    atc-kepware-configuration.exe connectivity devices create euromap63 -s [server-url] --channel-name [channelName] --device-name [deviceName]
---description [description] --session-file-path [filePath]
-    atc-kepware-configuration.exe connectivity devices create opcuaclient -s [server-url] --channel-name [channelName] --device-name [deviceName]
---description [description]
-
-OPTIONS:
-    -h, --help    Prints help information
-
-COMMANDS:
-    get       Operations related to retrieving devices
-    create    Operations related to creating devices
-    delete    Delete device from channel
-```
-
-#### Command <span style="color:yellow">connectivity tags</span>
-
-```powershell
-atc-kepware-configuration connectivity tags --help
-
-USAGE:
-    atc-kepware-configuration.exe connectivity tags [OPTIONS] <COMMAND>
-
-EXAMPLES:
-    atc-kepware-configuration.exe connectivity tags search -s [server-url] --search MyTag
-    atc-kepware-configuration.exe connectivity tags search -s [server-url] --search *Tag
-    atc-kepware-configuration.exe connectivity tags search -s [server-url] --search My*
-    atc-kepware-configuration.exe connectivity tags search -s [server-url] --search *yt*
-    atc-kepware-configuration.exe connectivity tags create tag -s [server-url] --channel-name [channelName] --device-name [deviceName] --name [tagName]
---address [tagAddress] --scan-rate [scanRate] --data-type [dataType] --client-access [clientAccess] --description [description]
-
-OPTIONS:
-    -h, --help    Prints help information
-
-COMMANDS:
-    get       Get tags for channel and device
-    create    Operations related to creating tags and tag groups
-    delete    Operations related to deleting tags and tag groups
-    search    Search tags
-```
-
-#### Command <span style="color:yellow">iot-gateway</span>
-
-```powershell
-atc-kepware-configuration iot-gateway --help
-
-USAGE:
-    atc-kepware-configuration.exe iot-gateway [OPTIONS] <COMMAND>
-
-EXAMPLES:
-    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
-    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client get -s [server-url] --name [iotAgentName]
-    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client all -s [server-url]
-    atc-kepware-configuration.exe iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
-    atc-kepware-configuration.exe iot-gateway iot-agent rest-client get -s [server-url] --name [iotAgentName]
-
-OPTIONS:
-    -h, --help    Prints help information
-
-COMMANDS:
-    iot-agent   Commands for iot agents
-    iot-item    Commands for iot items
-```
-
-#### Command <span style="color:yellow">iot-gateway iot-agent</span>
-
-```powershell
-atc-kepware-configuration iot-gateway iot-agent --help
-
-USAGE:
-    atc-kepware-configuration.exe iot-gateway iot-agent [OPTIONS] <COMMAND>
-
-EXAMPLES:
-    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
-    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client get -s [server-url] --name [iotAgentName]
-    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client all -s [server-url]
-    atc-kepware-configuration.exe iot-gateway iot-agent mqtt-client delete -s [server-url] --name [iotAgentName]
-    atc-kepware-configuration.exe iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
-
-OPTIONS:
-    -h, --help    Prints help information
-
-COMMANDS:
-    mqtt-client    Operations related to MQTT Client Iot Agents
-    rest-client    Operations related to Rest Client Iot Agents
-    rest-server    Operations related to Rest Server Iot Agents
-```
-
-#### Command <span style="color:yellow">iot-gateway iot-agent rest-client</span>
-
-```powershell
-atc-kepware-configuration iot-gateway iot-agent rest-client --help
-
-USAGE:
-    atc-kepware-configuration.exe iot-gateway iot-agent rest-client [OPTIONS] <COMMAND>
-
-EXAMPLES:
-    atc-kepware-configuration.exe iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [
-url] --publish-message-format [Standard|Advanced]
-    atc-kepware-configuration.exe iot-gateway iot-agent rest-client get -s [server-url] --name [iotAgentName]
-    atc-kepware-configuration.exe iot-gateway iot-agent rest-client all -s [server-url]
-    atc-kepware-configuration.exe iot-gateway iot-agent rest-client enable -s [server-url] --name [iotAgentName]
-    atc-kepware-configuration.exe iot-gateway iot-agent rest-client disable -s [server-url] --name [iotAgentName]
-
-OPTIONS:
-    -h, --help    Prints help information
-
-COMMANDS:
-    create     Create a rest-client iot agent (if not exists)
-    get        Get a single rest-client iot agent
-    all        Get all rest-client iot agents
-    enable     Enable a rest-client iot agent (if exists)
-    disable    Disable a rest-client iot agent (if exists)
-    update     Update a rest-client iot agent (if exists)
-    delete     Delete a rest-client iot agent (if exists)
-```
-
-#### Command <span style="color:yellow">iot-gateway iot-agent rest-client create</span>
-
-```powershell
-atc-kepware-configuration iot-gateway iot-agent rest-client create --help
-
-USAGE:
-    atc-kepware-configuration.exe iot-gateway iot-agent rest-client create [OPTIONS] <COMMAND>
-
-EXAMPLES:
-     atc-kepware-configuration.exe iot-gateway iot-agent rest-client create -s [server-url] --name [iotAgentName] --url [url] --publish-message-format [Standard|Advanced]
-
-OPTIONS:
-    -h, --help                                               Prints help information
-    -v, --verbose                                            Use verbose for more debug/trace information
-    -s, --server-url <SERVER-URL>                            Server Url for Kepserver configuration endpoint
-    -u, --username [USERNAME]                                UserName for Kepware server configuration endpoint
-    -p, --password [PASSWORD]                                Password for Kepware server configuration endpoint
-    -n, --name <NAME>                                        Iot Agent Name
-        --description [DESCRIPTION]                          Iot Agent Description
-        --ignore-quality-changes                             Indicates whether changes in quality should be ignored and not passed on
-        --url <URL>                                          The URl of the endpoint to send data to
-        --publish-http-method <PUBLISH-HTTP-METHOD>          Sets the HttpMethod for Publishing. Valid values are: Post (default), Put
-        --rate <RATE>                                        Specifies the frequency, in milliseconds, at which the agent pushes data to the endpoint
-        --publish-format <PUBLISH-FORMAT>                    Sets the format type for Publishing. Valid values are: Narrow (default), Wide
-        --max-events-per-publish                             The number of tag events the gateway packages in a single transmission when using narrow format
-        --transaction-timeout <TRANSACTION-TIMEOUT>          Defines the maximum amount of time, in seconds, allowed for a transaction to run
-        --send-initial-update                                Indicates if an initial update should be sent out on each tag when the Iot Agent starts up
-        --http-headers <KEY=VALUE>                           The headers to send to url on each connection
-        --publish-message-format <PUBLISH-MESSAGE-FORMAT>    Specifies how messages should be formatted. Valid values are: Standard, Advanced (default)
-        --publish-media-type [PUBLISH-MEDIA-TYPE]            Sets the media type for Publishing. Only valid when PublishMessageFormat is set to (Advanced). Valid values are: Json (default), Xml,
-                                                             XhtmlXml, TextPlain, TextHtml
-
-```
-
-```powershell
-atc-kepware-configuration iot-gateway iot-item --help
-
-USAGE:
-    atc-kepware-configuration.exe iot-gateway iot-item [OPTIONS] <COMMAND>
-
-EXAMPLES:
-    atc-kepware-configuration.exe iot-gateway iot-item mqtt-client create -s [server-url] --iot-agent-name [
-iotAgentName] --server-tag [serverTag] --scan-rate [scanRate]
-    atc-kepware-configuration.exe iot-gateway iot-item mqtt-client get -s [server-url] --iot-agent-name [iotAgentName]
---server-tag [serverTag]
-    atc-kepware-configuration.exe iot-gateway iot-item mqtt-client all -s [server-url]
-    atc-kepware-configuration.exe iot-gateway iot-item mqtt-client enable -s [server-url] --iot-agent-name [
-iotAgentName] --server-tag [serverTag]
-    atc-kepware-configuration.exe iot-gateway iot-item mqtt-client disable -s [server-url] --iot-agent-name [
-iotAgentName] --server-tag [serverTag]
-
-OPTIONS:
-    -h, --help    Prints help information
-
-COMMANDS:
-    mqtt-client    Operations related to MQTT Client Iot Agent Iot Items
-    rest-client    Operations related to Rest Client Iot Agent Iot Items
-    rest-server    Operations related to Rest Server Iot Agent Iot Items
-```
-
-```powershell
-atc-kepware-configuration iot-gateway iot-item rest-client --help
-
-USAGE:
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client [OPTIONS] <COMMAND>
-
-EXAMPLES:
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [
-iotAgentName] --server-tag [serverTag] --scan-rate [scanRate]
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client get -s [server-url] --iot-agent-name [iotAgentName]
---server-tag [serverTag]
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client all -s [server-url]
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client enable -s [server-url] --iot-agent-name [
-iotAgentName] --server-tag [serverTag]
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client disable -s [server-url] --iot-agent-name [
-iotAgentName] --server-tag [serverTag]
-
-OPTIONS:
-    -h, --help    Prints help information
-
-COMMANDS:
-    create     Create an iot item on a rest-client iot agent
-    get        Get a single rest-client iot agent iot item
-    all        Get all rest-client iot agent iot items
-    enable     Enable a single rest-client iot agent iot item
-    disable    Disable a single rest-client iot agent iot item
-    update     Update a rest-client iot agent iot item (if exists)
-    delete     Delete a rest-client iot agent iot item (if exists)
-```
-
-```powershell
-atc-kepware-configuration iot-gateway iot-item rest-client create --help
-
-USAGE:
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client create [OPTIONS] <COMMAND>
-
-EXAMPLES:
-    atc-kepware-configuration.exe iot-gateway iot-item rest-client create -s [server-url] --iot-agent-name [iotAgentName] --server-tag [serverTag]
---scan-rate [scanRate]
-
-OPTIONS:
-    -h, --help    Prints help information
-        --iot-agent-name <IOT-AGENT-NAME>          Iot Agent Name
-        --server-tag <SERVER-TAG>                  The server tag the Iot Item is pointing to
-        --scan-rate <SCAN-RATE>                    Specifies the frequency, in milliseconds, at which the iot item should be scanned (default: 10000)
-        --send-every-scan                          Specifies if the tag should be published on every scan or only on data changes (default: false)
-        --dead-band-percent [DEAD-BAND-PERCENT]    Specifies the DeadBand (%) when SendEveryScan is false (default: 0)
-        --enabled                                  Indicates whether the Iot Item is enabled (default: true)
-
-COMMANDS:
-    create    Create an iot item on a rest-client iot agent
-```
-
-### Requirements
-
-* [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
-
-
-## How to contribute
+# How to contribute
 
 [Contribution Guidelines](https://atc-net.github.io/introduction/about-atc#how-to-contribute)
 
