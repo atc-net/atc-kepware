@@ -17,16 +17,19 @@ services.AddLogging(builder =>
     builder.SetMinimumLevel(LogLevel.Debug);
 });
 
+// Configure Kepware client using ServiceCollection extensions
+services.AddKepwareConfiguration(options =>
+{
+    options.BaseUri = new Uri("https://localhost:57412/config/v1/");
+    options.UserName = "Administrator";
+    options.Password = string.Empty;
+    options.DisableCertificateValidationCheck = true;
+});
+
 var serviceProvider = services.BuildServiceProvider();
 
-var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-
-using var client = new KepwareConfigurationClient(
-    loggerFactory,
-    baseUri: new Uri("https://localhost:57412/config/v1/"),
-    userName: "Administrator",
-    password: string.Empty,
-    disableCertificateValidationCheck: true);
+// Resolve the client from DI
+var client = serviceProvider.GetRequiredService<IKepwareConfigurationClient>();
 
 try
 {

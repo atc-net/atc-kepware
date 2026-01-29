@@ -22,7 +22,11 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcUaCl
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Simulator;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.IotGateway;
 global using Atc.Kepware.Configuration.Contracts.IotGateway;
+global using Atc.Kepware.Configuration.Options;
+global using Atc.Kepware.Configuration.Services;
 global using Atc.Serialization;
 global using Mapster;
+global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Logging.Abstractions;
+global using Microsoft.Extensions.Options;
