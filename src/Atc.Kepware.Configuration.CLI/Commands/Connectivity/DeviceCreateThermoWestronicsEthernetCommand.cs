@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceCreateThermoWestronicsEthernetCommand : AsyncCommand<DeviceCreateThermoWestronicsEthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateThermoWestronicsEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceCreateThermoWestronicsEthernetCommand : AsyncCommand<D
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceCreateThermoWestronicsEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

@@ -3,7 +3,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotItem;
 
 public sealed class RestServerIotItemUpdateCommand : AsyncCommand<IotItemUpdateCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<RestServerIotItemUpdateCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -11,7 +10,6 @@ public sealed class RestServerIotItemUpdateCommand : AsyncCommand<IotItemUpdateC
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<RestServerIotItemUpdateCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

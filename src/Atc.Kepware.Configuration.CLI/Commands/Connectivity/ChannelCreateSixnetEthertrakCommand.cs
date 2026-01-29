@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class ChannelCreateSixnetEthertrakCommand : AsyncCommand<ChannelCreateSixnetEthertrakCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelCreateSixnetEthertrakCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class ChannelCreateSixnetEthertrakCommand : AsyncCommand<ChannelCr
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<ChannelCreateSixnetEthertrakCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

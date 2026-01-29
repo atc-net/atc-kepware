@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class ChannelCreateHoneywellUdcEthernetCommand : AsyncCommand<ChannelCreateHoneywellUdcEthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelCreateHoneywellUdcEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class ChannelCreateHoneywellUdcEthernetCommand : AsyncCommand<Chan
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<ChannelCreateHoneywellUdcEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

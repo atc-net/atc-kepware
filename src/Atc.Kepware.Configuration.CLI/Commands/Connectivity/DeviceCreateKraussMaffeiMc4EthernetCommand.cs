@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceCreateKraussMaffeiMc4EthernetCommand : AsyncCommand<DeviceCreateKraussMaffeiMc4EthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateKraussMaffeiMc4EthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceCreateKraussMaffeiMc4EthernetCommand : AsyncCommand<De
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceCreateKraussMaffeiMc4EthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

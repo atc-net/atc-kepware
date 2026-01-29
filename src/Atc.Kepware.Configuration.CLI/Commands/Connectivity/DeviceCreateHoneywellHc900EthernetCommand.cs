@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceCreateHoneywellHc900EthernetCommand : AsyncCommand<DeviceCreateHoneywellHc900EthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateHoneywellHc900EthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceCreateHoneywellHc900EthernetCommand : AsyncCommand<Dev
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceCreateHoneywellHc900EthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

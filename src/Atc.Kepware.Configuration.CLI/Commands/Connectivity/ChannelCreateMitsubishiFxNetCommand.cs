@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class ChannelCreateMitsubishiFxNetCommand : AsyncCommand<ChannelCreateMitsubishiFxNetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelCreateMitsubishiFxNetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class ChannelCreateMitsubishiFxNetCommand : AsyncCommand<ChannelCr
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<ChannelCreateMitsubishiFxNetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

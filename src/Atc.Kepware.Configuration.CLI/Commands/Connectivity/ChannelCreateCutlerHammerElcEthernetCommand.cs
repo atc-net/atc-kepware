@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class ChannelCreateCutlerHammerElcEthernetCommand : AsyncCommand<ChannelCreateCutlerHammerElcEthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelCreateCutlerHammerElcEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class ChannelCreateCutlerHammerElcEthernetCommand : AsyncCommand<C
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<ChannelCreateCutlerHammerElcEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

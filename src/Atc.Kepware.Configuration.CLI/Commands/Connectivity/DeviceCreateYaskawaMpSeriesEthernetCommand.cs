@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceCreateYaskawaMpSeriesEthernetCommand : AsyncCommand<DeviceCreateYaskawaMpSeriesEthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateYaskawaMpSeriesEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceCreateYaskawaMpSeriesEthernetCommand : AsyncCommand<De
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceCreateYaskawaMpSeriesEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

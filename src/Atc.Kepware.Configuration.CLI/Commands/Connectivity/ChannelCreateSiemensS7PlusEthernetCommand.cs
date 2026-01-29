@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class ChannelCreateSiemensS7PlusEthernetCommand : AsyncCommand<ChannelCreateSiemensS7PlusEthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelCreateSiemensS7PlusEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class ChannelCreateSiemensS7PlusEthernetCommand : AsyncCommand<Cha
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<ChannelCreateSiemensS7PlusEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

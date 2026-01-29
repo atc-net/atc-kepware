@@ -2,14 +2,14 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceCreateAlstomRedundantEthernetCommand : AsyncCommand<DeviceCreateAlstomRedundantEthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
+    private readonly ILogger<DeviceCreateAlstomRedundantEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
     public DeviceCreateAlstomRedundantEthernetCommand(
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
+        logger = loggerFactory.CreateLogger<DeviceCreateAlstomRedundantEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }
 
@@ -29,8 +29,6 @@ public sealed class DeviceCreateAlstomRedundantEthernetCommand : AsyncCommand<De
         CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
-
-        var logger = loggerFactory.CreateLogger<DeviceCreateAlstomRedundantEthernetCommand>();
 
         try
         {
