@@ -3,6 +3,12 @@ namespace Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.KeyenceKvEthe
 public sealed class KeyenceKvEthernetDevice : DeviceBase, IKeyenceKvEthernetDevice
 {
     /// <inheritdoc />
+    public KeyenceKvEthernetDeviceModelType Model { get; set; }
+
+    /// <inheritdoc />
+    public KeyenceKvEthernetDeviceIdFormatType IdFormat { get; set; }
+
+    /// <inheritdoc />
     public string DeviceId { get; set; } = string.Empty;
 
     /// <inheritdoc />

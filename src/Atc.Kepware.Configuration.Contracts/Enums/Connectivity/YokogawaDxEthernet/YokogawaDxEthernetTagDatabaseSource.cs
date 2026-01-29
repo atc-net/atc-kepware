@@ -10,4 +10,7 @@ public enum YokogawaDxEthernetTagDatabaseSource
 
     [Description("Device Tagname")]
     DeviceTagname = 1,
+
+    [Description("Device Tagname (Enhanced)")]
+    DeviceTagnameEnhanced = 2,
 }

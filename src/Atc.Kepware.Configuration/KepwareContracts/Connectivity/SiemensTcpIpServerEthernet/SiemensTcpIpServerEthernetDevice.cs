@@ -5,6 +5,12 @@ namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.SiemensTcpIpSe
 /// </summary>
 internal sealed class SiemensTcpIpServerEthernetDevice : DeviceBase, ISiemensTcpIpServerEthernetDevice
 {
+    [JsonPropertyName("servermain.DEVICE_MODEL")]
+    public SiemensTcpIpServerEthernetDeviceModelType Model { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_ID_FORMAT")]
+    public SiemensTcpIpServerEthernetDeviceIdFormatType IdFormat { get; set; } = SiemensTcpIpServerEthernetDeviceIdFormatType.Decimal;
+
     [JsonPropertyName("siemens_tcpip_unsolicited_ethernet.DEVICE_CPU_RACK")]
     public int RackNumber { get; set; }
 

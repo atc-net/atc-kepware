@@ -12,6 +12,9 @@ public class AromatEthernetDevice : DeviceBase, IAromatEthernetDevice
     public AromatEthernetDeviceModelType Model { get; set; } = AromatEthernetDeviceModelType.FP;
 
     /// <inheritdoc />
+    public AromatEthernetDeviceIdFormatType IdFormat { get; set; } = AromatEthernetDeviceIdFormatType.Octal;
+
+    /// <inheritdoc />
     public AromatEthernetProtocolType Protocol { get; set; } = AromatEthernetProtocolType.TcpIp;
 
     /// <inheritdoc />

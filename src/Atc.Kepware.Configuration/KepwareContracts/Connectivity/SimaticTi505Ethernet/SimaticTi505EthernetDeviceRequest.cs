@@ -10,6 +10,9 @@ internal sealed class SimaticTi505EthernetDeviceRequest : DeviceRequestBase, ISi
     {
     }
 
+    [JsonPropertyName("servermain.DEVICE_MODEL")]
+    public SimaticTi505EthernetDeviceModelType Model { get; set; } = SimaticTi505EthernetDeviceModelType.Model505Cp2572;
+
     [JsonPropertyName("simatic505_ethernet.DEVICE_IP_PROTOCOL")]
     public SimaticTi505EthernetIpProtocol IpProtocol { get; set; } = SimaticTi505EthernetIpProtocol.Udp;
 

@@ -5,6 +5,12 @@ namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.KraussMaffeiMc
 /// </summary>
 internal sealed class KraussMaffeiMc4EthernetDevice : DeviceBase, IKraussMaffeiMc4EthernetDevice
 {
+    [JsonPropertyName("servermain.DEVICE_MODEL")]
+    public KraussMaffeiMc4EthernetDeviceModelType Model { get; set; }
+
+    [JsonPropertyName("servermain.DEVICE_ID_FORMAT")]
+    public KraussMaffeiMc4EthernetDeviceIdFormatType IdFormat { get; set; }
+
     [JsonPropertyName("servermain.DEVICE_ID_STRING")]
     public string DeviceId { get; set; } = string.Empty;
 

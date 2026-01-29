@@ -6,6 +6,9 @@ namespace Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.SimaticTi505E
 public class SimaticTi505EthernetDevice : DeviceBase, ISimaticTi505EthernetDevice
 {
     /// <inheritdoc />
+    public SimaticTi505EthernetDeviceModelType Model { get; set; } = SimaticTi505EthernetDeviceModelType.Model505Cp2572;
+
+    /// <inheritdoc />
     public SimaticTi505EthernetIpProtocol IpProtocol { get; set; } = SimaticTi505EthernetIpProtocol.Udp;
 
     /// <inheritdoc />

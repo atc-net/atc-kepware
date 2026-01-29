@@ -19,6 +19,11 @@ public interface IAromatEthernetDeviceRequest : IDeviceRequestBase
     AromatEthernetDeviceModelType Model { get; set; }
 
     /// <summary>
+    /// Gets or sets the device ID format.
+    /// </summary>
+    AromatEthernetDeviceIdFormatType IdFormat { get; set; }
+
+    /// <summary>
     /// Gets or sets the protocol used by the device.
     /// </summary>
     AromatEthernetProtocolType Protocol { get; set; }

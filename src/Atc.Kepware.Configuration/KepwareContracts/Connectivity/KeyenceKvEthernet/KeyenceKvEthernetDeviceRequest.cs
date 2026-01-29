@@ -10,6 +10,12 @@ internal class KeyenceKvEthernetDeviceRequest : DeviceRequestBase, IKeyenceKvEth
     {
     }
 
+    [JsonPropertyName("servermain.DEVICE_MODEL")]
+    public KeyenceKvEthernetDeviceModelType Model { get; set; } = KeyenceKvEthernetDeviceModelType.KvSeries;
+
+    [JsonPropertyName("servermain.DEVICE_ID_FORMAT")]
+    public KeyenceKvEthernetDeviceIdFormatType IdFormat { get; set; } = KeyenceKvEthernetDeviceIdFormatType.Octal;
+
     /// <inheritdoc />
     [Required]
     [JsonPropertyName("servermain.DEVICE_ID_STRING")]

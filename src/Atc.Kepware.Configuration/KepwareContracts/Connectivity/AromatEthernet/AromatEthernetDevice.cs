@@ -11,6 +11,9 @@ internal sealed class AromatEthernetDevice : DeviceBase, IAromatEthernetDevice
     [JsonPropertyName("servermain.DEVICE_MODEL")]
     public AromatEthernetDeviceModelType Model { get; set; }
 
+    [JsonPropertyName("servermain.DEVICE_ID_FORMAT")]
+    public AromatEthernetDeviceIdFormatType IdFormat { get; set; } = AromatEthernetDeviceIdFormatType.Octal;
+
     [JsonPropertyName("aromat_ethernet.DEVICE_PROTOCOL")]
     public AromatEthernetProtocolType Protocol { get; set; }
 

@@ -10,6 +10,12 @@ internal sealed class BuswareEthernetDeviceRequest : DeviceRequestBase, IBusware
     {
     }
 
+    [JsonPropertyName("servermain.DEVICE_MODEL")]
+    public BuswareEthernetDeviceModelType Model { get; set; } = BuswareEthernetDeviceModelType.BuswareEthernet;
+
+    [JsonPropertyName("servermain.DEVICE_ID_FORMAT")]
+    public BuswareEthernetDeviceIdFormatType IdFormat { get; set; } = BuswareEthernetDeviceIdFormatType.Octal;
+
     /// <inheritdoc />
     [Required]
     [JsonPropertyName("servermain.DEVICE_ID_STRING")]

@@ -11,6 +11,12 @@ public sealed class KraussMaffeiMc4EthernetDeviceRequest : DeviceRequestBase, IK
     }
 
     /// <inheritdoc />
+    public KraussMaffeiMc4EthernetDeviceModelType Model { get; set; } = KraussMaffeiMc4EthernetDeviceModelType.MC4;
+
+    /// <inheritdoc />
+    public KraussMaffeiMc4EthernetDeviceIdFormatType IdFormat { get; set; } = KraussMaffeiMc4EthernetDeviceIdFormatType.Octal;
+
+    /// <inheritdoc />
     [Required]
     public string DeviceId { get; set; } = string.Empty;
 

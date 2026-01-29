@@ -14,6 +14,12 @@ public class SiemensTcpIpServerEthernetDeviceRequest : DeviceRequestBase, ISieme
     }
 
     /// <inheritdoc />
+    public SiemensTcpIpServerEthernetDeviceModelType Model { get; set; } = SiemensTcpIpServerEthernetDeviceModelType.VirtualS7300;
+
+    /// <inheritdoc />
+    public SiemensTcpIpServerEthernetDeviceIdFormatType IdFormat { get; set; } = SiemensTcpIpServerEthernetDeviceIdFormatType.Decimal;
+
+    /// <inheritdoc />
     [Range(0, 7)]
     public int RackNumber { get; set; }
 
