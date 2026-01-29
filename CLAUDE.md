@@ -70,11 +70,12 @@ Configuration classes are in `Options/KepwareConfigurationOptions.cs`.
 
 ### Driver-Specific Types
 
-Connectivity supports multiple Kepware drivers with type hierarchies:
-- **Channels**: `ChannelBase` → `EuroMap63Channel`, `OpcUaClientChannel`, `SimulatorChannel`
-- **Devices**: `DeviceBase` → `EuroMap63Device`, `OpcUaClientDevice`, `SimulatorDevice`
+Connectivity supports 70+ Kepware drivers organized by manufacturer (Allen-Bradley, Siemens, Mitsubishi, Omron, etc.) and protocol (Modbus, OPC UA, MQTT, etc.). Each driver has:
 
-Each driver has corresponding request types (`*ChannelRequest`, `*DeviceRequest`) in both the Contracts and main library.
+- **Channels**: `ChannelBase` → driver-specific types (e.g., `EuroMap63Channel`, `OpcUaClientChannel`, `SimulatorChannel`)
+- **Devices**: `DeviceBase` → driver-specific types (e.g., `EuroMap63Device`, `OpcUaClientDevice`, `SimulatorDevice`)
+
+Each driver has corresponding request types (`*ChannelRequest`, `*DeviceRequest`) in both the Contracts and main library. See README.md for the complete list of supported drivers.
 
 ### CLI Structure
 
@@ -82,7 +83,14 @@ Commands use Spectre.Console and follow a hierarchy pattern:
 - `connectivity channels|devices|tags` - Manage connectivity resources
 - `iot-gateway iot-agent|iot-item` - Manage IoT Gateway resources
 
-Command implementations are in `Commands/` with settings classes in `Commands/Settings/`.
+Command implementations are organized in hierarchical folders:
+- `Commands/Connectivity/Channels/Create/` - Channel creation commands
+- `Commands/Connectivity/Channels/Retrieve/` - Channel retrieval commands
+- `Commands/Connectivity/Channels/Delete/` - Channel deletion commands
+- `Commands/Connectivity/Devices/Create/`, `/Retrieve/`, `/Delete/` - Device commands
+- `Commands/IotGateway/IotAgent/`, `Commands/IotGateway/IotItem/` - IoT commands
+
+Settings classes are in `Commands/Settings/`. Command registration is centralized in `Extensions/CommandAppExtensions.cs`.
 
 All CLI commands inherit from `AsyncCommand<TSettings>` and must implement `ExecuteAsync` with a `CancellationToken` parameter.
 
