@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.YokogawaGxEthernet;
 
 /// <summary>
-/// Yokogawa GX Ethernet device - Kepware format.
+/// Yokogawa GX Ethernet device.
 /// </summary>
 internal sealed class YokogawaGxEthernetDevice : DeviceBase, IYokogawaGxEthernetDevice
 {

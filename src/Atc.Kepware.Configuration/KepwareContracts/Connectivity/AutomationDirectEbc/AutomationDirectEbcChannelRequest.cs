@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.AutomationDirectEbc;
 
 /// <summary>
-/// AutomationDirect EBC channel request - Kepware format.
+/// AutomationDirect EBC channel request.
 /// </summary>
 internal sealed class AutomationDirectEbcChannelRequest : ChannelRequestBase, IAutomationDirectEbcChannelRequest
 {

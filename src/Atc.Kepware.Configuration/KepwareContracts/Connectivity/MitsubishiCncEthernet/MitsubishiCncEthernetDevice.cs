@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.MitsubishiCncEthernet;
 
 /// <summary>
-/// Mitsubishi CNC Ethernet device - Kepware format.
+/// Mitsubishi CNC Ethernet device.
 /// </summary>
 internal sealed class MitsubishiCncEthernetDevice : DeviceBase, IMitsubishiCncEthernetDevice
 {

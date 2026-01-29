@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.TorqueToolEthernet;
 
 /// <summary>
-/// Torque Tool Ethernet channel request - Kepware format.
+/// Torque Tool Ethernet channel request.
 /// </summary>
 internal sealed class TorqueToolEthernetChannelRequest : ChannelRequestBase, ITorqueToolEthernetChannelRequest
 {

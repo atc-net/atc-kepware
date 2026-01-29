@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.OmronNjEthernet;
 
 /// <summary>
-/// Omron NJ Ethernet channel request - Kepware format.
+/// Omron NJ Ethernet channel request.
 /// </summary>
 internal sealed class OmronNjEthernetChannelRequest : ChannelRequestBase, IOmronNjEthernetChannelRequest
 {

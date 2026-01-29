@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.AutomationDirectEbc;
 
 /// <summary>
-/// AutomationDirect EBC device - Kepware format.
+/// AutomationDirect EBC device.
 /// </summary>
 internal sealed class AutomationDirectEbcDevice : DeviceBase, IAutomationDirectEbcDevice
 {

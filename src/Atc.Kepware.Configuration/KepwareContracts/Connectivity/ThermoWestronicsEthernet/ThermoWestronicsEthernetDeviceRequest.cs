@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.ThermoWestronicsEthernet;
 
 /// <summary>
-/// Thermo Westronics Ethernet device request - Kepware format.
+/// Thermo Westronics Ethernet device request.
 /// </summary>
 internal sealed class ThermoWestronicsEthernetDeviceRequest : DeviceRequestBase, IThermoWestronicsEthernetDeviceRequest
 {

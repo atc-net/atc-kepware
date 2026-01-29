@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.SiemensTcpIpServerEthernet;
 
 /// <summary>
-/// Siemens TCP/IP Server Ethernet device - Kepware format.
+/// Siemens TCP/IP Server Ethernet device.
 /// </summary>
 internal sealed class SiemensTcpIpServerEthernetDevice : DeviceBase, ISiemensTcpIpServerEthernetDevice
 {

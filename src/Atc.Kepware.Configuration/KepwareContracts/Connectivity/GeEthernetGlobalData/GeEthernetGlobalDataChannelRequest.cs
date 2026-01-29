@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.GeEthernetGlobalData;
 
 /// <summary>
-/// GE Ethernet Global Data channel request - Kepware format.
+/// GE Ethernet Global Data channel request.
 /// </summary>
 internal sealed class GeEthernetGlobalDataChannelRequest : ChannelRequestBase, IGeEthernetGlobalDataChannelRequest
 {

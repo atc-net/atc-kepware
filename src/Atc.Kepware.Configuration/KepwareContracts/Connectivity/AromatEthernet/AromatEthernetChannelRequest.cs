@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.AromatEthernet;
 
 /// <summary>
-/// Aromat Ethernet channel request - Kepware format.
+/// Aromat Ethernet channel request.
 /// </summary>
 internal sealed class AromatEthernetChannelRequest : ChannelRequestBase, IAromatEthernetChannelRequest
 {
