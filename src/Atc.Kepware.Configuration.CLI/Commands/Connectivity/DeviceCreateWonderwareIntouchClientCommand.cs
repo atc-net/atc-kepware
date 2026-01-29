@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceCreateWonderwareIntouchClientCommand : AsyncCommand<DeviceCreateWonderwareIntouchClientCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateWonderwareIntouchClientCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceCreateWonderwareIntouchClientCommand : AsyncCommand<De
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceCreateWonderwareIntouchClientCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

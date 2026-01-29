@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 
 public sealed class IotAgentDisableCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<IotAgentDisableCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class IotAgentDisableCommand : AsyncCommand<IotAgentCommandBaseSet
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<IotAgentDisableCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

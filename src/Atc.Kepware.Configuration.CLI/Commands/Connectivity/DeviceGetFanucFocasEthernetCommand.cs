@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceGetFanucFocasEthernetCommand : AsyncCommand<ChannelAndDeviceCommandBaseSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceGetFanucFocasEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceGetFanucFocasEthernetCommand : AsyncCommand<ChannelAnd
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceGetFanucFocasEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class ChannelCreateWagoEthernetCommand : AsyncCommand<ChannelCreateWagoEthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelCreateWagoEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class ChannelCreateWagoEthernetCommand : AsyncCommand<ChannelCreat
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<ChannelCreateWagoEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

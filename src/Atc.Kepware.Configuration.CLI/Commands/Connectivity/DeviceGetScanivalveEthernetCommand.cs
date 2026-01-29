@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceGetScanivalveEthernetCommand : AsyncCommand<ChannelAndDeviceCommandBaseSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceGetScanivalveEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceGetScanivalveEthernetCommand : AsyncCommand<ChannelAnd
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceGetScanivalveEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

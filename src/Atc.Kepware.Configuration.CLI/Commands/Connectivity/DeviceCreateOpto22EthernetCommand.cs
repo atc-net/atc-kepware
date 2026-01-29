@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceCreateOpto22EthernetCommand : AsyncCommand<DeviceCreateOpto22EthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateOpto22EthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceCreateOpto22EthernetCommand : AsyncCommand<DeviceCreat
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceCreateOpto22EthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

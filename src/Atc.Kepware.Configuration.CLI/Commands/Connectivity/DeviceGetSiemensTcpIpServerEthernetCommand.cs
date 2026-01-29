@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceGetSiemensTcpIpServerEthernetCommand : AsyncCommand<ChannelAndDeviceCommandBaseSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceGetSiemensTcpIpServerEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceGetSiemensTcpIpServerEthernetCommand : AsyncCommand<Ch
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceGetSiemensTcpIpServerEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

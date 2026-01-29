@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class ChannelGetMqttClientCommand : AsyncCommand<ChannelGetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelGetMqttClientCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class ChannelGetMqttClientCommand : AsyncCommand<ChannelGetCommand
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<ChannelGetMqttClientCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

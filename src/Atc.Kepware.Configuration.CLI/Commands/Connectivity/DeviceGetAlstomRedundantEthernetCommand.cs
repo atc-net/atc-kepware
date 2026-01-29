@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceGetAlstomRedundantEthernetCommand : AsyncCommand<ChannelAndDeviceCommandBaseSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceGetAlstomRedundantEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceGetAlstomRedundantEthernetCommand : AsyncCommand<Chann
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceGetAlstomRedundantEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

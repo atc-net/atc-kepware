@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class ChannelCreateAutomationDirectProductivitySeriesEthernetCommand : AsyncCommand<ChannelCreateAutomationDirectProductivitySeriesEthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelCreateAutomationDirectProductivitySeriesEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class ChannelCreateAutomationDirectProductivitySeriesEthernetComma
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<ChannelCreateAutomationDirectProductivitySeriesEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class ChannelCreateIec608705104ClientCommand : AsyncCommand<ChannelCreateIec608705104ClientCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelCreateIec608705104ClientCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class ChannelCreateIec608705104ClientCommand : AsyncCommand<Channe
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<ChannelCreateIec608705104ClientCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

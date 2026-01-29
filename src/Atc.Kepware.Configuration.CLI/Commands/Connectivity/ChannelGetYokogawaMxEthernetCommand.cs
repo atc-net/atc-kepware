@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class ChannelGetYokogawaMxEthernetCommand : AsyncCommand<ChannelGetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelGetYokogawaMxEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class ChannelGetYokogawaMxEthernetCommand : AsyncCommand<ChannelGe
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<ChannelGetYokogawaMxEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

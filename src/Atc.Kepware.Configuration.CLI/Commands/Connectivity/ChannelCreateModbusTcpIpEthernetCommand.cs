@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class ChannelCreateModbusTcpIpEthernetCommand : AsyncCommand<ChannelCreateModbusTcpIpEthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelCreateModbusTcpIpEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class ChannelCreateModbusTcpIpEthernetCommand : AsyncCommand<Chann
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<ChannelCreateModbusTcpIpEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

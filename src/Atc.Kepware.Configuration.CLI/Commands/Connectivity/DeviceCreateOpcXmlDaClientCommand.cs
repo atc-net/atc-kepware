@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceCreateOpcXmlDaClientCommand : AsyncCommand<DeviceCreateOpcXmlDaClientCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateOpcXmlDaClientCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceCreateOpcXmlDaClientCommand : AsyncCommand<DeviceCreat
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceCreateOpcXmlDaClientCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

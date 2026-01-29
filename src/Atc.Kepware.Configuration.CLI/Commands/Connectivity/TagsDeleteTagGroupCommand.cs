@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class TagsDeleteTagGroupCommand : AsyncCommand<TagGroupDeleteCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<TagsDeleteTagGroupCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class TagsDeleteTagGroupCommand : AsyncCommand<TagGroupDeleteComma
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<TagsDeleteTagGroupCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

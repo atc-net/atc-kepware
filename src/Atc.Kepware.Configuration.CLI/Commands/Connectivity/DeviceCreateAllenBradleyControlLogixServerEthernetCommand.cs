@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceCreateAllenBradleyControlLogixServerEthernetCommand : AsyncCommand<DeviceCreateAllenBradleyControlLogixServerEthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateAllenBradleyControlLogixServerEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceCreateAllenBradleyControlLogixServerEthernetCommand : 
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceCreateAllenBradleyControlLogixServerEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

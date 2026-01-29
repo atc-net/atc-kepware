@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceCreateAutomationDirectEcomCommand : AsyncCommand<DeviceCreateAutomationDirectEcomCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateAutomationDirectEcomCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceCreateAutomationDirectEcomCommand : AsyncCommand<Devic
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceCreateAutomationDirectEcomCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

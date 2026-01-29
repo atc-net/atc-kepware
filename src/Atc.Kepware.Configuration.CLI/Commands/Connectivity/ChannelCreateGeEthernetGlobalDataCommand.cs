@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class ChannelCreateGeEthernetGlobalDataCommand : AsyncCommand<ChannelCreateGeEthernetGlobalDataCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<ChannelCreateGeEthernetGlobalDataCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class ChannelCreateGeEthernetGlobalDataCommand : AsyncCommand<Chan
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<ChannelCreateGeEthernetGlobalDataCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

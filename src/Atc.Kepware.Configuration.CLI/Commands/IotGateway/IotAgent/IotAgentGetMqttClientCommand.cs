@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.IotGateway.IotAgent;
 
 public sealed class IotAgentGetMqttClientCommand : AsyncCommand<IotAgentCommandBaseSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<IotAgentGetMqttClientCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class IotAgentGetMqttClientCommand : AsyncCommand<IotAgentCommandB
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<IotAgentGetMqttClientCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

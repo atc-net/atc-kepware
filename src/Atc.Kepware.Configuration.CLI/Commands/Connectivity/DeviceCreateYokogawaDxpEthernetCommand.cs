@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class DeviceCreateYokogawaDxpEthernetCommand : AsyncCommand<DeviceCreateYokogawaDxpEthernetCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<DeviceCreateYokogawaDxpEthernetCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class DeviceCreateYokogawaDxpEthernetCommand : AsyncCommand<Device
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<DeviceCreateYokogawaDxpEthernetCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }

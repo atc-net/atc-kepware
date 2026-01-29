@@ -2,7 +2,6 @@ namespace Atc.Kepware.Configuration.CLI.Commands.Connectivity;
 
 public sealed class TagsSearchCommand : AsyncCommand<TagsSearchCommandSettings>
 {
-    private readonly ILoggerFactory loggerFactory;
     private readonly ILogger<TagsSearchCommand> logger;
     private readonly IKepwareConfigurationClient kepwareConfigurationClient;
 
@@ -10,7 +9,6 @@ public sealed class TagsSearchCommand : AsyncCommand<TagsSearchCommandSettings>
         ILoggerFactory loggerFactory,
         IKepwareConfigurationClient kepwareConfigurationClient)
     {
-        this.loggerFactory = loggerFactory;
         logger = loggerFactory.CreateLogger<TagsSearchCommand>();
         this.kepwareConfigurationClient = kepwareConfigurationClient;
     }
