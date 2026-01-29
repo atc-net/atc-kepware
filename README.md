@@ -299,11 +299,130 @@ await client.DeleteIotAgentRestClientIotItem("MyAgent", "MyChannel.MyDevice.MyTa
 
 ## Supported Drivers
 
-| Driver | Channel Type | Device Type |
-|--------|-------------|-------------|
-| EuroMap 63 | `EuroMap63Channel` | `EuroMap63Device` |
-| OPC UA Client | `OpcUaClientChannel` | `OpcUaClientDevice` |
-| Simulator | `SimulatorChannel` | `SimulatorDevice` |
+The library supports a comprehensive range of Kepware drivers organized by manufacturer and protocol:
+
+### Allen-Bradley / Rockwell Automation
+| Driver | Description |
+|--------|-------------|
+| ControlLogix Ethernet | ControlLogix, CompactLogix, FlexLogix over Ethernet/IP |
+| ControlLogix Server Ethernet | Server-side ControlLogix communication |
+| Allen-Bradley Ethernet | PLC-5, SLC 500 over Ethernet |
+| Micro800 Ethernet | Micro800 series controllers |
+| Server Ethernet | Allen-Bradley server communication |
+| Bulletin 900 | Bulletin 900 devices |
+| Bulletin 1609 | Bulletin 1609 devices |
+
+### Siemens
+| Driver | Description |
+|--------|-------------|
+| S7+ Ethernet | S7-1200/S7-1500 native protocol |
+| TCP/IP Ethernet | S7-200/300/400 over TCP/IP |
+| TCP/IP Server Ethernet | Server-side Siemens communication |
+| Simatic TI505 Ethernet | TI505 series controllers |
+
+### Mitsubishi
+| Driver | Description |
+|--------|-------------|
+| CNC Ethernet | Mitsubishi CNC controllers |
+| Ethernet | MELSEC-Q/L/QnA series |
+| FX Net | FX series over Ethernet |
+
+### Omron
+| Driver | Description |
+|--------|-------------|
+| FINS Ethernet | CS/CJ/CP series over FINS |
+| NJ Ethernet | NJ/NX series controllers |
+
+### Yokogawa
+| Driver | Description |
+|--------|-------------|
+| Cx Ethernet | Cx series |
+| Darwin Ethernet | Darwin series recorders |
+| Dx Ethernet | Dx series |
+| Dxp Ethernet | Dxp series |
+| Gx Ethernet | Gx series |
+| Mw Ethernet | Mw series |
+| Mx Ethernet | Mx series |
+
+### Honeywell
+| Driver | Description |
+|--------|-------------|
+| HC900 Ethernet | HC900 hybrid controller |
+| UDC Ethernet | Universal Digital Controller |
+
+### GE
+| Driver | Description |
+|--------|-------------|
+| GE Ethernet | GE PLCs over Ethernet |
+| GE Ethernet Global Data | Global Data communication |
+
+### Industrial Protocols
+| Driver | Description |
+|--------|-------------|
+| BACnet IP | Building automation protocol |
+| DNP3 Client Ethernet | Distributed Network Protocol |
+| IEC 60870-5-104 Client | Power system SCADA protocol |
+| IEC 61850 MMS Client | Substation automation |
+| Modbus TCP/IP Ethernet | Modbus over TCP/IP |
+| SNMP | Simple Network Management Protocol |
+
+### OPC Standards
+| Driver | Description |
+|--------|-------------|
+| OPC DA Client | Classic OPC Data Access |
+| OPC UA Client | OPC Unified Architecture |
+| OPC XML-DA Client | OPC XML Data Access |
+
+### Industrial IoT / Machine Tool
+| Driver | Description |
+|--------|-------------|
+| MQTT Client | MQTT connectivity driver |
+| MTConnect Client | MTConnect machine tool standard |
+| EuroMap 63 | Injection molding machine interface |
+| KraussMaffei MC4 Ethernet | KraussMaffei injection molding |
+
+### Automation Controllers
+| Driver | Description |
+|--------|-------------|
+| Automation Direct EBC | EBC series |
+| Automation Direct ECOM | ECOM series |
+| Automation Direct Productivity Series | Productivity series PLCs |
+| Beckhoff TwinCAT | TwinCAT ADS protocol |
+| Codesys | Codesys runtime |
+| Cutler-Hammer ELC Ethernet | ELC series |
+| Keyence KV Ethernet | KV series PLCs |
+| Opto 22 Ethernet | Opto 22 controllers |
+| Toyopuc Ethernet | Toyopuc PLCs |
+| Triconex Ethernet | Triconex safety systems |
+| Wago Ethernet | Wago controllers |
+| Yaskawa MP Series Ethernet | MP series motion controllers |
+
+### CNC / Motion
+| Driver | Description |
+|--------|-------------|
+| FANUC Focas Ethernet | FANUC CNC over Ethernet |
+| FANUC Focas HSSB | FANUC CNC over HSSB |
+| Toshiba Ethernet | Toshiba controllers |
+
+### Other Drivers
+| Driver | Description |
+|--------|-------------|
+| Alstom Redundant Ethernet | Alstom redundant systems |
+| Aromat Ethernet | Aromat/Panasonic PLCs |
+| Bristol BSAP IP | Bristol Babcock SCADA |
+| Busware Ethernet | Busware devices |
+| Custom Interface | Custom driver interface |
+| DDE Client | Dynamic Data Exchange |
+| Memory Based | In-memory simulation |
+| Ping | Network diagnostics |
+| SattBus Ethernet | SattBus protocol |
+| Scanivalve Ethernet | Scanivalve pressure scanners |
+| Simulator | Tag simulation/testing |
+| Sixnet Ethertrak | Sixnet I/O |
+| System Monitor | System performance monitoring |
+| Thermo Westronics Ethernet | Thermo recorders |
+| Torque Tool Ethernet | Torque tool integration |
+| Wonderware InTouch Client | InTouch connectivity |
 
 # CLI Tool
 
