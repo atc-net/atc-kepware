@@ -20,8 +20,40 @@ public sealed class IotAgentGetAllRestServersCommand : AsyncCommand<KepwareBaseC
         KepwareBaseCommandSettings settings,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(settings);
+
+        return ExecuteInternalAsync(settings, cancellationToken);
+    }
+
+    private async Task<int> ExecuteInternalAsync(
+        KepwareBaseCommandSettings settings,
+        CancellationToken cancellationToken)
+    {
         ConsoleHelper.WriteHeader();
 
-        throw new NotImplementedException();
+        try
+        {
+            kepwareConfigurationClient.SetConnectionInformation(
+                new Uri(settings.ServerUrl),
+                settings.UserName!.Value,
+                settings.Password!.Value);
+
+            var result = await kepwareConfigurationClient.GetIotAgentRestServers(cancellationToken);
+
+            if (!result.CommunicationSucceeded ||
+                result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
+            {
+                return ConsoleExitStatusCodes.Failure;
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError($"{EmojisConstants.Error} {ex.GetMessage()}");
+            return ConsoleExitStatusCodes.Failure;
+        }
+
+        logger.LogInformation($"{EmojisConstants.Success} Done");
+        return ConsoleExitStatusCodes.Success;
     }
 }
