@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.SimaticTi505Ethernet;
 
 /// <summary>
-/// Simatic/TI 505 Ethernet device request - Kepware format.
+/// Simatic/TI 505 Ethernet device request.
 /// </summary>
 internal sealed class SimaticTi505EthernetDeviceRequest : DeviceRequestBase, ISimaticTi505EthernetDeviceRequest
 {

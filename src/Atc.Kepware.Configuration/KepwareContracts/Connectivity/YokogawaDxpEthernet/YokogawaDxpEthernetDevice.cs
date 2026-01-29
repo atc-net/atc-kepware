@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.YokogawaDxpEthernet;
 
 /// <summary>
-/// Yokogawa DXP Ethernet device - Kepware format.
+/// Yokogawa DXP Ethernet device.
 /// </summary>
 internal sealed class YokogawaDxpEthernetDevice : DeviceBase, IYokogawaDxpEthernetDevice
 {

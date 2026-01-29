@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.YokogawaMwEthernet;
 
 /// <summary>
-/// Yokogawa MW Ethernet device - Kepware format.
+/// Yokogawa MW Ethernet device.
 /// </summary>
 internal sealed class YokogawaMwEthernetDevice : DeviceBase, IYokogawaMwEthernetDevice
 {

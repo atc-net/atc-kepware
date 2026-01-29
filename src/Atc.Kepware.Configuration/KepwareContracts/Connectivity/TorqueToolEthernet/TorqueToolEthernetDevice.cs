@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.TorqueToolEthernet;
 
 /// <summary>
-/// Torque Tool Ethernet device - Kepware format.
+/// Torque Tool Ethernet device.
 /// </summary>
 internal sealed class TorqueToolEthernetDevice : DeviceBase, ITorqueToolEthernetDevice
 {

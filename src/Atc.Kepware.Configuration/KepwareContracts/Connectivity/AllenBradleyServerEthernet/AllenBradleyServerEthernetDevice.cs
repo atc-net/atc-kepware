@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.AllenBradleyServerEthernet;
 
 /// <summary>
-/// Allen-Bradley Server Ethernet device - Kepware format.
+/// Allen-Bradley Server Ethernet device.
 /// </summary>
 internal sealed class AllenBradleyServerEthernetDevice : DeviceBase, IAllenBradleyServerEthernetDevice
 {

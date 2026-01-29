@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.MitsubishiFxNet;
 
 /// <summary>
-/// Mitsubishi FX Net channel request - Kepware format.
+/// Mitsubishi FX Net channel request.
 /// </summary>
 internal sealed class MitsubishiFxNetChannelRequest : ChannelRequestBase, IMitsubishiFxNetChannelRequest
 {

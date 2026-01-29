@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.AromatEthernet;
 
 /// <summary>
-/// Aromat Ethernet device - Kepware format.
+/// Aromat Ethernet device.
 /// </summary>
 internal sealed class AromatEthernetDevice : DeviceBase, IAromatEthernetDevice
 {

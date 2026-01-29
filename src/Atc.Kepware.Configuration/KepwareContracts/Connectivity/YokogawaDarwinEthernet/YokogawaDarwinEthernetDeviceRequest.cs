@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.YokogawaDarwinEthernet;
 
 /// <summary>
-/// Yokogawa Darwin Ethernet device request - Kepware format.
+/// Yokogawa Darwin Ethernet device request.
 /// </summary>
 internal sealed class YokogawaDarwinEthernetDeviceRequest : DeviceRequestBase, IYokogawaDarwinEthernetDeviceRequest
 {

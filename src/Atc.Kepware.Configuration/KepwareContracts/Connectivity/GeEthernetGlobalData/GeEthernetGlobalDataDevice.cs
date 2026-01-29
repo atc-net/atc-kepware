@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.GeEthernetGlobalData;
 
 /// <summary>
-/// GE Ethernet Global Data device - Kepware format.
+/// GE Ethernet Global Data device.
 /// </summary>
 internal sealed class GeEthernetGlobalDataDevice : DeviceBase, IGeEthernetGlobalDataDevice
 {

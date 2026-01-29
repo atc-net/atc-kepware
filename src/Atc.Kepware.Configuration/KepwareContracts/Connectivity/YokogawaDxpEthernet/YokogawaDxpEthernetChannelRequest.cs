@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.YokogawaDxpEthernet;
 
 /// <summary>
-/// Yokogawa DXP Ethernet channel request - Kepware format.
+/// Yokogawa DXP Ethernet channel request.
 /// </summary>
 internal sealed class YokogawaDxpEthernetChannelRequest : ChannelRequestBase, IYokogawaDxpEthernetChannelRequest
 {

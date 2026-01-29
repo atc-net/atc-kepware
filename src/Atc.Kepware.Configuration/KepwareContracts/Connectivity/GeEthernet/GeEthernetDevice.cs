@@ -1,7 +1,7 @@
 namespace Atc.Kepware.Configuration.KepwareContracts.Connectivity.GeEthernet;
 
 /// <summary>
-/// GE Ethernet device - Kepware format.
+/// GE Ethernet device.
 /// </summary>
 internal sealed class GeEthernetDevice : DeviceBase, IGeEthernetDevice
 {
