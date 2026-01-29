@@ -486,4 +486,296 @@ public sealed partial class KepwareConfigurationClient
 
     private static string EnsureProperIotItemNameFormat(string iotItemName)
         => iotItemName.TrimExtended().Replace('.', '_');
+
+    public Task<HttpClientRequestResult<bool>> CreateIotAgentMqttClient(
+        IotAgentMqttClientCreateRequest request,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+
+        if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
+        }
+
+        return InvokeCreateIotAgentMqttClient(
+            request,
+            cancellationToken);
+    }
+
+    public async Task<HttpClientRequestResult<IList<IotAgentMqttClient>?>> GetIotAgentMqttClients(
+        CancellationToken cancellationToken)
+    {
+        var response = await Get<IList<KepwareContracts.IotGateway.IotAgentMqttClient>>(
+            EndpointPathTemplateConstants.IotGatewayMqttClients,
+            cancellationToken);
+
+        return response.Adapt<HttpClientRequestResult<IList<IotAgentMqttClient>?>>();
+    }
+
+    public Task<HttpClientRequestResult<IotAgentMqttClient?>> GetIotAgentMqttClient(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+
+        return InvokeGetIotAgentMqttClient(iotAgentName, cancellationToken);
+    }
+
+    public Task<HttpClientRequestResult<bool>> UpdateIotAgentMqttClient(
+        string iotAgentName,
+        IotAgentMqttClientUpdateRequest request,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+        ArgumentNullException.ThrowIfNull(request);
+
+        if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
+        }
+
+        return InvokeUpdateIotAgentMqttClient(
+            iotAgentName,
+            request,
+            cancellationToken);
+    }
+
+    public Task<HttpClientRequestResult<bool>> CreateIotAgentRestServer(
+        IotAgentRestServerCreateRequest request,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+
+        if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
+        }
+
+        return InvokeCreateIotAgentRestServer(
+            request,
+            cancellationToken);
+    }
+
+    public async Task<HttpClientRequestResult<IList<IotAgentRestServer>?>> GetIotAgentRestServers(
+        CancellationToken cancellationToken)
+    {
+        var response = await Get<IList<KepwareContracts.IotGateway.IotAgentRestServer>>(
+            EndpointPathTemplateConstants.IotGatewayRestServers,
+            cancellationToken);
+
+        return response.Adapt<HttpClientRequestResult<IList<IotAgentRestServer>?>>();
+    }
+
+    public Task<HttpClientRequestResult<IotAgentRestServer?>> GetIotAgentRestServer(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+
+        return InvokeGetIotAgentRestServer(iotAgentName, cancellationToken);
+    }
+
+    public Task<HttpClientRequestResult<bool>> UpdateIotAgentRestServer(
+        string iotAgentName,
+        IotAgentRestServerUpdateRequest request,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+        ArgumentNullException.ThrowIfNull(request);
+
+        if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
+        }
+
+        return InvokeUpdateIotAgentRestServer(
+            iotAgentName,
+            request,
+            cancellationToken);
+    }
+
+    public Task<HttpClientRequestResult<bool>> CreateIotAgentMqttClientIotItem(
+        string iotAgentName,
+        IotItemCreateRequest request,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+        ArgumentNullException.ThrowIfNull(request);
+
+        return InvokeCreateIotAgentMqttClientIotItem(
+            iotAgentName,
+            request,
+            cancellationToken);
+    }
+
+    public Task<HttpClientRequestResult<bool>> UpdateIotAgentMqttClientIotItem(
+        string iotAgentName,
+        string iotItemName,
+        IotItemUpdateRequest request,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+        ArgumentNullException.ThrowIfNull(iotItemName);
+        ArgumentNullException.ThrowIfNull(request);
+
+        if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
+        }
+
+        return InvokeUpdateIotAgentMqttClientIotItem(
+            iotAgentName,
+            EnsureProperIotItemNameFormat(iotItemName),
+            request,
+            cancellationToken);
+    }
+
+    public Task<HttpClientRequestResult<bool>> CreateIotAgentRestServerIotItem(
+        string iotAgentName,
+        IotItemCreateRequest request,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+        ArgumentNullException.ThrowIfNull(request);
+
+        return InvokeCreateIotAgentRestServerIotItem(
+            iotAgentName,
+            request,
+            cancellationToken);
+    }
+
+    public Task<HttpClientRequestResult<bool>> UpdateIotAgentRestServerIotItem(
+        string iotAgentName,
+        string iotItemName,
+        IotItemUpdateRequest request,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(iotAgentName);
+        ArgumentNullException.ThrowIfNull(iotItemName);
+        ArgumentNullException.ThrowIfNull(request);
+
+        if (!DataAnnotationHelper.TryValidateOutToString(request, out var validationErrors))
+        {
+            return Task.FromResult(HttpClientRequestResultFactory<bool>.CreateBadRequest(validationErrors));
+        }
+
+        return InvokeUpdateIotAgentRestServerIotItem(
+            iotAgentName,
+            EnsureProperIotItemNameFormat(iotItemName),
+            request,
+            cancellationToken);
+    }
+
+    private Task<HttpClientRequestResult<bool>> InvokeCreateIotAgentMqttClient(
+        IotAgentMqttClientCreateRequest request,
+        CancellationToken cancellationToken)
+        => Post(
+            request.Adapt<KepwareContracts.IotGateway.IotAgentMqttClientCreateRequest>(),
+            EndpointPathTemplateConstants.IotGatewayMqttClients,
+            cancellationToken);
+
+    private async Task<HttpClientRequestResult<IotAgentMqttClient?>> InvokeGetIotAgentMqttClient(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+    {
+        var response = await Get<KepwareContracts.IotGateway.IotAgentMqttClient>(
+            $"{EndpointPathTemplateConstants.IotGatewayMqttClients}/{iotAgentName}",
+            cancellationToken);
+
+        if (response is { CommunicationSucceeded: true, HasData: true } &&
+            !response.Data!.AgentType.Equals(IotAgentType.MqttClient))
+        {
+            return new HttpClientRequestResult<IotAgentMqttClient?>(HttpStatusCode.NotFound, data: null, $"Retrieved iot agent '{iotAgentName}' is not a '{IotAgentType.MqttClient.GetDescription()}'.");
+        }
+
+        return response.Adapt<HttpClientRequestResult<IotAgentMqttClient?>>();
+    }
+
+    private Task<HttpClientRequestResult<bool>> InvokeUpdateIotAgentMqttClient(
+        string iotAgentName,
+        IotAgentMqttClientUpdateRequest request,
+        CancellationToken cancellationToken)
+        => Put(
+            request.Adapt<KepwareContracts.IotGateway.IotAgentMqttClientUpdateRequest>(),
+            $"{EndpointPathTemplateConstants.IotGatewayMqttClients}/{iotAgentName}",
+            cancellationToken);
+
+    private Task<HttpClientRequestResult<bool>> InvokeCreateIotAgentRestServer(
+        IotAgentRestServerCreateRequest request,
+        CancellationToken cancellationToken)
+        => Post(
+            request.Adapt<KepwareContracts.IotGateway.IotAgentRestServerCreateRequest>(),
+            EndpointPathTemplateConstants.IotGatewayRestServers,
+            cancellationToken);
+
+    private async Task<HttpClientRequestResult<IotAgentRestServer?>> InvokeGetIotAgentRestServer(
+        string iotAgentName,
+        CancellationToken cancellationToken)
+    {
+        var response = await Get<KepwareContracts.IotGateway.IotAgentRestServer>(
+            $"{EndpointPathTemplateConstants.IotGatewayRestServers}/{iotAgentName}",
+            cancellationToken);
+
+        if (response is { CommunicationSucceeded: true, HasData: true } &&
+            !response.Data!.AgentType.Equals(IotAgentType.RestServer))
+        {
+            return new HttpClientRequestResult<IotAgentRestServer?>(HttpStatusCode.NotFound, data: null, $"Retrieved iot agent '{iotAgentName}' is not a '{IotAgentType.RestServer.GetDescription()}'.");
+        }
+
+        return response.Adapt<HttpClientRequestResult<IotAgentRestServer?>>();
+    }
+
+    private Task<HttpClientRequestResult<bool>> InvokeUpdateIotAgentRestServer(
+        string iotAgentName,
+        IotAgentRestServerUpdateRequest request,
+        CancellationToken cancellationToken)
+        => Put(
+            request.Adapt<KepwareContracts.IotGateway.IotAgentRestServerUpdateRequest>(),
+            $"{EndpointPathTemplateConstants.IotGatewayRestServers}/{iotAgentName}",
+            cancellationToken);
+
+    private Task<HttpClientRequestResult<bool>> InvokeCreateIotAgentMqttClientIotItem(
+        string iotAgentName,
+        IotItemCreateRequest request,
+        CancellationToken cancellationToken)
+        => Post(
+            new List<KepwareContracts.IotGateway.IotItemCreateRequest>
+            {
+                request.Adapt<KepwareContracts.IotGateway.IotItemCreateRequest>(),
+            },
+            $"{EndpointPathTemplateConstants.IotGatewayMqttClients}/{iotAgentName}/{EndpointPathTemplateConstants.IotItems}",
+            cancellationToken);
+
+    private Task<HttpClientRequestResult<bool>> InvokeUpdateIotAgentMqttClientIotItem(
+        string iotAgentName,
+        string iotItemName,
+        IotItemUpdateRequest request,
+        CancellationToken cancellationToken)
+        => Put(
+            request.Adapt<KepwareContracts.IotGateway.IotItemUpdateRequest>(),
+            $"{EndpointPathTemplateConstants.IotGatewayMqttClients}/{iotAgentName}/{EndpointPathTemplateConstants.IotItems}/{iotItemName}",
+            cancellationToken);
+
+    private Task<HttpClientRequestResult<bool>> InvokeCreateIotAgentRestServerIotItem(
+        string iotAgentName,
+        IotItemCreateRequest request,
+        CancellationToken cancellationToken)
+        => Post(
+            new List<KepwareContracts.IotGateway.IotItemCreateRequest>
+            {
+                request.Adapt<KepwareContracts.IotGateway.IotItemCreateRequest>(),
+            },
+            $"{EndpointPathTemplateConstants.IotGatewayRestServers}/{iotAgentName}/{EndpointPathTemplateConstants.IotItems}",
+            cancellationToken);
+
+    private Task<HttpClientRequestResult<bool>> InvokeUpdateIotAgentRestServerIotItem(
+        string iotAgentName,
+        string iotItemName,
+        IotItemUpdateRequest request,
+        CancellationToken cancellationToken)
+        => Put(
+            request.Adapt<KepwareContracts.IotGateway.IotItemUpdateRequest>(),
+            $"{EndpointPathTemplateConstants.IotGatewayRestServers}/{iotAgentName}/{EndpointPathTemplateConstants.IotItems}/{iotItemName}",
+            cancellationToken);
 }

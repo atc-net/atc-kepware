@@ -235,4 +235,152 @@ public partial interface IKepwareConfigurationClient
         string iotAgentName,
         string iotItemName,
         CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Create an iot agent mqtt client to Kepware's Iot Gateway.
+    /// </summary>
+    /// <param name="request">The request.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    Task<HttpClientRequestResult<bool>> CreateIotAgentMqttClient(
+        IotAgentMqttClientCreateRequest request,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Returns the properties of all mqtt client iot agents.
+    /// </summary>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Sub iot items will not be returned in this call.
+    /// </remarks>
+    Task<HttpClientRequestResult<IList<IotAgentMqttClient>?>> GetIotAgentMqttClients(
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Returns the properties of the specified mqtt client iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Sub iot items will not be returned in this call.
+    /// </remarks>
+    Task<HttpClientRequestResult<IotAgentMqttClient?>> GetIotAgentMqttClient(
+        string iotAgentName,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Updates the specified mqtt client iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="request">The request.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Requires that the current ProjectId is sent in the request.
+    /// Retrieve the client forehand to retrieve ProjectId.
+    /// </remarks>
+    Task<HttpClientRequestResult<bool>> UpdateIotAgentMqttClient(
+        string iotAgentName,
+        IotAgentMqttClientUpdateRequest request,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Create an iot agent rest server to Kepware's Iot Gateway.
+    /// </summary>
+    /// <param name="request">The request.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    Task<HttpClientRequestResult<bool>> CreateIotAgentRestServer(
+        IotAgentRestServerCreateRequest request,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Returns the properties of all rest server iot agents.
+    /// </summary>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Sub iot items will not be returned in this call.
+    /// </remarks>
+    Task<HttpClientRequestResult<IList<IotAgentRestServer>?>> GetIotAgentRestServers(
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Returns the properties of the specified rest server iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Sub iot items will not be returned in this call.
+    /// </remarks>
+    Task<HttpClientRequestResult<IotAgentRestServer?>> GetIotAgentRestServer(
+        string iotAgentName,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Updates the specified rest server iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="request">The request.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Requires that the current ProjectId is sent in the request.
+    /// Retrieve the client forehand to retrieve ProjectId.
+    /// </remarks>
+    Task<HttpClientRequestResult<bool>> UpdateIotAgentRestServer(
+        string iotAgentName,
+        IotAgentRestServerUpdateRequest request,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Add a iot item to the specified mqtt client iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="request">The request.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    Task<HttpClientRequestResult<bool>> CreateIotAgentMqttClientIotItem(
+        string iotAgentName,
+        IotItemCreateRequest request,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Updates the specified iot item under a given mqtt client iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="iotItemName">The Iot Item Name.</param>
+    /// <param name="request">The request.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Requires that the current ProjectId is sent in the request.
+    /// Retrieve the client forehand to retrieve ProjectId.
+    /// </remarks>
+    Task<HttpClientRequestResult<bool>> UpdateIotAgentMqttClientIotItem(
+        string iotAgentName,
+        string iotItemName,
+        IotItemUpdateRequest request,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Add a iot item to the specified rest server iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="request">The request.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    Task<HttpClientRequestResult<bool>> CreateIotAgentRestServerIotItem(
+        string iotAgentName,
+        IotItemCreateRequest request,
+        CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Updates the specified iot item under a given rest server iot agent.
+    /// </summary>
+    /// <param name="iotAgentName">The Iot Agent Name.</param>
+    /// <param name="iotItemName">The Iot Item Name.</param>
+    /// <param name="request">The request.</param>
+    /// <param name="cancellationToken">The CancellationToken.</param>
+    /// <remarks>
+    /// Requires that the current ProjectId is sent in the request.
+    /// Retrieve the client forehand to retrieve ProjectId.
+    /// </remarks>
+    Task<HttpClientRequestResult<bool>> UpdateIotAgentRestServerIotItem(
+        string iotAgentName,
+        string iotItemName,
+        IotItemUpdateRequest request,
+        CancellationToken cancellationToken);
 }
