@@ -77,14 +77,40 @@ public sealed class DeviceCreateMtConnectClientCommand : AsyncCommand<DeviceCrea
 
     private static MtConnectClientDeviceRequest BuildMtConnectClientDeviceRequest(
         DeviceCreateMtConnectClientCommandSettings settings)
-        => new()
+    {
+        var request = new MtConnectClientDeviceRequest
         {
             Name = settings.DeviceName,
             Description = settings.Description is not null && settings.Description.IsSet
                 ? settings.Description.Value
                 : string.Empty,
-            DeviceId = settings.MtConnectDeviceId is not null && settings.MtConnectDeviceId.IsSet
-                ? settings.MtConnectDeviceId.Value
-                : string.Empty,
         };
+
+        if (settings.PortNumber is { IsSet: true })
+        {
+            request.PortNumber = settings.PortNumber.Value;
+        }
+
+        if (settings.CloseAgentConnectionAfterEachRequest is { IsSet: true })
+        {
+            request.CloseAgentConnectionAfterEachRequest = settings.CloseAgentConnectionAfterEachRequest.Value;
+        }
+
+        if (settings.SchemaTagValidation is { IsSet: true })
+        {
+            request.SchemaTagValidation = settings.SchemaTagValidation.Value;
+        }
+
+        if (settings.ReadAllItemsInSingleRequest is { IsSet: true })
+        {
+            request.ReadAllItemsInSingleRequest = settings.ReadAllItemsInSingleRequest.Value;
+        }
+
+        if (settings.ItemsPerRequest is { IsSet: true })
+        {
+            request.ItemsPerRequest = settings.ItemsPerRequest.Value;
+        }
+
+        return request;
+    }
 }

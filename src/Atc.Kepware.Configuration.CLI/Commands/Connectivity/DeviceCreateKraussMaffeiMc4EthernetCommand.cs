@@ -87,7 +87,9 @@ public sealed class DeviceCreateKraussMaffeiMc4EthernetCommand : AsyncCommand<De
             // KraussMaffei MC4 Ethernet Specific Settings
             DeviceId = settings.DeviceId,
             Port = settings.Port,
-            MachineId = settings.MachineId,
+            Protocol = settings.Protocol,
+            RequestSizeMode = settings.RequestSizeMode,
+            ParameterHandles = settings.ParameterHandles,
             ConnectTimeoutSeconds = settings.ConnectTimeoutSeconds,
             RequestTimeoutMs = settings.RequestTimeoutMs,
             RetryAttempts = settings.RetryAttempts,

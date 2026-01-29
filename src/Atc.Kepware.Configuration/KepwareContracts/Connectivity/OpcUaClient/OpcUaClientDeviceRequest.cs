@@ -13,9 +13,9 @@ internal class OpcUaClientDeviceRequest : DeviceRequestBase, IOpcUaClientDeviceR
     public int PublishingInterval { get; set; } = 1000;
 
     /// <inheritdoc />
-    [Range(0, 2147483647)]
+    [Range(0, 4294967295)]
     [JsonPropertyName("opcuaclient.DEVICE_SUBSCRIPTION_MAX_NOTIFICATIONS_PER_PUBLISH")]
-    public int MaxNotificationsPerPublish { get; set; }
+    public long MaxNotificationsPerPublish { get; set; }
 
     /// <inheritdoc />
     [JsonPropertyName("opcuaclient.DEVICE_SUBSCRIPTION_UPDATE_MODE")]
@@ -84,7 +84,7 @@ internal class OpcUaClientDeviceRequest : DeviceRequestBase, IOpcUaClientDeviceR
     /// <inheritdoc />
     [Range(0, 999999999)]
     [JsonPropertyName("opcuaclient.DEVICE_MONITORED_ITEMS_DEADBAND_VALUE")]
-    public int DeadBandValue { get; set; }
+    public double DeadBandValue { get; set; }
 
     /// <inheritdoc />
     public override string ToString()

@@ -36,4 +36,16 @@ public class YokogawaDxpEthernetDeviceRequest : DeviceRequestBase, IYokogawaDxpE
 
     /// <inheritdoc />
     public YokogawaDxpEthernetTagDatabaseSource TagDatabaseSource { get; set; } = YokogawaDxpEthernetTagDatabaseSource.PhysicalChannelNumber;
+
+    /// <inheritdoc />
+    public string Username { get; set; } = "user";
+
+    /// <inheritdoc />
+    public string Password { get; set; } = string.Empty;
+
+    /// <inheritdoc />
+    public string UserId { get; set; } = string.Empty;
+
+    /// <inheritdoc />
+    public YokogawaDxpEthernetUserFunction UserFunction { get; set; } = YokogawaDxpEthernetUserFunction.Monitor;
 }

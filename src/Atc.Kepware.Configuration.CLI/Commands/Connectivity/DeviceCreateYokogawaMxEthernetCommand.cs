@@ -86,12 +86,9 @@ public sealed class DeviceCreateYokogawaMxEthernetCommand : AsyncCommand<DeviceC
 
             // Yokogawa MX Ethernet Specific Settings
             Model = settings.Model,
+            StopMxOnShutdown = settings.StopMxOnShutdown,
             DataHandling = settings.DataHandling,
-            PollingInterval = settings.PollingInterval,
-            StartMath = settings.StartMath,
             DateAndTime = settings.DateAndTime,
             DateFormat = settings.DateFormat,
-            SetClock = settings.SetClock,
-            TagDatabaseSource = settings.TagDatabaseSource,
         };
 }

@@ -4,7 +4,7 @@ public sealed class OpcUaClientDevice : DeviceBase, IOpcUaClientDevice
 {
     public int PublishingInterval { get; set; }
 
-    public int MaxNotificationsPerPublish { get; set; }
+    public long MaxNotificationsPerPublish { get; set; }
 
     public OpcUaDeviceSubscriptionUpdateModeType UpdateMode { get; set; }
 
@@ -34,7 +34,7 @@ public sealed class OpcUaClientDevice : DeviceBase, IOpcUaClientDevice
 
     public OpcUaDeviceMonitoredItemsDeadBandType DeadBand { get; set; }
 
-    public int DeadBandValue { get; set; }
+    public double DeadBandValue { get; set; }
 
     public override string ToString()
         => $"{base.ToString()}, {nameof(PublishingInterval)}: {PublishingInterval}, {nameof(MaxNotificationsPerPublish)}: {MaxNotificationsPerPublish}, {nameof(UpdateMode)}: {UpdateMode}, {nameof(RegisteredReadWrite)}: {RegisteredReadWrite}, {nameof(MaxItemsPerRead)}: {MaxItemsPerRead}, {nameof(MaxItemsPerWrite)}: {MaxItemsPerWrite}, {nameof(ReadTimeout)}: {ReadTimeout}, {nameof(WriteTimeout)}: {WriteTimeout}, {nameof(ReadAfterWrite)}: {ReadAfterWrite}, {nameof(LifetimeCount)}: {LifetimeCount}, {nameof(KeepAliveCount)}: {KeepAliveCount}, {nameof(ConnectionPriority)}: {ConnectionPriority}, {nameof(SampleInterval)}: {SampleInterval}, {nameof(QueueSize)}: {QueueSize}, {nameof(DiscardOldest)}: {DiscardOldest}, {nameof(DeadBand)}: {DeadBand}, {nameof(DeadBandValue)}: {DeadBandValue}";

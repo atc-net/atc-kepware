@@ -11,11 +11,11 @@ public sealed class Opto22EthernetDeviceRequest : DeviceRequestBase, IOpto22Ethe
     }
 
     /// <inheritdoc />
-    public Opto22EthernetDeviceModelType Model { get; set; } = Opto22EthernetDeviceModelType.SnapPacR1;
+    public Opto22EthernetDeviceModelType Model { get; set; } = Opto22EthernetDeviceModelType.Opto22;
 
     /// <inheritdoc />
     [Required]
-    public string DeviceId { get; set; } = string.Empty;
+    public string DeviceId { get; set; } = "255.255.255.255";
 
     /// <inheritdoc />
     [Range(1, 30)]
@@ -44,10 +44,20 @@ public sealed class Opto22EthernetDeviceRequest : DeviceRequestBase, IOpto22Ethe
     public bool DiscardRequestsWhenDemoted { get; set; }
 
     /// <inheritdoc />
-    [Range(0, 65535)]
-    public int Port { get; set; } = 2001;
+    public Opto22EthernetIoUnitProtocolType IoUnitProtocol { get; set; } = Opto22EthernetIoUnitProtocolType.TcpIp;
+
+    /// <inheritdoc />
+    [Range(1, 65535)]
+    public int IoUnitPortNumber { get; set; } = 2001;
+
+    /// <inheritdoc />
+    [Range(1, 65535)]
+    public int ControlEnginePortNumber { get; set; } = 22001;
+
+    /// <inheritdoc />
+    public string? ImportFile { get; set; }
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}";
+        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DeviceId)}: {DeviceId}, {nameof(IoUnitPortNumber)}: {IoUnitPortNumber}";
 }

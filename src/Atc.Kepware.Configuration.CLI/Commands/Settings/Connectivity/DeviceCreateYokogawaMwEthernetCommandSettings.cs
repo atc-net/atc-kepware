@@ -12,15 +12,15 @@ public class DeviceCreateYokogawaMwEthernetCommandSettings : DeviceCreateCommand
     [DefaultValue(YokogawaMwEthernetDataHandling.None)]
     public YokogawaMwEthernetDataHandling DataHandling { get; init; } = YokogawaMwEthernetDataHandling.None;
 
-    [CommandOption("--polling-interval")]
-    [Description("Polling interval in milliseconds (10-30000)")]
-    [DefaultValue(1000)]
-    public int PollingInterval { get; init; } = 1000;
-
     [CommandOption("--start-math")]
     [Description("Start math computation on communication startup")]
     [DefaultValue(false)]
     public bool StartMath { get; init; }
+
+    [CommandOption("--start-measuring")]
+    [Description("Start measuring on communication startup")]
+    [DefaultValue(false)]
+    public bool StartMeasuring { get; init; }
 
     [CommandOption("--date-and-time")]
     [Description("Source of the date and time data")]
@@ -41,4 +41,14 @@ public class DeviceCreateYokogawaMwEthernetCommandSettings : DeviceCreateCommand
     [Description("Tag database generation source")]
     [DefaultValue(YokogawaMwEthernetTagDatabaseSource.PhysicalChannelNumber)]
     public YokogawaMwEthernetTagDatabaseSource TagDatabaseSource { get; init; } = YokogawaMwEthernetTagDatabaseSource.PhysicalChannelNumber;
+
+    [CommandOption("--username")]
+    [Description("Username (max 16 characters)")]
+    [DefaultValue("admin")]
+    public string Username { get; init; } = "admin";
+
+    [CommandOption("--device-password")]
+    [Description("Password (max 8 characters)")]
+    [DefaultValue("")]
+    public string DevicePassword { get; init; } = string.Empty;
 }

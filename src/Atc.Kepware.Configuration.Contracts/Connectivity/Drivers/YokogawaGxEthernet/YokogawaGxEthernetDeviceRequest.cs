@@ -17,23 +17,14 @@ public class YokogawaGxEthernetDeviceRequest : DeviceRequestBase, IYokogawaGxEth
     public YokogawaGxEthernetModel Model { get; set; } = YokogawaGxEthernetModel.Gx;
 
     /// <inheritdoc />
-    public YokogawaGxEthernetDataHandling DataHandling { get; set; } = YokogawaGxEthernetDataHandling.None;
+    public bool As1SecurityOption { get; set; }
 
     /// <inheritdoc />
-    public int PollingInterval { get; set; } = 1000;
+    public string Username { get; set; } = "admin";
 
     /// <inheritdoc />
-    public bool StartMath { get; set; }
+    public string Password { get; set; } = "0";
 
     /// <inheritdoc />
-    public YokogawaGxEthernetDateTimeSource DateAndTime { get; set; } = YokogawaGxEthernetDateTimeSource.DeviceTime;
-
-    /// <inheritdoc />
-    public YokogawaGxEthernetDateFormat DateFormat { get; set; } = YokogawaGxEthernetDateFormat.MmDdYy;
-
-    /// <inheritdoc />
-    public bool SetClock { get; set; }
-
-    /// <inheritdoc />
-    public YokogawaGxEthernetTagDatabaseSource TagDatabaseSource { get; set; } = YokogawaGxEthernetTagDatabaseSource.PhysicalChannelNumber;
+    public string UserId { get; set; } = string.Empty;
 }

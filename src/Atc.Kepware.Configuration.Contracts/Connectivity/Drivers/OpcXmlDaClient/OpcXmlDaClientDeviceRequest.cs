@@ -14,19 +14,27 @@ public class OpcXmlDaClientDeviceRequest : DeviceRequestBase, IOpcXmlDaClientDev
     }
 
     /// <inheritdoc />
-    public bool ReturnItemTime { get; set; } = true;
+    public OpcXmlDaClientUpdateMode UpdateMode { get; set; }
 
     /// <inheritdoc />
-    public bool ReturnItemPath { get; set; }
+    [Range(100, 3600000)]
+    public int UpdatePollRate { get; set; } = 5000;
 
     /// <inheritdoc />
-    public bool ReturnItemName { get; set; }
+    [Range(0, 65535)]
+    public int LanguageId { get; set; } = 1033;
 
     /// <inheritdoc />
-    public bool ReturnDiagnosticInfo { get; set; }
+    [Range(0, 36000000)]
+    public int HoldTime { get; set; }
 
     /// <inheritdoc />
-    public bool ReturnErrorText { get; set; } = true;
+    [Range(0, 36000000)]
+    public int WaitTime { get; set; }
+
+    /// <inheritdoc />
+    [Range(0, 100)]
+    public float PercentDeadband { get; set; }
 
     /// <inheritdoc />
     [Range(1, 512)]
@@ -37,9 +45,17 @@ public class OpcXmlDaClientDeviceRequest : DeviceRequestBase, IOpcXmlDaClientDev
     public int MaxItemsPerWrite { get; set; } = 512;
 
     /// <inheritdoc />
+    [Range(100, 2100000)]
+    public int ReadTimeout { get; set; } = 5000;
+
+    /// <inheritdoc />
+    [Range(100, 2100000)]
+    public int WriteTimeout { get; set; } = 5000;
+
+    /// <inheritdoc />
     public bool ReadAfterWrite { get; set; } = true;
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(MaxItemsPerRead)}: {MaxItemsPerRead}, {nameof(MaxItemsPerWrite)}: {MaxItemsPerWrite}";
+        => $"{base.ToString()}, {nameof(UpdateMode)}: {UpdateMode}, {nameof(MaxItemsPerRead)}: {MaxItemsPerRead}, {nameof(MaxItemsPerWrite)}: {MaxItemsPerWrite}";
 }

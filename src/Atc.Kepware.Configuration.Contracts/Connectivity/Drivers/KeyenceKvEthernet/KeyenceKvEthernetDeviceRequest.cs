@@ -19,16 +19,12 @@ public sealed class KeyenceKvEthernetDeviceRequest : DeviceRequestBase, IKeyence
     public int ConnectTimeoutSeconds { get; set; } = 3;
 
     /// <inheritdoc />
-    [Range(10, 9999999)]
+    [Range(50, 9999999)]
     public int RequestTimeoutMs { get; set; } = 1000;
 
     /// <inheritdoc />
     [Range(1, 10)]
     public int RetryAttempts { get; set; } = 3;
-
-    /// <inheritdoc />
-    [Range(0, 30000)]
-    public int InterRequestDelayMs { get; set; }
 
     /// <inheritdoc />
     public bool DemoteOnFailure { get; set; }
@@ -45,10 +41,21 @@ public sealed class KeyenceKvEthernetDeviceRequest : DeviceRequestBase, IKeyence
     public bool DiscardRequestsWhenDemoted { get; set; }
 
     /// <inheritdoc />
-    [Range(0, 65535)]
-    public int Port { get; set; } = 8501;
+    public KeyenceKvEthernetIpProtocolType IpProtocol { get; set; } = KeyenceKvEthernetIpProtocolType.TcpIp;
+
+    /// <inheritdoc />
+    [Range(1, 65535)]
+    public int PortNumber { get; set; } = 8501;
+
+    /// <inheritdoc />
+    [Range(1, 1000)]
+    public int WordMemoryBlockSize { get; set; } = 1000;
+
+    /// <inheritdoc />
+    [Range(1, 120)]
+    public int TimerCounterMemoryBlockSize { get; set; } = 120;
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}";
+        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(PortNumber)}: {PortNumber}";
 }

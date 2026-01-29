@@ -86,6 +86,5 @@ public sealed class ChannelCreateKeyenceKvEthernetCommand : AsyncCommand<Channel
             NonNormalizedFloatingPointHandling = settings.NonNormalizedFloatingPointHandling is not null && settings.NonNormalizedFloatingPointHandling.IsSet
                 ? settings.NonNormalizedFloatingPointHandling.Value
                 : ChannelNonNormalizedFloatingPointHandlingType.ReplaceWithZero,
-            Port = settings.Port,
         };
 }

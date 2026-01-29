@@ -98,6 +98,14 @@ public interface IMitsubishiEthernetDeviceRequest : IDeviceRequestBase
     MitsubishiEthernetTimeSyncMethodType TimeSyncMethod { get; set; }
 
     /// <summary>
+    /// Gets or sets the absolute sync time in minutes since midnight.
+    /// </summary>
+    /// <remarks>
+    /// Only used when TimeSyncMethod is Absolute. Represents the hour and minute of each day to synchronize time.
+    /// </remarks>
+    int AbsoluteSyncTime { get; set; }
+
+    /// <summary>
     /// Gets or sets the sync interval in minutes.
     /// </summary>
     /// <remarks>

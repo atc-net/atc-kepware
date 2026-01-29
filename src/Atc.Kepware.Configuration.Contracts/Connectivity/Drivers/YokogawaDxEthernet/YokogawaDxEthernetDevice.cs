@@ -33,14 +33,14 @@ public class YokogawaDxEthernetDevice : DeviceBase, IYokogawaDxEthernetDevice
     public bool As1SecurityOption { get; set; }
 
     /// <inheritdoc />
-    public string Username { get; set; } = string.Empty;
+    public string Username { get; set; } = "admin";
 
     /// <inheritdoc />
-    public string Password { get; set; } = string.Empty;
+    public string Password { get; set; } = "0";
 
     /// <inheritdoc />
-    public int UserId { get; set; }
+    public string UserId { get; set; } = string.Empty;
 
     /// <inheritdoc />
-    public YokogawaDxEthernetUserFunction UserFunction { get; set; } = YokogawaDxEthernetUserFunction.User;
+    public YokogawaDxEthernetUserFunction UserFunction { get; set; } = YokogawaDxEthernetUserFunction.Monitor;
 }

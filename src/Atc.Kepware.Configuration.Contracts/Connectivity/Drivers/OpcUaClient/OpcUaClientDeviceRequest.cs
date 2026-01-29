@@ -12,8 +12,8 @@ public sealed class OpcUaClientDeviceRequest : DeviceRequestBase, IOpcUaClientDe
     public int PublishingInterval { get; set; } = 1000;
 
     /// <inheritdoc />
-    [Range(0, 2147483647)]
-    public int MaxNotificationsPerPublish { get; set; }
+    [Range(0, 4294967295)]
+    public long MaxNotificationsPerPublish { get; set; }
 
     /// <inheritdoc />
     public OpcUaDeviceSubscriptionUpdateModeType UpdateMode { get; set; } = OpcUaDeviceSubscriptionUpdateModeType.Exception;
@@ -67,7 +67,7 @@ public sealed class OpcUaClientDeviceRequest : DeviceRequestBase, IOpcUaClientDe
 
     /// <inheritdoc />
     [Range(0, 999999999)]
-    public int DeadBandValue { get; set; }
+    public double DeadBandValue { get; set; }
 
     /// <inheritdoc />
     public override string ToString()

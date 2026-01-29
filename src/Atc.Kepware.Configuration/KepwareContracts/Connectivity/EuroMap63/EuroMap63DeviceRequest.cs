@@ -10,17 +10,17 @@ internal class EuroMap63DeviceRequest : DeviceRequestBase, IEuroMap63DeviceReque
     /// <inheritdoc />
     [Range(1, 30)]
     [JsonPropertyName("servermain.DEVICE_CONNECTION_TIMEOUT_SECONDS")]
-    public int ConnectionTimeout { get; set; } = 30;
+    public int ConnectionTimeout { get; set; } = 3;
 
     /// <inheritdoc />
     [Range(1000, 9000000)]
     [JsonPropertyName("servermain.DEVICE_REQUEST_TIMEOUT_MILLISECONDS")]
-    public int RequestTimeout { get; set; } = 120000;
+    public int RequestTimeout { get; set; } = 60000;
 
     /// <inheritdoc />
     [Range(1, 10)]
     [JsonPropertyName("servermain.DEVICE_RETRY_ATTEMPTS")]
-    public int RetryAttempts { get; set; } = 3;
+    public int RetryAttempts { get; set; } = 1;
 
     /// <inheritdoc />
     [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_ENABLE_ON_COMMUNICATIONS_FAILURES")]
@@ -42,7 +42,7 @@ internal class EuroMap63DeviceRequest : DeviceRequestBase, IEuroMap63DeviceReque
 
     /// <inheritdoc />
     [JsonPropertyName("servermain.DEVICE_TAG_GENERATION_ON_STARTUP")]
-    public EuroMap63DeviceTagGenerationOnStartupType TagGenerationOnStartup { get; set; } = EuroMap63DeviceTagGenerationOnStartupType.AlwaysGenerateOnStartup;
+    public EuroMap63DeviceTagGenerationOnStartupType TagGenerationOnStartup { get; set; } = EuroMap63DeviceTagGenerationOnStartupType.DoNotGenerateOnStartup;
 
     /// <inheritdoc />
     [JsonPropertyName("servermain.DEVICE_TAG_GENERATION_DUPLICATE_HANDLING")]
@@ -86,15 +86,15 @@ internal class EuroMap63DeviceRequest : DeviceRequestBase, IEuroMap63DeviceReque
     /// <inheritdoc />
     [Range(50, 65535)]
     [JsonPropertyName("euromap_63.DEVICE_MAX_FILE_SIZE")]
-    public int MaxFileSize { get; set; } = 20000;
+    public int MaxFileSize { get; set; } = 2000;
 
     /// <inheritdoc />
     [JsonPropertyName("euromap_63.DEVICE_CHARACTER_ENCODING")]
-    public EuroMap63CharacterEncodingType CharacterEncoding { get; set; } = EuroMap63CharacterEncodingType.Utf8;
+    public EuroMap63CharacterEncodingType CharacterEncoding { get; set; } = EuroMap63CharacterEncodingType.Ansi;
 
     /// <inheritdoc />
     [JsonPropertyName("euromap_63.DEVICE_INCLUDE_CYCLIC")]
-    public bool IncludeCyclic { get; set; }
+    public bool IncludeCyclic { get; set; } = true;
 
     /// <inheritdoc />
     public override string ToString()

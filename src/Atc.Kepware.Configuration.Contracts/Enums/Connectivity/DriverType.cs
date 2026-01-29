@@ -154,4 +154,43 @@ public enum DriverType
 
     [Description("KraussMaffei MC4 Ethernet")]
     KraussMaffeiMc4Ethernet,
+
+    [Description("SattBus Ethernet")]
+    SattBusEthernet,
+
+    [Description("Scanivalve Ethernet")]
+    ScanivalveEthernet,
+
+    [Description("SIXNET EtherTRAK")]
+    SixnetEthertrak,
+
+    [Description("Simatic/TI 505 Ethernet")]
+    SimaticTi505Ethernet,
+
+    [Description("SNMP")]
+    Snmp,
+
+    [Description("Thermo Westronics Ethernet")]
+    ThermoWestronicsEthernet,
+
+    [Description("Toshiba Ethernet")]
+    ToshibaEthernet,
+
+    [Description("Torque Tool Ethernet")]
+    TorqueToolEthernet,
+
+    [Description("Toyopuc PC3/PC2 Ethernet")]
+    ToyopucEthernet,
+
+    [Description("Triconex Ethernet")]
+    TriconexEthernet,
+
+    [Description("Wonderware InTouch Client")]
+    WonderwareIntouchClient,
+
+    [Description("Yaskawa MP Series Ethernet")]
+    YaskawaMpSeriesEthernet,
+
+    [Description("Wago Ethernet")]
+    WagoEthernet,
 }

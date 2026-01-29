@@ -47,6 +47,10 @@ public class OpcDaClientDeviceRequest : DeviceRequestBase, IOpcDaClientDeviceReq
 
     /// <inheritdoc />
     [Range(100, 30000)]
+    public int ReadTimeout { get; set; } = 1000;
+
+    /// <inheritdoc />
+    [Range(100, 30000)]
     public int WriteTimeout { get; set; } = 1000;
 
     /// <inheritdoc />

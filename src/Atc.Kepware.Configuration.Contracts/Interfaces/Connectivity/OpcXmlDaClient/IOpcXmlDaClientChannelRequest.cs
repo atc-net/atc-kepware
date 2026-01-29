@@ -11,65 +11,78 @@ public interface IOpcXmlDaClientChannelRequest : IChannelRequestBase
     string ServerUrl { get; set; }
 
     /// <summary>
-    /// Gets or sets the HTTP timeout in seconds.
+    /// Gets or sets the keep alive interval in seconds.
     /// </summary>
     /// <remarks>
-    /// The maximum amount of time to wait for a response from the server.
-    /// Valid range: 1-999 seconds.
+    /// Specifies the rate at which a GetStatus call is sent to the remote server to check the server's operational status.
+    /// When 0 is specified, no Keep Alive is sent.
+    /// Valid range: 0-3600 seconds.
     /// </remarks>
-    int HttpTimeout { get; set; }
+    int KeepAlive { get; set; }
 
     /// <summary>
-    /// Gets or sets the subscription update rate in milliseconds.
+    /// Gets or sets the path to a file that contains certificates that the client driver should trust.
     /// </summary>
     /// <remarks>
-    /// The rate at which the driver will poll the server for subscription updates.
-    /// Valid range: 100-3600000 ms.
+    /// This is required when using SSL.
     /// </remarks>
-    int SubscriptionUpdateRate { get; set; }
+    string? TrustedCertificatesPath { get; set; }
 
     /// <summary>
-    /// Gets or sets the read timeout in milliseconds.
+    /// Gets or sets the item path delimiter.
     /// </summary>
     /// <remarks>
-    /// Valid range: 100-30000 ms.
+    /// Specifies the item path delimiter, which is used in the tag address with the format ItemPath + Delimiter + ItemName.
+    /// If the server does not use item paths, then the item path and delimiter are not needed.
     /// </remarks>
-    int ReadTimeout { get; set; }
+    OpcXmlDaClientItemPathDelimiter ItemPathDelimiter { get; set; }
 
     /// <summary>
-    /// Gets or sets the write timeout in milliseconds.
+    /// Gets or sets the proxy server address.
     /// </summary>
     /// <remarks>
-    /// Valid range: 100-30000 ms.
+    /// Specifies the address of a proxy server if a proxy is required. Either an IP or a domain name may be used.
     /// </remarks>
-    int WriteTimeout { get; set; }
+    string? ProxyServerAddress { get; set; }
 
     /// <summary>
-    /// Gets or sets the locale ID for the server.
+    /// Gets or sets the proxy port.
     /// </summary>
     /// <remarks>
-    /// The locale ID determines the language for text operations.
+    /// Specifies the port used to connect to the proxy.
+    /// Valid range: 0-65535.
     /// </remarks>
-    string? LocaleId { get; set; }
+    int ProxyPort { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to use HTTP authentication.
-    /// </summary>
-    bool UseHttpAuthentication { get; set; }
-
-    /// <summary>
-    /// Gets or sets the HTTP authentication user name.
+    /// Gets or sets the proxy username.
     /// </summary>
     /// <remarks>
-    /// Only used when UseHttpAuthentication is enabled.
+    /// Specifies a username if one is required to connect to the proxy server.
     /// </remarks>
-    string? HttpAuthenticationUserName { get; set; }
+    string? ProxyUsername { get; set; }
+
+    /// <summary>
+    /// Gets or sets the proxy password.
+    /// </summary>
+    /// <remarks>
+    /// Specifies a password if one is required to connect to the proxy server.
+    /// </remarks>
+    string? ProxyPassword { get; set; }
+
+    /// <summary>
+    /// Gets or sets the HTTP authentication username.
+    /// </summary>
+    /// <remarks>
+    /// Specifies a username if required by the remote XML-DA server.
+    /// </remarks>
+    string? HttpAuthUsername { get; set; }
 
     /// <summary>
     /// Gets or sets the HTTP authentication password.
     /// </summary>
     /// <remarks>
-    /// Only used when UseHttpAuthentication is enabled.
+    /// Specifies a password if required by the remote XML-DA server.
     /// </remarks>
-    string? HttpAuthenticationPassword { get; set; }
+    string? HttpAuthPassword { get; set; }
 }

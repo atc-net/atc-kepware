@@ -11,37 +11,22 @@ public interface IYokogawaGxEthernetDeviceRequest : IDeviceRequestBase
     YokogawaGxEthernetModel Model { get; set; }
 
     /// <summary>
-    /// Gets or sets the data handling for out of range and error conditions.
+    /// Gets or sets a value indicating whether AS1 security option is enabled.
     /// </summary>
-    YokogawaGxEthernetDataHandling DataHandling { get; set; }
+    bool As1SecurityOption { get; set; }
 
     /// <summary>
-    /// Gets or sets the polling interval in milliseconds.
+    /// Gets or sets the username.
     /// </summary>
-    int PollingInterval { get; set; }
+    string Username { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to start math computation on communication startup.
+    /// Gets or sets the password.
     /// </summary>
-    bool StartMath { get; set; }
+    string Password { get; set; }
 
     /// <summary>
-    /// Gets or sets the source of the date and time data.
+    /// Gets or sets the user ID for AS1 security.
     /// </summary>
-    YokogawaGxEthernetDateTimeSource DateAndTime { get; set; }
-
-    /// <summary>
-    /// Gets or sets the date format for the return string.
-    /// </summary>
-    YokogawaGxEthernetDateFormat DateFormat { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether to set the device clock on communication startup.
-    /// </summary>
-    bool SetClock { get; set; }
-
-    /// <summary>
-    /// Gets or sets the tag database generation source.
-    /// </summary>
-    YokogawaGxEthernetTagDatabaseSource TagDatabaseSource { get; set; }
+    string UserId { get; set; }
 }

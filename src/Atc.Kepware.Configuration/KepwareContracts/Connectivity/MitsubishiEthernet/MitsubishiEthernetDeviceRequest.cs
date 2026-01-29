@@ -70,6 +70,10 @@ internal sealed class MitsubishiEthernetDeviceRequest : DeviceRequestBase, IMits
     public MitsubishiEthernetTimeSyncMethodType TimeSyncMethod { get; set; } = MitsubishiEthernetTimeSyncMethodType.Disabled;
 
     /// <inheritdoc />
+    [JsonPropertyName("mitsubishi_ethernet.DEVICE_TIME_SYNC_ABSOLUTE_LOCAL")]
+    public int AbsoluteSyncTime { get; set; }
+
+    /// <inheritdoc />
     [Range(5, 1440)]
     [JsonPropertyName("mitsubishi_ethernet.DEVICE_TIME_SYNC_INTERVAL_MINUTES")]
     public int SyncIntervalMinutes { get; set; } = 5;

@@ -6,19 +6,22 @@ namespace Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.OpcXmlDaClien
 public class OpcXmlDaClientDevice : DeviceBase, IOpcXmlDaClientDevice
 {
     /// <inheritdoc />
-    public bool ReturnItemTime { get; set; } = true;
+    public OpcXmlDaClientUpdateMode UpdateMode { get; set; }
 
     /// <inheritdoc />
-    public bool ReturnItemPath { get; set; }
+    public int UpdatePollRate { get; set; } = 5000;
 
     /// <inheritdoc />
-    public bool ReturnItemName { get; set; }
+    public int LanguageId { get; set; } = 1033;
 
     /// <inheritdoc />
-    public bool ReturnDiagnosticInfo { get; set; }
+    public int HoldTime { get; set; }
 
     /// <inheritdoc />
-    public bool ReturnErrorText { get; set; } = true;
+    public int WaitTime { get; set; }
+
+    /// <inheritdoc />
+    public float PercentDeadband { get; set; }
 
     /// <inheritdoc />
     public int MaxItemsPerRead { get; set; } = 512;
@@ -27,9 +30,15 @@ public class OpcXmlDaClientDevice : DeviceBase, IOpcXmlDaClientDevice
     public int MaxItemsPerWrite { get; set; } = 512;
 
     /// <inheritdoc />
+    public int ReadTimeout { get; set; } = 5000;
+
+    /// <inheritdoc />
+    public int WriteTimeout { get; set; } = 5000;
+
+    /// <inheritdoc />
     public bool ReadAfterWrite { get; set; } = true;
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(MaxItemsPerRead)}: {MaxItemsPerRead}, {nameof(MaxItemsPerWrite)}: {MaxItemsPerWrite}";
+        => $"{base.ToString()}, {nameof(UpdateMode)}: {UpdateMode}, {nameof(MaxItemsPerRead)}: {MaxItemsPerRead}, {nameof(MaxItemsPerWrite)}: {MaxItemsPerWrite}";
 }

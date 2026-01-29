@@ -23,13 +23,13 @@ public class BacNetIpDeviceRequest : DeviceRequestBase, IBacNetIpDeviceRequest
     public string? BacNetMac { get; set; }
 
     /// <inheritdoc />
-    public BacNetIpRemoteDataLinkType RemoteDataLinkTechnology { get; set; } = BacNetIpRemoteDataLinkType.BacNetIp;
+    public BacNetIpRemoteDataLinkType RemoteDataLinkTechnology { get; set; } = BacNetIpRemoteDataLinkType.Disabled;
 
     /// <inheritdoc />
-    public BacNetIpCovModeType CovMode { get; set; } = BacNetIpCovModeType.Disabled;
+    public BacNetIpCovModeType CovMode { get; set; } = BacNetIpCovModeType.UseUnconfirmedCov;
 
     /// <inheritdoc />
-    [Range(60, 86400)]
+    [Range(0, 86400)]
     public int CovResubscriptionInterval { get; set; } = 3600;
 
     /// <inheritdoc />
@@ -39,11 +39,12 @@ public class BacNetIpDeviceRequest : DeviceRequestBase, IBacNetIpDeviceRequest
     public int MaximumApduLength { get; set; } = 1476;
 
     /// <inheritdoc />
-    public int MaximumItemsPerRequest { get; set; } = 16;
+    [Range(1, 64)]
+    public int MaximumItemsPerRequest { get; set; } = 64;
 
     /// <inheritdoc />
     [Range(1, 16)]
-    public int CommandPriority { get; set; } = 16;
+    public int CommandPriority { get; set; } = 8;
 
     /// <inheritdoc />
     public override string ToString()

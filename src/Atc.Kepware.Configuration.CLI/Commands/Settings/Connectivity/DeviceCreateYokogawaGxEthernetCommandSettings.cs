@@ -7,38 +7,23 @@ public class DeviceCreateYokogawaGxEthernetCommandSettings : DeviceCreateCommand
     [DefaultValue(YokogawaGxEthernetModel.Gx)]
     public YokogawaGxEthernetModel Model { get; init; } = YokogawaGxEthernetModel.Gx;
 
-    [CommandOption("--data-handling")]
-    [Description("Data handling for out of range and error conditions")]
-    [DefaultValue(YokogawaGxEthernetDataHandling.None)]
-    public YokogawaGxEthernetDataHandling DataHandling { get; init; } = YokogawaGxEthernetDataHandling.None;
-
-    [CommandOption("--polling-interval")]
-    [Description("Polling interval in milliseconds (10-30000)")]
-    [DefaultValue(1000)]
-    public int PollingInterval { get; init; } = 1000;
-
-    [CommandOption("--start-math")]
-    [Description("Start math computation on communication startup")]
+    [CommandOption("--as1-security-option")]
+    [Description("Enable AS1 security option")]
     [DefaultValue(false)]
-    public bool StartMath { get; init; }
+    public bool As1SecurityOption { get; init; }
 
-    [CommandOption("--date-and-time")]
-    [Description("Source of the date and time data")]
-    [DefaultValue(YokogawaGxEthernetDateTimeSource.DeviceTime)]
-    public YokogawaGxEthernetDateTimeSource DateAndTime { get; init; } = YokogawaGxEthernetDateTimeSource.DeviceTime;
+    [CommandOption("--username")]
+    [Description("Username (max 256 characters)")]
+    [DefaultValue("admin")]
+    public string Username { get; init; } = "admin";
 
-    [CommandOption("--date-format")]
-    [Description("Date format for the return string")]
-    [DefaultValue(YokogawaGxEthernetDateFormat.MmDdYy)]
-    public YokogawaGxEthernetDateFormat DateFormat { get; init; } = YokogawaGxEthernetDateFormat.MmDdYy;
+    [CommandOption("--device-password")]
+    [Description("Password (max 256 characters)")]
+    [DefaultValue("0")]
+    public string DevicePassword { get; init; } = "0";
 
-    [CommandOption("--set-clock")]
-    [Description("Set device clock on communication startup")]
-    [DefaultValue(false)]
-    public bool SetClock { get; init; }
-
-    [CommandOption("--tag-database-source")]
-    [Description("Tag database generation source")]
-    [DefaultValue(YokogawaGxEthernetTagDatabaseSource.PhysicalChannelNumber)]
-    public YokogawaGxEthernetTagDatabaseSource TagDatabaseSource { get; init; } = YokogawaGxEthernetTagDatabaseSource.PhysicalChannelNumber;
+    [CommandOption("--user-id")]
+    [Description("User ID for AS1 security")]
+    [DefaultValue("")]
+    public string UserId { get; init; } = string.Empty;
 }

@@ -15,9 +15,6 @@ public sealed class KeyenceKvEthernetDevice : DeviceBase, IKeyenceKvEthernetDevi
     public int RetryAttempts { get; set; }
 
     /// <inheritdoc />
-    public int InterRequestDelayMs { get; set; }
-
-    /// <inheritdoc />
     public bool DemoteOnFailure { get; set; }
 
     /// <inheritdoc />
@@ -30,9 +27,18 @@ public sealed class KeyenceKvEthernetDevice : DeviceBase, IKeyenceKvEthernetDevi
     public bool DiscardRequestsWhenDemoted { get; set; }
 
     /// <inheritdoc />
-    public int Port { get; set; }
+    public KeyenceKvEthernetIpProtocolType IpProtocol { get; set; }
+
+    /// <inheritdoc />
+    public int PortNumber { get; set; }
+
+    /// <inheritdoc />
+    public int WordMemoryBlockSize { get; set; }
+
+    /// <inheritdoc />
+    public int TimerCounterMemoryBlockSize { get; set; }
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}";
+        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(PortNumber)}: {PortNumber}";
 }

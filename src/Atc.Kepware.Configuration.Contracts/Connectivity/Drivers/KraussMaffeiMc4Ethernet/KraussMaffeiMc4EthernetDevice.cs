@@ -18,24 +18,18 @@ public sealed class KraussMaffeiMc4EthernetDevice : DeviceBase, IKraussMaffeiMc4
     public int RetryAttempts { get; set; }
 
     /// <inheritdoc />
-    public bool DemoteOnFailure { get; set; }
-
-    /// <inheritdoc />
-    public int TimeoutsToDemote { get; set; }
-
-    /// <inheritdoc />
-    public int DemotionPeriodMs { get; set; }
-
-    /// <inheritdoc />
-    public bool DiscardRequestsWhenDemoted { get; set; }
-
-    /// <inheritdoc />
     public int Port { get; set; }
 
     /// <inheritdoc />
-    public int MachineId { get; set; }
+    public KraussMaffeiMc4ProtocolType Protocol { get; set; }
+
+    /// <inheritdoc />
+    public KraussMaffeiMc4RequestSizeModeType RequestSizeMode { get; set; }
+
+    /// <inheritdoc />
+    public bool ParameterHandles { get; set; }
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}, {nameof(MachineId)}: {MachineId}";
+        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}, {nameof(Protocol)}: {Protocol}, {nameof(RequestSizeMode)}: {RequestSizeMode}, {nameof(ParameterHandles)}: {ParameterHandles}";
 }

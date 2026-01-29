@@ -14,7 +14,7 @@ public sealed class BeckhoffTwinCatDeviceRequest : DeviceRequestBase, IBeckhoffT
     public BeckhoffTwinCatModel Model { get; set; } = BeckhoffTwinCatModel.TwinCatPlc;
 
     /// <inheritdoc />
-    public BeckhoffTwinCatIdFormat IdFormat { get; set; } = BeckhoffTwinCatIdFormat.Decimal;
+    public BeckhoffTwinCatIdFormat IdFormat { get; set; } = BeckhoffTwinCatIdFormat.Octal;
 
     /// <inheritdoc />
     [Required]

@@ -53,6 +53,11 @@ internal sealed class OpcDaClientDeviceRequest : DeviceRequestBase, IOpcDaClient
 
     /// <inheritdoc />
     [Range(100, 30000)]
+    [JsonPropertyName("opcdaclient.DEVICE_READ_TIMEOUT_MS")]
+    public int ReadTimeout { get; set; } = 1000;
+
+    /// <inheritdoc />
+    [Range(100, 30000)]
     [JsonPropertyName("opcdaclient.DEVICE_WRITE_TIMEOUT_MS")]
     public int WriteTimeout { get; set; } = 1000;
 

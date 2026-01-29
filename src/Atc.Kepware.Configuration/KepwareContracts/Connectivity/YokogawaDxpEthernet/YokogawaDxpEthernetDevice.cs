@@ -29,6 +29,18 @@ internal sealed class YokogawaDxpEthernetDevice : DeviceBase, IYokogawaDxpEthern
     [JsonPropertyName("yokogawa_dxp.DEVICE_GENERATE_TAG_DATABASE_USING")]
     public YokogawaDxpEthernetTagDatabaseSource TagDatabaseSource { get; set; } = YokogawaDxpEthernetTagDatabaseSource.PhysicalChannelNumber;
 
+    [JsonPropertyName("yokogawa_dxp.DEVICE_USERNAME")]
+    public string Username { get; set; } = "user";
+
+    [JsonPropertyName("yokogawa_dxp.DEVICE_PASSWORD")]
+    public string Password { get; set; } = string.Empty;
+
+    [JsonPropertyName("yokogawa_dxp.DEVICE_USER_ID")]
+    public string UserId { get; set; } = string.Empty;
+
+    [JsonPropertyName("yokogawa_dxp.DEVICE_USER_FUNCTION")]
+    public YokogawaDxpEthernetUserFunction UserFunction { get; set; } = YokogawaDxpEthernetUserFunction.Monitor;
+
     public override string ToString()
-        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DataHandling)}: {DataHandling}, {nameof(PollingInterval)}: {PollingInterval}, {nameof(StartMath)}: {StartMath}, {nameof(DateAndTime)}: {DateAndTime}, {nameof(DateFormat)}: {DateFormat}, {nameof(SetClock)}: {SetClock}, {nameof(TagDatabaseSource)}: {TagDatabaseSource}";
+        => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DataHandling)}: {DataHandling}, {nameof(PollingInterval)}: {PollingInterval}, {nameof(StartMath)}: {StartMath}, {nameof(DateAndTime)}: {DateAndTime}, {nameof(DateFormat)}: {DateFormat}, {nameof(SetClock)}: {SetClock}, {nameof(TagDatabaseSource)}: {TagDatabaseSource}, {nameof(Username)}: {Username}";
 }

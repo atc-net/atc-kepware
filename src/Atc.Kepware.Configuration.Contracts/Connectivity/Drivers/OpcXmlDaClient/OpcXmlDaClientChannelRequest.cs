@@ -15,37 +15,38 @@ public class OpcXmlDaClientChannelRequest : ChannelRequestBase, IOpcXmlDaClientC
 
     /// <inheritdoc />
     [Required]
-    public string ServerUrl { get; set; } = string.Empty;
+    public string ServerUrl { get; set; } = "http://localhost:80/Kepware/xmldaservice.asp";
 
     /// <inheritdoc />
-    [Range(1, 999)]
-    public int HttpTimeout { get; set; } = 30;
+    [Range(0, 3600)]
+    public int KeepAlive { get; set; }
 
     /// <inheritdoc />
-    [Range(100, 3600000)]
-    public int SubscriptionUpdateRate { get; set; } = 1000;
+    public string? TrustedCertificatesPath { get; set; }
 
     /// <inheritdoc />
-    [Range(100, 30000)]
-    public int ReadTimeout { get; set; } = 1000;
+    public OpcXmlDaClientItemPathDelimiter ItemPathDelimiter { get; set; }
 
     /// <inheritdoc />
-    [Range(100, 30000)]
-    public int WriteTimeout { get; set; } = 1000;
+    public string? ProxyServerAddress { get; set; }
 
     /// <inheritdoc />
-    public string? LocaleId { get; set; }
+    [Range(0, 65535)]
+    public int ProxyPort { get; set; } = 8080;
 
     /// <inheritdoc />
-    public bool UseHttpAuthentication { get; set; }
+    public string? ProxyUsername { get; set; }
 
     /// <inheritdoc />
-    public string? HttpAuthenticationUserName { get; set; }
+    public string? ProxyPassword { get; set; }
 
     /// <inheritdoc />
-    public string? HttpAuthenticationPassword { get; set; }
+    public string? HttpAuthUsername { get; set; }
+
+    /// <inheritdoc />
+    public string? HttpAuthPassword { get; set; }
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(ServerUrl)}: {ServerUrl}, {nameof(HttpTimeout)}: {HttpTimeout}";
+        => $"{base.ToString()}, {nameof(ServerUrl)}: {ServerUrl}, {nameof(KeepAlive)}: {KeepAlive}";
 }

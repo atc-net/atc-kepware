@@ -96,10 +96,10 @@ public sealed class DeviceCreateBacNetIpCommand : AsyncCommand<DeviceCreateBacNe
                 : null,
             RemoteDataLinkTechnology = settings.RemoteDataLinkTechnology is not null && settings.RemoteDataLinkTechnology.IsSet
                 ? settings.RemoteDataLinkTechnology.Value
-                : BacNetIpRemoteDataLinkType.BacNetIp,
+                : BacNetIpRemoteDataLinkType.Disabled,
             CovMode = settings.CovMode is not null && settings.CovMode.IsSet
                 ? settings.CovMode.Value
-                : BacNetIpCovModeType.Disabled,
+                : BacNetIpCovModeType.DoNotUseCov,
             CovResubscriptionInterval = settings.CovResubscriptionInterval,
             CancelCovSubscriptions = settings.CancelCovSubscriptions,
             MaximumApduLength = settings.MaximumApduLength,

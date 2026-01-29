@@ -15,7 +15,7 @@ public interface IOpcUaClientDeviceRequest
     /// If the value is low, the OPC UA server may drop tag updates.
     /// Zero means no limit.
     /// </summary>
-    int MaxNotificationsPerPublish { get; set; }
+    long MaxNotificationsPerPublish { get; set; }
 
     /// <summary>
     /// The subscription method.
@@ -122,5 +122,5 @@ public interface IOpcUaClientDeviceRequest
     /// If set to Percent, this value is a percentage number (such as, 10=10%).
     /// If set to Absolute, this value is the threshold number.
     /// </summary>
-    int DeadBandValue { get; set; }
+    double DeadBandValue { get; set; }
 }

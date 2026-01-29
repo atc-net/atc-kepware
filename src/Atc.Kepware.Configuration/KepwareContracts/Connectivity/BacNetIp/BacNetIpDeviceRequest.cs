@@ -24,14 +24,14 @@ internal sealed class BacNetIpDeviceRequest : DeviceRequestBase, IBacNetIpDevice
 
     /// <inheritdoc />
     [JsonPropertyName("bacnet.DEVICE_REMOTE_DATA_LINK_TECHNOLOGY")]
-    public BacNetIpRemoteDataLinkType RemoteDataLinkTechnology { get; set; } = BacNetIpRemoteDataLinkType.BacNetIp;
+    public BacNetIpRemoteDataLinkType RemoteDataLinkTechnology { get; set; } = BacNetIpRemoteDataLinkType.Disabled;
 
     /// <inheritdoc />
     [JsonPropertyName("bacnet.DEVICE_COV_MODE")]
-    public BacNetIpCovModeType CovMode { get; set; } = BacNetIpCovModeType.Disabled;
+    public BacNetIpCovModeType CovMode { get; set; } = BacNetIpCovModeType.UseUnconfirmedCov;
 
     /// <inheritdoc />
-    [Range(60, 86400)]
+    [Range(0, 86400)]
     [JsonPropertyName("bacnet.DEVICE_COV_RESUBSCRIPTION_INTERVAL")]
     public int CovResubscriptionInterval { get; set; } = 3600;
 
@@ -44,13 +44,14 @@ internal sealed class BacNetIpDeviceRequest : DeviceRequestBase, IBacNetIpDevice
     public int MaximumApduLength { get; set; } = 1476;
 
     /// <inheritdoc />
+    [Range(1, 64)]
     [JsonPropertyName("bacnet.DEVICE_MAXIMUM_ITEMS_PER_REQUEST")]
-    public int MaximumItemsPerRequest { get; set; } = 16;
+    public int MaximumItemsPerRequest { get; set; } = 64;
 
     /// <inheritdoc />
     [Range(1, 16)]
     [JsonPropertyName("bacnet.DEVICE_COMMAND_PRIORITY")]
-    public int CommandPriority { get; set; } = 16;
+    public int CommandPriority { get; set; } = 8;
 
     /// <inheritdoc />
     public override string ToString()

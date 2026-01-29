@@ -33,16 +33,16 @@ internal sealed class YokogawaDxEthernetDevice : DeviceBase, IYokogawaDxEthernet
     public bool As1SecurityOption { get; set; }
 
     [JsonPropertyName("yokogawa_dx.DEVICE_USERNAME")]
-    public string Username { get; set; } = string.Empty;
+    public string Username { get; set; } = "admin";
 
     [JsonPropertyName("yokogawa_dx.DEVICE_PASSWORD")]
-    public string Password { get; set; } = string.Empty;
+    public string Password { get; set; } = "0";
 
     [JsonPropertyName("yokogawa_dx.DEVICE_USER_ID")]
-    public int UserId { get; set; }
+    public string UserId { get; set; } = string.Empty;
 
     [JsonPropertyName("yokogawa_dx.DEVICE_USER_FUNCTION")]
-    public YokogawaDxEthernetUserFunction UserFunction { get; set; } = YokogawaDxEthernetUserFunction.User;
+    public YokogawaDxEthernetUserFunction UserFunction { get; set; } = YokogawaDxEthernetUserFunction.Monitor;
 
     public override string ToString()
         => $"{base.ToString()}, {nameof(Model)}: {Model}, {nameof(DataHandling)}: {DataHandling}, {nameof(PollingInterval)}: {PollingInterval}, {nameof(StartMath)}: {StartMath}, {nameof(DateAndTime)}: {DateAndTime}, {nameof(DateFormat)}: {DateFormat}, {nameof(SetClock)}: {SetClock}, {nameof(TagDatabaseSource)}: {TagDatabaseSource}, {nameof(As1SecurityOption)}: {As1SecurityOption}, {nameof(Username)}: {Username}, {nameof(UserId)}: {UserId}, {nameof(UserFunction)}: {UserFunction}";

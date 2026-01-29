@@ -72,6 +72,14 @@ public interface IOpcDaClientDeviceRequest : IDeviceRequestBase
     int MaxItemsPerWrite { get; set; }
 
     /// <summary>
+    /// Gets or sets the read timeout in milliseconds.
+    /// </summary>
+    /// <remarks>
+    /// Only applicable in Poll mode. Valid range: 100-30000 ms.
+    /// </remarks>
+    int ReadTimeout { get; set; }
+
+    /// <summary>
     /// Gets or sets the write timeout in milliseconds.
     /// </summary>
     /// <remarks>

@@ -65,6 +65,9 @@ public class MitsubishiEthernetDeviceRequest : DeviceRequestBase, IMitsubishiEth
     public MitsubishiEthernetTimeSyncMethodType TimeSyncMethod { get; set; } = MitsubishiEthernetTimeSyncMethodType.Disabled;
 
     /// <inheritdoc />
+    public int AbsoluteSyncTime { get; set; }
+
+    /// <inheritdoc />
     [Range(5, 1440)]
     public int SyncIntervalMinutes { get; set; } = 5;
 

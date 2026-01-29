@@ -5,9 +5,9 @@ namespace Atc.Kepware.Configuration.Contracts.Enums.Connectivity.YokogawaDxEther
 /// </summary>
 public enum YokogawaDxEthernetUserFunction
 {
-    [Description("User")]
-    User = 0,
+    [Description("Monitor")]
+    Monitor = 0,
 
-    [Description("Admin")]
-    Admin = 1,
+    [Description("Setting")]
+    Setting = 1,
 }

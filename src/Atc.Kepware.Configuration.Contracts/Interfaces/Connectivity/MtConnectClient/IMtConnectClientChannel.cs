@@ -1,18 +1,11 @@
 namespace Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MtConnectClient;
 
+/// <summary>
+/// Channel properties for the MTConnect Client driver.
+/// </summary>
+/// <remarks>
+/// The MTConnect Client driver has no channel-specific properties beyond the base channel properties.
+/// </remarks>
 public interface IMtConnectClientChannel : IChannelBase
 {
-    string AgentUrl { get; set; }
-
-    int Port { get; set; }
-
-    int HttpTimeout { get; set; }
-
-    int SampleInterval { get; set; }
-
-    string ProbePath { get; set; }
-
-    string CurrentPath { get; set; }
-
-    string SamplePath { get; set; }
 }

@@ -33,6 +33,9 @@ public class OpcDaClientDevice : DeviceBase, IOpcDaClientDevice
     public int MaxItemsPerWrite { get; set; } = 512;
 
     /// <inheritdoc />
+    public int ReadTimeout { get; set; } = 1000;
+
+    /// <inheritdoc />
     public int WriteTimeout { get; set; } = 1000;
 
     /// <inheritdoc />

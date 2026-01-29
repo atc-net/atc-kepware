@@ -37,7 +37,7 @@ public interface IBacNetIpDeviceRequest : IDeviceRequestBase
     /// Gets or sets the COV resubscription interval in seconds.
     /// </summary>
     /// <remarks>
-    /// Valid range: 60-86400. Default: 3600.
+    /// Valid range: 0-86400. Default: 3600.
     /// </remarks>
     int CovResubscriptionInterval { get; set; }
 
@@ -60,7 +60,7 @@ public interface IBacNetIpDeviceRequest : IDeviceRequestBase
     /// Gets or sets the command priority for writes.
     /// </summary>
     /// <remarks>
-    /// Valid range: 1-16. Default: 16.
+    /// Valid range: 1-16. Default: 8 (Manual Operator).
     /// </remarks>
     int CommandPriority { get; set; }
 }

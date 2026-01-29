@@ -86,12 +86,9 @@ public sealed class DeviceCreateYokogawaGxEthernetCommand : AsyncCommand<DeviceC
 
             // Yokogawa GX Ethernet Specific Settings
             Model = settings.Model,
-            DataHandling = settings.DataHandling,
-            PollingInterval = settings.PollingInterval,
-            StartMath = settings.StartMath,
-            DateAndTime = settings.DateAndTime,
-            DateFormat = settings.DateFormat,
-            SetClock = settings.SetClock,
-            TagDatabaseSource = settings.TagDatabaseSource,
+            As1SecurityOption = settings.As1SecurityOption,
+            Username = settings.Username,
+            Password = settings.DevicePassword,
+            UserId = settings.UserId,
         };
 }

@@ -44,6 +44,9 @@ internal sealed class MitsubishiEthernetDevice : DeviceBase, IMitsubishiEthernet
     [JsonPropertyName("mitsubishi_ethernet.DEVICE_TIME_SYNC_METHOD")]
     public MitsubishiEthernetTimeSyncMethodType TimeSyncMethod { get; set; }
 
+    [JsonPropertyName("mitsubishi_ethernet.DEVICE_TIME_SYNC_ABSOLUTE_LOCAL")]
+    public int AbsoluteSyncTime { get; set; }
+
     [JsonPropertyName("mitsubishi_ethernet.DEVICE_TIME_SYNC_INTERVAL_MINUTES")]
     public int SyncIntervalMinutes { get; set; }
 

@@ -63,7 +63,7 @@ public interface IYokogawaDxEthernetDeviceRequest : IDeviceRequestBase
     /// <summary>
     /// Gets or sets the user ID for AS1 security.
     /// </summary>
-    int UserId { get; set; }
+    string UserId { get; set; }
 
     /// <summary>
     /// Gets or sets the user function for AS1 security.

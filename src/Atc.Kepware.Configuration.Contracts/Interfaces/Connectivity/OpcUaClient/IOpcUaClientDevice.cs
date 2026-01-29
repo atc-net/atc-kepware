@@ -4,7 +4,7 @@ public interface IOpcUaClientDevice : IDeviceBase
 {
     int PublishingInterval { get; set; }
 
-    int MaxNotificationsPerPublish { get; set; }
+    long MaxNotificationsPerPublish { get; set; }
 
     OpcUaDeviceSubscriptionUpdateModeType UpdateMode { get; set; }
 
@@ -34,5 +34,5 @@ public interface IOpcUaClientDevice : IDeviceBase
 
     OpcUaDeviceMonitoredItemsDeadBandType DeadBand { get; set; }
 
-    int DeadBandValue { get; set; }
+    double DeadBandValue { get; set; }
 }

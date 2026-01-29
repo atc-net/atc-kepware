@@ -91,5 +91,16 @@ public sealed class ChannelCreateDnpClientEthernetCommand : AsyncCommand<Channel
             NetworkAdapter = settings.NetworkAdapter is not null && settings.NetworkAdapter.IsSet
                 ? settings.NetworkAdapter.Value
                 : null,
+            Protocol = settings.Protocol is not null && settings.Protocol.IsSet
+                ? settings.Protocol.Value
+                : DnpClientEthernetProtocolType.Tcp,
+            SourcePort = settings.SourcePort,
+            DestinationHost = settings.DestinationHost is not null && settings.DestinationHost.IsSet
+                ? settings.DestinationHost.Value
+                : "255.255.255.255",
+            DestinationPort = settings.DestinationPort,
+            ConnectTimeout = settings.ConnectTimeout,
+            ResponseTimeout = settings.ResponseTimeout,
+            MaxLinkLayerRetries = settings.MaxLinkLayerRetries,
         };
 }

@@ -21,7 +21,7 @@ internal class KeyenceKvEthernetDeviceRequest : DeviceRequestBase, IKeyenceKvEth
     public int ConnectTimeoutSeconds { get; set; } = 3;
 
     /// <inheritdoc />
-    [Range(10, 9999999)]
+    [Range(50, 9999999)]
     [JsonPropertyName("servermain.DEVICE_REQUEST_TIMEOUT_MILLISECONDS")]
     public int RequestTimeoutMs { get; set; } = 1000;
 
@@ -29,11 +29,6 @@ internal class KeyenceKvEthernetDeviceRequest : DeviceRequestBase, IKeyenceKvEth
     [Range(1, 10)]
     [JsonPropertyName("servermain.DEVICE_RETRY_ATTEMPTS")]
     public int RetryAttempts { get; set; } = 3;
-
-    /// <inheritdoc />
-    [Range(0, 30000)]
-    [JsonPropertyName("servermain.DEVICE_INTER_REQUEST_DELAY_MILLISECONDS")]
-    public int InterRequestDelayMs { get; set; }
 
     /// <inheritdoc />
     [JsonPropertyName("servermain.DEVICE_AUTO_DEMOTION_ENABLE_ON_COMMUNICATIONS_FAILURES")]
@@ -54,11 +49,25 @@ internal class KeyenceKvEthernetDeviceRequest : DeviceRequestBase, IKeyenceKvEth
     public bool DiscardRequestsWhenDemoted { get; set; }
 
     /// <inheritdoc />
-    [Range(0, 65535)]
-    [JsonPropertyName("keyence_kv_ethernet.DEVICE_PORT")]
-    public int Port { get; set; } = 8501;
+    [JsonPropertyName("keyence_kv_ethernet.DEVICE_IP_PROTOCOL")]
+    public KeyenceKvEthernetIpProtocolType IpProtocol { get; set; } = KeyenceKvEthernetIpProtocolType.TcpIp;
+
+    /// <inheritdoc />
+    [Range(1, 65535)]
+    [JsonPropertyName("keyence_kv_ethernet.DEVICE_PORT_NUMBER")]
+    public int PortNumber { get; set; } = 8501;
+
+    /// <inheritdoc />
+    [Range(1, 1000)]
+    [JsonPropertyName("keyence_kv_ethernet.DEVICE_WORD_MEMORY_BLOCK_SIZE")]
+    public int WordMemoryBlockSize { get; set; } = 1000;
+
+    /// <inheritdoc />
+    [Range(1, 120)]
+    [JsonPropertyName("keyence_kv_ethernet.DEVICE_TIMER_COUNTER_MEMORY_BLOCK_SIZE")]
+    public int TimerCounterMemoryBlockSize { get; set; } = 120;
 
     /// <inheritdoc />
     public override string ToString()
-        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(Port)}: {Port}";
+        => $"{base.ToString()}, {nameof(DeviceId)}: {DeviceId}, {nameof(PortNumber)}: {PortNumber}";
 }

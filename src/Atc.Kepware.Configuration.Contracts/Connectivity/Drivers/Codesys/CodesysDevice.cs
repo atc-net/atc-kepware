@@ -60,6 +60,9 @@ public sealed class CodesysDevice : DeviceBase, ICodesysDevice
     public int? GatewayPort { get; set; }
 
     /// <inheritdoc />
+    public string? GatewayPassword { get; set; }
+
+    /// <inheritdoc />
     public CodesysDeviceTagGenerationMethodType? TagGenerationMethod { get; set; }
 
     /// <inheritdoc />
@@ -73,6 +76,9 @@ public sealed class CodesysDevice : DeviceBase, ICodesysDevice
 
     /// <inheritdoc />
     public string? PlcUsername { get; set; }
+
+    /// <inheritdoc />
+    public string? PlcPassword { get; set; }
 
     /// <inheritdoc />
     public override string ToString()

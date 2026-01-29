@@ -96,6 +96,11 @@ public interface ICodesysDevice : IDeviceBase
     int? GatewayPort { get; set; }
 
     /// <summary>
+    /// The password for the gateway.
+    /// </summary>
+    string? GatewayPassword { get; set; }
+
+    /// <summary>
     /// Whether Automatic Tag Generation is done offline or online.
     /// </summary>
     CodesysDeviceTagGenerationMethodType? TagGenerationMethod { get; set; }
@@ -119,4 +124,9 @@ public interface ICodesysDevice : IDeviceBase
     /// The username to use to login to the device (V3 only).
     /// </summary>
     string? PlcUsername { get; set; }
+
+    /// <summary>
+    /// The password to use to login to the device (V3 only).
+    /// </summary>
+    string? PlcPassword { get; set; }
 }

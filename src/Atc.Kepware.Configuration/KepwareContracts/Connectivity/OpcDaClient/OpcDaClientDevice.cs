@@ -42,6 +42,10 @@ internal sealed class OpcDaClientDevice : DeviceBase, IOpcDaClientDevice
     public int MaxItemsPerWrite { get; set; } = 512;
 
     /// <inheritdoc />
+    [JsonPropertyName("opcdaclient.DEVICE_READ_TIMEOUT_MS")]
+    public int ReadTimeout { get; set; } = 1000;
+
+    /// <inheritdoc />
     [JsonPropertyName("opcdaclient.DEVICE_WRITE_TIMEOUT_MS")]
     public int WriteTimeout { get; set; } = 1000;
 

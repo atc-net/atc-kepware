@@ -16,14 +16,14 @@ public interface IYokogawaMwEthernetDeviceRequest : IDeviceRequestBase
     YokogawaMwEthernetDataHandling DataHandling { get; set; }
 
     /// <summary>
-    /// Gets or sets the polling interval in milliseconds.
-    /// </summary>
-    int PollingInterval { get; set; }
-
-    /// <summary>
     /// Gets or sets a value indicating whether to start math computation on communication startup.
     /// </summary>
     bool StartMath { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to start measuring on communication startup.
+    /// </summary>
+    bool StartMeasuring { get; set; }
 
     /// <summary>
     /// Gets or sets the source of the date and time data.
@@ -44,4 +44,14 @@ public interface IYokogawaMwEthernetDeviceRequest : IDeviceRequestBase
     /// Gets or sets the tag database generation source.
     /// </summary>
     YokogawaMwEthernetTagDatabaseSource TagDatabaseSource { get; set; }
+
+    /// <summary>
+    /// Gets or sets the username.
+    /// </summary>
+    string Username { get; set; }
+
+    /// <summary>
+    /// Gets or sets the password.
+    /// </summary>
+    string Password { get; set; }
 }

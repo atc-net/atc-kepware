@@ -5,4 +5,8 @@ namespace Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Automation
 /// </summary>
 public interface IAutomationDirectEbcChannelRequest : IChannelRequestBase
 {
+    /// <summary>
+    /// Gets or sets the network adapter to bind for Ethernet communication.
+    /// </summary>
+    string? NetworkAdapter { get; set; }
 }
