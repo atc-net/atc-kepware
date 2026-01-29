@@ -124,6 +124,8 @@ global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.YokogawaGxEt
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.YokogawaMwEthernet;
 global using Atc.Kepware.Configuration.Contracts.Enums.Connectivity.YokogawaMxEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyBulletin1609;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyBulletin900;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyControlLogixEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyControlLogixServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.AllenBradleyEthernet;
@@ -139,10 +141,13 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Beckhof
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BristolBsapIp;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.BuswareEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Codesys;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.CustomInterface;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.CutlerHammerElcEthernet;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DdeClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.FanucFocasEthernet;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.FanucFocasHssb;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.GeEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.GeEthernetGlobalData;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.HoneywellHc900Ethernet;
@@ -151,6 +156,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Iec6087
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Iec61850MmsClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.KeyenceKvEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.KraussMaffeiMc4Ethernet;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MemoryBased;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiCncEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.MitsubishiFxNet;
@@ -163,6 +169,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcDaCl
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcUaClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.OpcXmlDaClient;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Opto22Ethernet;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Ping;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SattBusEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.ScanivalveEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SiemensS7PlusEthernet;
@@ -172,6 +179,7 @@ global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Simatic
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Simulator;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SixnetEthertrak;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.Snmp;
+global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.SystemMonitor;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.ThermoWestronicsEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.TorqueToolEthernet;
 global using Atc.Kepware.Configuration.Contracts.Interfaces.Connectivity.ToshibaEthernet;

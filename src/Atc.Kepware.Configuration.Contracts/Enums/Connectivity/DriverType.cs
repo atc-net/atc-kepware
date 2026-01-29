@@ -131,6 +131,9 @@ public enum DriverType
     [Description("Fanuc Focas Ethernet")]
     FanucFocasEthernet,
 
+    [Description("Fanuc Focas HSSB")]
+    FanucFocasHssb,
+
     [Description("Honeywell UDC Ethernet")]
     HoneywellUdcEthernet,
 
@@ -193,4 +196,25 @@ public enum DriverType
 
     [Description("Wago Ethernet")]
     WagoEthernet,
+
+    [Description("DDE Client")]
+    DdeClient,
+
+    [Description("Custom Interface")]
+    CustomInterface,
+
+    [Description("Allen-Bradley Bulletin 1609")]
+    AllenBradleyBulletin1609,
+
+    [Description("Allen-Bradley Bulletin 900")]
+    AllenBradleyBulletin900,
+
+    [Description("System Monitor")]
+    SystemMonitor,
+
+    [Description("Ping")]
+    Ping,
+
+    [Description("Memory Based")]
+    MemoryBased,
 }
