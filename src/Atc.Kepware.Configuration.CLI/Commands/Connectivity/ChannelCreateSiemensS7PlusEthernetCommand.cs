@@ -17,16 +17,18 @@ public sealed class ChannelCreateSiemensS7PlusEthernetCommand : AsyncCommand<Cha
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateSiemensS7PlusEthernetCommandSettings settings)
+        ChannelCreateSiemensS7PlusEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateSiemensS7PlusEthernetCommandSettings settings)
+        ChannelCreateSiemensS7PlusEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateSiemensS7PlusEthernetCommand : AsyncCommand<Cha
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateSiemensS7PlusEthernetCommand : AsyncCommand<Cha
             }
 
             var request = BuildSiemensS7PlusEthernetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateSiemensS7PlusEthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateSiemensS7PlusEthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

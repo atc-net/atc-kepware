@@ -17,16 +17,18 @@ public sealed class DeviceCreateIec608705104ClientCommand : AsyncCommand<DeviceC
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        DeviceCreateIec608705104ClientCommandSettings settings)
+        DeviceCreateIec608705104ClientCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        DeviceCreateIec608705104ClientCommandSettings settings)
+        DeviceCreateIec608705104ClientCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -40,7 +42,7 @@ public sealed class DeviceCreateIec608705104ClientCommand : AsyncCommand<DeviceC
             var isDeviceDefinedResult = await kepwareConfigurationClient.IsDeviceDefined(
                 settings.ChannelName,
                 settings.DeviceName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isDeviceDefinedResult.CommunicationSucceeded)
             {
@@ -57,7 +59,7 @@ public sealed class DeviceCreateIec608705104ClientCommand : AsyncCommand<DeviceC
             var result = await kepwareConfigurationClient.CreateIec608705104ClientDevice(
                 request,
                 settings.ChannelName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))

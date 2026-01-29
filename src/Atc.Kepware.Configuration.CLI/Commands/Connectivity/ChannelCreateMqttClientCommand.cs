@@ -17,16 +17,18 @@ public sealed class ChannelCreateMqttClientCommand : AsyncCommand<ChannelCreateM
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateMqttClientCommandSettings settings)
+        ChannelCreateMqttClientCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateMqttClientCommandSettings settings)
+        ChannelCreateMqttClientCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateMqttClientCommand : AsyncCommand<ChannelCreateM
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateMqttClientCommand : AsyncCommand<ChannelCreateM
             }
 
             var request = BuildMqttClientChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateMqttClientChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateMqttClientChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

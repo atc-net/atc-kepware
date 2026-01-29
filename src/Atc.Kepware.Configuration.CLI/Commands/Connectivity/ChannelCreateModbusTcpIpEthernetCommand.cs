@@ -17,16 +17,18 @@ public sealed class ChannelCreateModbusTcpIpEthernetCommand : AsyncCommand<Chann
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateModbusTcpIpEthernetCommandSettings settings)
+        ChannelCreateModbusTcpIpEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateModbusTcpIpEthernetCommandSettings settings)
+        ChannelCreateModbusTcpIpEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateModbusTcpIpEthernetCommand : AsyncCommand<Chann
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateModbusTcpIpEthernetCommand : AsyncCommand<Chann
             }
 
             var request = BuildModbusTcpIpEthernetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateModbusTcpIpEthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateModbusTcpIpEthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

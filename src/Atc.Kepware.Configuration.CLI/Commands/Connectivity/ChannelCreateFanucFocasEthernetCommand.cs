@@ -17,16 +17,18 @@ public sealed class ChannelCreateFanucFocasEthernetCommand : AsyncCommand<Channe
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateFanucFocasEthernetCommandSettings settings)
+        ChannelCreateFanucFocasEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateFanucFocasEthernetCommandSettings settings)
+        ChannelCreateFanucFocasEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateFanucFocasEthernetCommand : AsyncCommand<Channe
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateFanucFocasEthernetCommand : AsyncCommand<Channe
             }
 
             var request = BuildFanucFocasEthernetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateFanucFocasEthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateFanucFocasEthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

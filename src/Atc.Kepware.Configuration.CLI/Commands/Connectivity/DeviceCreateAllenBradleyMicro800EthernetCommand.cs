@@ -17,16 +17,18 @@ public sealed class DeviceCreateAllenBradleyMicro800EthernetCommand : AsyncComma
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        DeviceCreateAllenBradleyMicro800EthernetCommandSettings settings)
+        DeviceCreateAllenBradleyMicro800EthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        DeviceCreateAllenBradleyMicro800EthernetCommandSettings settings)
+        DeviceCreateAllenBradleyMicro800EthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -40,7 +42,7 @@ public sealed class DeviceCreateAllenBradleyMicro800EthernetCommand : AsyncComma
             var isDeviceDefinedResult = await kepwareConfigurationClient.IsDeviceDefined(
                 settings.ChannelName,
                 settings.DeviceName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isDeviceDefinedResult.CommunicationSucceeded)
             {
@@ -57,7 +59,7 @@ public sealed class DeviceCreateAllenBradleyMicro800EthernetCommand : AsyncComma
             var result = await kepwareConfigurationClient.CreateAllenBradleyMicro800EthernetDevice(
                 request,
                 settings.ChannelName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))

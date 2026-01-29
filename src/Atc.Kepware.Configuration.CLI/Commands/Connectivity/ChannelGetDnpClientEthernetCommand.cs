@@ -17,16 +17,18 @@ public sealed class ChannelGetDnpClientEthernetCommand : AsyncCommand<ChannelGet
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelGetCommandSettings settings)
+        ChannelGetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelGetCommandSettings settings)
+        ChannelGetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelGetDnpClientEthernetCommand : AsyncCommand<ChannelGet
 
             var result = await kepwareConfigurationClient.GetDnpClientEthernetChannel(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (result is { CommunicationSucceeded: true, HasData: true })
             {

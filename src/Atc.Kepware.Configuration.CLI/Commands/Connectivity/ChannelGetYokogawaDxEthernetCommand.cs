@@ -17,16 +17,18 @@ public sealed class ChannelGetYokogawaDxEthernetCommand : AsyncCommand<ChannelGe
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelGetCommandSettings settings)
+        ChannelGetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelGetCommandSettings settings)
+        ChannelGetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelGetYokogawaDxEthernetCommand : AsyncCommand<ChannelGe
 
             var result = await kepwareConfigurationClient.GetYokogawaDxEthernetChannel(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (result is { CommunicationSucceeded: true, HasData: true })
             {

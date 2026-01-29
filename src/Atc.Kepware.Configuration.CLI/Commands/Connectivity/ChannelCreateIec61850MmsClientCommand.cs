@@ -17,16 +17,18 @@ public sealed class ChannelCreateIec61850MmsClientCommand : AsyncCommand<Channel
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateCommandBaseSettings settings)
+        ChannelCreateCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateCommandBaseSettings settings)
+        ChannelCreateCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateIec61850MmsClientCommand : AsyncCommand<Channel
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateIec61850MmsClientCommand : AsyncCommand<Channel
             }
 
             var request = BuildIec61850MmsClientChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateIec61850MmsClientChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateIec61850MmsClientChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

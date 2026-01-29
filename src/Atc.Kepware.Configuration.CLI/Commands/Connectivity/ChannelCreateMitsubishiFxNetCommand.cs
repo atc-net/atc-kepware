@@ -17,16 +17,18 @@ public sealed class ChannelCreateMitsubishiFxNetCommand : AsyncCommand<ChannelCr
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateMitsubishiFxNetCommandSettings settings)
+        ChannelCreateMitsubishiFxNetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateMitsubishiFxNetCommandSettings settings)
+        ChannelCreateMitsubishiFxNetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateMitsubishiFxNetCommand : AsyncCommand<ChannelCr
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateMitsubishiFxNetCommand : AsyncCommand<ChannelCr
             }
 
             var request = BuildMitsubishiFxNetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateMitsubishiFxNetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateMitsubishiFxNetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

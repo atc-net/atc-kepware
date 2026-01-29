@@ -17,16 +17,18 @@ public sealed class ChannelCreateSnmpCommand : AsyncCommand<ChannelCreateSnmpCom
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateSnmpCommandSettings settings)
+        ChannelCreateSnmpCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateSnmpCommandSettings settings)
+        ChannelCreateSnmpCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateSnmpCommand : AsyncCommand<ChannelCreateSnmpCom
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateSnmpCommand : AsyncCommand<ChannelCreateSnmpCom
             }
 
             var request = BuildSnmpChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateSnmpChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateSnmpChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

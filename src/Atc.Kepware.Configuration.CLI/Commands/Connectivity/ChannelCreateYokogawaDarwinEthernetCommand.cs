@@ -17,16 +17,18 @@ public sealed class ChannelCreateYokogawaDarwinEthernetCommand : AsyncCommand<Ch
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateYokogawaDarwinEthernetCommandSettings settings)
+        ChannelCreateYokogawaDarwinEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateYokogawaDarwinEthernetCommandSettings settings)
+        ChannelCreateYokogawaDarwinEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateYokogawaDarwinEthernetCommand : AsyncCommand<Ch
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -55,7 +57,7 @@ public sealed class ChannelCreateYokogawaDarwinEthernetCommand : AsyncCommand<Ch
             var request = BuildYokogawaDarwinEthernetChannelRequest(settings);
             var result = await kepwareConfigurationClient.CreateYokogawaDarwinEthernetChannel(
                 request,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))

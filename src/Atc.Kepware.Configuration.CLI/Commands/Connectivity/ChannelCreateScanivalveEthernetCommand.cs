@@ -17,16 +17,18 @@ public sealed class ChannelCreateScanivalveEthernetCommand : AsyncCommand<Channe
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateCommandBaseSettings settings)
+        ChannelCreateCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateCommandBaseSettings settings)
+        ChannelCreateCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateScanivalveEthernetCommand : AsyncCommand<Channe
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateScanivalveEthernetCommand : AsyncCommand<Channe
             }
 
             var request = BuildScanivalveEthernetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateScanivalveEthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateScanivalveEthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

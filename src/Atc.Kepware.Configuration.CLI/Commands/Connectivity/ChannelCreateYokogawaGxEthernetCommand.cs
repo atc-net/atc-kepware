@@ -17,16 +17,18 @@ public sealed class ChannelCreateYokogawaGxEthernetCommand : AsyncCommand<Channe
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateYokogawaGxEthernetCommandSettings settings)
+        ChannelCreateYokogawaGxEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateYokogawaGxEthernetCommandSettings settings)
+        ChannelCreateYokogawaGxEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateYokogawaGxEthernetCommand : AsyncCommand<Channe
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -55,7 +57,7 @@ public sealed class ChannelCreateYokogawaGxEthernetCommand : AsyncCommand<Channe
             var request = BuildYokogawaGxEthernetChannelRequest(settings);
             var result = await kepwareConfigurationClient.CreateYokogawaGxEthernetChannel(
                 request,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))

@@ -17,16 +17,18 @@ public sealed class ChannelCreateAllenBradleyEthernetCommand : AsyncCommand<Chan
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateAllenBradleyEthernetCommandSettings settings)
+        ChannelCreateAllenBradleyEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateAllenBradleyEthernetCommandSettings settings)
+        ChannelCreateAllenBradleyEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateAllenBradleyEthernetCommand : AsyncCommand<Chan
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -55,7 +57,7 @@ public sealed class ChannelCreateAllenBradleyEthernetCommand : AsyncCommand<Chan
             var request = BuildAllenBradleyEthernetChannelRequest(settings);
             var result = await kepwareConfigurationClient.CreateAllenBradleyEthernetChannel(
                 request,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))

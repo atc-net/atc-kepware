@@ -17,16 +17,18 @@ public sealed class DeviceCreateYokogawaDxEthernetCommand : AsyncCommand<DeviceC
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        DeviceCreateYokogawaDxEthernetCommandSettings settings)
+        DeviceCreateYokogawaDxEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        DeviceCreateYokogawaDxEthernetCommandSettings settings)
+        DeviceCreateYokogawaDxEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -40,7 +42,7 @@ public sealed class DeviceCreateYokogawaDxEthernetCommand : AsyncCommand<DeviceC
             var isDeviceDefinedResult = await kepwareConfigurationClient.IsDeviceDefined(
                 settings.ChannelName,
                 settings.DeviceName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isDeviceDefinedResult.CommunicationSucceeded)
             {
@@ -57,7 +59,7 @@ public sealed class DeviceCreateYokogawaDxEthernetCommand : AsyncCommand<DeviceC
             var result = await kepwareConfigurationClient.CreateYokogawaDxEthernetDevice(
                 request,
                 settings.ChannelName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
