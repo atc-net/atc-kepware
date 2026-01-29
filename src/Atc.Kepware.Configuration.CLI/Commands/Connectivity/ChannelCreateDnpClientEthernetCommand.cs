@@ -17,16 +17,18 @@ public sealed class ChannelCreateDnpClientEthernetCommand : AsyncCommand<Channel
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateDnpClientEthernetCommandSettings settings)
+        ChannelCreateDnpClientEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateDnpClientEthernetCommandSettings settings)
+        ChannelCreateDnpClientEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateDnpClientEthernetCommand : AsyncCommand<Channel
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateDnpClientEthernetCommand : AsyncCommand<Channel
             }
 
             var request = BuildDnpClientEthernetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateDnpClientEthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateDnpClientEthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

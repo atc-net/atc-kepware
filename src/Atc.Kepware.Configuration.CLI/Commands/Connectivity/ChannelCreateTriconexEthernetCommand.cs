@@ -17,16 +17,18 @@ public sealed class ChannelCreateTriconexEthernetCommand : AsyncCommand<ChannelC
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateTriconexEthernetCommandSettings settings)
+        ChannelCreateTriconexEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateTriconexEthernetCommandSettings settings)
+        ChannelCreateTriconexEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateTriconexEthernetCommand : AsyncCommand<ChannelC
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateTriconexEthernetCommand : AsyncCommand<ChannelC
             }
 
             var request = BuildTriconexEthernetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateTriconexEthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateTriconexEthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

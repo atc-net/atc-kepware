@@ -17,16 +17,18 @@ public sealed class DeviceGetToyopucEthernetCommand : AsyncCommand<ChannelAndDev
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelAndDeviceCommandBaseSettings settings)
+        ChannelAndDeviceCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelAndDeviceCommandBaseSettings settings)
+        ChannelAndDeviceCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -40,7 +42,7 @@ public sealed class DeviceGetToyopucEthernetCommand : AsyncCommand<ChannelAndDev
             var result = await kepwareConfigurationClient.GetToyopucEthernetDevice(
                 settings.ChannelName,
                 settings.DeviceName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (result is { CommunicationSucceeded: true, HasData: true })
             {

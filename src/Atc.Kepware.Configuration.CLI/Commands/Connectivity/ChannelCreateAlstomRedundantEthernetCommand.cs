@@ -15,16 +15,18 @@ public sealed class ChannelCreateAlstomRedundantEthernetCommand : AsyncCommand<C
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateAlstomRedundantEthernetCommandSettings settings)
+        ChannelCreateAlstomRedundantEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateAlstomRedundantEthernetCommandSettings settings)
+        ChannelCreateAlstomRedundantEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateAlstomRedundantEthernetCommand : AsyncCommand<C
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateAlstomRedundantEthernetCommand : AsyncCommand<C
             }
 
             var request = BuildRequest(settings);
-            var result = await kepwareConfigurationClient.CreateAlstomRedundantEthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateAlstomRedundantEthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

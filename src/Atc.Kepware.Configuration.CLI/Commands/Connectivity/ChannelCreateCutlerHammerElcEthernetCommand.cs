@@ -17,16 +17,18 @@ public sealed class ChannelCreateCutlerHammerElcEthernetCommand : AsyncCommand<C
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateCutlerHammerElcEthernetCommandSettings settings)
+        ChannelCreateCutlerHammerElcEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateCutlerHammerElcEthernetCommandSettings settings)
+        ChannelCreateCutlerHammerElcEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateCutlerHammerElcEthernetCommand : AsyncCommand<C
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateCutlerHammerElcEthernetCommand : AsyncCommand<C
             }
 
             var request = BuildCutlerHammerElcEthernetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateCutlerHammerElcEthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateCutlerHammerElcEthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

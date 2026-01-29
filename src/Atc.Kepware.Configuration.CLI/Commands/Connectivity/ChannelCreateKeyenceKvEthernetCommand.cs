@@ -17,16 +17,18 @@ public sealed class ChannelCreateKeyenceKvEthernetCommand : AsyncCommand<Channel
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateKeyenceKvEthernetCommandSettings settings)
+        ChannelCreateKeyenceKvEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateKeyenceKvEthernetCommandSettings settings)
+        ChannelCreateKeyenceKvEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateKeyenceKvEthernetCommand : AsyncCommand<Channel
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateKeyenceKvEthernetCommand : AsyncCommand<Channel
             }
 
             var request = BuildKeyenceKvEthernetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateKeyenceKvEthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateKeyenceKvEthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

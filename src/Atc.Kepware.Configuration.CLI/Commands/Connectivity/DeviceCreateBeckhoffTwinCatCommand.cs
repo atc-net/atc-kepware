@@ -17,16 +17,18 @@ public sealed class DeviceCreateBeckhoffTwinCatCommand : AsyncCommand<DeviceCrea
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        DeviceCreateBeckhoffTwinCatCommandSettings settings)
+        DeviceCreateBeckhoffTwinCatCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        DeviceCreateBeckhoffTwinCatCommandSettings settings)
+        DeviceCreateBeckhoffTwinCatCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -40,7 +42,7 @@ public sealed class DeviceCreateBeckhoffTwinCatCommand : AsyncCommand<DeviceCrea
             var isDeviceDefinedResult = await kepwareConfigurationClient.IsDeviceDefined(
                 settings.ChannelName,
                 settings.DeviceName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isDeviceDefinedResult.CommunicationSucceeded)
             {
@@ -57,7 +59,7 @@ public sealed class DeviceCreateBeckhoffTwinCatCommand : AsyncCommand<DeviceCrea
             var result = await kepwareConfigurationClient.CreateBeckhoffTwinCatDevice(
                 request,
                 settings.ChannelName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))

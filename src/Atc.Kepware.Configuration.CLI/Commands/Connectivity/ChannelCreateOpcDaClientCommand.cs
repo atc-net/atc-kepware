@@ -17,16 +17,18 @@ public sealed class ChannelCreateOpcDaClientCommand : AsyncCommand<ChannelCreate
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateOpcDaClientCommandSettings settings)
+        ChannelCreateOpcDaClientCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateOpcDaClientCommandSettings settings)
+        ChannelCreateOpcDaClientCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateOpcDaClientCommand : AsyncCommand<ChannelCreate
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateOpcDaClientCommand : AsyncCommand<ChannelCreate
             }
 
             var request = BuildOpcDaClientChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateOpcDaClientChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateOpcDaClientChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

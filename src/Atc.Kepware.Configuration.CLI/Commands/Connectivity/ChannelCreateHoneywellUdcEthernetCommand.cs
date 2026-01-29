@@ -17,16 +17,18 @@ public sealed class ChannelCreateHoneywellUdcEthernetCommand : AsyncCommand<Chan
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateHoneywellUdcEthernetCommandSettings settings)
+        ChannelCreateHoneywellUdcEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateHoneywellUdcEthernetCommandSettings settings)
+        ChannelCreateHoneywellUdcEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateHoneywellUdcEthernetCommand : AsyncCommand<Chan
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateHoneywellUdcEthernetCommand : AsyncCommand<Chan
             }
 
             var request = BuildHoneywellUdcEthernetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateHoneywellUdcEthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateHoneywellUdcEthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

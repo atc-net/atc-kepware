@@ -17,16 +17,18 @@ public sealed class ChannelCreateAromatEthernetCommand : AsyncCommand<ChannelCre
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateAromatEthernetCommandSettings settings)
+        ChannelCreateAromatEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateAromatEthernetCommandSettings settings)
+        ChannelCreateAromatEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateAromatEthernetCommand : AsyncCommand<ChannelCre
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateAromatEthernetCommand : AsyncCommand<ChannelCre
             }
 
             var request = BuildAromatEthernetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateAromatEthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateAromatEthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

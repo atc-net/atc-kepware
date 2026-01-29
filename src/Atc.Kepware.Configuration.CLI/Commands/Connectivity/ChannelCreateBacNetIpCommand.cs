@@ -17,16 +17,18 @@ public sealed class ChannelCreateBacNetIpCommand : AsyncCommand<ChannelCreateBac
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateBacNetIpCommandSettings settings)
+        ChannelCreateBacNetIpCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateBacNetIpCommandSettings settings)
+        ChannelCreateBacNetIpCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateBacNetIpCommand : AsyncCommand<ChannelCreateBac
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateBacNetIpCommand : AsyncCommand<ChannelCreateBac
             }
 
             var request = BuildBacNetIpChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateBacNetIpChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateBacNetIpChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

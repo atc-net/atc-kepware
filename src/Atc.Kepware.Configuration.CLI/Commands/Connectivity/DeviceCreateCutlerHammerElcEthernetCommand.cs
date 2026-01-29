@@ -17,16 +17,18 @@ public sealed class DeviceCreateCutlerHammerElcEthernetCommand : AsyncCommand<De
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        DeviceCreateCutlerHammerElcEthernetCommandSettings settings)
+        DeviceCreateCutlerHammerElcEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        DeviceCreateCutlerHammerElcEthernetCommandSettings settings)
+        DeviceCreateCutlerHammerElcEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -40,7 +42,7 @@ public sealed class DeviceCreateCutlerHammerElcEthernetCommand : AsyncCommand<De
             var isDeviceDefinedResult = await kepwareConfigurationClient.IsDeviceDefined(
                 settings.ChannelName,
                 settings.DeviceName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isDeviceDefinedResult.CommunicationSucceeded)
             {
@@ -57,7 +59,7 @@ public sealed class DeviceCreateCutlerHammerElcEthernetCommand : AsyncCommand<De
             var result = await kepwareConfigurationClient.CreateCutlerHammerElcEthernetDevice(
                 request,
                 settings.ChannelName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))

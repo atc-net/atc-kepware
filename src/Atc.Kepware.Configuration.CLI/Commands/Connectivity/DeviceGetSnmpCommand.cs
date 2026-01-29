@@ -17,16 +17,18 @@ public sealed class DeviceGetSnmpCommand : AsyncCommand<ChannelAndDeviceCommandB
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelAndDeviceCommandBaseSettings settings)
+        ChannelAndDeviceCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelAndDeviceCommandBaseSettings settings)
+        ChannelAndDeviceCommandBaseSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -40,7 +42,7 @@ public sealed class DeviceGetSnmpCommand : AsyncCommand<ChannelAndDeviceCommandB
             var result = await kepwareConfigurationClient.GetSnmpDevice(
                 settings.ChannelName,
                 settings.DeviceName,
-                CancellationToken.None);
+                cancellationToken);
 
             if (result is { CommunicationSucceeded: true, HasData: true })
             {

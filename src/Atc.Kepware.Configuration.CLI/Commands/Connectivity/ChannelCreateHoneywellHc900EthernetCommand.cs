@@ -17,16 +17,18 @@ public sealed class ChannelCreateHoneywellHc900EthernetCommand : AsyncCommand<Ch
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateHoneywellHc900EthernetCommandSettings settings)
+        ChannelCreateHoneywellHc900EthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateHoneywellHc900EthernetCommandSettings settings)
+        ChannelCreateHoneywellHc900EthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateHoneywellHc900EthernetCommand : AsyncCommand<Ch
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateHoneywellHc900EthernetCommand : AsyncCommand<Ch
             }
 
             var request = BuildHoneywellHc900EthernetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateHoneywellHc900EthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateHoneywellHc900EthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {

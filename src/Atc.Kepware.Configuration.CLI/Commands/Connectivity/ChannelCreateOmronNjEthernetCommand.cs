@@ -17,16 +17,18 @@ public sealed class ChannelCreateOmronNjEthernetCommand : AsyncCommand<ChannelCr
 
     public override Task<int> ExecuteAsync(
         CommandContext context,
-        ChannelCreateOmronNjEthernetCommandSettings settings)
+        ChannelCreateOmronNjEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        return ExecuteInternalAsync(settings);
+        return ExecuteInternalAsync(settings, cancellationToken);
     }
 
     private async Task<int> ExecuteInternalAsync(
-        ChannelCreateOmronNjEthernetCommandSettings settings)
+        ChannelCreateOmronNjEthernetCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         ConsoleHelper.WriteHeader();
 
@@ -39,7 +41,7 @@ public sealed class ChannelCreateOmronNjEthernetCommand : AsyncCommand<ChannelCr
 
             var isChannelDefinedResult = await kepwareConfigurationClient.IsChannelDefined(
                 settings.Name,
-                CancellationToken.None);
+                cancellationToken);
 
             if (!isChannelDefinedResult.CommunicationSucceeded)
             {
@@ -53,7 +55,7 @@ public sealed class ChannelCreateOmronNjEthernetCommand : AsyncCommand<ChannelCr
             }
 
             var request = BuildOmronNjEthernetChannelRequest(settings);
-            var result = await kepwareConfigurationClient.CreateOmronNjEthernetChannel(request, CancellationToken.None);
+            var result = await kepwareConfigurationClient.CreateOmronNjEthernetChannel(request, cancellationToken);
             if (!result.CommunicationSucceeded ||
                 result.StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Created))
             {
