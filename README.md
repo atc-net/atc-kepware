@@ -37,7 +37,7 @@ Atc.Kepware is a .NET library and CLI tool for configuring Kepware servers via R
 
 The library provides comprehensive Kepware server management capabilities:
 
-- ✅ **Channel Management**: Create, retrieve, and delete channels for various drivers (EuroMap63, OPC UA Client, Simulator)
+- ✅ **Channel Management**: Create, retrieve, and delete channels for 70+ [supported drivers](#supported-drivers)
 - ✅ **Device Management**: Configure devices under channels with driver-specific settings
 - ✅ **Tag Management**: Create tags and tag groups with hierarchical structures, search for tags with wildcards
 - ✅ **IoT Gateway**: Manage MQTT and REST client/server agents and their associated items
