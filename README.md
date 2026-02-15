@@ -397,6 +397,14 @@ The library supports a comprehensive range of Kepware drivers organized by manuf
 | Wago Ethernet | Wago controllers |
 | Yaskawa MP Series Ethernet | MP series motion controllers |
 
+### Flow Computers / Metering
+| Driver | Description |
+|--------|-------------|
+| ABB Totalflow | ABB Totalflow flow computers |
+| Fisher ROC Ethernet | Fisher ROC flow computers over Ethernet |
+| Fisher ROC Plus Ethernet | Fisher ROC Plus flow computers over Ethernet |
+| Omni Flow Computer | Omni Flow Computer metering |
+
 ### CNC / Motion
 | Driver | Description |
 |--------|-------------|
