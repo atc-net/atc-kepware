@@ -452,11 +452,11 @@ dotnet tool update --global atc-kepware-configuration
 
 ## Commands
 
-The CLI is organized into two main command groups:
+The CLI is organized into two main command groups. The connectivity group includes subcommands for channels, devices, tags, and meters:
 
 ### Connectivity Commands
 
-Manage channels, devices, and tags:
+Manage channels, devices, tags, and meters:
 
 ```bash
 # List all channels
@@ -485,6 +485,19 @@ atc-kepware-configuration connectivity tags create tag -s <server-url> \
     --address R0001 \
     --data-type Word \
     --scan-rate 1000
+
+# Get meters for a flow computer meter group
+atc-kepware-configuration connectivity meters get abbtotalflow -s <server-url> \
+    --channel-name MyChannel \
+    --device-name MyDevice \
+    --meter-group-name MyMeterGroup
+
+# Create a meter
+atc-kepware-configuration connectivity meters create fisherrocethernet -s <server-url> \
+    --channel-name MyChannel \
+    --device-name MyDevice \
+    --meter-group-name MyMeterGroup \
+    --name MyMeter
 ```
 
 ### IoT Gateway Commands
