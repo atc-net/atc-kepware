@@ -268,19 +268,19 @@ public sealed partial class KepwareConfigurationClient
             }
 
             var tagGroupResult = await GetTagGroupResultForPathTemplate(basePathTemplate, cancellationToken);
-
             if (tagGroupResult is { CommunicationSucceeded: true, HasData: true } &&
                 tagGroupResult.Data!.Any())
             {
                 foreach (var kepwareTagGroup in tagGroupResult.Data!)
                 {
                     var tagGroup = kepwareTagGroup.Adapt<TagGroup>();
-
                     if (maxDepth >= currentDepth && kepwareTagGroup.TagCountInTree > 0)
                     {
                         await IterateTagGroup(
                             tagGroup,
                             $"{basePathTemplate}/{EndpointPathTemplateConstants.TagGroups}",
+                            kepwareTagGroup.TagCountInGroup,
+                            kepwareTagGroup.TagCountInTree,
                             currentDepth + 1,
                             maxDepth,
                             cancellationToken);
@@ -922,6 +922,8 @@ public sealed partial class KepwareConfigurationClient
     private async Task IterateTagGroup(
         TagGroup tagGroup,
         string tagGroupPathTemplate,
+        int tagCountInGroup,
+        int tagCountInTree,
         int currentDepth,
         int maxDepth,
         CancellationToken cancellationToken)
@@ -933,43 +935,49 @@ public sealed partial class KepwareConfigurationClient
 
         tagGroupPathTemplate = $"{tagGroupPathTemplate}/{tagGroup.Name}";
 
-        // TODO: Optimize if tagGroup.TagCountInGroup > 0
-        var tagResult = await GetTagsResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
-        if (!tagResult.CommunicationSucceeded)
+        if (tagCountInGroup > 0)
         {
-            return;
-        }
-
-        if (tagResult.HasData &&
-            tagResult.Data!.Any())
-        {
-            foreach (var tag in tagResult.Data!.Adapt<List<Tag>>())
+            var tagResult = await GetTagsResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
+            if (!tagResult.CommunicationSucceeded)
             {
-                tagGroup.Tags.Add(tag);
+                return;
+            }
+
+            if (tagResult.HasData &&
+                tagResult.Data!.Any())
+            {
+                foreach (var tag in tagResult.Data!.Adapt<List<Tag>>())
+                {
+                    tagGroup.Tags.Add(tag);
+                }
             }
         }
 
-        // TODO: Optimize if tagGroup.TagCountInTree > 0
-        var tagGroupResult = await GetTagGroupResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
-
-        if (tagGroupResult is { CommunicationSucceeded: true, HasData: true } &&
-            tagGroupResult.Data!.Any())
+        if (tagCountInTree > tagCountInGroup)
         {
-            foreach (var kepwareTagGroup in tagGroupResult.Data!)
+            var tagGroupResult = await GetTagGroupResultForPathTemplate(tagGroupPathTemplate, cancellationToken);
+
+            if (tagGroupResult is { CommunicationSucceeded: true, HasData: true } &&
+                tagGroupResult.Data!.Any())
             {
-                var subTagGroup = kepwareTagGroup.Adapt<TagGroup>();
-
-                if (kepwareTagGroup.TagCountInTree > 0)
+                foreach (var kepwareTagGroup in tagGroupResult.Data!)
                 {
-                    await IterateTagGroup(
-                        subTagGroup,
-                        $"{tagGroupPathTemplate}/{EndpointPathTemplateConstants.TagGroups}",
-                        currentDepth + 1,
-                        maxDepth,
-                        cancellationToken);
-                }
+                    var subTagGroup = kepwareTagGroup.Adapt<TagGroup>();
 
-                tagGroup.TagGroups.Add(subTagGroup);
+                    if (kepwareTagGroup.TagCountInTree > 0)
+                    {
+                        await IterateTagGroup(
+                            subTagGroup,
+                            $"{tagGroupPathTemplate}/{EndpointPathTemplateConstants.TagGroups}",
+                            kepwareTagGroup.TagCountInGroup,
+                            kepwareTagGroup.TagCountInTree,
+                            currentDepth + 1,
+                            maxDepth,
+                            cancellationToken);
+                    }
+
+                    tagGroup.TagGroups.Add(subTagGroup);
+                }
             }
         }
     }
