@@ -16,6 +16,8 @@ global using Atc.Kepware.Configuration.CLI.Commands.Connectivity.Channels.Retrie
 global using Atc.Kepware.Configuration.CLI.Commands.Connectivity.Devices.Create;
 global using Atc.Kepware.Configuration.CLI.Commands.Connectivity.Devices.Delete;
 global using Atc.Kepware.Configuration.CLI.Commands.Connectivity.Devices.Retrieve;
+global using Atc.Kepware.Configuration.CLI.Commands.Connectivity.Meters.Create;
+global using Atc.Kepware.Configuration.CLI.Commands.Connectivity.Meters.Retrieve;
 global using Atc.Kepware.Configuration.CLI.Commands.Connectivity.Tags;
 global using Atc.Kepware.Configuration.CLI.Commands.DescriptionAttributes.Connectivity;
 global using Atc.Kepware.Configuration.CLI.Commands.DescriptionAttributes.IotGateway;
@@ -38,6 +40,7 @@ global using Atc.Kepware.Configuration.CLI.Commands.Settings.Connectivity.Channe
 global using Atc.Kepware.Configuration.CLI.Commands.Settings.Connectivity.Devices.Create;
 global using Atc.Kepware.Configuration.CLI.Commands.Settings.Connectivity.Devices.Delete;
 global using Atc.Kepware.Configuration.CLI.Commands.Settings.Connectivity.Devices.Retrieve;
+global using Atc.Kepware.Configuration.CLI.Commands.Settings.Connectivity.Meters;
 global using Atc.Kepware.Configuration.CLI.Commands.Settings.Connectivity.Tags;
 global using Atc.Kepware.Configuration.CLI.Commands.Settings.IotGateway;
 global using Atc.Kepware.Configuration.CLI.Commands.Settings.IotGateway.IotAgent.Create;
@@ -48,6 +51,7 @@ global using Atc.Kepware.Configuration.CLI.Commands.Settings.IotGateway.IotItem.
 global using Atc.Kepware.Configuration.CLI.Extensions;
 global using Atc.Kepware.Configuration.Contracts;
 global using Atc.Kepware.Configuration.Contracts.Connectivity;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AbbTotalflow;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyControlLogixEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyControlLogixServerEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.AllenBradleyEthernet;
@@ -67,6 +71,8 @@ global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.CutlerHamm
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.DnpClientEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.EuroMap63;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.FanucFocasEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.FisherRocEthernet;
+global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.FisherRocPlusEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.GeEthernet;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.GeEthernetGlobalData;
 global using Atc.Kepware.Configuration.Contracts.Connectivity.Drivers.HoneywellHc900Ethernet;

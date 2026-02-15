@@ -19,6 +19,7 @@ public static class CommandAppExtensions
             node.AddBranch("channels", ConfigureChannelsCommands());
             node.AddBranch("devices", ConfigureDevicesCommands());
             node.AddBranch("tags", ConfigureTagsCommands());
+            node.AddBranch("meters", ConfigureMetersCommands());
         };
 
     private static Action<IConfigurator<CommandSettings>> ConfigureChannelsCommands()
@@ -1414,6 +1415,57 @@ public static class CommandAppExtensions
             delete.AddCommand<TagsDeleteTagGroupCommand>("taggroup")
                 .WithDescription("Deletes a tag group (if exists).")
                 .WithExample("connectivity tags delete taggroup -s [server-url] --name [tagGroupName]");
+        });
+
+    private static Action<IConfigurator<CommandSettings>> ConfigureMetersCommands()
+        => node =>
+        {
+            node.SetDescription("Commands for meters");
+
+            ConfigureMeterGetCommands(node);
+            ConfigureMeterCreateCommands(node);
+        };
+
+    private static void ConfigureMeterGetCommands(
+        IConfigurator<CommandSettings> node)
+        => node.AddBranch("get", get =>
+        {
+            get.SetDescription("Operations related to retrieving meters.");
+
+            get.AddCommand<MetersGetAbbTotalflowCommand>("abbtotalflow")
+                .WithDescription("Get ABB Totalflow meters for a meter group.")
+                .WithExample("connectivity meters get abbtotalflow -s [server-url] -c [channelName] -d [deviceName] -m [meterGroupName]");
+
+            get.AddCommand<MetersGetFisherRocEthernetCommand>("fisherrocethernet")
+                .WithDescription("Get Fisher ROC Ethernet meters for a meter group.")
+                .WithExample("connectivity meters get fisherrocethernet -s [server-url] -c [channelName] -d [deviceName] -m [meterGroupName]");
+
+            get.AddCommand<MetersGetFisherRocPlusEthernetCommand>("fisherrocplusethernet")
+                .WithDescription("Get Fisher ROC Plus Ethernet meters for a meter group.")
+                .WithExample("connectivity meters get fisherrocplusethernet -s [server-url] -c [channelName] -d [deviceName] -m [meterGroupName]");
+
+            get.AddCommand<MetersGetOmniFlowComputerCommand>("omniflowcomputer")
+                .WithDescription("Get Omni Flow Computer meters for a meter group.")
+                .WithExample("connectivity meters get omniflowcomputer -s [server-url] -c [channelName] -d [deviceName] -m [meterGroupName]");
+        });
+
+    private static void ConfigureMeterCreateCommands(
+        IConfigurator<CommandSettings> node)
+        => node.AddBranch("create", create =>
+        {
+            create.SetDescription("Operations related to creating meters.");
+
+            create.AddCommand<MeterCreateAbbTotalflowCommand>("abbtotalflow")
+                .WithDescription("Creates an ABB Totalflow meter.")
+                .WithExample("connectivity meters create abbtotalflow -s [server-url] -c [channelName] -d [deviceName] -m [meterGroupName] -n [meterName]");
+
+            create.AddCommand<MeterCreateFisherRocEthernetCommand>("fisherrocethernet")
+                .WithDescription("Creates a Fisher ROC Ethernet meter.")
+                .WithExample("connectivity meters create fisherrocethernet -s [server-url] -c [channelName] -d [deviceName] -m [meterGroupName] -n [meterName]");
+
+            create.AddCommand<MeterCreateFisherRocPlusEthernetCommand>("fisherrocplusethernet")
+                .WithDescription("Creates a Fisher ROC Plus Ethernet meter.")
+                .WithExample("connectivity meters create fisherrocplusethernet -s [server-url] -c [channelName] -d [deviceName] -m [meterGroupName] -n [meterName]");
         });
 
     private static Action<IConfigurator<CommandSettings>> ConfigureIotGatewayCommands()
