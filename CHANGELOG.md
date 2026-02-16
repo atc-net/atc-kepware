@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.0](https://github.com/atc-net/atc-kepware/compare/v2.2.0...v2.3.0) (2026-02-16)
+
+
+### Features
+
+* **cli:** add meter commands for flow computer drivers ([70e01bd](https://github.com/atc-net/atc-kepware/commit/70e01bd2c1b7f9f2931cdfef72d40284d9d88e5d))
+
+
+### Bug Fixes
+
+* skip unnecessary API calls in tag group iteration ([4ab82e7](https://github.com/atc-net/atc-kepware/commit/4ab82e7681a2133b9215ccc2b1f5efe209457659))
+
 ## [2.2.0](https://github.com/atc-net/atc-kepware/compare/v2.1.0...v2.2.0) (2026-01-30)
 
 
