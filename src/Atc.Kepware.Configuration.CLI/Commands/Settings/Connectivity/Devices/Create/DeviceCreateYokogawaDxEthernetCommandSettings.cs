@@ -47,7 +47,7 @@ public class DeviceCreateYokogawaDxEthernetCommandSettings : DeviceCreateCommand
     [DefaultValue(false)]
     public bool As1SecurityOption { get; init; }
 
-    [CommandOption("--username")]
+    [CommandOption("--device-username")]
     [Description("Username for AS1 security (max 256 characters)")]
     [DefaultValue("admin")]
     public string Username { get; init; } = "admin";

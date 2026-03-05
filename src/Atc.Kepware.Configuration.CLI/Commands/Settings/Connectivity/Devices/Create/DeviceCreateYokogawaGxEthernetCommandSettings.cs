@@ -12,7 +12,7 @@ public class DeviceCreateYokogawaGxEthernetCommandSettings : DeviceCreateCommand
     [DefaultValue(false)]
     public bool As1SecurityOption { get; init; }
 
-    [CommandOption("--username")]
+    [CommandOption("--device-username")]
     [Description("Username (max 256 characters)")]
     [DefaultValue("admin")]
     public string Username { get; init; } = "admin";

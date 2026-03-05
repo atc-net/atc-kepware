@@ -28,7 +28,7 @@ public class DeviceCreateSnmpCommandSettings : DeviceCreateCommandBaseSettings
     [DefaultValue(25)]
     public int ItemsPerRequest { get; init; }
 
-    [CommandOption("--username [USERNAME]")]
+    [CommandOption("--device-username [USERNAME]")]
     [Description("SNMPv3 username")]
     public FlagValue<string>? Username { get; init; } = new();
 
