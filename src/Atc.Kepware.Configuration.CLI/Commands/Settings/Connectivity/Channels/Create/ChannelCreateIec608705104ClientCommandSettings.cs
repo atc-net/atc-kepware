@@ -45,12 +45,12 @@ public class ChannelCreateIec608705104ClientCommandSettings : ChannelCreateComma
     [DefaultValue(20)]
     public int T3 { get; init; } = 20;
 
-    [CommandOption("--k")]
+    [CommandOption("--k-factor")]
     [Description("Maximum unacknowledged transmitted APDUs (1-12)")]
     [DefaultValue(12)]
     public int K { get; init; } = 12;
 
-    [CommandOption("--w")]
+    [CommandOption("--w-factor")]
     [Description("Maximum unacknowledged received APDUs (1-65535)")]
     [DefaultValue(8)]
     public int W { get; init; } = 8;
@@ -106,12 +106,12 @@ public class ChannelCreateIec608705104ClientCommandSettings : ChannelCreateComma
 
         if (K < 1 || K > 12)
         {
-            return ValidationResult.Error("--k must be between 1 and 12.");
+            return ValidationResult.Error("--k-factor must be between 1 and 12.");
         }
 
         if (W < 1 || W > 65535)
         {
-            return ValidationResult.Error("--w must be between 1 and 65535.");
+            return ValidationResult.Error("--w-factor must be between 1 and 65535.");
         }
 
         if (RxBufferSize < 2 || RxBufferSize > 253)
