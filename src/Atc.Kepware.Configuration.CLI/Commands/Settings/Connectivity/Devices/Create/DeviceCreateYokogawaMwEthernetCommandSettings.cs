@@ -42,7 +42,7 @@ public class DeviceCreateYokogawaMwEthernetCommandSettings : DeviceCreateCommand
     [DefaultValue(YokogawaMwEthernetTagDatabaseSource.PhysicalChannelNumber)]
     public YokogawaMwEthernetTagDatabaseSource TagDatabaseSource { get; init; } = YokogawaMwEthernetTagDatabaseSource.PhysicalChannelNumber;
 
-    [CommandOption("--username")]
+    [CommandOption("--device-username")]
     [Description("Username (max 16 characters)")]
     [DefaultValue("admin")]
     public string Username { get; init; } = "admin";
