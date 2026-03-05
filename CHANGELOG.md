@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.3.1](https://github.com/atc-net/atc-kepware/compare/v2.3.0...v2.3.1) (2026-03-05)
+
+
+### Bug Fixes
+
+* **cli:** add tag create commands to correct branch node ([26daed1](https://github.com/atc-net/atc-kepware/commit/26daed1d5330aa7bdcfc32fbcad45b649c75945a))
+* **cli:** rename duplicate --username options to --device-username ([fbd1d97](https://github.com/atc-net/atc-kepware/commit/fbd1d97da484371b5d80b37b5b9b999084992819))
+* **cli:** rename single-char long options to valid multi-char names ([17dc500](https://github.com/atc-net/atc-kepware/commit/17dc500b61dc758d4409f4017c3c8eef7c73a22a))
+
 ## [2.3.0](https://github.com/atc-net/atc-kepware/compare/v2.2.0...v2.3.0) (2026-02-16)
 
 
