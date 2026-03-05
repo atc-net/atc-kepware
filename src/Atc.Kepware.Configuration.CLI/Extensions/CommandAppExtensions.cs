@@ -1393,11 +1393,11 @@ public static class CommandAppExtensions
         {
             create.SetDescription("Operations related to creating tags and tag groups.");
 
-            node.AddCommand<TagsCreateTagCommand>("tag")
+            create.AddCommand<TagsCreateTagCommand>("tag")
                 .WithDescription("Creates a tag (if not exists).")
                 .WithExample("connectivity tags create tag -s [server-url] --channel-name [channelName] --device-name [deviceName] --name [tagName] --address [tagAddress] --scan-rate [scanRate] --data-type [dataType] --client-access [clientAccess] --description [description]");
 
-            node.AddCommand<TagsCreateTagGroupCommand>("taggroup")
+            create.AddCommand<TagsCreateTagGroupCommand>("taggroup")
                 .WithDescription("Creates a tag group (if not exists).")
                 .WithExample("connectivity tags create taggroup -s [server-url] --channel-name [channelName] --device-name [deviceName] --name [tagGroupName] --description [description]");
         });
