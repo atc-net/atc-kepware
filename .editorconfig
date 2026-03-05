@@ -580,6 +580,8 @@ dotnet_diagnostic.S6964.severity = none             # Value type property used a
 ##########################################
 [*.cs]
 
+MA0051.maximum_lines_per_method = 100
+
 dotnet_diagnostic.SA1010.severity = none            #
 dotnet_diagnostic.SA1615.severity = none            # Element return value should be documented
 
