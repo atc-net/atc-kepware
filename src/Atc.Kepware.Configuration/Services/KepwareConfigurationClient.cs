@@ -294,7 +294,7 @@ public sealed partial class KepwareConfigurationClient : IKepwareConfigurationCl
                 }
             }
 
-            LogPostFailure(pathTemplate, errorResponseString);
+            LogDeleteFailure(pathTemplate, errorResponseString);
             return new HttpClientRequestResult<bool>(response.StatusCode, data: false, errorResponseString);
         }
         catch (Exception ex)
