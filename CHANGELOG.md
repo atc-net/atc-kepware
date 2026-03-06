@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.2](https://github.com/atc-net/atc-kepware/compare/v2.3.1...v2.3.2) (2026-03-06)
+
+
+### Bug Fixes
+
+* correct copy-paste error in KepwareConfigurationClient Delete method ([52f0ebe](https://github.com/atc-net/atc-kepware/commit/52f0ebefde369671cc50c2ab5fd141e2e686fc5f))
+
 ## [2.3.1](https://github.com/atc-net/atc-kepware/compare/v2.3.0...v2.3.1) (2026-03-05)
 
 
